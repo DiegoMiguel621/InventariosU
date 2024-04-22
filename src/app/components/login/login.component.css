@@ -1,6 +1,6 @@
 #contenedorLogin{
     width: 100%;
-    height: 538px;
+    height: 700px;
     margin: 0;
     padding: 70px 0px;
     display: inline-block;
@@ -48,3 +48,18 @@ input::placeholder {
   input::target-text{
     
   }
+
+  button {
+    background-color: #441B69;;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    float: right;
+}
+
+button:hover {
+    background-color: #6a5acd;
+}
