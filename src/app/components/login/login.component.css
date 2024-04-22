@@ -1,0 +1,50 @@
+#contenedorLogin{
+    width: 100%;
+    height: 538px;
+    margin: 0;
+    padding: 70px 0px;
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    background-color: #ECF0F5;
+    
+}
+#upp{
+    
+    height: fit-content;
+    width: fit-content;
+    margin-bottom: 20px;
+    position: relative;
+    margin-left: 47%;
+    
+}
+#Login{       
+    height: fit-content;
+    width: 576px;
+    background-color: white;
+    display: flexbox;    
+    align-items: center;
+    justify-content: center;
+    margin-left: 470px;
+    padding: 20px 0px;
+    
+}
+
+.itemForm{    
+    width: fit-content;
+    margin-left: 195px;    
+}
+.itemForm2{    
+    width: 400px;
+    height: 35px;
+    margin-left: 40px;    
+}
+input{
+    border: 1px solid black;
+}
+input::placeholder {
+    font-size: 1.5em;
+  }
+  input::target-text{
+    
+  }
