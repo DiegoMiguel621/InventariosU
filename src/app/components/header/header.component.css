@@ -52,12 +52,11 @@ header{
     width: 28px;
     position: relative;
     top: 5px;
-    margin-top: -3px;
+    margin-top: 1.1%;
     right: 10px;
 }
-#nombreYtutor{    
- /*border: 2px solid blue;   */
+#nombreYtutor{     
 float: right;
-margin-top: 3px;
+margin-top: 2.5%;
 }
 

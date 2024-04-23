@@ -3,18 +3,24 @@
     height: fit-content;
 }
 .formCont {
-    display: flex;
+    display: inline-block;
     justify-content: space-between;
     align-items: flex-start;
     padding: 20px;
-    width: 50%;
+    width: 82.3%;
+    height: 580px;
     border-left: 1000px;
-    
+    background-color: #ECF0F5;
 
 }
 
 .formulario-contenido {
     flex: 1;
+    background-color: white;
+    padding-left: 30px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    border-top: 2px solid gray;
 }
 
 h2 {
@@ -36,14 +42,15 @@ label {
 }
 
 input {
-    width: 100%;
+    width: 40%;
     padding: 8px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    background-color: #F4F4F4;
 }
 
-button {
+#buttonSol {
     background-color: #441B69;;
     color: white;
     border: none;
@@ -51,7 +58,8 @@ button {
     font-size: 18px;
     border-radius: 5px;
     cursor: pointer;
-    float: right;
+    margin-left: 33%;
+    margin-top: 10px;
 }
 
 button:hover {
