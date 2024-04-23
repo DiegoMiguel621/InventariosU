@@ -1,6 +1,6 @@
 #contRecu{
-    
-    height: fit-content;
+    width: 100%;
+    height: 100%;
 }
 .formCont {
     display: inline-block;
@@ -8,10 +8,8 @@
     align-items: flex-start;
     padding: 20px;
     width: 82.3%;
-    height: 580px;
-    border-left: 1000px;
+    height: 520px;
     background-color: #ECF0F5;
-
 }
 
 .formulario-contenido {
@@ -88,5 +86,6 @@ button:hover {
 width: 100%;
 height: 45px;
 }
+
 
 

@@ -1,0 +1,25 @@
+.footer{
+    height: 60px;
+    width: 84.3%;
+    float: right;
+    display: flex;
+    align-items: center;
+}
+
+#uniFooter{
+    margin-left: 2%;
+    width: 93%;
+    
+}
+#uppFooter{
+    
+    height: fit-content;
+}
+
+b{
+    font-size: 14px;
+}
+p{
+    font-size: 15px;
+    
+}
