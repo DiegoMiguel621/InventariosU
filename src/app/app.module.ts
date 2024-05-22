@@ -7,6 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RecuperarContraComponent } from './components/recuperar-contra/recuperar-contra.component';
+import { InicioComponent } from './components/inicio/inicio.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { RecuperarContraComponent } from './components/recuperar-contra/recupera
     LoginComponent,
     HeaderComponent,
     FooterComponent,
-    RecuperarContraComponent
+    RecuperarContraComponent,
+    InicioComponent
   ],
   imports: [
     BrowserModule,

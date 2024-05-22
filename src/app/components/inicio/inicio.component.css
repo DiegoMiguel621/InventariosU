@@ -1,0 +1,41 @@
+#secInicio{
+    width: 100%;
+    height: fit-content;
+    display: inline;
+}
+
+#opciones{    
+    width: 20%;
+    height: 550px;
+    float: left;
+    background-color: gray;
+    position: relative;
+}
+
+#opcInicio{
+    background-color:beige;
+    width: 80%;
+    height: 550px;
+    float: right;
+    
+}
+
+#titulo{
+    border: 1px solid black;
+    width: fit-content;
+    height: fit-content;
+    padding-left: 20px;
+}
+
+#contOpc{
+    background-color: white;
+    width: 96%;
+    height: 200px;
+}
+
+.actividades{
+    background-color: blue;
+    width: 200px;
+    height: 80px;
+
+}
