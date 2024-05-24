@@ -44,9 +44,9 @@ header{
 #notificacion{
     width: 2%;    /*ancho*/
     position: relative;  /*como lo podemos mover (fijo o libre)*/
-    top: 3px; /*para separar de arriba*/
+    top: -3px;; /*para separar de arriba*/
     /*border: 2px solid black;*/
-    right: 20px;
+    right: 30px;
 }
 #perfil{
     width: 28px;
@@ -58,5 +58,12 @@ header{
 #nombreYtutor{
 float: right;
 margin-top: 2.5%;
+color: white;
 }
 
+.iconoHambur{
+  position: relative;
+  border: 10px solid black;
+  float: left;
+
+}

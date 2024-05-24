@@ -6,38 +6,38 @@
     display: inline-block;
     justify-content: center;
     align-items: center;
-    background-color: #ECF0F5;
-    
+    background-color: #D2D6DE;
+
 }
 #upp{
-    
+
     height: fit-content;
     width: fit-content;
     margin-bottom: 20px;
     position: relative;
     margin-left: 47%;
-    
+
 }
-#Login{       
+#Login{
     height: 300px;
-    width: 576px;
+    width: 540px;
     background-color: white;
-    display: flexbox;    
+    display: flexbox;
     align-items: center;
     justify-content: center;
     margin-left: 470px;
     padding: 20px 0px;
-    
+
 }
 
-.itemForm{    
+.itemForm{
     width: fit-content;
-    margin-left: 195px;    
+    margin-left: 195px;
 }
-.itemForm2{    
+.itemForm2{
     width: 400px;
     height: 35px;
-    margin-left: 40px;    
+    margin-left: 40px;
 }
 input{
     border: 1px solid black;
@@ -46,7 +46,7 @@ input::placeholder {
     font-size: 1.5em;
   }
   input::target-text{
-    
+
   }
 
   button {
@@ -62,10 +62,10 @@ input::placeholder {
 }
 
 #textOlv{
-    
+
     position: relative;
     margin-left: 14%;
     bottom: -45px;
-    
-    
+
+
 }

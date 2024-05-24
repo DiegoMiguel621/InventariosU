@@ -23,7 +23,7 @@
 }
 
 #titulo{
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     width: fit-content;
     height: fit-content;
     padding-left: 10px;
@@ -75,7 +75,8 @@
 #menuPalabra{
   width: fit-content;
   height: auto;
-  margin-left: 10px;
+  margin-left: 15px;
+  padding-top: 10px;
   position: relative;
 }
 
@@ -96,4 +97,13 @@
     margin-left: 40px;
     margin-top: 4px;
     color: #C4ECFE;
+    }
+
+    #txtInventario{
+      width: 99%;
+      height: 40%;
+      border: 2px solid green;
+      float: top;
+
+
     }
