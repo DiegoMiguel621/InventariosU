@@ -44,6 +44,7 @@
     height: 118px;
     margin-left: 20px;
     margin-top: 10px;
+    display:inline-block;
 }
 #actividadNaranja{
   background-color: #DD4B39;
@@ -87,17 +88,46 @@
   margin-left: 20px;
   }
 
-  .textoEnlace{
+ .textoEnlace{
     margin-left: 40px;
     margin-top: 4px;
     color: #C4ECFE;
-    }
+  }
 
-    #txtInventario{
-      width: 99%;
-      height: 40%;
-      border: 2px solid green;
-      float: top;
+.izOpc{
+  width: fit-content;
+  height: 80%;
+  float: left;
+}
 
+#txtOpc{
+  width: fit-content;
+  height: fit-content ;
+  padding: 6px 0px 0px 10px;
+  }
 
-    }
+  #txtOpc2{
+    width: fit-content;
+    height: fit-content;
+    padding: 12px 0px 0px 10px;
+    
+  }
+
+  .footerOpcAz{
+    width: 100%;
+    height: 20%;
+    
+    float: inline-end;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .footerOpcNa{
+    width: 100%;
+    height: 20%;
+    
+    float: inline-end;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
