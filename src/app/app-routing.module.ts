@@ -5,6 +5,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RecuperarContraComponent } from './components/recuperar-contra/recuperar-contra.component';
 import { InicioComponent } from './components/inicio/inicio.component';
+import { InventarioComponent } from './components/inventario/inventario.component';
+import { PersonalComponent } from './components/personal/personal.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'login',pathMatch:'full'},
@@ -13,6 +15,8 @@ const routes: Routes = [
   {path:'footer',component:FooterComponent},
   {path:'recu',component:RecuperarContraComponent},
   {path:'inicio',component:InicioComponent},
+  {path:'inventario',component:InventarioComponent},
+  {path:'personal',component:PersonalComponent},
   {path:'**',redirectTo:'login',pathMatch:'full'}
 ];
 

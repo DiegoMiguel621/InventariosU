@@ -8,6 +8,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RecuperarContraComponent } from './components/recuperar-contra/recuperar-contra.component';
 import { InicioComponent } from './components/inicio/inicio.component';
+import { InventarioComponent } from './components/inventario/inventario.component';
+import { PersonalComponent } from './components/personal/personal.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { InicioComponent } from './components/inicio/inicio.component';
     HeaderComponent,
     FooterComponent,
     RecuperarContraComponent,
-    InicioComponent
+    InicioComponent,
+    InventarioComponent,
+    PersonalComponent
   ],
   imports: [
     BrowserModule,
