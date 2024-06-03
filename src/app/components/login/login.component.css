@@ -69,3 +69,15 @@ input::placeholder {
 
 
 }
+
+.usLogin{
+    max-width: 420px;
+    position: relative;
+    align-items: center;
+}
+.iconoLogin{
+position: absolute;
+  display: block;
+  bottom: 12px;
+  right: 0px;      
+}

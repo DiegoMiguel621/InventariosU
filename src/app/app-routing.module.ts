@@ -6,6 +6,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { RecuperarContraComponent } from './components/recuperar-contra/recuperar-contra.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { InventarioComponent } from './components/inventario/inventario.component';
+import { Inventario2Component } from './components/inventario2/inventario2.component';
 import { PersonalComponent } from './components/personal/personal.component';
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path:'recu',component:RecuperarContraComponent},
   {path:'inicio',component:InicioComponent},
   {path:'inventario',component:InventarioComponent},
+  {path:'inventario2',component:Inventario2Component},
   {path:'personal',component:PersonalComponent},
   {path:'**',redirectTo:'login',pathMatch:'full'}
 ];

@@ -10,6 +10,7 @@ import { RecuperarContraComponent } from './components/recuperar-contra/recupera
 import { InicioComponent } from './components/inicio/inicio.component';
 import { InventarioComponent } from './components/inventario/inventario.component';
 import { PersonalComponent } from './components/personal/personal.component';
+import { Inventario2Component } from './components/inventario2/inventario2.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PersonalComponent } from './components/personal/personal.component';
     RecuperarContraComponent,
     InicioComponent,
     InventarioComponent,
-    PersonalComponent
+    PersonalComponent,
+    Inventario2Component
   ],
   imports: [
     BrowserModule,

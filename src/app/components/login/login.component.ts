@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -8,4 +8,6 @@ import { RouterOutlet } from '@angular/router';
 })
 export class LoginComponent {
 
+  
 }
+

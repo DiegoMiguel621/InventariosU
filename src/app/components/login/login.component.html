@@ -15,12 +15,18 @@
                 <font size="6" class="itemForm">Iniciar sesión</font>
                 <form action="/inicio" method="post">
                     <ul>
-                            <input class="itemForm2" type="text" id="matriculaLogin" name="matLog" placeholder="Usuario" required>
+                            <div class="usLogin">
+                                <input #matriculaLogin class="itemForm2" type="text" maxlength="10" id="matriculaLogin" name="matLog" placeholder="Usuario" required>
+                            <i class="fa-solid fa-user iconoLogin" style="color: #9e9e9e;"></i>
+                            </div>            
                             <br><br><br>
+                            <div class="usLogin">
                             <input class="itemForm2" type="password" id="contraLogin" name="contLog" placeholder="Contraseña" required>
+                            <i class="fa-solid fa-lock iconoLogin" style="color: #9e9e9e;"></i>
+                            </div>
                     </ul>
                     <button type="submit">Entrar</button>
-                    <a href="/recu" id="textOlv">Olvide mi contraseñaa</a>
+                    <a href="/recu" id="textOlv">Olvide mi contraseña</a>
                 </form>
         </article>
     </section>
