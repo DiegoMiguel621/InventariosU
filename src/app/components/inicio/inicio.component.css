@@ -116,7 +116,7 @@
   .footerOpcAz{
     width: 100%;
     height: 20%;
-    
+    background-color: #0067A4;
     float: inline-end;
     display: flex;
     align-items: center;
@@ -125,7 +125,7 @@
   .footerOpcNa{
     width: 100%;
     height: 20%;
-    
+    background-color: #BC4031;
     float: inline-end;
     display: flex;
     align-items: center;
