@@ -12,6 +12,10 @@ import { InventarioComponent } from './components/inventario/inventario.componen
 import { PersonalComponent } from './components/personal/personal.component';
 import { Inventario2Component } from './components/inventario2/inventario2.component';
 import { ModalComponent } from './modal/modal.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { ModalforminvComponent } from './components/modalforminv/modalforminv.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -24,14 +28,18 @@ import { ModalComponent } from './modal/modal.component';
     InventarioComponent,
     PersonalComponent,
     Inventario2Component,
-    ModalComponent
+    ModalComponent,
+    ModalforminvComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })

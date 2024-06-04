@@ -8,6 +8,7 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { InventarioComponent } from './components/inventario/inventario.component';
 import { Inventario2Component } from './components/inventario2/inventario2.component';
 import { PersonalComponent } from './components/personal/personal.component';
+import { ModalforminvComponent } from './components/modalforminv/modalforminv.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'login',pathMatch:'full'},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path:'inventario',component:InventarioComponent},
   {path:'inventario2',component:Inventario2Component},
   {path:'personal',component:PersonalComponent},
+  {path:'modal1', component:ModalforminvComponent},
   {path:'**',redirectTo:'login',pathMatch:'full'}
 ];
 

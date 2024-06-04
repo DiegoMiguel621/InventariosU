@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalforminvComponent } from '../modalforminv/modalforminv.component';
+
 
 @Component({
   selector: 'app-inventario',
@@ -6,12 +9,12 @@ import { Component } from '@angular/core';
   styleUrl: './inventario.component.css'
 })
 export class InventarioComponent {
-  
-  modalSwitch!: Boolean;
+  constructor(private _matDialog: MatDialog){}
+  abrirModal():void{
+    this._matDialog.open(ModalforminvComponent);
+    
+  }
 
-openModal(){
-  this.modalSwitch = true;
-}
 
 }
 
