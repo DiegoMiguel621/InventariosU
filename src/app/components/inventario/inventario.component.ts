@@ -6,6 +6,12 @@ import { Component } from '@angular/core';
   styleUrl: './inventario.component.css'
 })
 export class InventarioComponent {
+  
+  modalSwitch!: Boolean;
+
+openModal(){
+  this.modalSwitch = true;
+}
 
 }
 

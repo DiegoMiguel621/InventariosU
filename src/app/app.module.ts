@@ -11,6 +11,7 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { InventarioComponent } from './components/inventario/inventario.component';
 import { PersonalComponent } from './components/personal/personal.component';
 import { Inventario2Component } from './components/inventario2/inventario2.component';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { Inventario2Component } from './components/inventario2/inventario2.compo
     InicioComponent,
     InventarioComponent,
     PersonalComponent,
-    Inventario2Component
+    Inventario2Component,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
