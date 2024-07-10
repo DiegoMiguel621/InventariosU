@@ -93,10 +93,10 @@ table{
 
 .table th,
 .table td {
-  padding: 8px;
-  text-align: left;
+  padding: 5px;
+  text-align: center;
   border: 1px solid #ddd;
-  
+
 }
 
 .table th {

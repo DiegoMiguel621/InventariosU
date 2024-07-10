@@ -17,6 +17,7 @@ import { ModalforminvComponent } from './components/modalforminv/modalforminv.co
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,7 @@ import {MatButtonModule} from '@angular/material/button';
     PersonalComponent,
     Inventario2Component,
     ModalComponent,
-    ModalforminvComponent
+    ModalforminvComponent,
   ],
   imports: [
     BrowserModule,
