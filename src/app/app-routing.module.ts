@@ -9,6 +9,9 @@ import { InventarioComponent } from './components/inventario/inventario.componen
 import { Inventario2Component } from './components/inventario2/inventario2.component';
 import { PersonalComponent } from './components/personal/personal.component';
 import { ModalforminvComponent } from './components/modalforminv/modalforminv.component';
+import { ModalEditarComponent } from './components/modal-editar/modal-editar.component';
+import { ModalVerComponent } from './components/modal-ver/modal-ver.component';
+import { ModalEliminarComponent } from './components/modal-eliminar/modal-eliminar.component';
 
 
 const routes: Routes = [
@@ -21,7 +24,13 @@ const routes: Routes = [
   {path:'inventario',component:InventarioComponent},
   {path:'inventario2',component:Inventario2Component},
   {path:'personal',component:PersonalComponent},
+
+
+  //modales
   {path:'modal1', component:ModalforminvComponent},
+  {path:'modal2',component:ModalEditarComponent},
+  {path:'modal3',component:ModalVerComponent},
+  {path:'modal4',component:ModalEliminarComponent},
 
   {path:'**',redirectTo:'login',pathMatch:'full'}
 ];

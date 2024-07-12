@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ModalforminvComponent } from '../modalforminv/modalforminv.component';
+import { ModalEditarComponent } from '../modal-editar/modal-editar.component';
+import { ModalVerComponent } from '../modal-ver/modal-ver.component';
+import { ModalEliminarComponent } from '../modal-eliminar/modal-eliminar.component';
 
 
 @Component({
@@ -19,7 +22,22 @@ export class InventarioComponent{
     }
 
   }
+  abrirModal2():void{
+    this._matDialog.open(ModalEditarComponent),{
 
+    }
 
 }
 
+  abrirModal3():void{
+    this._matDialog.open(ModalVerComponent),{
+
+    }
+}
+
+abrirModal4():void{
+  this._matDialog.open(ModalEliminarComponent),{
+
+  }
+}
+}

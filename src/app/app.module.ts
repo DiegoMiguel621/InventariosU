@@ -16,6 +16,9 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { ModalforminvComponent } from './components/modalforminv/modalforminv.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
+import { ModalEditarComponent } from './components/modal-editar/modal-editar.component';
+import { ModalVerComponent } from './components/modal-ver/modal-ver.component';
+import { ModalEliminarComponent } from './components/modal-eliminar/modal-eliminar.component';
 
 
 @NgModule({
@@ -31,6 +34,9 @@ import {MatButtonModule} from '@angular/material/button';
     Inventario2Component,
     ModalComponent,
     ModalforminvComponent,
+    ModalEditarComponent,
+    ModalVerComponent,
+    ModalEliminarComponent,
   ],
   imports: [
     BrowserModule,
