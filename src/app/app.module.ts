@@ -19,6 +19,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { ModalEditarComponent } from './components/modal-editar/modal-editar.component';
 import { ModalVerComponent } from './components/modal-ver/modal-ver.component';
 import { ModalEliminarComponent } from './components/modal-eliminar/modal-eliminar.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { ModalEliminarComponent } from './components/modal-eliminar/modal-elimin
     BrowserModule,
     AppRoutingModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    HttpClientModule
   ],
   providers: [
     provideClientHydration(),
