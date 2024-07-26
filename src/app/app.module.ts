@@ -19,7 +19,9 @@ import {MatButtonModule} from '@angular/material/button';
 import { ModalEditarComponent } from './components/modal-editar/modal-editar.component';
 import { ModalVerComponent } from './components/modal-ver/modal-ver.component';
 import { ModalEliminarComponent } from './components/modal-eliminar/modal-eliminar.component';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ApiBienesService } from '././service/api-bienes.service';
 
 
 @NgModule({
@@ -44,11 +46,13 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     MatDialogModule,
     MatButtonModule,
+    ReactiveFormsModule,
     HttpClientModule
   ],
   providers: [
     provideClientHydration(),
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    ApiBienesService
   ],
   bootstrap: [AppComponent]
 })

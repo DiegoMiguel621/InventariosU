@@ -72,38 +72,37 @@
       </div>
 
 
-      <table class="table">
+      <table>
         <thead>
           <tr>
-            <th scope="col">Clave</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Marca</th>
-            <th scope="col">Modelo</th>
-            <th scope="col">Nº de serie</th>
-            <th scope="col">Encargado</th>
-            <th scope="col">Observaciones</th>
-            <th scope="col">Opciones</th>
+            <th>Clave</th>
+            <th>Nombre</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Número de Serie</th>
+            <th>Encargado</th>
+            <th>Observaciones</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">145654</th>
-            <td>Impresora</td>
-            <td>HP</td>
-            <td>Brother-HP62</td>
-            <td>21876593</td>
-            <td>Melany Fuentes</td>
-            <td>Tapa ropa</td>
-            <td style="display: flex; justify-content: space-evenly;" >
-              <i class="fa-solid fa-pen-to-square" style="color: #133777;" (click)="abrirModal2()"></i>
-              <i class="fa-regular fa-eye" style="color: #133777;" (click)="abrirModal3()"></i>
-              <i class="fa-solid fa-xmark" style="color: #133777;" (click)="abrirModal4()"></i>
+          <tr *ngFor="let bien of bienes">
+            <td>{{ bien.clave }}</td>
+            <td>{{ bien.nombre }}</td>
+            <td>{{ bien.marca }}</td>
+            <td>{{ bien.modelo }}</td>
+            <td>{{ bien.nserie }}</td>
+            <td>{{ bien.encargado }}</td>
+            <td>{{ bien.observaciones }}</td>
+            <td>
+              <button (click)="editarBien(bien)">Editar</button>
+              <button (click)="eliminarBien(bien.id)">Eliminar</button>
             </td>
           </tr>
-
-
         </tbody>
       </table>
+      
+      
 
     </section>
 </section>

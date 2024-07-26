@@ -1,37 +1,35 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiBienesService {
-  private apiUrl = 'http://localhost/api-bienes'; // URL de tu API
+  private apiUrl = 'http://localhost/api-bienes';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  // Obtener todos los productos
   getBienes(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}`);
+    return this.http.get(`${this.apiUrl}`);
   }
 
-  // Obtener un producto por ID
-  getBien(id: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  getBienById(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}${id}`);
   }
 
-  // Crear un nuevo producto
-  createBien(bien: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, bien);
+  addBien(bien: any): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'x-www-form-urlencoded', 
+      responseType: 'text' as 'json'  
+     });
+    return this.http.post<any>(`${this.apiUrl}/`, bien, { headers });
   }
 
-  // Actualizar un producto
-  updateBien(id: string, bien: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, bien);
+  updateBien(id: number, bien: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, bien);
   }
 
-  // Eliminar un producto
-  deleteBien(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+  deleteBien(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }
