@@ -6,14 +6,14 @@ import { ApiBienesService } from '../../service/api-bienes.service';
 @Component({
   selector: 'app-modalforminv',
   templateUrl: './modalforminv.component.html',
-  styleUrl: './modalforminv.component.css'
+  styleUrls: ['./modalforminv.component.css']
 })
 export class ModalforminvComponent {
 
   addProductForm: FormGroup;
 
   constructor(
-    public _matDialogRef: MatDialogRef<ModalforminvComponent>,
+    public dialogRef: MatDialogRef<ModalforminvComponent>,
     private fb: FormBuilder,
     private apiBienesService: ApiBienesService
   ) {
@@ -33,7 +33,7 @@ export class ModalforminvComponent {
       this.apiBienesService.addBien(this.addProductForm.value).subscribe(response => {
         console.log('Producto agregado exitosamente', response);
         // Cierra el modal después de agregar el producto
-        this._matDialogRef.close();
+        this.dialogRef.close();
       }, error => {
         console.error('Error al agregar el producto', error);
       });

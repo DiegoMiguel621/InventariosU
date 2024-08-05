@@ -15,14 +15,12 @@ export class ApiBienesService {
   }
 
   getBienById(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}${id}`);
+    return this.http.get(`${this.apiUrl}/${id}`);
   }
 
   addBien(bien: any): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'x-www-form-urlencoded', 
-      responseType: 'text' as 'json'  
-     });
-    return this.http.post<any>(`${this.apiUrl}/`, bien, { headers });
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<any>(`${this.apiUrl}`, bien, { headers });
   }
 
   updateBien(id: number, bien: any): Observable<any> {
