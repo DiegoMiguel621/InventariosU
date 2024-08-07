@@ -19,8 +19,8 @@
 
 }
 #Login{
-    height: 300px;
-    width: 540px;
+    height: 65%;
+    width: 38%;
     background-color: white;
     display: flexbox;
     align-items: center;
@@ -38,6 +38,7 @@
     width: 400px;
     height: 35px;
     margin-left: 40px;
+    
 }
 input{
     border: 1px solid black;
@@ -79,5 +80,5 @@ input::placeholder {
 position: absolute;
   display: block;
   bottom: 12px;
-  right: 0px;      
+  right: 0px;
 }
