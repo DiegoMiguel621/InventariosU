@@ -1,16 +1,28 @@
-#aside{
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow-x: hidden; /* Evita el desplazamiento horizontal */
+}
+
+
+#aside {
   background-color: #222D32;
   float: left;
   width: 15%;
   height: 620px;
 }
 
-#menuAside{
+#menuAside {
   background-color: #1A2226;
   width: 100%;
   height: 35px;
 }
-#menuPalabra{
+
+#menuPalabra {
   width: fit-content;
   height: auto;
   margin-left: 15px;
@@ -18,129 +30,115 @@
   position: relative;
 }
 
-.divEnlaces{
-  /*border: 2px solid green*/
+.divEnlaces {
   width: 100%;
   height: 45px;
-  }
+}
 
-.iconoEnlace{
+.iconoEnlace {
   float: left;
   width: 5px;
   margin-top: 2px;
   margin-left: 20px;
-  }
-
-  .textoEnlace{
-    margin-left: 40px;
-    margin-top: 4px;
-    color: #C4ECFE;
-  }
-
-.izOpc{
-  width: fit-content;
-  height: 80%;
-  float: left;
 }
 
+.textoEnlace {
+  margin-left: 40px;
+  margin-top: 4px;
+  color: #C4ECFE;
+}
 
-
-
-#opcInicio{
-
+#opcInicio {
   background-color: #ECF0F5;
   width: 85%;
-  height: 575px;
+  height: auto;
   float: right;
-
+  padding: 20px;
 }
 
-#titulo{
-  /*border: 1px solid black;*/
+#titulo {
   width: fit-content;
   height: fit-content;
   padding: 10px 0px 10px 20px;
-
 }
 
-#contOpc{
+#contOpc {
   background-color: white;
-  width: 95%;
-  height: 80%;
-  margin-left: 30px;
-  display: inline-flex;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
 }
 
-#txtArea
-{
-  margin-left: 40px;
+.dropdown, .search {
+  width: 100%;
 }
 
-#botonDesplegable{
-  margin-top: 35px;
-  padding: 10px 30px;
-  background-color:#F3F3F3;
-  color:lightslategrey;
+.dropdown label, .search label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.dropdown select, .search input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.search input {
+  background: #f0f0f0;
+}
+
+.dropdown select:focus, .search input:focus {
+  outline: none;
+  border-color: #777;
+}
+
+#actions {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 20px;
+}
+
+.add-user {
+  font-size: 24px;
+  color: #8e44ad;
   cursor: pointer;
-  width: 500px;
-  margin-left: -50px;
-  border-radius: 10px;
 }
 
-.opcAreas a{
-  text-decoration: none;
-  color: #1A2226;
-  display:block;
-  padding: 13px;
-      }
-      .opcAreas{
-        background-color: #f9f9f9;
-        width: 500px;
-        display: none;
-        margin-left: -50px
-      }
-      .opcAreas a:hover{
-        background-color: #f1f1f1;
-      }
-      .desplegable:hover .opcAreas{
-        display: block;
-      }
-
-
-#txtEstatus{
-  margin-left:100px;
+#listado {
+  width: 100%;
+  margin-top: 20px; /* Asegura que haya un espacio entre la tabla y los elementos superiores */
 }
 
-#btnDespleEsta{
-  margin-top: 35px;
-  padding: 10px 30px;
-  background-color:#F3F3F3;
-  color:lightslategrey;
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #ccc;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #f0f0f0;
+}
+
+td i {
+  color: #2ecc71;
   cursor: pointer;
-  width: 500px;
-  margin-left: -50px;
-  border-radius: 10px;
 }
-
-.opcAreas2 a{
-  text-decoration: none;
-  color: #1A2226;
-  display:block;
-  padding: 13px;
-      }
-      .opcAreas2{
-        background-color: #f9f9f9;
-        width: 500px;
-        display:none;
-        margin-left: -50px
-      }
-      .opcAreas2 a:hover{
-        background-color: #f1f1f1;
-      }
-      .desplegable2:hover .opcAreas2{
-        display: block;
-
-      }
-

@@ -65,10 +65,62 @@
 
 <section id="opcInicio">
   <div id="titulo">
-    <Font size="5">Lista de Trabajadores</Font>
+    <font size="5">Lista de Trabajadores</font>
   </div>
-    <section id="contOpc">
-      
+  <section id="contOpc">
+    <div class="dropdown">
+      <label for="area">Seleccione área:</label>
+      <select id="area">
+        <option value="" disabled selected>Área</option>
+        <option value="administracion">Administración</option>
+        <option value="academica">Académica</option>
+        <option value="servicios_estudiantiles">Servicios Estudiantiles</option>
+      </select>
+    </div>
+    <div class="dropdown">
+      <label for="estatus">Seleccione Estatus:</label>
+      <select id="estatus">
+        <option value="" disabled selected>Estatus</option>
+        <option value="activo">Activo</option>
+        <option value="inactivo">Inactivo</option>
+      </select>
+    </div>
+    <div class="search">
+      <label for="buscar">Buscar:</label>
+      <input type="text" id="buscar" placeholder="Buscar">
+    </div>
+    <div id="actions">
+      <div class="add-user">
+        <i class="fa fa-user-plus"></i>
+      </div>
+    </div>
 
+    <section id="listado">
+      <table>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Teléfono</th>
+            <th>Correo</th>
+            <th>Detalles</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Diego</td>
+            <td>Escamilla</td>
+            <td>7731685330</td>
+            <td>diego.miguelgmail.com</td>
+            <td><i class="fa fa-eye"></i></td>
+          </tr>
+
+        </tbody>
+      </table>
     </section>
+  </section>
+
 </section>
+
