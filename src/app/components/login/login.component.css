@@ -1,84 +1,87 @@
-#contenedorLogin{
-    width: 100%;
-    height: 535px;
-    margin: 0;
-    padding: 70px 0px;
-    display: inline-block;
-    justify-content: center;
-    align-items: center;
-    background-color: #D2D6DE;
-
+body {
+  background-color: #D2D6DE;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
 }
-#upp{
 
-    height: fit-content;
-    width: fit-content;
-    margin-bottom: 20px;
-    position: relative;
-    margin-left: 47%;
-
-}
-#Login{
-    height: 65%;
-    width: 38%;
-    background-color: white;
-    display: flexbox;
-    align-items: center;
-    justify-content: center;
-    margin-left: 470px;
-    padding: 20px 0px;
+#contenedorLogin {
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
 
 }
 
-.itemForm{
-    width: fit-content;
-    margin-left: 195px;
-}
-.itemForm2{
-    width: 400px;
-    height: 35px;
-    margin-left: 40px;
-    
-}
-input{
-    border: 1px solid black;
-}
-input::placeholder {
-    font-size: 1.5em;
-  }
-  input::target-text{
-
-  }
-
-  button {
-    background-color: #441B69;;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 18px;
-    border-radius: 5px;
-    cursor: pointer;
-    float: right;
-    margin-right: 90px;
+#upp {
+  margin-bottom: 20px;
 }
 
-#textOlv{
-
-    position: relative;
-    margin-left: 14%;
-    bottom: -45px;
-
-
+#upp font {
+  font-size: 2.5em;
+  color: #444444;
+  font-weight: bold;
 }
 
-.usLogin{
-    max-width: 420px;
-    position: relative;
-    align-items: center;
-}
-.iconoLogin{
-position: absolute;
+#Login label {
   display: block;
-  bottom: 12px;
-  right: 0px;
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  color: #444444;
 }
+
+.input-container {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-container input {
+  width: 100%;
+  padding: 10px 40px 10px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.input-container i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+  color: #9e9e9e;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #441B69;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #35124e;
+}
+
+#textOlv {
+  display: block;
+  margin-top: 10px;
+  color: #441B69;
+  text-decoration: none;
+}
+
+#textOlv:hover {
+  text-decoration: underline;
+}
+
+
