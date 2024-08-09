@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class ApiBienesService {
   private apiUrl = 'http://localhost/api-bienes';
 
+
   constructor(private http: HttpClient) {}
 
   getBienes(): Observable<any> {

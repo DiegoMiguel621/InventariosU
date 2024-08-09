@@ -71,9 +71,13 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "proxyConfig": "proxy.conf.json"
+          },
           "configurations": {
             "production": {
-              "buildTarget": "inventariosU:build:production"
+              "buildTarget": "inventariosU:build:production",
+              "proxyConfig": "proxy"
             },
             "development": {
               "buildTarget": "inventariosU:build:development"
