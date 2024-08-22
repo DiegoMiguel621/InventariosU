@@ -24,7 +24,6 @@ export class InventarioComponent implements OnInit {
 
   abrirModal(): void {
     const dialogRef = this._matDialog.open(ModalforminvComponent);
-
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.apiBienesService.getBienes().subscribe(data => {

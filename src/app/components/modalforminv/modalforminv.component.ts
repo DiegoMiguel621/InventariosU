@@ -30,13 +30,16 @@ export class ModalforminvComponent {
 
   onSubmit() {
     if (this.addProductForm.valid) {
-      this.apiBienesService.addBien(this.addProductForm.value).subscribe(response => {
-        console.log('Producto agregado exitosamente', response);
-        // Cierra el modal después de agregar el producto
-        this.dialogRef.close();
-      }, error => {
-        console.error('Error al agregar el producto', error);
-      });
+      this.apiBienesService.addBien(this.addProductForm.value).subscribe(
+        response => {
+          console.log('Producto agregado exitosamente', response);
+          this.dialogRef.close();
+        },
+        error => {
+          console.error('Error al agregar el producto', error);
+          // Mostrar mensaje al usuario sobre el error
+        }
+      );
     }
   }
 }
