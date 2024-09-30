@@ -12,28 +12,20 @@ body {
   background-color: white;
   border-radius: 3px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 40px;
-  width: 100%;
-  max-width: 400px;
+  padding: 30px;
+  width: 350px;
   text-align: center;
-
 }
 
 #upp {
   margin-bottom: 20px;
+  text-align: center;
 }
 
 #upp font {
-  font-size: 2.5em;
+  font-size: 3em;
   color: #444444;
   font-weight: bold;
-}
-
-#Login label {
-  display: block;
-  font-size: 1.2em;
-  margin-bottom: 20px;
-  color: #444444;
 }
 
 .input-container {
@@ -76,12 +68,35 @@ button:hover {
 #textOlv {
   display: block;
   margin-top: 10px;
-  color: #441B69;
+  color: #487EB3;
   text-decoration: none;
+  text-align: left;
 }
 
 #textOlv:hover {
   text-decoration: underline;
+
 }
 
+#matriculaLogin {
+  width: calc(100% - 20px);
+}
 
+#contraLogin {
+  width: calc(100% - 20px);
+}
+
+#iconoUsu{
+  padding: 10px;
+}
+
+#iconoContra{
+  padding: 10px;
+}
+
+#upp-title {
+  font-size: 3em;
+  color: #444444;
+  font-weight: bold;
+
+}

@@ -1,5 +1,7 @@
-import { Component, AfterViewInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AppComponent } from '../../app.component';
+
 
 @Component({
   selector: 'app-login',
@@ -8,6 +10,7 @@ import { RouterOutlet } from '@angular/router';
 })
 export class LoginComponent {
 
-  
+
 }
+
 
