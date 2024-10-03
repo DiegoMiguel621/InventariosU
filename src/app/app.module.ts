@@ -24,6 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApiBienesService } from '././service/api-bienes.service';
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +42,7 @@ import { ApiBienesService } from '././service/api-bienes.service';
     ModalEditarComponent,
     ModalVerComponent,
     ModalEliminarComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,9 @@ import { ApiBienesService } from '././service/api-bienes.service';
     MatDialogModule,
     MatButtonModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+
+
   ],
   providers: [
     provideClientHydration(),

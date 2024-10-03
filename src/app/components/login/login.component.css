@@ -1,4 +1,4 @@
-body {
+#body {
   background-color: #D2D6DE;
   font-family: Arial, sans-serif;
   display: flex;
@@ -6,6 +6,7 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
+  flex-direction: column;
 }
 
 #contenedorLogin {
@@ -88,6 +89,7 @@ button:hover {
 
 #iconoUsu{
   padding: 10px;
+  justify-content: center;
 }
 
 #iconoContra{
@@ -98,5 +100,6 @@ button:hover {
   font-size: 3em;
   color: #444444;
   font-weight: bold;
+  text-align: center;
 
 }
