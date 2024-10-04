@@ -1,9 +1,11 @@
 .footer{
-    height: 60px;
-    width: 84.3%;
+    height: 40px;
+    /*border: 1px solid green;*/
+    width: 84.4%;
     float: right;
     display: flex;
-    align-items: center;
+    align-items: center;  
+    margin-top: 10px;  
 }
 
 #uniFooter{
@@ -12,8 +14,9 @@
     
 }
 #uppFooter{
-    
+    margin-bottom: 10px;
     height: fit-content;
+    margin-left: 10px;
 }
 
 b{

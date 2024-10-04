@@ -2,7 +2,7 @@
   background-color: #222D32;
   float: left;
   width: 15%;
-  height: 620px;
+  height: 679px;
 }
 
 #menuAside{
@@ -44,13 +44,11 @@
 }
 
 
-
-
 #opcInicio{
 
   background-color: #ECF0F5;
   width: 85%;
-  height: 575px;
+  height: 630px;
   float: right;
 
 }
@@ -79,28 +77,90 @@
   margin-left:20px;
 }
 
+/*Estilos de la*/
 table{
   margin-top: 60px;
-  margin-right: 40px;
+  margin-right: 50px;
   
 
 }
 
-
-.table {
+table {
   width: 100%;
   border-collapse: collapse;
+  font-family: Arial, sans-serif;
 }
 
-.table th,
-.table td {
-  padding: 5px;
-  text-align: center;
-  border: 1px solid #ddd;
-
+thead {
+  background-color: #441B69;
+  color: white;
 }
 
-.table th {
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tbody tr:nth-child(even) {
   background-color: #f2f2f2;
 }
+
+tbody tr:hover {
+  background-color: #ddd;
+}
+
+tbody tr {
+  height: 40px;
+}
+
+tbody {
+  display: block;
+  height: 300px;
+  overflow-y: auto;
+}
+
+thead, tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed; /* Fija el ancho de las columnas */
+}
+
+thead th:first-child,
+tbody td:first-child {
+  width: 10%; /* Fija la columna "Clave" más estrecha */
+}
+
+button {
+  background-color: #441B69;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #361455;
+}
+
+td {
+  white-space: nowrap; /* Asegura que el contenido no haga salto de línea */
+}
+
+td button {
+  margin-right: 8px; /* Espacio entre los botones */
+  display: inline-block; /* Asegura que los botones estén alineados horizontalmente */
+  white-space: nowrap; /* Previene que el texto de los botones se quiebre */
+}
+
+td:last-child {
+  text-align: center;
+}
+
+
+
+
+
+
 
