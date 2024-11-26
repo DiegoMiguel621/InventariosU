@@ -22,6 +22,8 @@ import { ModalEliminarComponent } from './components/modal-eliminar/modal-elimin
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiBienesService } from '././service/api-bienes.service';
+import { ModalAgregarPersonalComponent } from './modal-agregar-personal/modal-agregar-personal.component';
+import { ModalVerPersonalComponent } from './modal-ver-personal/modal-ver-personal.component';
 
 
 
@@ -42,6 +44,8 @@ import { ApiBienesService } from '././service/api-bienes.service';
     ModalEditarComponent,
     ModalVerComponent,
     ModalEliminarComponent,
+    ModalAgregarPersonalComponent,
+    ModalVerPersonalComponent,
 
   ],
   imports: [

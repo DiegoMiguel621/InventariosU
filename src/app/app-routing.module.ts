@@ -12,6 +12,8 @@ import { ModalforminvComponent } from './components/modalforminv/modalforminv.co
 import { ModalEditarComponent } from './components/modal-editar/modal-editar.component';
 import { ModalVerComponent } from './components/modal-ver/modal-ver.component';
 import { ModalEliminarComponent } from './components/modal-eliminar/modal-eliminar.component';
+import { ModalAgregarPersonalComponent } from './modal-agregar-personal/modal-agregar-personal.component';
+import { ModalVerPersonalComponent } from './modal-ver-personal/modal-ver-personal.component';
 
 
 const routes: Routes = [
@@ -31,6 +33,8 @@ const routes: Routes = [
   {path:'modal2',component:ModalEditarComponent},
   {path:'modal3',component:ModalVerComponent},
   {path:'modal4',component:ModalEliminarComponent},
+  {path:'modal5',component:ModalAgregarPersonalComponent},
+  {path:'modal5',component:ModalVerPersonalComponent},
 
   {path:'**',redirectTo:'login',pathMatch:'full'}
 ];

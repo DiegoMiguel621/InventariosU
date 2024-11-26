@@ -33,6 +33,7 @@
   <a href="../personal/"class="usuarios">
   <div class="divEnlaces">
   <div class="iconoEnlace">
+
   <i class="fa-solid fa-users fa-xs" style="color: #02a22a;"></i>
   </div>
   <div class="textoEnlace">
@@ -90,9 +91,12 @@
       <input type="text" id="buscar" placeholder="Buscar">
     </div>
     <div id="actions">
-      <div class="add-user">
-        <i class="fa fa-user-plus"></i>
+      <div class="add-user" >
+        <button mat-raised-button color="primary" (click)="agregarPersonal()">
+        <i class="fa fa-user-plus" ></i>
+      </button>
       </div>
+
     </div>
 
     <section id="listado">
@@ -114,7 +118,10 @@
             <td>Escamilla</td>
             <td>7731685330</td>
             <td>diego.miguelgmail.com</td>
-            <td><i class="fa fa-eye"></i></td>
+            <td>
+
+              <i class="fa fa-eye" (click)="verrPersonal()"></i>
+            </td>
           </tr>
 
         </tbody>
