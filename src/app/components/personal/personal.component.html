@@ -60,15 +60,26 @@
       </div>
       </div>
   </aside>
-
-
 </section>
 
 <section id="opcInicio">
   <div id="titulo">
-    <font size="5">Lista de Trabajadores</font>
+    <font size="6">Lista de Trabajadores</font>
   </div>
   <section id="contOpc">
+    <div id="tituloBusqueda">
+      <font size="5">Opciones de búsqueda</font>
+    </div>
+    <div class="opcBusqueda">
+    <div class="search">
+      <label for="buscar">Nombre:</label>
+      <input type="text" class="buscar" placeholder="Buscar">
+    </div>
+    <div class="search">
+      <label for="buscar">No. de resguardante:</label>
+      <input type="text" class="buscar" placeholder="Buscar">
+    </div>
+    
     <div class="dropdown">
       <label for="area">Seleccione área:</label>
       <select id="area">
@@ -86,10 +97,8 @@
         <option value="inactivo">Inactivo</option>
       </select>
     </div>
-    <div class="search">
-      <label for="buscar">Buscar:</label>
-      <input type="text" id="buscar" placeholder="Buscar">
-    </div>
+  </div>
+    
     <div id="actions">
       <div class="add-user" >
         <button mat-raised-button color="primary" (click)="agregarPersonal()">
@@ -130,4 +139,5 @@
   </section>
 
 </section>
+
 
