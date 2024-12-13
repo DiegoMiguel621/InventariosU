@@ -1,49 +1,50 @@
 import { Component, OnInit } from '@angular/core';
-
-import { ApiBienesService } from '../../service/api-bienes.service';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ModalAgregarPersonalComponent } from '../../modal-agregar-personal/modal-agregar-personal.component';
 import { ModalVerPersonalComponent } from '../../modal-ver-personal/modal-ver-personal.component';
+import { TrabajadoresService } from '../../service/trabajadores.service'; // Importamos el nuevo servicio
 
 @Component({
   selector: 'app-personal',
   templateUrl: './personal.component.html',
-  styleUrl: './personal.component.css'
+  styleUrls: ['./personal.component.css'],
 })
-export class PersonalComponent implements OnInit{
+export class PersonalComponent implements OnInit {
+  trabajadores: any[] = []; // Cambiamos 'bienes' por 'trabajadores'
 
+  constructor(
+    private _matDialog: MatDialog,
+    private trabajadoresService: TrabajadoresService // Inyectamos el nuevo servicio
+  ) {}
 
-    bienes: any[] = [];
-
-    constructor(private _matDialog: MatDialog, private apiBienesService: ApiBienesService) {}
-
-    ngOnInit(): void {
-      this.apiBienesService.getBienes().subscribe(data => {
-        this.bienes = data;
-      });
-    }
-
-    agregarPersonal(): void {
-      const dialogRef = this._matDialog.open(ModalAgregarPersonalComponent);
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          this.apiBienesService.getBienes().subscribe(data => {
-            this.bienes = data;
-          });
-        }
-      });
-    }
-
-
-    verrPersonal(): void {
-      const dialogRef = this._matDialog.open(ModalVerPersonalComponent);
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          this.apiBienesService.getBienes().subscribe(data => {
-            this.bienes = data;
-          });
-        }
-      });
-    }
-
+  ngOnInit(): void {
+    // Usamos el servicio TrabajadoresService para obtener los datos de la API
+    this.trabajadoresService.getTrabajadores().subscribe((data) => {
+      this.trabajadores = data;
+    });
   }
+
+  agregarPersonal(): void {
+    const dialogRef = this._matDialog.open(ModalAgregarPersonalComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        // Refrescamos la lista de trabajadores al cerrar el modal
+        this.trabajadoresService.getTrabajadores().subscribe((data) => {
+          this.trabajadores = data;
+        });
+      }
+    });
+  }
+
+  verrPersonal(): void {
+    const dialogRef = this._matDialog.open(ModalVerPersonalComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        // Refrescamos la lista de trabajadores al cerrar el modal
+        this.trabajadoresService.getTrabajadores().subscribe((data) => {
+          this.trabajadores = data;
+        });
+      }
+    });
+  }
+}

@@ -56,7 +56,6 @@ import { ModalVerPersonalComponent } from './modal-ver-personal/modal-ver-person
     ReactiveFormsModule,
     HttpClientModule,
 
-
   ],
   providers: [
     provideClientHydration(),
