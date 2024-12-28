@@ -36,8 +36,11 @@ export class PersonalComponent implements OnInit {
     });
   }
 
-  verrPersonal(): void {
-    const dialogRef = this._matDialog.open(ModalVerPersonalComponent);
+  verrPersonal(id: number): void {
+    const dialogRef = this._matDialog.open(ModalVerPersonalComponent, {
+      data: { id }, // Pasamos el ID al modal
+    });
+  
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         // Refrescamos la lista de trabajadores al cerrar el modal
@@ -47,4 +50,5 @@ export class PersonalComponent implements OnInit {
       }
     });
   }
+  
 }

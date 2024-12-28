@@ -4,50 +4,55 @@
 
 
 <div class="modal">
-
-  <div class="modal-content">
+    <div class="modal-content">
       <div class="modal-header">
-          <h2 id="txtAddProd">Información del producto</h2>
-          <button class="close-button">
-            <i class="fa-solid fa-x fa-lg" style="color: #ffffff;"></i>
-          </button>
+        <h2>Información del Empleado</h2>
+        <button class="close-button" (click)="closeModal()">
+          <i class="fa-solid fa-x fa-lg" style="color: #ffffff;"></i>
+        </button>
       </div>
       <div class="modal-body">
-        <form id="addProductForm">
+        <div class="info-section">
+          <!-- Información del trabajador -->
           <div class="form-group">
-              <label for="clave">Clave:</label>
-              <label class="descripcion">145654</label>
+            <label>Nombre completo:</label>
+            <span>{{ trabajador.nombre }}</span>
           </div>
           <div class="form-group">
-              <label for="nombre">Nombre:</label>
-              <label class="descripcion">Impresora</label>
+            <label>Perfil Académico:</label>
+            <span>{{ trabajador.perfilAcad }}</span>
           </div>
           <div class="form-group">
-              <label for="marca">Marca:</label>
-              <label class="descripcion">HP</label>
+            <label>No. de trabajador:</label>
+            <span>{{ trabajador.numero }}</span>
           </div>
           <div class="form-group">
-              <label for="modelo">Modelo:</label>
-              <label class="descripcion">Brother-HP62</label>
+            <label>Puesto:</label>
+            <span>{{ trabajador.puesto }}</span>
           </div>
           <div class="form-group">
-              <label for="num-serie">Número de Serie:</label>
-              <label class="descripcion">21876593</label>
+            <label>Área:</label>
+            <span>{{ trabajador.area }}</span>
           </div>
           <div class="form-group">
-              <label for="encargado">Encargado:</label>
-              <label class="descripcion">Melany Fuentes</label>
+            <label>Estatus:</label>
+            <span>{{ trabajador.estatus }}</span>
           </div>
-          <div class="form-group">
-              <label for="observaciones">Observaciones:</label>
-              <label class="descripcion">Tapa ropa</label>
+        </div>
+  
+        <div class="bienes-section">
+          <h3>Bienes a su disposición</h3>
+          <div class="bienes-table">
+            <p>El trabajador no tiene bienes asignados</p>
           </div>
-
-          <div class="form-group">
-              <button class="OK" type="submit">OK</button>
-          </div>
-      </form>
+        </div>
       </div>
+  
+      <div class="modal-footer">
+        <button class="btn-imprimir" type="button">Imprimir Resguardo</button>
+      </div>
+    </div>
   </div>
-  <div id="barraMorada2"></div>
-</div>
+  
+  
+  

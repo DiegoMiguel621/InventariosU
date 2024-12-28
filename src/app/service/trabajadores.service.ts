@@ -13,4 +13,8 @@ export class TrabajadoresService {
   getTrabajadores(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
+  getTrabajadorById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
+  
 }
