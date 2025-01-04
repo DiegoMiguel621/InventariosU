@@ -16,5 +16,10 @@ export class TrabajadoresService {
   getTrabajadorById(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
+  addTrabajador(trabajador: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/trabajadores`, trabajador);
+  }
+  
+  
   
 }

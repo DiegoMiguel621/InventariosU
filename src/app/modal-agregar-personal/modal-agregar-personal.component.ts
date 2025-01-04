@@ -1,38 +1,51 @@
-import { Component } from '@angular/core';
-
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { TrabajadoresService } from '../service/trabajadores.service'; // Servicio para trabajadores
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-modal-agregar-personal',
   templateUrl: './modal-agregar-personal.component.html',
-  styleUrl: './modal-agregar-personal.component.css'
+  styleUrls: ['./modal-agregar-personal.component.css']
 })
-export class ModalAgregarPersonalComponent {
-
-  addPersonalForm: FormGroup;
+export class ModalAgregarPersonalComponent implements OnInit {
+  addPersonalForm!: FormGroup;
 
   constructor(
-    public dialogRef: MatDialogRef<ModalAgregarPersonalComponent>,
     private fb: FormBuilder,
-  ) {
+    private trabajadoresService: TrabajadoresService, // Servicio para interactuar con la API
+    private dialogRef: MatDialogRef<ModalAgregarPersonalComponent> // Referencia al modal
+  ) {}
+
+  ngOnInit(): void {
+    // Inicializa el formulario reactivo
     this.addPersonalForm = this.fb.group({
-      clave: ['', Validators.required],
-      nombre: ['', Validators.required],
-      marca: [''],
-      modelo: [''],
-      numSerie: [''],
-      encargado: [''],
-      observaciones: ['']
+      nombre: ['', [Validators.required]],
+      numero: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      area: ['', [Validators.required]],
+      ubicacion: ['', [Validators.required]],
+      perfilAcad: ['', [Validators.required]],
+      puesto: ['', [Validators.required]],
+      estatus: ['activo', [Validators.required]],
+      correoPersonal: ['', [Validators.required, Validators.email]],
+      correoInstit: ['', [Validators.required, Validators.email]]
     });
   }
 
-  onSubmit() {
-
-
+  // Función para guardar el trabajador
+  onSubmit(): void {
+    if (this.addPersonalForm.valid) {
+      this.trabajadoresService.addTrabajador(this.addPersonalForm.value).subscribe({
+        next: (response) => {
+          console.log('Trabajador agregado correctamente:', response);
+          this.dialogRef.close(true); // Cierra el modal y pasa un valor de éxito
+        },
+        error: (error) => {
+          console.error('Error al agregar el trabajador:', error);
+        }
+      });
+    } else {
+      console.error('Formulario inválido');
+    }
   }
-
-
-
 }

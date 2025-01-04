@@ -66,6 +66,17 @@ textarea{
   margin-top: 20px;
 }
 
+/* Estilo para el select del estatus */
+#estatus {
+  font-size: 16px;
+  margin-left: 10px;
+  border-radius: 8px;
+  padding: 4px;
+  background-color: #F4F4F4;
+  border: 2px solid black; 
+}
+
+
 .OK{
   float: right;
   margin-top: 15px;
