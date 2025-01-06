@@ -112,8 +112,7 @@
       <div class="table-container">
         <table class="custom-table">
           <thead>
-            <tr>
-              <th>ID</th>
+            <tr>              
               <th>Nombre</th>
               <th>Número</th>
               <th>Área</th>
@@ -127,8 +126,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let trabajador of trabajadores; let i = index" [ngClass]="{ 'even-row': i % 2 === 0, 'odd-row': i % 2 !== 0 }">
-              <td>{{ trabajador.idTrabajador }}</td>
+            <tr *ngFor="let trabajador of trabajadores; let i = index" [ngClass]="{ 'even-row': i % 2 === 0, 'odd-row': i % 2 !== 0 }">              
               <td>{{ trabajador.nombre }}</td>
               <td>{{ trabajador.numero }}</td>
               <td>{{ trabajador.area }}</td>

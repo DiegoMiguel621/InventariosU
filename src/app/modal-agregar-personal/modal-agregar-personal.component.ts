@@ -38,14 +38,16 @@ export class ModalAgregarPersonalComponent implements OnInit {
       this.trabajadoresService.addTrabajador(this.addPersonalForm.value).subscribe({
         next: (response) => {
           console.log('Trabajador agregado correctamente:', response);
-          this.dialogRef.close(true); // Cierra el modal y pasa un valor de éxito
+          this.dialogRef.close('success'); // Pasa una cadena clara para indicar éxito
         },
         error: (error) => {
           console.error('Error al agregar el trabajador:', error);
+          this.dialogRef.close('error'); // Pasa un mensaje en caso de error
         }
       });
     } else {
       console.error('Formulario inválido');
     }
   }
+  
 }

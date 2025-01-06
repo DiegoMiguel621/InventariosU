@@ -26,15 +26,22 @@ export class PersonalComponent implements OnInit {
 
   agregarPersonal(): void {
     const dialogRef = this._matDialog.open(ModalAgregarPersonalComponent);
+  
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        // Refrescamos la lista de trabajadores al cerrar el modal
+      if (result === 'success') {
+        // Refrescamos la lista de trabajadores al cerrar el modal exitosamente
         this.trabajadoresService.getTrabajadores().subscribe((data) => {
           this.trabajadores = data;
         });
+      } else if (result === 'error') {
+        console.error('Ocurrió un error al agregar el trabajador.');
+      } else {
+        console.log('El modal fue cerrado sin agregar un trabajador.');
       }
     });
   }
+  
+  
 
   verrPersonal(id: number): void {
     const dialogRef = this._matDialog.open(ModalVerPersonalComponent, {
