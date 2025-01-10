@@ -79,7 +79,7 @@
       <label for="buscar">No. de resguardante:</label>
       <input type="text" class="buscar" placeholder="Buscar">
     </div>
-    
+
     <div class="dropdown">
       <label for="area">Seleccione área:</label>
       <select id="area">
@@ -98,7 +98,7 @@
       </select>
     </div>
   </div>
-    
+
     <div id="actions">
       <div class="add-user" >
         <button mat-raised-button color="primary" (click)="agregarPersonal()">
@@ -112,7 +112,7 @@
       <div class="table-container">
         <table class="custom-table">
           <thead>
-            <tr>              
+            <tr>
               <th>Nombre</th>
               <th>Número</th>
               <th>Área</th>
@@ -126,7 +126,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let trabajador of trabajadores; let i = index" [ngClass]="{ 'even-row': i % 2 === 0, 'odd-row': i % 2 !== 0 }">              
+            <tr *ngFor="let trabajador of trabajadores; let i = index" [ngClass]="{ 'even-row': i % 2 === 0, 'odd-row': i % 2 !== 0 }">
               <td>{{ trabajador.nombre }}</td>
               <td>{{ trabajador.numero }}</td>
               <td>{{ trabajador.area }}</td>
@@ -138,15 +138,15 @@
               <td>{{ trabajador.correoInstit }}</td>
               <td class="fixed-column">
                 <i class="fa fa-eye" style="color: #00A65A;" (click)="verrPersonal(trabajador.idTrabajador)"></i>
-                <i class="fa-regular fa-pen-to-square" style="color: #6FC6F9;"></i>
+                <i class="fa-regular fa-pen-to-square" style="color: #6FC6F9;" (click)="verrPersonal(trabajador.idTrabajador)"></i>
                 <i class="fa-solid fa-circle-xmark" style="color: #FF346A;"></i>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-      
-      
+
+
     </section>
   </section>
 

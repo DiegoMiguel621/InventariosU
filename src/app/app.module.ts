@@ -24,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApiBienesService } from '././service/api-bienes.service';
 import { ModalAgregarPersonalComponent } from './modal-agregar-personal/modal-agregar-personal.component';
 import { ModalVerPersonalComponent } from './modal-ver-personal/modal-ver-personal.component';
+import { ModalEditarPersonalComponent } from './modal-editar-personal/modal-editar-personal.component';
 
 
 
@@ -46,6 +47,7 @@ import { ModalVerPersonalComponent } from './modal-ver-personal/modal-ver-person
     ModalEliminarComponent,
     ModalAgregarPersonalComponent,
     ModalVerPersonalComponent,
+    ModalEditarPersonalComponent,
 
   ],
   imports: [
