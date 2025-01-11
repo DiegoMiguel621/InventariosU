@@ -49,5 +49,5 @@ export class ModalAgregarPersonalComponent implements OnInit {
       console.error('Formulario inválido');
     }
   }
-  
+
 }

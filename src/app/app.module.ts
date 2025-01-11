@@ -25,6 +25,7 @@ import { ApiBienesService } from '././service/api-bienes.service';
 import { ModalAgregarPersonalComponent } from './modal-agregar-personal/modal-agregar-personal.component';
 import { ModalVerPersonalComponent } from './modal-ver-personal/modal-ver-personal.component';
 import { ModalEditarPersonalComponent } from './modal-editar-personal/modal-editar-personal.component';
+import { ModalEliminarPersonalComponent } from './modal-eliminar-personal/modal-eliminar-personal.component';
 
 
 
@@ -48,6 +49,7 @@ import { ModalEditarPersonalComponent } from './modal-editar-personal/modal-edit
     ModalAgregarPersonalComponent,
     ModalVerPersonalComponent,
     ModalEditarPersonalComponent,
+    ModalEliminarPersonalComponent,
 
   ],
   imports: [

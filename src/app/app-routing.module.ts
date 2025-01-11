@@ -15,6 +15,7 @@ import { ModalEliminarComponent } from './components/modal-eliminar/modal-elimin
 import { ModalAgregarPersonalComponent } from './modal-agregar-personal/modal-agregar-personal.component';
 import { ModalVerPersonalComponent } from './modal-ver-personal/modal-ver-personal.component';
 import { ModalEditarPersonalComponent } from './modal-editar-personal/modal-editar-personal.component';
+import { ModalEliminarPersonalComponent } from './modal-eliminar-personal/modal-eliminar-personal.component';
 
 
 const routes: Routes = [
@@ -37,6 +38,8 @@ const routes: Routes = [
   {path:'modal5',component:ModalAgregarPersonalComponent},
   {path:'modal6',component:ModalVerPersonalComponent},
   {path:'modal7',component:ModalEditarPersonalComponent,},
+  {path:'modal8',component:ModalEliminarPersonalComponent,},
+
 
 
   {path:'**',redirectTo:'login',pathMatch:'full'}
