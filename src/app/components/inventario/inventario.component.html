@@ -71,36 +71,74 @@
         </button>
       </div>
 
-
-      <table>
-        <thead>
-          <tr>
-            <th>Clave</th>
-            <th>Nombre</th>
-            <th>Marca</th>
-            <th>Modelo</th>
-            <th>Número de Serie</th>
-            <th>Encargado</th>
-            <th>Observaciones</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let bien of bienes">
-            <td>{{ bien.clave }}</td>
-            <td>{{ bien.nombre }}</td>
-            <td>{{ bien.marca }}</td>
-            <td>{{ bien.modelo }}</td>
-            <td>{{ bien.nserie }}</td>
-            <td>{{ bien.encargado }}</td>
-            <td>{{ bien.observaciones }}</td>
-            <td>
-              <button (click)="editarBien(bien)">Editar</button>
-              <button (click)="eliminarBien(bien.id)">Eliminar</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div id="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Número de inventario anterior</th>
+              <th>Número de inventario armonizado</th>
+              <th>Clave de control (BIENES SUJETO A CONTROL)</th>
+              <th>Nombre del bien</th>
+              <th>Clasificación del bien</th>
+              <th>Clasificación adicional del bien</th>
+              <th>Nombre del bien (ACORDE AL CATÁLOGO DE PRODUCTOS DEL CONAC)</th>
+              <th>Descripción del bien</th>
+              <th>Marca</th>
+              <th>Modelo</th>
+              <th>Número de serie</th>
+              <th>Aplica para registro contable (SI/NO)</th>
+              <th>Grupo de bienes (CONTABILIDAD)</th>
+              <th>Grupo de bienes (CONAC)</th>
+              <th>Categoría (CONAC)</th>
+              <th>Subcategoría (CONAC)</th>
+              <th>Tipo de alta (COMPRA, COMODATO,DONACIÓN, MENORES A 70 UMA. OTRO)</th>
+              <th>Se cuenta con factura física/documento oficial de ingreso del bien SI/NO</th>
+              <th>Fecha de recepción de la factura física/documento oficial de ingreso del bien</th>
+              <th>Número de factura</th>
+              <th>Fecha de la factura</th>
+              <th>Fecha de alta del bien</th>
+              <th>Costo de adquisición del bien</th>
+              <th>Costo de adquisición del bien (REGISTRADO EN CONTABILIDAD)</th>
+              <th>Con depreciación SI/NO</th>
+              <th>Frecuencia de depreciación</th>
+              <th>% de depreciación anual</th>
+              <th>Total de meses a depreciar</th>
+              <th>Importe de depreciación mensual</th>
+              <th>Monto depreciado</th>
+              <th>Valor en libros</th>
+              <th>Meses pendientes por depreciar</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let bien of bienes">
+              <td>{{ bien.clave }}</td>
+              <td>{{ bien.nombre }}</td>
+              <td>{{ bien.marca }}</td>
+              <td>{{ bien.modelo }}</td>
+              <td>{{ bien.nserie }}</td>
+              <td>{{ bien.encargado }}</td>
+              <td>{{ bien.observaciones }}</td>
+              
+              <td>
+                <button (click)="editarBien(bien)">Editar</button>
+                <button (click)="eliminarBien(bien.id)">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
 
 

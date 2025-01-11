@@ -81,7 +81,8 @@
 table{
   margin-top: 60px;
   margin-right: 50px;
-  
+
+
 
 }
 
@@ -89,6 +90,8 @@ table {
   width: 100%;
   border-collapse: collapse;
   font-family: Arial, sans-serif;
+  min-width: 1200px; /* Asegura que las tablas con muchas columnas sean más anchas que el contenedor */
+  table-layout: fixed; /* Fija el ancho de las columnas */
 }
 
 thead {
@@ -100,6 +103,7 @@ th, td {
   padding: 8px;
   text-align: left;
   border-bottom: 1px solid #ddd;
+  overflow: hidden; /* Evita desbordamiento de texto */
 }
 
 tbody tr:nth-child(even) {
@@ -118,6 +122,7 @@ tbody {
   display: block;
   height: 300px;
   overflow-y: auto;
+  overflow-y: auto; /* Habilita desplazamiento vertical si es necesario */
 }
 
 thead, tbody tr {
@@ -158,6 +163,23 @@ td:last-child {
   text-align: center;
 }
 
+#table-container {
+  width: 100%; /* Ajusta al ancho del contenedor */
+  overflow-x: auto; /* Habilita desplazamiento horizontal */
+  border: 1px solid #ddd; /* Opcional: define un borde alrededor */
+}
+
+thead tr {
+  display: table;
+  width: 100%; /* Asegura que las columnas coincidan */
+  table-layout: fixed; /* Alinea encabezados con celdas */
+}
+
+tbody tr {
+  display: table;
+  width: 100%; /* Asegura que las columnas coincidan */
+  table-layout: fixed; /* Fija el ancho de las celdas */
+}
 
 
 
