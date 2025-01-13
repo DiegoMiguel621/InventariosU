@@ -38,9 +38,6 @@
 }
 
 .close-button {
-  background: none;
-  border: none;
-  color: white;
   cursor: pointer;
 }
 
@@ -116,8 +113,8 @@
 }
 
 .btn-imprimir {
-  background-color: #441B69; /* Fondo blanco para contraste */
-  color: #FFFFFF; /* Texto morado */
+  background-color: transparent; 
+  color: #FFFFFF; 
   padding: 10px 20px;
   border: 1px solid #FFFFFF;
   border-radius: 4px;

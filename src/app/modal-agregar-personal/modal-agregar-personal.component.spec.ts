@@ -21,3 +21,4 @@ describe('ModalAgregarPersonalComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

@@ -50,4 +50,9 @@ export class ModalAgregarPersonalComponent implements OnInit {
     }
   }
 
+  closeModal(): void {
+    this.dialogRef.close(); // Cierra el modal sin enviar datos
+  }
+  
+
 }

@@ -6,8 +6,11 @@
     <div class="modal-content">
       <div class="modal-header">
         <h2 id="txtAddProd">Añadir Trabajador</h2>
-        
+        <div class="iconContainerClose" (click)="closeModal()">
+          <i class="fa-solid fa-xmark fa-2xl" style="color: #ffffff;"></i>
+        </div>
       </div>
+      
       <div class="modal-body">
 
         <form [formGroup]="addPersonalForm" (ngSubmit)="onSubmit()">
@@ -16,7 +19,7 @@
             <input type="text" id="nombre" formControlName="nombre" required>
           </div>
           <div class="form-group">
-            <label for="numero">Número:</label>
+            <label for="numero">Número de Resguardo:</label>
             <input type="number" id="numero" formControlName="numero" required>
           </div>
           <div class="form-group">
@@ -51,11 +54,11 @@
             <input type="email" id="correoInstit" formControlName="correoInstit" required>
           </div>
           <div class="form-group">
-            <button class="OK" type="submit">GUARDAR</button>
+            <div id="barraMorada2">
+              <button class="OK" type="submit">GUARDAR</button>
+            </div>            
           </div>
         </form>
-        
       </div>
     </div>
-    <div id="barraMorada2"></div>
   </div>
