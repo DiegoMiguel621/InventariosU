@@ -17,8 +17,13 @@ export class TrabajadoresService {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
   addTrabajador(trabajador: any): Observable<any> {
-    return this.http.post<any>('http://localhost:3000/api/trabajadores', trabajador);
+    return this.http.post(`${this.apiUrl}`, trabajador);
   }
+  
+  deleteTrabajador(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+  
   
   
   

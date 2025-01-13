@@ -188,6 +188,7 @@ body {
   text-align: center; /* Centra el contenido horizontalmente */
 }
 
+
 .custom-table tbody tr.even-row td.fixed-column {
   background-color: white; /* Color de fondo para filas pares */
 }

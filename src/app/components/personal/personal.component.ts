@@ -29,20 +29,18 @@ export class PersonalComponent implements OnInit {
 
   agregarPersonal(): void {
     const dialogRef = this._matDialog.open(ModalAgregarPersonalComponent);
-
     dialogRef.afterClosed().subscribe((result) => {
-      if (result === 'success') {
-        // Refrescamos la lista de trabajadores al cerrar el modal exitosamente
+      if (result) { // Si se recibe un valor "true"
+        console.log('El trabajador fue agregado, actualizando la tabla...');
         this.trabajadoresService.getTrabajadores().subscribe((data) => {
           this.trabajadores = data;
         });
-      } else if (result === 'error') {
-        console.error('Ocurrió un error al agregar el trabajador.');
       } else {
         console.log('El modal fue cerrado sin agregar un trabajador.');
       }
     });
   }
+    
 
 
 
@@ -74,16 +72,22 @@ export class PersonalComponent implements OnInit {
   }
 
 
-  eliminarPersonal(): void {
-    const dialogRef = this._matDialog.open(ModalEliminarPersonalComponent);
-    dialogRef.afterClosed().subscribe(result => {
+  eliminarPersonal(id: number): void {
+    console.log('ID del trabajador a eliminar:', id); // Confirma que el ID es correcto
+    const dialogRef = this._matDialog.open(ModalEliminarPersonalComponent, {
+      data: { id } // Pasamos el ID al modal
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.trabajadoresService.getTrabajadores().subscribe(data => {
+        this.trabajadoresService.getTrabajadores().subscribe((data) => {
           this.trabajadores = data;
         });
       }
     });
   }
+  
+  
 
 }
 
