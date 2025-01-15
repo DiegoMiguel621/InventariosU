@@ -126,7 +126,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let trabajador of trabajadores; let i = index" [ngClass]="{ 'even-row': i % 2 === 0, 'odd-row': i % 2 !== 0 }">
+            <tr *ngFor="let trabajador of paginatedTrabajadores; let i = index" [ngClass]="{ 'even-row': i % 2 === 0, 'odd-row': i % 2 !== 0 }">
               <td>{{ trabajador.nombre }}</td>
               <td>{{ trabajador.numero }}</td>
               <td>{{ trabajador.area }}</td>
@@ -137,19 +137,24 @@
               <td>{{ trabajador.correoPersonal }}</td>
               <td>{{ trabajador.correoInstit }}</td>
               <td class="fixed-column">
-                
                 <i class="fa fa-eye" style="color: #00A65A;" (click)="verrPersonal(trabajador.idTrabajador)"></i>
-                <i class="fa-regular fa-pen-to-square" style="color: #6FC6F9;" (click)="editarPersonal(trabajador)"></i>                
+                <i class="fa-regular fa-pen-to-square" style="color: #6FC6F9;" (click)="editarPersonal(trabajador)"></i>
                 <i class="fa-solid fa-circle-xmark" style="color: #FF346A;" (click)="eliminarPersonal(trabajador.idTrabajador)"></i>
-
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-
-
+      <div class="pagination">
+        <button (click)="prevPage()" [disabled]="currentPage === 1">Anterior</button>
+        <span>
+          Página {{ currentPage }} de {{ Math.ceil(trabajadores.length / itemsPerPage) }}
+        </span>        
+        <button (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= trabajadores.length">Siguiente</button>
+      </div>
     </section>
+    
+
   </section>
 
 </section>
