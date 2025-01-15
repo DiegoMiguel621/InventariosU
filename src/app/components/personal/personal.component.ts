@@ -60,16 +60,24 @@ export class PersonalComponent implements OnInit {
   }
 
 
-  editarPersonal(): void {
-    const dialogRef = this._matDialog.open(ModalEditarPersonalComponent);
-    dialogRef.afterClosed().subscribe(result => {
+  editarPersonal(trabajador: any): void {
+    const dialogRef = this._matDialog.open(ModalEditarPersonalComponent, {
+      data: trabajador, // Asegúrate de que "trabajador" tiene el campo idTrabajador
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.trabajadoresService.getTrabajadores().subscribe(data => {
+        this.trabajadoresService.getTrabajadores().subscribe((data) => {
           this.trabajadores = data;
         });
       }
     });
   }
+  
+  
+  
+  
+  
 
 
   eliminarPersonal(id: number): void {

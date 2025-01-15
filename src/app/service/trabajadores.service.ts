@@ -19,10 +19,16 @@ export class TrabajadoresService {
   addTrabajador(trabajador: any): Observable<any> {
     return this.http.post(`${this.apiUrl}`, trabajador);
   }
-  
   deleteTrabajador(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
+  updateTrabajador(idTrabajador: number, trabajador: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${idTrabajador}`, trabajador);
+  }
+  
+  
+  
+  
   
   
   

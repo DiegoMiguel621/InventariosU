@@ -4,60 +4,63 @@
 
 
 <div class="modal">
-
   <div class="modal-content">
-      <div class="modal-header">
-          <h2 id="txtAddProd">Editar información del trabajador</h2>
-          <button class="close-button">
-            <i class="fa-solid fa-x fa-lg" style="color: #ffffff;"></i>
-          </button>
+    <div class="modal-header">
+      <h2 id="txtAddProd">Modificar datos del Trabajador</h2>
+      <div class="iconContainerClose" (click)="closeModal()">
+        <i class="fa-solid fa-xmark fa-2xl" style="color: #ffffff;"></i>
       </div>
-      <div class="modal-body">
-        <form (ngSubmit)="onSubmit()">
-          <div class="form-group">
-            <label for="nombre">Nombre Completo:</label>
-            <input type="text" id="nombre" formControlName="nombre" required>
-          </div>
-          <div class="form-group">
-            <label for="numero">Número:</label>
-            <input type="number" id="numero" formControlName="numero" required>
-          </div>
-          <div class="form-group">
-            <label for="area">Área:</label>
-            <input type="text" id="area" formControlName="area" required>
-          </div>
-          <div class="form-group">
-            <label for="ubicacion">Ubicación:</label>
-            <input type="text" id="ubicacion" formControlName="ubicacion" required>
-          </div>
-          <div class="form-group">
-            <label for="perfilAcad">Perfil Académico:</label>
-            <input type="text" id="perfilAcad" formControlName="perfilAcad" required>
-          </div>
-          <div class="form-group">
-            <label for="puesto">Puesto:</label>
-            <input type="text" id="puesto" formControlName="puesto" required>
-          </div>
-          <div class="form-group">
-            <label for="estatus">Estatus:</label>
-            <select id="estatus" formControlName="estatus" required>
-              <option value="activo">Activo</option>
-              <option value="inactivo">Inactivo</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="correoPersonal">Correo Personal:</label>
-            <input type="email" id="correoPersonal" formControlName="correoPersonal" required>
-          </div>
-          <div class="form-group">
-            <label for="correoInstit">Correo Institucional:</label>
-            <input type="email" id="correoInstit" formControlName="correoInstit" required>
-          </div>
-          <div class="form-group">
-            <button class="OK" type="submit">GUARDAR</button>
-          </div>
-        </form>
     </div>
-</div>
-<div id="barraMorada2"></div>
+    
+    <div class="modal-body">
+
+      <form [formGroup]="EditarPersonalForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="nombre">Nombre Completo:</label>
+          <input type="text" id="nombre" formControlName="nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="numero">Número de Resguardo:</label>
+          <input type="number" id="numero" formControlName="numero" required>
+        </div>
+        <div class="form-group">
+          <label for="area">Área:</label>
+          <input type="text" id="area" formControlName="area" required>
+        </div>
+        <div class="form-group">
+          <label for="ubicacion">Ubicación:</label>
+          <input type="text" id="ubicacion" formControlName="ubicacion" required>
+        </div>
+        <div class="form-group">
+          <label for="perfilAcad">Perfil Académico:</label>
+          <input type="text" id="perfilAcad" formControlName="perfilAcad" required>
+        </div>
+        <div class="form-group">
+          <label for="puesto">Puesto:</label>
+          <input type="text" id="puesto" formControlName="puesto" required>
+        </div>
+        <div class="form-group">
+          <label for="estatus">Estatus:</label>
+          <select id="estatus" formControlName="estatus" required>
+            <option value="activo">Activo</option>
+            <option value="inactivo">Inactivo</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="correoPersonal">Correo Personal:</label>
+          <input type="email" id="correoPersonal" formControlName="correoPersonal" required>
+        </div>
+        <div class="form-group">
+          <label for="correoInstit">Correo Institucional:</label>
+          <input type="email" id="correoInstit" formControlName="correoInstit" required>
+        </div>
+        <div class="form-group">
+          <div id="barraMorada2">
+            <button class="OK" type="submit">GUARDAR</button>
+          </div>            
+        </div>
+      </form>
+            
+    </div>
+  </div>
 </div>
