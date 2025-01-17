@@ -14,8 +14,8 @@
 
 #opcInicio{
     background-color: #ECF0F5;
-    width: 85%;
-    height: 630px;
+    width: 88%;
+    height: calc(100vh - 100px);
     float: right;
 
 }
@@ -32,7 +32,7 @@
     background-color: white;
     width: 96%;
     height: fit-content;
-    margin-left: 10px;
+    margin-left: 2%;
     display: inline-flex;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -60,8 +60,8 @@
 #aside{
   background-color: #222D32;
   float: left;
-  width: 15%;
-  height: 679px;
+  width: 12%;
+  height: calc(100vh - 50px);
 }
 #menuAside{
   background-color: #1A2226;

@@ -15,13 +15,14 @@
 .ELIMINAR{
   float: right;
   margin-top: 2%;
+  margin-right: 25%;
   background-color: #441B69;
   color: white;
-  padding: 10px;
-  margin-right: 25%;
-  border-color: white;
+  padding: 10px;   
   border-radius: 5px;
-  cursor: pointer;
+  cursor: pointer;  
+  width: 20%;
+  height: 10%;
 }
 
 .CANCELAR{
@@ -33,4 +34,6 @@
   padding: 10px;
   border-radius: 5px;
   cursor: pointer;
+  width: 20%;
+  height: 10%;
 }

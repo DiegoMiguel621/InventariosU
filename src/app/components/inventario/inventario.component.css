@@ -1,8 +1,8 @@
 #aside{
   background-color: #222D32;
   float: left;
-  width: 15%;
-  height: 679px;
+  width: 12%;
+  height: calc(100vh - 50px);
 }
 
 #menuAside{
@@ -47,8 +47,8 @@
 #opcInicio{
 
   background-color: #ECF0F5;
-  width: 85%;
-  height: 630px;
+  width: 88%;
+  height: calc(100vh - 100px);
   float: right;
 
 }
