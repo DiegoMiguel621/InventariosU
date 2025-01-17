@@ -70,34 +70,39 @@
     <div id="tituloBusqueda">
       <font size="5">Opciones de búsqueda</font>
     </div>
+    
     <div class="opcBusqueda">
-    <div class="search">
-      <label for="buscar">Nombre:</label>
-      <input type="text" class="buscar" placeholder="Buscar">
-    </div>
-    <div class="search">
-      <label for="buscar">No. de resguardante:</label>
-      <input type="text" class="buscar" placeholder="Buscar">
-    </div>
+      <div class="search">
+        <label for="buscar">Nombre:</label>
+        <input type="text" id="buscar" class="buscar" placeholder="Buscar" (input)="filtrarPorNombre($event)"/>
+      </div>
+      
+      <div class="search">
+        <label for="buscar">No. de resguardante:</label>
+        <input type="text" class="buscar" placeholder="Buscar">
+      </div>
 
-    <div class="dropdown">
-      <label for="area">Seleccione área:</label>
-      <select id="area">
-        <option value="" disabled selected>Área</option>
-        <option value="administracion">Administración</option>
-        <option value="academica">Académica</option>
-        <option value="servicios_estudiantiles">Servicios Estudiantiles</option>
-      </select>
+       <div class="dropdown">
+          <label for="area">Seleccione área:</label>
+          <select id="area">
+            <option value="" disabled selected>Área</option>
+            <option value="administracion">Administración</option>
+            <option value="academica">Académica</option>
+            <option value="servicios_estudiantiles">Servicios Estudiantiles</option>
+          </select>
+        </div>
+
+        <div class="dropdown">
+          <label for="estatus">Seleccione Estatus:</label>
+          <select id="estatus" (change)="filtrarPorEstatus($event)">
+            <option value="" disabled selected>Estatus</option>
+            <option value="ACTIVO">Activo</option>
+            <option value="INACTIVO">Inactivo</option>
+            <option value="AMBAS">Ambas</option>
+          </select>
+        </div>
+                    
     </div>
-    <div class="dropdown">
-      <label for="estatus">Seleccione Estatus:</label>
-      <select id="estatus">
-        <option value="" disabled selected>Estatus</option>
-        <option value="activo">Activo</option>
-        <option value="inactivo">Inactivo</option>
-      </select>
-    </div>
-  </div>
 
     <div id="actions">
       <div class="add-user" >
@@ -137,20 +142,21 @@
               <td>{{ trabajador.correoInstit }}</td>
               <td class="fixed-column">
                 <i class="fa fa-eye" style="color: #00A65A;" (click)="verrPersonal(trabajador.idTrabajador)"></i>
-                <i class="fa-regular fa-pen-to-square" style="color: #6FC6F9;" (click)="editarPersonal(trabajador)"></i>
+                <i class="fa-regular fa-pen-to-square" style="color: #6FC6F9;" (click)="editarPersonal(trabajador)"></i>                
                 <i class="fa-solid fa-circle-xmark" style="color: #FF346A;" (click)="eliminarPersonal(trabajador.idTrabajador)"></i>
               </td>
             </tr>
-          </tbody>
+          </tbody>          
+          
         </table>
       </div>
       <div class="pagination">
         <button (click)="prevPage()" [disabled]="currentPage === 1">Anterior</button>
-        <span>
-          Página {{ currentPage }} de {{ Math.ceil(trabajadores.length / itemsPerPage) }}
-        </span>        
-        <button (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= trabajadores.length">Siguiente</button>
+        <span>Página {{ currentPage }} de {{ Math.ceil(trabajadoresFiltrados.length / itemsPerPage) }}</span>
+        <button (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= trabajadoresFiltrados.length">Siguiente</button>
       </div>
+      
+      
     </section>
     
 
