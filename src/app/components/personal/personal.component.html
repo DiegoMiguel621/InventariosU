@@ -78,27 +78,25 @@
       </div>
       
       <div class="search">
-        <label for="buscar">No. de resguardante:</label>
-        <input type="text" class="buscar" placeholder="Buscar">
+        <label for="buscarNumero">No. de resguardante:</label>
+        <input type="text" id="buscarNumero" class="buscar" placeholder="Buscar" [(ngModel)]="numeroBusqueda" (input)="filtrarPorNumero()"/>
+      </div>                  
+
+      <div class="dropdown">
+        <label for="area">Seleccione área:</label>
+        <select id="area" (change)="filtrarPorArea($event)">
+          <option value="" disabled selected>Área</option>
+          <option *ngFor="let area of areas" [value]="area">{{ area }}</option>
+        </select>
       </div>
-
-       <div class="dropdown">
-          <label for="area">Seleccione área:</label>
-          <select id="area">
-            <option value="" disabled selected>Área</option>
-            <option value="administracion">Administración</option>
-            <option value="academica">Académica</option>
-            <option value="servicios_estudiantiles">Servicios Estudiantiles</option>
-          </select>
-        </div>
-
+          
         <div class="dropdown">
           <label for="estatus">Seleccione Estatus:</label>
           <select id="estatus" (change)="filtrarPorEstatus($event)">
             <option value="" disabled selected>Estatus</option>
             <option value="ACTIVO">Activo</option>
             <option value="INACTIVO">Inactivo</option>
-            <option value="AMBAS">Ambas</option>
+            <option value="AMBAS">Ambos</option>
           </select>
         </div>
                     

@@ -17,10 +17,13 @@ export class PersonalComponent implements OnInit {
   paginatedTrabajadores: any[] = [];
   currentPage: number = 1;
   itemsPerPage: number = 10;
-  Math = Math; // Necesario para la paginación en el template
+  estatusSeleccionado: string = '';
+  nombreBusqueda: string = '';
+  numeroBusqueda: string = '';
+  areaSeleccionada: string = '';
+  areas: string[] = [];
 
-  estatusSeleccionado: string = ''; // Guarda el valor del filtro de estatus
-  nombreBuscado: string = ''; // Guarda el valor del filtro de nombre
+  Math = Math; // Exponemos Math para usar Math.ceil en el template
 
   constructor(
     private _matDialog: MatDialog,
@@ -28,14 +31,101 @@ export class PersonalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Cargar trabajadores
     this.trabajadoresService.getTrabajadores().subscribe((data) => {
       this.trabajadores = data;
-      this.trabajadoresFiltrados = data; // Inicializamos los filtrados con todos los trabajadores
-      this.updatePagination(); // Configuramos la paginación
+      this.trabajadoresFiltrados = [...data];
+      this.updatePagination();
+    });
+
+    // Cargar áreas desde el servicio
+    this.trabajadoresService.getAreas().subscribe((areas: string[]) => {
+      this.areas = ['CUALQUIER AREA', ...areas]; // Agregar "CUALQUIER AREA"
     });
   }
 
-  // Función para actualizar la paginación
+  // Función para aplicar filtros combinados
+  usarFiltros(): void {
+    let resultados = [...this.trabajadores];
+  
+    // Filtro por estatus
+    if (this.estatusSeleccionado && this.estatusSeleccionado !== 'AMBAS') {
+      resultados = resultados.filter(
+        (trabajador) => trabajador.estatus === this.estatusSeleccionado
+      );
+    }
+  
+    // Filtro por nombre
+    if (this.nombreBusqueda) {
+      resultados = resultados.filter((trabajador) =>
+        this.normalizarTexto(trabajador.nombre).includes(
+          this.normalizarTexto(this.nombreBusqueda)
+        )
+      );
+    }
+  
+    // Filtro por número
+    if (this.numeroBusqueda) {
+      resultados = resultados.filter((trabajador) =>
+        trabajador.numero.includes(this.numeroBusqueda)
+      );
+    }
+  
+    // Filtro por área
+    if (this.areaSeleccionada && this.areaSeleccionada !== 'CUALQUIER AREA') {
+      resultados = resultados.filter((trabajador) =>
+        this.normalizarTexto(trabajador.area).includes(
+          this.normalizarTexto(this.areaSeleccionada)
+        )
+      );
+    }
+  
+    this.trabajadoresFiltrados = resultados;
+    this.updatePagination(); // Actualizar paginación después de filtrar
+  }
+  
+
+  // Filtros individuales que llaman a usarFiltros
+  filtrarPorEstatus(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    this.estatusSeleccionado = selectElement.value;
+    this.usarFiltros();
+  }
+
+  filtrarPorNombre(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    this.nombreBusqueda = inputElement.value;
+    this.usarFiltros();
+  }
+
+  filtrarPorNumero(): void {
+    if (this.numeroBusqueda) {
+      this.trabajadoresFiltrados = this.trabajadoresFiltrados.filter((trabajador) =>
+        trabajador.numero.toString().includes(this.numeroBusqueda)
+      );
+    } else {
+      // Si el campo está vacío, reseteamos el filtro y volvemos a aplicar los demás filtros
+      this.usarFiltros();
+    }
+    this.updatePagination(); // Aseguramos que la paginación sea correcta después del filtro
+  }
+  
+
+  filtrarPorArea(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    this.areaSeleccionada = selectElement.value;
+    this.usarFiltros();
+  }
+
+  // Normalizar texto para búsquedas insensibles a mayúsculas y acentos
+  normalizarTexto(texto: string): string {
+    return texto
+      .toUpperCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, ''); // Elimina los acentos
+  }
+
+  // Funciones de paginación
   updatePagination(): void {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
@@ -46,10 +136,7 @@ export class PersonalComponent implements OnInit {
   }
 
   nextPage(): void {
-    if (
-      this.currentPage * this.itemsPerPage <
-      this.trabajadoresFiltrados.length
-    ) {
+    if (this.currentPage * this.itemsPerPage < this.trabajadoresFiltrados.length) {
       this.currentPage++;
       this.updatePagination();
     }
@@ -62,14 +149,14 @@ export class PersonalComponent implements OnInit {
     }
   }
 
-  // CRUD - Funciones del modal
+  // CRUD Functions (sin cambios)
   agregarPersonal(): void {
     const dialogRef = this._matDialog.open(ModalAgregarPersonalComponent);
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.trabajadoresService.getTrabajadores().subscribe((data) => {
           this.trabajadores = data;
-          this.trabajadoresFiltrados = data;
+          this.trabajadoresFiltrados = [...data];
           this.updatePagination();
         });
       }
@@ -85,7 +172,7 @@ export class PersonalComponent implements OnInit {
       if (result) {
         this.trabajadoresService.getTrabajadores().subscribe((data) => {
           this.trabajadores = data;
-          this.trabajadoresFiltrados = data;
+          this.trabajadoresFiltrados = [...data];
           this.updatePagination();
         });
       }
@@ -101,7 +188,7 @@ export class PersonalComponent implements OnInit {
       if (result) {
         this.trabajadoresService.getTrabajadores().subscribe((data) => {
           this.trabajadores = data;
-          this.trabajadoresFiltrados = data;
+          this.trabajadoresFiltrados = [...data];
           this.updatePagination();
         });
       }
@@ -117,49 +204,10 @@ export class PersonalComponent implements OnInit {
       if (result) {
         this.trabajadoresService.getTrabajadores().subscribe((data) => {
           this.trabajadores = data;
-          this.trabajadoresFiltrados = data;
+          this.trabajadoresFiltrados = [...data];
           this.updatePagination();
         });
       }
     });
-  }
-
-  // Filtro por estatus
-  filtrarPorEstatus(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement;
-    this.estatusSeleccionado = selectElement.value;
-
-    this.aplicarFiltros(); // Llama a la función de aplicar filtros acumulativos
-  }
-
-  // Filtro por nombre
-  filtrarPorNombre(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
-    this.nombreBuscado = inputElement.value.toLowerCase();
-
-    this.aplicarFiltros(); // Llama a la función de aplicar filtros acumulativos
-  }
-
-  // Función para aplicar filtros acumulativos
-  aplicarFiltros(): void {
-    this.trabajadoresFiltrados = this.trabajadores;
-
-    // Filtra por estatus si se ha seleccionado alguno
-    if (this.estatusSeleccionado && this.estatusSeleccionado !== 'AMBAS') {
-      this.trabajadoresFiltrados = this.trabajadoresFiltrados.filter(
-        (trabajador) => trabajador.estatus === this.estatusSeleccionado
-      );
-    }
-
-    // Filtra por nombre si se ha escrito algo
-    if (this.nombreBuscado) {
-      this.trabajadoresFiltrados = this.trabajadoresFiltrados.filter(
-        (trabajador) =>
-          trabajador.nombre.toLowerCase().includes(this.nombreBuscado)
-      );
-    }
-
-    this.currentPage = 1; // Reiniciar la paginación
-    this.updatePagination();
   }
 }

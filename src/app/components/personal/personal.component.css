@@ -7,7 +7,7 @@
 body {
   overflow-x: hidden; /* Evita el desplazamiento horizontal */
 }
-#secInicio{
+#secInicio{ 
   height: 100%;
 }
 

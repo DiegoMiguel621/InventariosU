@@ -25,6 +25,12 @@ export class TrabajadoresService {
   updateTrabajador(idTrabajador: number, trabajador: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/${idTrabajador}`, trabajador);
   }
+
+  getAreas(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiUrl}/areas`);
+  }
+  
+
   
   
   
