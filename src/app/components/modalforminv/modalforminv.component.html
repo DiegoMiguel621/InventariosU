@@ -5,21 +5,49 @@
 <div class="modal">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 id="txtAddProd">Añadir Producto</h2>
-        <button class="close-button" (click)="dialogRef.close()">
-          <i class="fa-solid fa-x fa-lg" style="color: #ffffff;"></i>
-        </button>
+        <h2 id="txtAddProd">Agregar Bien</h2>
+        <div class="iconContainerClose" (click)="cerrarModal()">
+          <i class="fa-solid fa-xmark fa-2xl" style="color: #ffffff;"></i>
+        </div>
       </div>
+      
       <div class="modal-body">
         <form [formGroup]="addProductForm" (ngSubmit)="onSubmit()">
+          <!-- Sección Identificación -->
           <div class="form-group">
-            <label for="clave">Clave:</label>
-            <input type="text" id="clave" formControlName="clave" required>
+            <label for="numInvAnt">Número de Inventario Anterior:</label>
+            <input type="text" id="numInvAnt" formControlName="numInvAnt">
           </div>
           <div class="form-group">
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" formControlName="nombre" required>
+            <label for="numInvArm">Número de Inventario Armonizado:</label>
+            <input type="text" id="numInvArm" formControlName="numInvArm">
           </div>
+          <div class="form-group">
+            <label for="cControl">Clave de Control:</label>
+            <input type="text" id="cControl" formControlName="cControl">
+          </div>
+          <div class="form-group">
+            <label for="nombreBien">Nombre del Bien:</label>
+            <input type="text" id="nombreBien" formControlName="nombreBien" required>
+          </div>
+          <div class="form-group">
+            <label for="clasificacion">Clasificación:</label>
+            <input type="text" id="clasificacion" formControlName="clasificacion">
+          </div>
+          <div class="form-group">
+            <label for="clasAdic">Clasificación Adicional:</label>
+            <input type="text" id="clasAdic" formControlName="clasAdic">
+          </div>
+          <div class="form-group">
+            <label for="nombreCat">Nombre del Bien (Catálogo):</label>
+            <input type="text" id="nombreCat" formControlName="nombreCat">
+          </div>
+          <div class="form-group">
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" formControlName="descripcion"></textarea>
+          </div>
+        
+          <!-- Sección Detalles -->
           <div class="form-group">
             <label for="marca">Marca:</label>
             <input type="text" id="marca" formControlName="marca">
@@ -29,22 +57,291 @@
             <input type="text" id="modelo" formControlName="modelo">
           </div>
           <div class="form-group">
-            <label for="num-serie">Número de Serie:</label>
-            <input type="text" id="num-serie" formControlName="numSerie">
+            <label for="numSerie">Número de Serie:</label>
+            <input type="text" id="numSerie" formControlName="numSerie">
           </div>
           <div class="form-group">
-            <label for="encargado">Encargado:</label>
-            <input type="text" id="encargado" formControlName="encargado">
+            <label for="aplicaRegCont">Aplica Registro Contable:</label>
+            <select id="aplicaRegCont" formControlName="aplicaRegCont">
+              <option value="SI">SI</option>
+              <option value="NO">NO</option>
+            </select>
           </div>
           <div class="form-group">
-            <label for="observaciones">Observaciones:</label>
-            <textarea id="observaciones" formControlName="observaciones"></textarea>
+            <label for="grupoBienesCont">Grupo de Bienes (Contabilidad):</label>
+            <input type="text" id="grupoBienesCont" formControlName="grupoBienesCont">
           </div>
           <div class="form-group">
-            <button class="OK" type="submit">GUARDAR</button>
+            <label for="grupoBienesConac">Grupo de Bienes (CONAC):</label>
+            <input type="text" id="grupoBienesConac" formControlName="grupoBienesConac">
+          </div>
+          <div class="form-group">
+            <label for="categoria">Categoría:</label>
+            <input type="text" id="categoria" formControlName="categoria">
+          </div>
+          <div class="form-group">
+            <label for="subcategoria">Subcategoría:</label>
+            <input type="text" id="subcategoria" formControlName="subcategoria">
+          </div>
+          <div class="form-group">
+            <label for="tipoAlta">Tipo de Alta:</label>
+            <select id="tipoAlta" formControlName="tipoAlta">
+              <option value="COMPRA">COMPRA</option>
+              <option value="COMODATO">COMODATO</option>
+              <option value="DONACIÓN">DONACIÓN</option>
+              <option value="MENORES A 70 UMA">MENORES A 70 UMA</option>
+              <option value="OTRO">OTRO</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="facturaFisica">Factura Física:</label>
+            <select id="facturaFisica" formControlName="facturaFisica">
+              <option value="SI">SI</option>
+              <option value="NO">NO</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="fechaRecFact">Fecha Recepción Factura:</label>
+            <input type="date" id="fechaRecFact" formControlName="fechaRecFact">
+          </div>
+          <div class="form-group">
+            <label for="numFact">Número de Factura:</label>
+            <input type="text" id="numFact" formControlName="numFact">
+          </div>
+          <div class="form-group">
+            <label for="fechaFact">Fecha Factura:</label>
+            <input type="date" id="fechaFact" formControlName="fechaFact">
+          </div>
+          <div class="form-group">
+            <label for="fechaAlta">Fecha Alta:</label>
+            <input type="date" id="fechaAlta" formControlName="fechaAlta">
+          </div>
+        
+          <!-- Sección Financiera -->
+          <div class="form-group">
+            <label for="costoAdq">Costo Adquisición:</label>
+            <input type="number" id="costoAdq" formControlName="costoAdq" step="0.01">
+          </div>
+          <div class="form-group">
+            <label for="costoAdqCont">Costo Adquisición Contable:</label>
+            <input type="number" id="costoAdqCont" formControlName="costoAdqCont" step="0.01">
+          </div>
+          <div class="form-group">
+            <label for="depreciacion">Depreciación:</label>
+            <select id="depreciacion" formControlName="depreciacion">
+              <option value="SI">SI</option>
+              <option value="NO">NO</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="frecDepre">Frecuencia Depreciación:</label>
+            <input type="text" id="frecDepre" formControlName="frecDepre">
+          </div>
+          <div class="form-group">
+            <label for="porcDepAnual">% Depreciación Anual:</label>
+            <input type="number" id="porcDepAnual" formControlName="porcDepAnual" step="0.01">
+          </div>
+          <div class="form-group">
+            <label for="mesesDepre">Meses a Depreciar:</label>
+            <input type="number" id="mesesDepre" formControlName="mesesDepre">
+          </div>
+          <div class="form-group">
+            <label for="impMensDepre">Importe Mensual Depreciación:</label>
+            <input type="number" id="impMensDepre" formControlName="impMensDepre" step="0.01">
+          </div>
+          <div class="form-group">
+            <label for="montoDepre">Monto Depreciado:</label>
+            <input type="number" id="montoDepre" formControlName="montoDepre" step="0.01">
+          </div>
+          <div class="form-group">
+            <label for="valLibros">Valor en Libros:</label>
+            <input type="number" id="valLibros" formControlName="valLibros" step="0.01">
+          </div>
+          <div class="form-group">
+            <label for="mesesPendDepre">Meses Pendientes Depreciación:</label>
+            <input type="number" id="mesesPendDepre" formControlName="mesesPendDepre">
+          </div>
+        
+          <div class="form-group">
+            <label for="claveProyecto">Clave del Proyecto:</label>
+            <input type="text" id="claveProyecto" formControlName="claveProyecto">
+          </div>
+        
+          <div class="form-group">
+            <label for="apProye">Aplica Proyecto:</label>
+            <select id="apProye" formControlName="apProye">
+              <option value="SI">Sí</option>
+              <option value="NO">No</option>
+            </select>
+          </div>
+        
+          <div class="form-group">
+            <label for="partPres">Partida Presupuestal:</label>
+            <input type="text" id="partPres" formControlName="partPres">
+          </div>
+        
+          <div class="form-group">
+            <label for="fuenteFinan">Fuente de Financiamiento:</label>
+            <input type="text" id="fuenteFinan" formControlName="fuenteFinan">
+          </div>
+        
+          <div class="form-group">
+            <label for="numCuenta">Número de Cuenta:</label>
+            <input type="text" id="numCuenta" formControlName="numCuenta">
+          </div>
+        
+          <div class="form-group">
+            <label for="proveedor">Proveedor:</label>
+            <input type="text" id="proveedor" formControlName="proveedor">
+          </div>
+        
+          <div class="form-group">
+            <label for="rfcProveedor">RFC del Proveedor:</label>
+            <input type="text" id="rfcProveedor" formControlName="rfcProveedor">
+          </div>
+        
+          <div class="form-group">
+            <label for="domProveedor">Domicilio del Proveedor:</label>
+            <textarea id="domProveedor" formControlName="domProveedor"></textarea>
+          </div>
+        
+          <div class="form-group">
+            <label for="bienesMenores">Bienes Menores:</label>
+            <input type="number" step="0.01" id="bienesMenores" formControlName="bienesMenores">
+          </div>
+        
+          <div class="form-group">
+            <label for="tipoResguardo">Tipo de Resguardo:</label>
+            <input type="text" id="tipoResguardo" formControlName="tipoResguardo">
+          </div>
+        
+          <div class="form-group">
+            <label for="nomRes">Nombre del Resguardante:</label>
+            <input type="text" id="nomRes" formControlName="nomRes">
+          </div>
+        
+          <div class="form-group">
+            <label for="numRes">Número del Resguardante:</label>
+            <input type="number" id="numRes" formControlName="numRes">
+          </div>
+        
+          <div class="form-group">
+            <label for="areaRes">Área del Resguardante:</label>
+            <input type="text" id="areaRes" formControlName="areaRes">
+          </div>
+        
+          <div class="form-group">
+            <label for="ubiRes">Ubicación del Resguardante:</label>
+            <input type="text" id="ubiRes" formControlName="ubiRes">
+          </div>
+        
+          <div class="form-group">
+            <label for="observ1">Observaciones 1:</label>
+            <textarea id="observ1" formControlName="observ1"></textarea>
+          </div>
+        
+          <div class="form-group">
+            <label for="observ2">Observaciones 2:</label>
+            <textarea id="observ2" formControlName="observ2"></textarea>
+          </div>
+        
+          <div class="form-group">
+            <label for="comentCont">Comentario Contable:</label>
+            <textarea id="comentCont" formControlName="comentCont"></textarea>
+          </div>
+        
+          <div class="form-group">
+            <label for="seguimDesinc">Seguimiento de Desincorporación:</label>
+            <textarea id="seguimDesinc" formControlName="seguimDesinc"></textarea>
+          </div>
+        
+          <div class="form-group">
+            <label for="estatusBien">Estatus del Bien:</label>
+            <select id="estatusBien" formControlName="estatusBien">
+              <option value="" disabled selected>Seleccione Estatus</option>
+              <option value="ALTA">ALTA</option>
+              <option value="BAJA">BAJA</option>
+            </select>
+          </div>
+          
+        
+          <div class="form-group">
+            <label for="motBaja">Motivo de Baja:</label>
+            <textarea id="motBaja" formControlName="motBaja"></textarea>
+          </div>
+        
+          <div class="form-group">
+            <label for="fechaBaja">Fecha de Baja:</label>
+            <input type="date" id="fechaBaja" formControlName="fechaBaja">
+          </div>
+        
+          <div class="form-group">
+            <label for="aAdquisicion">Año de Adquisición:</label>
+            <input type="number" id="aAdquisicion" formControlName="aAdquisicion">
+          </div>
+        
+          <div class="form-group">
+            <label for="mAdquisicion">Mes de Adquisición:</label>
+            <input type="text" id="mAdquisicion" formControlName="mAdquisicion">
+          </div>
+        
+          <div class="form-group">
+            <label for="fotoBien">Foto del Bien:</label>
+            <input type="file" id="fotoBien" formControlName="fotoBien" accept="image/*">
+          </div>
+        
+          <div class="form-group">
+            <label for="perfilRes">Perfil del Resguardante:</label>
+            <input type="text" id="perfilRes" formControlName="perfilRes">
+          </div>
+        
+          <div class="form-group">
+            <label for="puestoRes">Puesto del Resguardante:</label>
+            <input type="text" id="puestoRes" formControlName="puestoRes">
+          </div>
+        
+          <div class="form-group">
+            <label for="estatusRes">Estatus del Resguardante:</label>
+            <input type="text" id="estatusRes" formControlName="estatusRes">
+          </div>
+        
+          <div class="form-group">
+            <label for="correoPerRes">Correo Personal del Resguardante:</label>
+            <input type="email" id="correoPerRes" formControlName="correoPerRes">
+          </div>
+        
+          <div class="form-group">
+            <label for="correoInstRes">Correo Institucional del Resguardante:</label>
+            <input type="email" id="correoInstRes" formControlName="correoInstRes">
+          </div>
+        
+          <div class="form-group">
+            <label for="estatusResguardo">Estatus de Resguardo:</label>
+            <input type="text" id="estatusResguardo" formControlName="estatusResguardo">
+          </div>
+        
+          <div class="form-group">
+            <label for="ultimoResguardo">Último Resguardo:</label>
+            <input type="date" id="ultimoResguardo" formControlName="ultimoResguardo">
+          </div>
+        
+          <div class="form-group">
+            <label for="etiqueta">Etiqueta:</label>
+            <select id="etiqueta" formControlName="etiqueta">
+              <option value="SI">Sí</option>
+              <option value="NO">No</option>
+            </select>
+          </div>
+        
+          <!-- Botón -->
+          <div class="form-group">
+            <div id="barraMorada2">
+              <button class="OK" type="submit">GUARDAR</button>
+            </div>            
           </div>
         </form>
+        
       </div>
     </div>
-    <div id="barraMorada2"></div>
+   
   </div>

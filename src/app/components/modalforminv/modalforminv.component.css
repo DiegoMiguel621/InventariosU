@@ -1,43 +1,44 @@
 .modal{
-  width: 700px;
-  height: 600px;
+  width: 650px;
+  height: 630px;
   margin: 0;
-
 }
 
-.close-button{
-  margin-left: 95%;
-  letter-spacing: 5px;
-  background-color: #441B69;
-  margin-top: -50px;
 
+.iconContainerClose {
+  cursor: pointer; /* Cambia el cursor al pasar sobre el icono */
+  padding-right: 1%;
 }
 
-#barraMorada1{
+
+#barraMorada2 {
   width: 100%;
-  height: 5%;
+  height: 60px; /* Altura fija para la barra */
   background-color: #441B69;
+  display: flex; /* Habilita Flexbox */
+  justify-content: flex-end; /* Alinea el botón a la derecha */
+  align-items: center; /* Centra el botón verticalmente */
+  
 }
 
-#barraMorada2{
+.modal-header {
   width: 100%;
-  height: 10%;
+  height: 50px;
   background-color: #441B69;
+  display: flex;
+  align-items: center; /* Centra verticalmente el contenido */
+  justify-content: space-between; /* Coloca el texto a la izquierda y el icono a la derecha */
+  padding: 0 15px; /* Espaciado horizontal */
+  box-sizing: border-box;
 }
 
-.modal-header{
-  width: 100%;
-  height: 20%;
-  background-color: #441B69;
-}
-
-#txtAddProd{
+#txtAddProd {
   color: white;
   text-transform: uppercase;
-  margin-left: 15px;
   font-size: 20px;
-  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  margin: 0; /* Elimina cualquier margen predeterminado */
+  padding: 0px 0px 0px 20px;
 }
 
 label{
@@ -53,7 +54,12 @@ input{
   padding: 4px;
   background-color: #F4F4F4;
 }
-
+input#nomRes{
+  width: 40%;
+}
+input#numRes{
+  width: 10%;
+}
 #observaciones{
   margin-left: 20px;
   border-radius: 8px;
@@ -66,12 +72,208 @@ textarea{
   margin-top: 20px;
 }
 
-.OK{
-  float: right;
-  margin-top: 15px;
+.OK {
   background-color: transparent;
   color: white;
-  padding: 10px;
-  margin-right: 10px;
-  border-color: white;
+  border: 1px solid white;
+  border-radius: 4px;
+  margin-right: 20px; /* Ajuste horizontal del botón */
+  height: 50%; /* Altura del 50% de barraMorada2 */
+  font-size: 14px;
+  cursor: pointer;
+}
+
+
+/* Caja de texto para descripción */
+#observaciones,
+textarea {
+  margin-left: 3%;
+  border-radius: 10px;
+  background-color: #F9F9F9; /* Fondo claro */
+  border: 2px solid black; /* Borde negro predeterminado */
+  font-size: 16px;
+  width: calc(100% - 100px); /* Ajusta el ancho */
+  box-sizing: border-box;
+  height: 120px; /* Altura ajustada */
+  resize: none; /* Evita redimensionar */
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Transición suave */
+  margin-top: -20px;
+}
+
+#observaciones:focus,
+textarea:focus {
+  border-color: #441B69; /* Cambia el color del borde al enfocarse */
+  box-shadow: 0 0 5px rgba(68, 27, 105, 0.5); /* Agrega un sombreado */
+}
+
+/* Estilo específico para los elementos select */
+select {
+  margin-left: 20px;
+  border-radius: 8px; /* Bordes redondeados más sutiles */
+  padding: 6px; /* Reduce el padding para hacerlo más pequeño */
+  background-color: #F9F9F9; /* Fondo limpio */
+  border: 2px solid black; /* Borde negro predeterminado */
+  font-size: 14px; /* Fuente ligeramente más pequeña */
+  width: 10%; /* Ajusta el ancho */
+  box-sizing: border-box;
+  height: 35px; /* Altura más pequeña */
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Transición suave */
+}
+
+select:focus {
+  border-color: #441B69; /* Color morado al enfocar */
+  box-shadow: 0 0 5px rgba(68, 27, 105, 0.5); /* Sombra elegante */
+}
+
+select option {
+  font-size: 14px; /* Tamaño de fuente reducido */
+  padding: 4px;
+}
+/* Estilo específico para "Aplica registro contable" */
+#aplicaRegCont {
+  margin-left: 20px;
+  border-radius: 8px; 
+  padding: 6px; 
+  background-color: #F9F9F9; 
+  border: 2px solid black; 
+  font-size: 14px; 
+  width: 10%; /* Ancho específico */
+  box-sizing: border-box;
+  height: 35px; 
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; 
+}
+
+#aplicaRegCont:focus {
+  border-color: #441B69; 
+  box-shadow: 0 0 5px rgba(68, 27, 105, 0.5); 
+}
+
+/* Estilo específico para "Tipo de alta" */
+#tipoAlta {
+  margin-left: 20px;
+  border-radius: 8px; 
+  padding: 6px; 
+  background-color: #F9F9F9; 
+  border: 2px solid black; 
+  font-size: 14px; 
+  width: 30%; /* Ancho específico */
+  box-sizing: border-box;
+  height: 35px; 
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; 
+}
+
+#tipoAlta:focus {
+  border-color: #441B69; 
+  box-shadow: 0 0 5px rgba(68, 27, 105, 0.5); 
+}
+
+/* Estilo específico para "Factura física" */
+#facturaFisica {
+  margin-left: 20px;
+  border-radius: 8px; 
+  padding: 6px; 
+  background-color: #F9F9F9; 
+  border: 2px solid black; 
+  font-size: 14px; 
+  width: 10%; /* Ancho específico */
+  box-sizing: border-box;
+  height: 35px; 
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; 
+}
+
+#facturaFisica:focus {
+  border-color: #441B69; 
+  box-shadow: 0 0 5px rgba(68, 27, 105, 0.5); 
+}
+
+/* Estilo específico para "Depreciación" */
+#depreciacion {
+  margin-left: 20px;
+  border-radius: 8px; 
+  padding: 6px; 
+  background-color: #F9F9F9; 
+  border: 2px solid black; 
+  font-size: 14px; 
+  width: 10%; /* Ancho específico */
+  box-sizing: border-box;
+  height: 35px; 
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; 
+}
+
+#depreciacion:focus {
+  border-color: #441B69; 
+  box-shadow: 0 0 5px rgba(68, 27, 105, 0.5); 
+}
+
+/* Ajuste general para cuadros de texto más pequeños */
+textarea#domProveedor, 
+textarea#observ1, 
+textarea#observ2, 
+textarea#comentCont, 
+textarea#seguimDesinc {
+  height: 50px; /* Altura reducida */
+  border-radius: 4px; /* Mantiene consistencia con otros inputs */
+  border: 1px solid black; /* Borde negro */
+  padding: 8px; /* Espaciado interno */
+  resize: none; /* Evita que el usuario cambie el tamaño */
+  background-color: #F4F4F4;
+}
+
+/* Motivo de Baja como los inputs pequeños */
+textarea#motBaja {
+  height: 40px; /* Altura ajustada */
+  border-radius: 4px; /* Redondeo como otros inputs */
+  border: 1px solid black;
+  padding: 8px;
+  resize: none;
+  background-color: #F4F4F4;
+}
+
+/* Estilo para Foto del Bien */
+input#fotoBien {
+  border: 1px solid black; /* Borde negro */
+  padding: 8px; /* Espaciado interno */
+  border-radius: 4px; /* Bordes redondeados */
+  background-color: #F9F9F9; /* Color de fondo suave */
+  cursor: pointer; /* Indica interactividad */
+  width: 50%; /* Amplía el campo */
+  margin-left: 20px; /* Alineación consistente */
+  font-family: 'Arial', sans-serif; /* Tipografía simple */
+}
+
+/* Efecto hover para Foto del Bien */
+input#fotoBien:hover {
+  background-color: #E0E0E0; /* Cambia ligeramente el fondo */
+  border-color: #441B69; /* Resalta el borde */
+}
+
+/* Efecto de enfoque para todos los inputs */
+input:focus, 
+textarea:focus, 
+select:focus {
+  border-color: #441B69; /* Borde morado al enfocar */
+  outline: none; /* Elimina el borde de enfoque predeterminado */
+  background-color: #FFF; /* Fondo blanco al enfocar */
+}
+
+/* Estilo para el select de Estatus del Bien */
+select#estatusBien {
+  width: 15%; /* Ancho especificado */
+  border: 1px solid black; /* Borde negro */
+  padding: 8px; /* Espaciado interno */
+  border-radius: 4px; /* Bordes redondeados */
+  background-color: #F4F4F4; /* Fondo gris claro */
+  font-family: 'Arial', sans-serif; /* Fuente uniforme */
+  margin-left: 10px; /* Espaciado consistente con otros elementos */
+}
+
+/* Efectos de hover y focus para el select */
+select#estatusBien:hover {
+  background-color: #E0E0E0; /* Fondo ligeramente más oscuro al pasar el mouse */
+}
+
+select#estatusBien:focus {
+  border-color: #441B69; /* Borde morado al enfocar */
+  outline: none; /* Elimina el contorno predeterminado */
+  background-color: #FFF; /* Fondo blanco al enfocar */
 }

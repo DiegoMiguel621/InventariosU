@@ -72,72 +72,170 @@
       </div>
 
       <div id="table-container">
-        <table>
+        <table >
           <thead>
             <tr>
               <th>Número de inventario anterior</th>
               <th>Número de inventario armonizado</th>
-              <th>Clave de control (BIENES SUJETO A CONTROL)</th>
+              <th>Clave de control</th>
               <th>Nombre del bien</th>
-              <th>Clasificación del bien</th>
-              <th>Clasificación adicional del bien</th>
-              <th>Nombre del bien (ACORDE AL CATÁLOGO DE PRODUCTOS DEL CONAC)</th>
-              <th>Descripción del bien</th>
+              <th>Clasificación</th>
+              <th>Clasificación adicional</th>
+              <th>Nombre en catálogo</th>
+              <th>Descripción</th>
               <th>Marca</th>
               <th>Modelo</th>
               <th>Número de serie</th>
-              <th>Aplica para registro contable (SI/NO)</th>
-              <th>Grupo de bienes (CONTABILIDAD)</th>
-              <th>Grupo de bienes (CONAC)</th>
-              <th>Categoría (CONAC)</th>
-              <th>Subcategoría (CONAC)</th>
-              <th>Tipo de alta (COMPRA, COMODATO,DONACIÓN, MENORES A 70 UMA. OTRO)</th>
-              <th>Se cuenta con factura física/documento oficial de ingreso del bien SI/NO</th>
-              <th>Fecha de recepción de la factura física/documento oficial de ingreso del bien</th>
+              <th>Aplica registro contable</th>
+              <th>Grupo bienes (contabilidad)</th>
+              <th>Grupo bienes (CONAC)</th>
+              <th>Categoría</th>
+              <th>Subcategoría</th>
+              <th>Tipo de alta</th>
+              <th>Factura física</th>
+              <th>Fecha recepción factura</th>
               <th>Número de factura</th>
-              <th>Fecha de la factura</th>
-              <th>Fecha de alta del bien</th>
-              <th>Costo de adquisición del bien</th>
-              <th>Costo de adquisición del bien (REGISTRADO EN CONTABILIDAD)</th>
-              <th>Con depreciación SI/NO</th>
-              <th>Frecuencia de depreciación</th>
-              <th>% de depreciación anual</th>
-              <th>Total de meses a depreciar</th>
-              <th>Importe de depreciación mensual</th>
+              <th>Fecha de factura</th>
+              <th>Fecha de alta</th>
+              <th>Costo adquisición</th>
+              <th>Costo adquisición contable</th>
+              <th>Con depreciación</th>
+              <th>Frecuencia depreciación</th>
+              <th>% Depreciación anual</th>
+              <th>Total meses depreciar</th>
+              <th>Importe mensual depreciación</th>
               <th>Monto depreciado</th>
               <th>Valor en libros</th>
-              <th>Meses pendientes por depreciar</th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
+              <th>Meses pendientes depreciar</th>
+              <th>Clave del proyecto</th>
+              <th>Aplica a proyecto</th>
+              <th>Partida presupuestal</th>
+              <th>Fuente de financiamiento</th>
+              <th>Número de cuenta</th>
+              <th>Proveedor</th>
+              <th>RFC del proveedor</th>
+              <th>Domicilio del proveedor</th>
+              <th>Bienes menores</th>
+              <th>Tipo de resguardo</th>
+              <th>Nombre del resguardante</th>
+              <th>Número del resguardante</th>
+              <th>Área del resguardante</th>
+              <th>Ubicación del resguardante</th>
+              <th>Observación 1</th>
+              <th>Observación 2</th>
+              <th>Comentario contable</th>
+              <th>Seguimiento desincorporación</th>
+              <th>Estatus del bien</th>
+              <th>Motivo de baja</th>
+              <th>Fecha de baja</th>
+              <th>Año de adquisición</th>
+              <th>Mes de adquisición</th>
+              <th>Foto del bien</th>
+              <th>Perfil del resguardante</th>
+              <th>Puesto del resguardante</th>
+              <th>Estatus del resguardante</th>
+              <th>Correo personal del resguardante</th>
+              <th>Correo institucional del resguardante</th>
+              <th>Resguardante 16 anterior</th>
+              <th>Resguardante 17</th>
+              <th>Resguardante 18</th>
+              <th>Resguardante 19</th>
+              <th>Resguardante 20</th>
+              <th>Resguardante 21</th>
+              <th>Resguardante 22</th>
+              <th>Resguardante 23</th>
+              <th>Resguardante 24</th>
+              <th>Estatus del resguardo</th>
+              <th>Último resguardo</th>
+              <th>Etiqueta</th>
+              <th class="fixed-column">Opciones</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let bien of bienes">
-              <td>{{ bien.clave }}</td>
-              <td>{{ bien.nombre }}</td>
+              <td>{{ bien.numInvAnt }}</td>
+              <td>{{ bien.numInvArm }}</td>
+              <td>{{ bien.cControl }}</td>
+              <td>{{ bien.nombreBien }}</td>
+              <td>{{ bien.clasificacion }}</td>
+              <td>{{ bien.clasAdic }}</td>
+              <td>{{ bien.nombreCat }}</td>
+              <td>{{ bien.descripcion }}</td>
               <td>{{ bien.marca }}</td>
               <td>{{ bien.modelo }}</td>
-              <td>{{ bien.nserie }}</td>
-              <td>{{ bien.encargado }}</td>
-              <td>{{ bien.observaciones }}</td>
-              
-              <td>
-                <button (click)="editarBien(bien)">Editar</button>
-                <button (click)="eliminarBien(bien.id)">Eliminar</button>
+              <td>{{ bien.numSerie }}</td>
+              <td>{{ bien.aplicaRegCont }}</td>
+              <td>{{ bien.grupoBienesCont }}</td>
+              <td>{{ bien.grupoBienesConac }}</td>
+              <td>{{ bien.categoria }}</td>
+              <td>{{ bien.subcategoria }}</td>
+              <td>{{ bien.tipoAlta }}</td>
+              <td>{{ bien.facturaFisica }}</td>
+              <td>{{ bien.fechaRecFact }}</td>
+              <td>{{ bien.numFact }}</td>
+              <td>{{ bien.fechaFact }}</td>
+              <td>{{ bien.fechaAlta }}</td>
+              <td>{{ bien.costoAdq }}</td>
+              <td>{{ bien.costoAdqCont }}</td>
+              <td>{{ bien.depreciacion }}</td>
+              <td>{{ bien.frecDepre }}</td>
+              <td>{{ bien.porcDepAnual }}</td>
+              <td>{{ bien.mesesDepre }}</td>
+              <td>{{ bien.impMensDepre }}</td>
+              <td>{{ bien.montoDepre }}</td>
+              <td>{{ bien.valLibros }}</td>
+              <td>{{ bien.mesesPendDepre }}</td>
+              <td>{{ bien.claveProyecto }}</td>
+              <td>{{ bien.apProye }}</td>
+              <td>{{ bien.partPres }}</td>
+              <td>{{ bien.fuenteFinan }}</td>
+              <td>{{ bien.numCuenta }}</td>
+              <td>{{ bien.proveedor }}</td>
+              <td>{{ bien.rfcProveedor }}</td>
+              <td>{{ bien.domProveedor }}</td>
+              <td>{{ bien.bienesMenores }}</td>
+              <td>{{ bien.tipoResguardo }}</td>
+              <td>{{ bien.nomRes }}</td>
+              <td>{{ bien.numRes }}</td>
+              <td>{{ bien.areaRes }}</td>
+              <td>{{ bien.ubiRes }}</td>
+              <td>{{ bien.observ1 }}</td>
+              <td>{{ bien.observ2 }}</td>
+              <td>{{ bien.comentCont }}</td>
+              <td>{{ bien.seguimDesinc }}</td>
+              <td>{{ bien.estatusBien }}</td>
+              <td>{{ bien.motBaja }}</td>
+              <td>{{ bien.fechaBaja }}</td>
+              <td>{{ bien.aAdquisicion }}</td>
+              <td>{{ bien.mAdquisicion }}</td>
+              <td>{{ bien.fotoBien }}</td>
+              <td>{{ bien.perfilRes }}</td>
+              <td>{{ bien.puestoRes }}</td>
+              <td>{{ bien.estatusRes }}</td>
+              <td>{{ bien.correoPerRes }}</td>
+              <td>{{ bien.correoInstRes }}</td>
+              <td>{{ bien.res16Ant }}</td>
+              <td>{{ bien.res17 }}</td>
+              <td>{{ bien.res18 }}</td>
+              <td>{{ bien.res19 }}</td>
+              <td>{{ bien.res20 }}</td>
+              <td>{{ bien.res21 }}</td>
+              <td>{{ bien.res22 }}</td>
+              <td>{{ bien.res23 }}</td>
+              <td>{{ bien.res24 }}</td>
+              <td>{{ bien.estatusResguardo }}</td>
+              <td>{{ bien.ultimoResguardo }}</td>
+              <td>{{ bien.etiqueta }}</td>
+              <td class="fixed-column">
+                <i class="fa fa-eye" style="color: #00A65A;" (click)="VerBien(bien.idBien)"></i>
+                <i class="fa-regular fa-pen-to-square" style="color: #6FC6F9;" (click)="editarBien(bien)"></i>                
+                <i class="fa-solid fa-circle-xmark" style="color: #FF346A;" (click)="eliminarBien(bien.idBien)"></i>
               </td>
             </tr>
           </tbody>
         </table>
+        
+        
       </div>
 
 

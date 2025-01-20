@@ -1,71 +1,59 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ModalforminvComponent } from '../modalforminv/modalforminv.component';
 import { ModalEditarComponent } from '../modal-editar/modal-editar.component';
 import { ModalVerComponent } from '../modal-ver/modal-ver.component';
 import { ModalEliminarComponent } from '../modal-eliminar/modal-eliminar.component';
-import { ApiBienesService } from '../../service/api-bienes.service';
+import { BienesService } from '../../service/bienes.service'; // Importamos el servicio de bienes
 
 @Component({
   selector: 'app-inventario',
   templateUrl: './inventario.component.html',
-  styleUrl: './inventario.component.css'
+  styleUrls: ['./inventario.component.css']
 })
 export class InventarioComponent implements OnInit {
   bienes: any[] = [];
 
-  constructor(private _matDialog: MatDialog, private apiBienesService: ApiBienesService) {}
+  constructor(private _matDialog: MatDialog, private bienesService: BienesService) {}
 
   ngOnInit(): void {
-    this.apiBienesService.getBienes().subscribe(data => {
+    // Obtener los bienes y mostrarlos en la tabla
+    this.bienesService.getBienes().subscribe(data => {
       this.bienes = data;
     });
   }
 
+  // Abrir el modal para agregar un bien
   abrirModal(): void {
-    const dialogRef = this._matDialog.open(ModalforminvComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.apiBienesService.getBienes().subscribe(data => {
-          this.bienes = data;
-        });
-      }
+    this._matDialog.open(ModalforminvComponent).afterClosed().subscribe(() => {
+      console.log('Modal de agregar bien cerrado');
     });
   }
 
+  // Abrir el modal para editar un bien
   editarBien(bien: any): void {
-    const dialogRef = this._matDialog.open(ModalEditarComponent, {
+    this._matDialog.open(ModalEditarComponent, {
       data: bien
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.apiBienesService.getBienes().subscribe(data => {
-          this.bienes = data;
-        });
-      }
+    }).afterClosed().subscribe(() => {
+      console.log('Modal de editar bien cerrado');
     });
   }
 
-  abrirModalVer(bien: any): void {
+  // Abrir el modal para ver los detalles de un bien
+  VerBien(bien: any): void {
     this._matDialog.open(ModalVerComponent, {
       data: bien
+    }).afterClosed().subscribe(() => {
+      console.log('Modal de ver bien cerrado');
     });
   }
 
+  // Abrir el modal para eliminar un bien
   eliminarBien(id: number): void {
-    const dialogRef = this._matDialog.open(ModalEliminarComponent, {
+    this._matDialog.open(ModalEliminarComponent, {
       data: { id: id }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.apiBienesService.deleteBien(id).subscribe(() => {
-          this.apiBienesService.getBienes().subscribe(data => {
-            this.bienes = data;
-          });
-        });
-      }
+    }).afterClosed().subscribe(() => {
+      console.log('Modal de eliminar bien cerrado');
     });
   }
 }

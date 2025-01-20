@@ -42,4 +42,8 @@ export class ModalforminvComponent {
       );
     }
   }
+  cerrarModal(): void {
+    this.dialogRef.close();
+    console.log('Modal de agregar bien cerrado');
+  }
 }
