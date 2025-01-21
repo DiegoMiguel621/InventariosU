@@ -59,14 +59,13 @@
     </div>
 </aside>
 
-
 <section id="opcInicio">
   <div id="titulo">
     <Font size="5">Inventario de Bienes</Font>
   </div>
     <section id="contOpc">
       <div id="iconAgregar">
-        <button mat-raised-button color="primary" (click)="abrirModal()">
+        <button mat-raised-button color="primary" (click)="agregarBien()">
           <i class="fa-solid fa-circle-plus"></i>
         </button>
       </div>
@@ -79,75 +78,75 @@
               <th>Número de inventario armonizado</th>
               <th>Clave de control</th>
               <th>Nombre del bien</th>
-              <th>Clasificación</th>
-              <th>Clasificación adicional</th>
-              <th>Nombre en catálogo</th>
-              <th>Descripción</th>
+              <th>Clasificación del Bien</th>
+              <th>Clasificación adicional del Bien</th>
+              <th>Nombre del Bien (catálogo del CONAC)</th>
+              <th>Descripción del Bien</th>
               <th>Marca</th>
               <th>Modelo</th>
               <th>Número de serie</th>
-              <th>Aplica registro contable</th>
+              <th>Aplica registro contable Si/No</th>
               <th>Grupo bienes (contabilidad)</th>
               <th>Grupo bienes (CONAC)</th>
-              <th>Categoría</th>
-              <th>Subcategoría</th>
-              <th>Tipo de alta</th>
-              <th>Factura física</th>
-              <th>Fecha recepción factura</th>
+              <th>Categoría (CONAC)</th>
+              <th>Subcategoría (CONAC)</th>
+              <th>Tipo de alta (Compra, Comodato, Donación, Menores a 70 UMA, Otro)</th>
+              <th>Se cuenta con Factura física/Documento oficial de ingreso del Bien Si/No</th>
+              <th>Fecha recepción de la facturafísica/Documento oficial de ingreso del Bien</th>
               <th>Número de factura</th>
               <th>Fecha de factura</th>
-              <th>Fecha de alta</th>
-              <th>Costo adquisición</th>
-              <th>Costo adquisición contable</th>
-              <th>Con depreciación</th>
+              <th>Fecha de alta del Bien</th>
+              <th>Costo adquisición del Bien</th>
+              <th>Costo adquisición del Bien (Registrado en contabilidad)</th>
+              <th>Con depreciación Si/No</th>
               <th>Frecuencia depreciación</th>
-              <th>% Depreciación anual</th>
-              <th>Total meses depreciar</th>
-              <th>Importe mensual depreciación</th>
+              <th>% de Depreciación anual</th>
+              <th>Total meses a depreciar</th>
+              <th>Importe de depreciación mensual</th>
               <th>Monto depreciado</th>
               <th>Valor en libros</th>
               <th>Meses pendientes depreciar</th>
               <th>Clave del proyecto</th>
-              <th>Aplica a proyecto</th>
+              <th>Aplica para proyecto Si/No</th>
               <th>Partida presupuestal</th>
               <th>Fuente de financiamiento</th>
               <th>Número de cuenta</th>
-              <th>Proveedor</th>
+              <th>Nombre Proveedor</th>
               <th>RFC del proveedor</th>
-              <th>Domicilio del proveedor</th>
-              <th>Bienes menores</th>
-              <th>Tipo de resguardo</th>
-              <th>Nombre del resguardante</th>
-              <th>Número del resguardante</th>
-              <th>Área del resguardante</th>
-              <th>Ubicación del resguardante</th>
-              <th>Observación 1</th>
-              <th>Observación 2</th>
-              <th>Comentario contable</th>
-              <th>Seguimiento desincorporación</th>
+              <th>Domicilio Fiscal del proveedor</th>
+              <th>Bienes menores a 35 SMDF 2017 y años Anteriores y 70 veces el valor de la UMA a partir del años 2018</th>
+              <th>Tipo de resguardo a elaborar</th>
+              <th>Asignación (Nombre del resguardante)</th>
+              <th>Número de resguardo</th>
+              <th>Área de adscripción del resguardante</th>
+              <th>Ubicación física/área funcional del resguardante</th>
+              <th>Observaciónes 1</th>
+              <th>Observaciónes 2</th>
+              <th>Comentarios del área de contabilidad</th>
+              <th>Seguimiento del cómite de desincorporación de Bienes</th>
               <th>Estatus del bien</th>
-              <th>Motivo de baja</th>
-              <th>Fecha de baja</th>
+              <th>Motivo de baja del bien</th>
+              <th>Fecha de baja del bien</th>
               <th>Año de adquisición</th>
               <th>Mes de adquisición</th>
-              <th>Foto del bien</th>
-              <th>Perfil del resguardante</th>
-              <th>Puesto del resguardante</th>
-              <th>Estatus del resguardante</th>
-              <th>Correo personal del resguardante</th>
-              <th>Correo institucional del resguardante</th>
-              <th>Resguardante 16 anterior</th>
-              <th>Resguardante 17</th>
-              <th>Resguardante 18</th>
-              <th>Resguardante 19</th>
-              <th>Resguardante 20</th>
-              <th>Resguardante 21</th>
-              <th>Resguardante 22</th>
-              <th>Resguardante 23</th>
-              <th>Resguardante 24</th>
+              <th>Evidencia Fotográfica del bien</th>
+              <th>Perfil académico del resguardante</th>
+              <th>Puesto</th>
+              <th>Estatus laboral del resguardante</th>
+              <th>Correo electrónico personal del resguardante</th>
+              <th>Correo electrónico institucional del resguardante</th>
+              <th>Resguardo 2016 y años anteriores</th>
+              <th>Resguardo 2017 Si/No</th>
+              <th>Resguardo 2018 Si/No</th>
+              <th>Resguardo 2019 Si/No</th>
+              <th>Resguardo 2020 Si/No</th>
+              <th>Resguardo 2021 Si/No</th>
+              <th>Resguardo 2022 Si/No</th>
+              <th>Resguardo 2023 Si/No</th>
+              <th>Resguardo 2024 Si/No</th>
               <th>Estatus del resguardo</th>
-              <th>Último resguardo</th>
-              <th>Etiqueta</th>
+              <th>Fecha de generación del Último resguardo</th>
+              <th>El bien cuenta con Etiqueta Si/No</th>
               <th class="fixed-column">Opciones</th>
             </tr>
           </thead>
@@ -235,11 +234,7 @@
           </tbody>
         </table>
         
-        
       </div>
-
-
-
     </section>
 </section>
 

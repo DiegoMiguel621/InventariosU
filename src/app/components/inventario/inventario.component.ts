@@ -24,7 +24,7 @@ export class InventarioComponent implements OnInit {
   }
 
   // Abrir el modal para agregar un bien
-  abrirModal(): void {
+  agregarBien(): void {
     this._matDialog.open(ModalforminvComponent).afterClosed().subscribe(() => {
       console.log('Modal de agregar bien cerrado');
     });
