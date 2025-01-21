@@ -14,4 +14,8 @@ export class BienesService {
   getBienes(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}`);
   }
+   // Crear un nuevo bien (POST)
+  addBien(bienData: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, bienData);
+  }
 }

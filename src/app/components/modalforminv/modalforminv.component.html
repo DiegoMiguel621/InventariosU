@@ -12,8 +12,7 @@
       </div>
       
       <div class="modal-body">
-        <form [formGroup]="addProductForm" (ngSubmit)="onSubmit()">
-          <!-- Sección Identificación -->
+        <form [formGroup]="addProductForm" (ngSubmit)="onSubmit()">          
           <div class="form-group">
             <label for="numInvAnt">Número de Inventario Anterior:</label>
             <input type="text" id="numInvAnt" formControlName="numInvAnt">
@@ -46,8 +45,7 @@
             <label for="descripcion">Descripción:</label>
             <textarea id="descripcion" formControlName="descripcion"></textarea>
           </div>
-        
-          <!-- Sección Detalles -->
+                  
           <div class="form-group">
             <label for="marca">Marca:</label>
             <input type="text" id="marca" formControlName="marca">
@@ -117,7 +115,6 @@
             <input type="date" id="fechaAlta" formControlName="fechaAlta">
           </div>
         
-          <!-- Sección Financiera -->
           <div class="form-group">
             <label for="costoAdq">Costo Adquisición:</label>
             <input type="number" id="costoAdq" formControlName="costoAdq" step="0.01">
@@ -315,6 +312,78 @@
             <input type="email" id="correoInstRes" formControlName="correoInstRes">
           </div>
         
+          <div class="form-group">
+            <label for="res16Ant">Resguardo 2016 y años anteriores:</label>
+            <select id="res16Ant" formControlName="res16Ant">
+              <option value="SI">SI</option>
+              <option value="NO">NO</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="res17">Resguardo 2017 Si/No:</label>
+            <select id="res17" formControlName="res17">
+              <option value="SI">SI</option>
+              <option value="NO">NO</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="res18">Resguardo 2018 Si/No:</label>
+            <select id="res18" formControlName="res18">
+              <option value="SI">SI</option>
+              <option value="NO">NO</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="res19">Resguardo 2019 Si/No:</label>
+            <select id="res19" formControlName="res19">
+              <option value="SI">SI</option>
+              <option value="NO">NO</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="res20">Resguardo 2020 Si/No:</label>
+            <select id="res20" formControlName="res20">
+              <option value="SI">SI</option>
+              <option value="NO">NO</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="res21">Resguardo 2021 Si/No:</label>
+            <select id="res21" formControlName="res21">
+              <option value="SI">SI</option>
+              <option value="NO">NO</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="res22">Resguardo 2022 Si/No:</label>
+            <select id="res22" formControlName="res22">
+              <option value="SI">SI</option>
+              <option value="NO">NO</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="res23">Resguardo 2023 Si/No:</label>
+            <select id="res23" formControlName="res23">
+              <option value="SI">SI</option>
+              <option value="NO">NO</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="res24">Resguardo 2024 Si/No:</label>
+            <select id="res24" formControlName="res24">
+              <option value="SI">SI</option>
+              <option value="NO">NO</option>
+            </select>
+          </div>
+
           <div class="form-group">
             <label for="estatusResguardo">Estatus de Resguardo:</label>
             <input type="text" id="estatusResguardo" formControlName="estatusResguardo">

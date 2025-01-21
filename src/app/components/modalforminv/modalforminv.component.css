@@ -17,8 +17,7 @@
   background-color: #441B69;
   display: flex; /* Habilita Flexbox */
   justify-content: flex-end; /* Alinea el botón a la derecha */
-  align-items: center; /* Centra el botón verticalmente */
-  
+  align-items: center; /* Centra el botón verticalmente */  
 }
 
 .modal-header {
@@ -78,9 +77,10 @@ textarea{
   border: 1px solid white;
   border-radius: 4px;
   margin-right: 20px; /* Ajuste horizontal del botón */
-  height: 50%; /* Altura del 50% de barraMorada2 */
+  height: 60%; /* Altura del 50% de barraMorada2 */
   font-size: 14px;
   cursor: pointer;
+  width: 15%;
 }
 
 

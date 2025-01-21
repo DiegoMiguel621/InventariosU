@@ -6,12 +6,12 @@
 <div class="modal">
 
   <div class="modal-content">
-      <div class="modal-header">
-          <h2 id="txtAddProd">Editar Producto</h2>
-          <button class="close-button">
-            <i class="fa-solid fa-x fa-lg" style="color: #ffffff;"></i>
-          </button>
-      </div>
+    <div class="modal-header">
+        <h2 id="txtAddProd">Editar la información de un Bien</h2>
+        <div class="iconContainerClose" (click)="cerrarModal()">
+          <i class="fa-solid fa-xmark fa-2xl" style="color: #ffffff;"></i>
+        </div>
+    </div>
       <div class="modal-body">
         <form id="editProductForm">
           <div class="form-group">
@@ -44,10 +44,12 @@
           </div>
 
           <div class="form-group">
-              <button class="OK" type="submit">MODIFICAR</button>
+            <div id="barraMorada2">
+              <button class="OK" type="submit">GUARDAR</button>
+            </div>            
           </div>
       </form>
       </div>
   </div>
-  <div id="barraMorada2"></div>
+  
 </div>
