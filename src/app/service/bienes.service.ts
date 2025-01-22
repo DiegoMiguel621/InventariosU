@@ -18,4 +18,8 @@ export class BienesService {
   addBien(bienData: any): Observable<any> {
     return this.http.post<any>(this.apiUrl, bienData);
   }
+  //Función para obtener un bien por su id
+  getBien(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
 }

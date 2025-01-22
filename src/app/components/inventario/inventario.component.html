@@ -226,7 +226,7 @@
               <td>{{ bien.ultimoResguardo }}</td>
               <td>{{ bien.etiqueta }}</td>
               <td class="fixed-column">
-                <i class="fa fa-eye" style="color: #00A65A;" (click)="VerBien(bien.idBien)"></i>
+                <i class="fa fa-eye" style="color: #00A65A;" (click)="VerBien(bien)"></i>
                 <i class="fa-regular fa-pen-to-square" style="color: #6FC6F9;" (click)="editarBien(bien)"></i>                
                 <i class="fa-solid fa-circle-xmark" style="color: #FF346A;" (click)="eliminarBien(bien.idBien)"></i>
               </td>
@@ -240,8 +240,7 @@
         </button>
       
         <span> 
-          Página {{ currentPage + 1 }} de {{ totalPages }} 
-          ({{ pageSize }} por página)
+          Página {{ currentPage + 1 }} de {{ totalPages }}           
         </span>
       
         <button (click)="nextPage()" [disabled]="currentPage === totalPages - 1">

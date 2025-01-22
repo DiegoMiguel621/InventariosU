@@ -1,83 +1,127 @@
-.modal{
-  width: 700px;
-  height: 600px;
-  margin: 0;
-
-}
-
-.close-button{
-  margin-left: 95%;
-  letter-spacing: 5px;
-  background-color: #441B69;
-  margin-top: -50px;
-
-}
-
-#barraMorada1{
+/* Estilo del modal */
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 5%;
-  background-color: #441B69;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 }
 
-#barraMorada2{
-  width: 100%;
-  height: 12%;
-  background-color: #441B69;
-}
-
-.modal-header{
-  width: 100%;
-  height: 20%;
-  background-color: #441B69;
-}
-
-#txtAddProd{
+.modal-content {
+  background-color: #FFFFFF;
   color: white;
-  text-transform: uppercase;
-  margin-left: 15px;
-  font-size: 20px;
-  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-
-}
-
-label{
-  line-height: 3.3;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 20px;
-  margin-left: 20px;
-}
-
-input{
-  margin-left: 10px;
+  width: 700px; /* Ancho fijo */
+  height: 600px; /* Alto fijo */
   border-radius: 8px;
-  padding: 4px;
-  background-color: #F4F4F4;
+  overflow: hidden; /* Evita que se desborden elementos */
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-#observaciones{
-  margin-left: 20px;
-  border-radius: 8px;
-  background-color: #F4F4F4;
-  border-width: 2px;
-  margin-top: 10px;
-  padding: 10px;
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #441B69;
+  padding: 10px 20px;
 }
-textarea{
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.close-button {
+  cursor: pointer;
+}
+
+.modal-body {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto; /* Agrega desplazamiento vertical si el contenido supera el espacio */
+}
+
+.info-section {
+  display: flex;
+  flex-direction: column; /* Apila los elementos en una sola columna */
+  gap: 10px; /* Espaciado entre los elementos */
+  margin-bottom: 20px;
+}
+
+.info-section .form-group {
+  display: flex;
+  align-items: center; /* Alinea verticalmente */
+  justify-content: flex-start; /* Alinea todo el contenido a la izquierda */
+  gap: 5px; /* Espaciado mínimo entre el campo y la información */
+  padding: 5px 0;
+}
+
+.info-section label {
+  font-weight: bold;
+  font-size: 14px;
+  color: black; /* Color del campo */
+  margin: 0;
+}
+
+.info-section span {
+  color: black; /* Color de la información */
+  margin: 0;
+}
+
+
+.bienes-section {
   margin-top: 20px;
 }
 
-.OK{
-  float: right;
-  margin-top: 15px;
-  background-color: transparent;
-  color: white;
-  padding: 10px;
-  margin-right: 10px;
-  border-color: white;
+.bienes-section h3 {
+  margin: 0;
+  font-size: 16px;
+  border-bottom: 2px solid #9e5bb5;
+  padding-bottom: 5px;
 }
 
-.descripcion{
-  color:darkgray;
-  font-family: 'Times New Roman', Times, serif;
-  text-decoration: underline;
+.bienes-table {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #ffffff;
+  color: #4a185a;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 14px;
 }
+
+.btn-group {
+  text-align: right;
+  padding: 10px 20px;
+}
+
+
+/* Modal footer: barra morada */
+.modal-footer {
+  background-color: #441B69; /* Color de fondo morado */
+  display: flex;
+  justify-content: end; /* Centra el botón horizontalmente */
+  align-items: center; /* Centra el botón verticalmente */
+  height: 60px; /* Altura fija para la barra */
+  margin-top: auto; /* Asegura que esté al final del modal */
+}
+
+.btn-imprimir {
+  background-color: transparent; 
+  color: #FFFFFF; 
+  padding: 10px 20px;
+  border: 1px solid #FFFFFF;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 5%;
+}
+
+
+

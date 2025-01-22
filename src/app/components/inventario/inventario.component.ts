@@ -25,7 +25,6 @@ export class InventarioComponent implements OnInit {
       this.bienes = data;
     });
   }
-
     // Calcula la cantidad total de páginas
     get totalPages(): number {
       return Math.ceil(this.bienes.length / this.pageSize);
@@ -71,12 +70,15 @@ export class InventarioComponent implements OnInit {
 
   // Abrir el modal para ver los detalles de un bien
   VerBien(bien: any): void {
+    // Asumiendo que la propiedad de la tabla sea "idBien"
+    console.log('Bien a ver:', bien);
     this._matDialog.open(ModalVerComponent, {
-      data: bien
+      data: { idBien: bien.idBien } // Pasamos el ID del bien
     }).afterClosed().subscribe(() => {
       console.log('Modal de ver bien cerrado');
     });
   }
+  
 
   // Abrir el modal para eliminar un bien
   eliminarBien(id: number): void {
