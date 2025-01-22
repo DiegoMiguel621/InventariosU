@@ -4,7 +4,7 @@ import { ModalforminvComponent } from '../modalforminv/modalforminv.component';
 import { ModalEditarComponent } from '../modal-editar/modal-editar.component';
 import { ModalVerComponent } from '../modal-ver/modal-ver.component';
 import { ModalEliminarComponent } from '../modal-eliminar/modal-eliminar.component';
-import { BienesService } from '../../service/bienes.service'; // Importamos el servicio de bienes
+import { BienesService } from '../../service/bienes.service';
 
 @Component({
   selector: 'app-inventario',
@@ -13,6 +13,9 @@ import { BienesService } from '../../service/bienes.service'; // Importamos el s
 })
 export class InventarioComponent implements OnInit {
   bienes: any[] = [];
+
+  currentPage: number = 0;  // Índice de página actual
+  pageSize: number = 12;    // 15 registros por página
 
   constructor(private _matDialog: MatDialog, private bienesService: BienesService) {}
 
@@ -23,10 +26,37 @@ export class InventarioComponent implements OnInit {
     });
   }
 
+    // Calcula la cantidad total de páginas
+    get totalPages(): number {
+      return Math.ceil(this.bienes.length / this.pageSize);
+    }
+  
+    // Avanza a la página siguiente
+    nextPage(): void {
+      if (this.currentPage < this.totalPages - 1) {
+        this.currentPage++;
+      }
+    }
+  
+    // Retrocede a la página anterior
+    previousPage(): void {
+      if (this.currentPage > 0) {
+        this.currentPage--;
+      }
+    }
+
   // Abrir el modal para agregar un bien
   agregarBien(): void {
-    this._matDialog.open(ModalforminvComponent).afterClosed().subscribe(() => {
+    this._matDialog.open(ModalforminvComponent).afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.cargarBienes(); // algún método que vuelve a llamar a getBienes()
+      }
       console.log('Modal de agregar bien cerrado');
+    });
+  }
+  cargarBienes() {
+    this.bienesService.getBienes().subscribe(data => {
+      this.bienes = data;
     });
   }
 

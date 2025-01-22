@@ -151,7 +151,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let bien of bienes">
+            <tr *ngFor="let bien of bienes | slice : (currentPage * pageSize) : ((currentPage + 1) * pageSize)">
               <td>{{ bien.numInvAnt }}</td>
               <td>{{ bien.numInvArm }}</td>
               <td>{{ bien.cControl }}</td>
@@ -233,7 +233,20 @@
             </tr>
           </tbody>
         </table>
-        
+      </div>
+      <div class="pagination-controls">
+        <button (click)="previousPage()" [disabled]="currentPage === 0">
+          Anterior
+        </button>
+      
+        <span> 
+          Página {{ currentPage + 1 }} de {{ totalPages }} 
+          ({{ pageSize }} por página)
+        </span>
+      
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages - 1">
+          Siguiente
+        </button>
       </div>
     </section>
 </section>

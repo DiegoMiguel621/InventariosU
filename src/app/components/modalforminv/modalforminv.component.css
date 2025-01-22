@@ -257,7 +257,7 @@ select:focus {
 }
 
 /* Estilo para el select de Estatus del Bien */
-select#estatusBien {
+select#estatusBien{
   width: 15%; /* Ancho especificado */
   border: 1px solid black; /* Borde negro */
   padding: 8px; /* Espaciado interno */
@@ -268,11 +268,33 @@ select#estatusBien {
 }
 
 /* Efectos de hover y focus para el select */
-select#estatusBien:hover {
+select#estatusBien:hover{
   background-color: #E0E0E0; /* Fondo ligeramente más oscuro al pasar el mouse */
 }
 
-select#estatusBien:focus {
+select#estatusBien:focus{
+  border-color: #441B69; /* Borde morado al enfocar */
+  outline: none; /* Elimina el contorno predeterminado */
+  background-color: #FFF; /* Fondo blanco al enfocar */
+}
+
+
+select#estatusRes,
+select#estatusResguardo{
+  width: 18%; /* Ancho especificado */
+  border: 1px solid black; /* Borde negro */
+  padding: 8px; /* Espaciado interno */
+  border-radius: 4px; /* Bordes redondeados */
+  background-color: #F4F4F4; /* Fondo gris claro */
+  font-family: 'Arial', sans-serif; /* Fuente uniforme */
+  margin-left: 10px; /* Espaciado consistente con otros elementos */
+}
+select#estatusRes:hover,
+select#estatusResguardo:hover {
+  background-color: #E0E0E0; /* Fondo ligeramente más oscuro al pasar el mouse */
+}
+select#estatusRes:focus,
+select#estatusResguardo:focus{
   border-color: #441B69; /* Borde morado al enfocar */
   outline: none; /* Elimina el contorno predeterminado */
   background-color: #FFF; /* Fondo blanco al enfocar */

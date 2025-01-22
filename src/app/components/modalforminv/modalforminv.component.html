@@ -299,7 +299,11 @@
         
           <div class="form-group">
             <label for="estatusRes">Estatus del Resguardante:</label>
-            <input type="text" id="estatusRes" formControlName="estatusRes">
+            <select id="estatusRes" formControlName="estatusRes">
+              <option value="" disabled selected>Seleccione Estatus</option>
+              <option value="ACTIVO">ACTIVO</option>
+              <option value="INACTIVO">INACTIVO</option>
+            </select>
           </div>
         
           <div class="form-group">
@@ -386,7 +390,11 @@
 
           <div class="form-group">
             <label for="estatusResguardo">Estatus de Resguardo:</label>
-            <input type="text" id="estatusResguardo" formControlName="estatusResguardo">
+            <select id="estatusResguardo" formControlName="estatusResguardo">
+              <option value="" disabled selected>Seleccione Estatus</option>
+              <option value="ACTIVO">ACTIVO</option>
+              <option value="INACTIVO">INACTIVO</option>
+            </select>
           </div>
         
           <div class="form-group">
