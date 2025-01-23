@@ -62,12 +62,14 @@ export class InventarioComponent implements OnInit {
   // Abrir el modal para editar un bien
   editarBien(bien: any): void {
     this._matDialog.open(ModalEditarComponent, {
-      data: bien
-    }).afterClosed().subscribe(() => {
-      console.log('Modal de editar bien cerrado');
+      data: { bien: bien }
+    }).afterClosed().subscribe((result) => {
+      if (result === true) {        
+        this.cargarBienes();
+      }
     });
   }
-
+  
   // Abrir el modal para ver los detalles de un bien
   VerBien(bien: any): void {
     console.log('Bien a ver:', bien);

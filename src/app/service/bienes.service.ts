@@ -26,4 +26,10 @@ export class BienesService {
   deleteBien(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
+  // Función para modificar un bien existente 
+  updateBien(id: number, bienData: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, bienData);
+}
+
+    
 }

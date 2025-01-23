@@ -64,10 +64,16 @@
     <Font size="5">Inventario de Bienes</Font>
   </div>
     <section id="contOpc">
-      <div id="iconAgregar">
-        <button mat-raised-button color="primary" (click)="agregarBien()">
-          <i class="fa-solid fa-circle-plus"></i>
-        </button>
+      <div id="opcSuperior">
+        <div id="iconAgregar">
+          <button mat-raised-button color="primary" (click)="agregarBien()">
+            <i class="fa-solid fa-circle-plus"></i>
+          </button>
+        </div>
+        <div class="search">
+          <label for="buscar">Buscar:</label>
+          <input type="text" id="buscar" class="buscar" placeholder="Nombre del bien o numeros de inventario" />
+        </div>
       </div>
 
       <div id="table-container">
@@ -235,17 +241,9 @@
         </table>
       </div>
       <div class="pagination-controls">
-        <button (click)="previousPage()" [disabled]="currentPage === 0">
-          Anterior
-        </button>
-      
-        <span> 
-          Página {{ currentPage + 1 }} de {{ totalPages }}           
-        </span>
-      
-        <button (click)="nextPage()" [disabled]="currentPage === totalPages - 1">
-          Siguiente
-        </button>
+        <button (click)="previousPage()" [disabled]="currentPage === 0">Anterior</button>
+        <span> Página {{ currentPage + 1 }} de {{ totalPages }}</span>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages - 1">Siguiente</button>
       </div>
     </section>
 </section>

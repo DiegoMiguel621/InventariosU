@@ -64,10 +64,44 @@ body {
 
 #contOpc {
   background-color: white;
+  border-top: 3px solid #441B69;
   width: 98%;
   height: auto; 
   padding: 20px;
   margin-left: 1%;
+  margin-bottom: 10px;
+}
+#opcSuperior{  
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+.search {
+  display: flex;
+  align-items: center;
+  gap: 8px;   
+  padding-left: 3%;      
+  width: auto;          
+}
+
+.search label {
+  font-weight: bold;
+  color: #333;
+  font-size: 16px;   
+}
+
+.buscar {                    
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 14px;
+  outline: none;
+  width: 40vh;
+}
+
+.buscar:focus {
+  border-color: #673AB7;
+  box-shadow: 0 0 5px rgba(103, 58, 183, 0.3);
 }
 
 /* Estilos de la tabla */
@@ -183,8 +217,7 @@ td:not(:last-child) {
 }
 
 .pagination-controls {
-  margin-top: 20px;  
-      
+  margin-top: 20px;        
   display: flex;           
   justify-content: center; 
   align-items: center;     
@@ -192,17 +225,20 @@ td:not(:last-child) {
 }
 
 .pagination-controls button {
+  padding: 10px 20px;
+  border: none;
   background-color: #673AB7;
   color: white;
-  border: none;
-  padding: 6px 12px;
   cursor: pointer;
   border-radius: 4px;
 }
 
 .pagination-controls button[disabled] {
-  opacity: 0.6;
+  background-color: #ccc;
   cursor: not-allowed;
+}
+.pagination-controls span {
+  font-size: 16px;
 }
 
 
