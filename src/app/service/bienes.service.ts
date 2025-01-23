@@ -22,4 +22,8 @@ export class BienesService {
   getBien(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
+  //Funcion para eliminar un bien (DELETE)
+  deleteBien(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
 }

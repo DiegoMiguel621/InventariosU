@@ -1,36 +1,39 @@
 .modal{
-  width: 590px;
-  height: 150px;
+  width: 500px;
+  height: 200px;
   margin: 0;
-
-
 }
 
 #txtPregunta{
   margin: 5%;
   text-align: center;
-  letter-spacing: 3px;
-
+  letter-spacing: 2px;
+  font-size: 18px;
 }
 
 
 .ELIMINAR{
   float: right;
-  margin-top: 15px;
+  margin-top: 2%;
+  margin-right: 25%;
   background-color: #441B69;
   color: white;
-  padding: 10px;
-  margin-right: 120px;
-  border-color: white;
+  padding: 10px;   
   border-radius: 5px;
+  cursor: pointer;  
+  width: 20%;
+  height: 10%;
 }
 
 .CANCELAR{
   float: left;
-  margin-left: 120px;
-  margin-top: 15px;
+  margin-left: 25%;
+  margin-top: 2%;
   background-color: #441B69;
   color: white;
   padding: 10px;
   border-radius: 5px;
+  cursor: pointer;
+  width: 20%;
+  height: 10%;
 }

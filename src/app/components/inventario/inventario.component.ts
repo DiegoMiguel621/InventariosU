@@ -15,7 +15,7 @@ export class InventarioComponent implements OnInit {
   bienes: any[] = [];
 
   currentPage: number = 0;  // Índice de página actual
-  pageSize: number = 12;    // 15 registros por página
+  pageSize: number = 12;    // cantidad de registros por página
 
   constructor(private _matDialog: MatDialog, private bienesService: BienesService) {}
 
@@ -70,22 +70,23 @@ export class InventarioComponent implements OnInit {
 
   // Abrir el modal para ver los detalles de un bien
   VerBien(bien: any): void {
-    // Asumiendo que la propiedad de la tabla sea "idBien"
     console.log('Bien a ver:', bien);
     this._matDialog.open(ModalVerComponent, {
-      data: { idBien: bien.idBien } // Pasamos el ID del bien
+      data: { idBien: bien.idBien }
     }).afterClosed().subscribe(() => {
       console.log('Modal de ver bien cerrado');
     });
   }
   
-
   // Abrir el modal para eliminar un bien
   eliminarBien(id: number): void {
     this._matDialog.open(ModalEliminarComponent, {
-      data: { id: id }
-    }).afterClosed().subscribe(() => {
-      console.log('Modal de eliminar bien cerrado');
+      data: { idBien: id }
+    }).afterClosed().subscribe((result) => {
+      if (result === true) {        
+        this.cargarBienes();
+      }
     });
   }
+  
 }
