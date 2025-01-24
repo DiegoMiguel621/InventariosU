@@ -16,6 +16,7 @@ import { ModalAgregarPersonalComponent } from './modal-agregar-personal/modal-ag
 import { ModalVerPersonalComponent } from './modal-ver-personal/modal-ver-personal.component';
 import { ModalEditarPersonalComponent } from './modal-editar-personal/modal-editar-personal.component';
 import { ModalEliminarPersonalComponent } from './modal-eliminar-personal/modal-eliminar-personal.component';
+import { AdministradoresComponent } from './components/administradores/administradores.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
   {path:'inventario',component:InventarioComponent},
   {path:'inventario2',component:Inventario2Component},
   {path:'personal',component:PersonalComponent},
+  {path:'administradores',component:AdministradoresComponent},
 
 
   //modales

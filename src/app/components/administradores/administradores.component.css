@@ -1,0 +1,149 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow-x: hidden; /* Evita el desplazamiento horizontal */
+}
+#secInicio{
+  height: 100%;
+}
+
+
+#aside {
+  background-color: #222D32;
+  float: left;
+  width: 12%;
+  height: calc(100vh - 50px) !important;
+}
+
+#menuAside {
+  background-color: #1A2226;
+  width: 100%;
+  height: 35px;
+}
+
+#menuPalabra {
+  width: fit-content;
+  height: auto;
+  margin-left: 15px;
+  padding-top: 10px;
+  position: relative;
+}
+
+.divEnlaces {
+  width: 100%;
+  height: 45px;
+}
+
+.iconoEnlace {
+  float: left;
+  width: 5px;
+  margin-top: 2px;
+  margin-left: 20px;
+}
+
+.textoEnlace {
+  margin-left: 40px;
+  margin-top: 4px;
+  color: #C4ECFE;
+}
+
+#opcInicio {
+  background-color: #ECF0F5;
+  width: 88%;
+  height: calc(100vh - 50px);
+  overflow-y: auto;
+  float: right;
+  padding: 20px;
+}
+
+
+#titulo {
+  width: fit-content;
+  height: fit-content;
+  padding: 10px 0px 10px 20px;
+}
+
+#contOpc {
+  background-color: white;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  border-top: 3px solid #441B69;
+}
+
+#btnAgregar {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 15px;
+  margin-left: 5%;
+
+}
+
+#btnAddAdmin {
+  background-color: #441B69;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#btnAddAdmin:hover {
+  background-color: #5c2a8e;
+}
+
+#tablaAdministradores {
+  width: 90%;
+  overflow-x: auto;
+  margin: 0 auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+thead {
+  background-color: #441B69;
+  color: white;
+}
+
+thead th {
+  padding: 10px;
+  text-align: left;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+
+tbody tr:hover {
+  background-color: #e1d3ea;
+}
+
+tbody td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tbody td i {
+  margin-right: 10px;
+}
+
+#iconoEliminar{
+  margin-left:10%;
+}
+
