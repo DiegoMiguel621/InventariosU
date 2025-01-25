@@ -1,0 +1,93 @@
+.modal{
+  width: 600px;
+  height: 500px;
+  margin: 0;
+}
+.modal-content{
+width: 100%;
+height: 100%;
+}
+
+.modal-header {
+  width: 100%;
+  height: 10%;
+  background-color: #441B69;
+  display: flex; /* Permite alinear elementos con flexbox */
+  justify-content: space-between; /* Texto a la izquierda, icono a la derecha */
+  align-items: center; /* Centra verticalmente el contenido */
+}
+
+#txtAddProd {
+  color: white;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  margin: 0; /* Elimina márgenes extras */
+  margin-left: 5%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.iconContainerClose {
+  cursor: pointer; /* Cambia el cursor al pasar sobre el icono */
+  margin-right: 2%;
+}
+
+.close-button{
+  margin-left: 95%;
+  letter-spacing: 5px;
+  background-color: #441B69;
+  margin-top: -50px;
+}
+
+.modal-body{
+  height: 80%;
+}
+
+label{
+  line-height: 3.3;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 20px;
+  margin-left: 20px;
+}
+
+input{
+  margin-left: 10px;
+  border-radius: 8px;
+  padding: 4px;
+  background-color: #F4F4F4;
+}
+
+/* Input más largo para "Nombre Completo", "Correo Personal" y "Correo Institucional" */
+#nombre, #apellidos, #correo{
+  width: 50%; /* Ajusta el ancho para hacerlo más largo */
+  margin-left: 10px;
+  border-radius: 8px;
+  padding: 4px;
+  background-color: #F4F4F4;
+}
+
+textarea{
+  margin-top: 20px;
+}
+
+#barraMorada2 {
+  width: 100%;
+  height: 10%; /* Altura fija para la barra */
+  background-color: #441B69;
+  display: flex; /* Habilita Flexbox */
+  justify-content: flex-end; /* Alinea el botón a la derecha */
+  align-items: center; /* Centra el botón verticalmente */
+}
+
+.OK {
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  border-radius: 4px;
+  margin-right: 20px; /* Ajuste horizontal del botón */
+  height: 50%; /* Altura del 50% de barraMorada2 */
+  font-size: 14px;
+  cursor: pointer;
+}
+

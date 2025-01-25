@@ -28,6 +28,7 @@ import { ModalVerPersonalComponent } from './modal-ver-personal/modal-ver-person
 import { ModalEditarPersonalComponent } from './modal-editar-personal/modal-editar-personal.component';
 import { ModalEliminarPersonalComponent } from './modal-eliminar-personal/modal-eliminar-personal.component';
 import { AdministradoresComponent } from './components/administradores/administradores.component';
+import { ModalAddAdministradorComponent } from './modal-add-administrador/modal-add-administrador.component';
 
 
 
@@ -53,6 +54,7 @@ import { AdministradoresComponent } from './components/administradores/administr
     ModalEditarPersonalComponent,
     ModalEliminarPersonalComponent,
     AdministradoresComponent,
+    ModalAddAdministradorComponent,
 
   ],
   imports: [
