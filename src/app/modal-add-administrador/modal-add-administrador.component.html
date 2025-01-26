@@ -12,7 +12,7 @@
       </div>
 
       <div class="modal-body">
-        <form>
+        <form [formGroup]="administradorForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
             <label for="nombre">Nombres:</label>
             <input type="text" id="nombre" formControlName="nombre" required>
@@ -26,14 +26,21 @@
             <input type="text" id="correo" formControlName="correo" required>
           </div>
           <div class="form-group">
+            <label for="contra">Contraseña:</label>
+            <input type="text" id="contra" formControlName="contraseña" required>
+          </div>
+          <div class="form-group">
             <label for="permiso">Permiso:</label>
-            <input type="text" id="permiso" formControlName="permiso" required>
+            <select id="permiso" formControlName="permiso" required>
+              <option value="ACTIVO">ACTIVO</option>
+              <option value="INACTIVO">INACTIVO</option>
+            </select>
           </div>
         </form>
       </div>
 
       <div id="barraMorada2">
-        <button class="OK" type="button" (click)="saveAdministrador()">GUARDAR</button>
+        <button class="OK" type="button" (click)="onSubmit()">GUARDAR</button>
       </div>
     </div>
 </div>

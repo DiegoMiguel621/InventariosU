@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdministradoresService } from '../service/administradores.service';
 
@@ -10,43 +10,52 @@ import { AdministradoresService } from '../service/administradores.service';
   styleUrl: './modal-add-administrador.component.css'
 })
 export class ModalAddAdministradorComponent implements OnInit {
-  administradorForm: FormGroup;
+  administradorForm!: FormGroup;
 
   constructor(
       private dialogRef: MatDialogRef<ModalAddAdministradorComponent>,
       private fb: FormBuilder, // Constructor del formulario
-    private administradoresService: AdministradoresService // Servicio de administradores
-    ) {
+      private administradoresService: AdministradoresService, // Servicio de administradores
+      private dialog: MatDialog
+    ) {}
+
+    ngOnInit(): void {
       // Inicializar el formulario con campos vacíos y validaciones
     this.administradorForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(3)]],
       apellidos: ['', [Validators.required]],
       correo: ['', [Validators.required, Validators.email]],
-      permiso: ['', [Validators.required]]
+      contraseña: ['', [Validators.required]],
+      permiso: ['activo', [Validators.required]]
     });
-    }
 
-    ngOnInit(): void {}
-
-    closeModal(): void {
-      this.dialogRef.close(); // Cierra el modal sin enviar datos
     }
 
     // Guardar los datos del administrador
-  saveAdministrador(): void {
+  onSubmit(): void {
     if (this.administradorForm.valid) {
-      const administradorData = this.administradorForm.value;
-      this.administradoresService.addAdministrador(administradorData).subscribe(
-        (response) => {
-          console.log('Administrador añadido:', response);
-          this.dialogRef.close(true); // Cierra el modal y devuelve un indicador de éxito
+      this.administradoresService.addAdministrador(this.administradorForm.value).subscribe({
+        next: (response) => {
+          console.log('Administrador agregado correctamente:', response);
+          this.dialogRef.close(true); // Cierra el modal y pasa "true"
         },
-        (error) => {
-          console.error('Error al añadir administrador:', error);
-        }
-      );
+        error: (error) => {
+          console.error('Error al agregar el administrador:', error);
+        },
+      });
     } else {
       console.log('Formulario inválido');
     }
   }
+
+  closeModal(): void {
+    this.dialogRef.close(); // Cierra el modal sin enviar datos
+  }
+
+  openModal(): void {
+    this.dialog.open(ModalAddAdministradorComponent, {
+      autoFocus: true, // Asegura que el foco esté en el modal
+      restoreFocus: true // Restaura el foco en el elemento previo al cerrar
+    });
+}
 }
