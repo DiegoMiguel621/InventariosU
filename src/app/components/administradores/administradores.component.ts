@@ -44,9 +44,16 @@ export class AdministradoresComponent implements OnInit {
   }
 
 
-  eliminarAdministrador(): void {
-    const dialogRef = this._matDialog.open(ModalEliminarAdministradorComponent);
-    dialogRef.afterClosed().subscribe( {
+  eliminarAdministrador(id: number): void {
+    const dialogRef = this._matDialog.open(ModalEliminarAdministradorComponent, {
+      data: { id } // Pasar el ID del administrador al modal
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        // Si se confirmó la eliminación, actualiza la lista
+        this.getAdministradores();
+      }
     });
   }
 }
