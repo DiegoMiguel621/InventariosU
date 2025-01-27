@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AdministradoresService } from '../../service/administradores.service';
 import { ModalAddAdministradorComponent } from '../../modal-add-administrador/modal-add-administrador.component';
 import { ModalEliminarAdministradorComponent } from '../../modal-eliminar-administrador/modal-eliminar-administrador.component';
+import { ModalEditarAdministradorComponent } from '../../modal-editar-administrador/modal-editar-administrador.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -56,4 +57,11 @@ export class AdministradoresComponent implements OnInit {
       }
     });
   }
+
+  editarAdministrador(): void {
+    const dialogRef = this._matDialog.open(ModalEditarAdministradorComponent);
+    dialogRef.afterClosed().subscribe( {
+    });
+  }
+
 }

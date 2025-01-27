@@ -30,6 +30,8 @@ import { ModalEliminarPersonalComponent } from './modal-eliminar-personal/modal-
 import { AdministradoresComponent } from './components/administradores/administradores.component';
 import { ModalAddAdministradorComponent } from './modal-add-administrador/modal-add-administrador.component';
 import { ModalEliminarAdministradorComponent } from './modal-eliminar-administrador/modal-eliminar-administrador.component';
+import { ModalEditarAdministradorComponent } from './modal-editar-administrador/modal-editar-administrador.component';
+import { ModalFiltrosBienesComponent } from './modal-filtros-bienes/modal-filtros-bienes.component';
 
 
 
@@ -57,6 +59,8 @@ import { ModalEliminarAdministradorComponent } from './modal-eliminar-administra
     AdministradoresComponent,
     ModalAddAdministradorComponent,
     ModalEliminarAdministradorComponent,
+    ModalEditarAdministradorComponent,
+    ModalFiltrosBienesComponent,
 
   ],
   imports: [

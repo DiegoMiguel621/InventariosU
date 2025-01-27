@@ -66,12 +66,12 @@ body {
   background-color: white;
   border-top: 3px solid #441B69;
   width: 98%;
-  height: auto; 
+  height: auto;
   padding: 20px;
   margin-left: 1%;
   margin-bottom: 10px;
 }
-#opcSuperior{  
+#opcSuperior{
   display: flex;
   align-items: center;
   justify-content: start;
@@ -79,18 +79,18 @@ body {
 .search {
   display: flex;
   align-items: center;
-  gap: 8px;   
-  padding-left: 3%;      
-  width: auto;          
+  gap: 8px;
+  padding-left: 3%;
+  width: auto;
 }
 
 .search label {
   font-weight: bold;
   color: #333;
-  font-size: 16px;   
+  font-size: 16px;
 }
 
-.buscar {                    
+.buscar {
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 6px 10px;
@@ -107,7 +107,7 @@ body {
 /* Estilos de la tabla */
 #table-container {
   width: 100%;
-  overflow-x: auto; 
+  overflow-x: auto;
   border: 1px solid #ddd;
   margin-top: 20px;
 }
@@ -115,8 +115,8 @@ body {
 table {
   width: 100%;
   border-collapse: collapse;
-  table-layout: auto; 
-  min-width: 1200px; 
+  table-layout: auto;
+  min-width: 1200px;
 }
 
 thead {
@@ -128,7 +128,7 @@ th, td {
   padding: 8px;
   text-align: left;
   border-bottom: 1px solid #ddd;
-  white-space: nowrap; 
+  white-space: nowrap;
 }
 
 tbody tr:nth-child(even) {
@@ -145,7 +145,7 @@ tbody tr {
 
 thead th:first-child,
 tbody td:first-child {
-  width: 10%; 
+  width: 10%;
 }
 
 button {
@@ -162,9 +162,9 @@ button:hover {
 }
 
 td {
-  white-space: nowrap; 
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; 
+  text-overflow: ellipsis;
 }
 
 td:last-child {
@@ -172,7 +172,7 @@ td:last-child {
 }
 
 .table-container::-webkit-scrollbar {
-  height: 8px; 
+  height: 8px;
 }
 
 .table-container::-webkit-scrollbar-thumb {
@@ -188,14 +188,14 @@ td:last-child {
 td.fixed-column, th.fixed-column {
   position: sticky;
   right: 0;
-  background-color: #673AB7; 
-  color: white; 
-  z-index: 2; 
-  text-align: center; 
+  background-color: #673AB7;
+  color: white;
+  z-index: 2;
+  text-align: center;
 }
 
 tbody tr:nth-child(even) td.fixed-column {
-  background-color: #F2F2F2; 
+  background-color: #F2F2F2;
 }
 
 tbody tr:nth-child(odd) td.fixed-column {
@@ -203,13 +203,13 @@ tbody tr:nth-child(odd) td.fixed-column {
 }
 
 .fixed-column i {
-  margin-right: 10px; 
-  cursor: pointer; 
-  font-size: 16px; 
+  margin-right: 10px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 .fixed-column i:last-child {
-  margin-right: 0; 
+  margin-right: 0;
 }
 th:not(:last-child),
 td:not(:last-child) {
@@ -217,11 +217,11 @@ td:not(:last-child) {
 }
 
 .pagination-controls {
-  margin-top: 20px;        
-  display: flex;           
-  justify-content: center; 
-  align-items: center;     
-  gap: 10px;               
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .pagination-controls button {
@@ -241,4 +241,12 @@ td:not(:last-child) {
   font-size: 16px;
 }
 
+#contenedorFiltros{
+  margin-left: 42%;
+  width: 100px;
+}
 
+#btnFiltros{
+  padding: 10px;
+  width: 100%;
+}

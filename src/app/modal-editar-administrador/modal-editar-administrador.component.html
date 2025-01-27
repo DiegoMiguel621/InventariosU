@@ -1,0 +1,48 @@
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<div class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="txtAddProd">Añadir Trabajador</h2>
+        <div class="iconContainerClose">
+          <i class="fa-solid fa-xmark fa-2xl" style="color: #ffffff;" ></i>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <form >
+          <div class="form-group">
+            <label for="nombres">Nombres:</label>
+            <input type="text" id="nombres" formControlName="nombres" required>
+          </div>
+          <div class="form-group">
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" id="apellidos" formControlName="apellidos" required>
+          </div>
+          <div class="form-group">
+            <label for="correo">Correo electronico:</label>
+            <input type="text" id="correo" formControlName="correo" required>
+          </div>
+          <div class="form-group">
+            <label for="contra">Contraseña:</label>
+            <input type="text" id="contra" formControlName="contraseña" required>
+          </div>
+          <div class="form-group">
+            <label for="permiso">Permiso:</label>
+            <select id="permiso" formControlName="permiso" required>
+              <option value="ACTIVO">ACTIVO</option>
+              <option value="INACTIVO">INACTIVO</option>
+            </select>
+          </div>
+        </form>
+      </div>
+
+      <div id="barraMorada2">
+        <button class="OK" type="button" >GUARDAR</button>
+      </div>
+    </div>
+</div>
+
+
