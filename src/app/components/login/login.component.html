@@ -1,47 +1,29 @@
-
 <div id="body">
     <title>Login</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="login.component.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="login.component.css" />
     <div id="upp">
-    <h1 id="upp-title" >UPP</h1>
+      <h1 id="upp-title">UPP</h1>
     </div>
-    <form [formGroup]="validacion" (ngSubmit)="handleSubmit()">
-    <section id="contenedorLogin">
-    <article id="Login">
-
-            <div class="input-container">
-                <input type="text" id="matriculaLogin" name="matLog"  placeholder="Usuario" formControlName="matricula" maxlength="10">
-                <i id="iconoUsu" class="fas fa-user"></i>
-                <p class="form-error" *ngIf="matricula.hasError('required') && matricula.touched">
-                  La matrícula es obligatoria
-              </p>
-              <p class="form-error" *ngIf="matricula.hasError('pattern') && matricula.touched">
-                  La matrícula debe tener 10 números
-              </p>
-            </div>
-            <div class="input-container">
-                <input type="password" id="contraLogin" name="contLog" placeholder="Contraseña" formControlName="contra" maxlength="15">
-                <i id="iconoContra" class="fas fa-lock"></i>
-                <p class="form-error" *ngIf="contra.hasError('required') && contra.touched">
-                  La contraseña es obligatoria
-              </p>
-              <p class="form-error" *ngIf="contra.hasError('pattern') && contra.touched">
-                  La constraseña debe tener un máximo de 15 digítos
-              </p>
-            </div>
-            <button type="submit"[disabled]="validacion.invalid" >Entrar</button>
-            <a href="/recu" id="textOlv">Olvide mi contraseña</a>
-
-    </article>
-
-</section>
-</form>
-</div>
-
-
-
-
-
-
-<router-outlet></router-outlet>
+    <div id="contenedorLogin">
+      <form [formGroup]="validacion" (ngSubmit)="handleSubmit()">
+        <article id="Login">
+          <div class="input-container">
+            <input type="text" id="correoLogin" name="correoLog" placeholder="Correo electrónico" formControlName="correo"/>
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="input-container">
+            <input type="password" id="contraLogin" name="contLog" placeholder="Contraseña" formControlName="contra"/>
+            <i class="fas fa-lock"></i>
+          </div>
+          <button type="submit" [disabled]="validacion.invalid">Entrar</button>
+          
+        </article>
+      </form>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+  

@@ -5,14 +5,14 @@
 <div class="modal">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 id="txtAddProd">Añadir Trabajador</h2>
+        <h2 id="txtAddProd">Modificar información del Administrador</h2>
         <div class="iconContainerClose">
-          <i class="fa-solid fa-xmark fa-2xl" style="color: #ffffff;" ></i>
+          <i class="fa-solid fa-xmark fa-2xl" style="color: #ffffff;" (click)="cerrar()" ></i>
         </div>
       </div>
 
       <div class="modal-body">
-        <form >
+        <form [formGroup]="administradorForm">
           <div class="form-group">
             <label for="nombres">Nombres:</label>
             <input type="text" id="nombres" formControlName="nombres" required>
@@ -22,7 +22,7 @@
             <input type="text" id="apellidos" formControlName="apellidos" required>
           </div>
           <div class="form-group">
-            <label for="correo">Correo electronico:</label>
+            <label for="correo">Correo electrónico:</label>
             <input type="text" id="correo" formControlName="correo" required>
           </div>
           <div class="form-group">
@@ -32,16 +32,18 @@
           <div class="form-group">
             <label for="permiso">Permiso:</label>
             <select id="permiso" formControlName="permiso" required>
-              <option value="ACTIVO">ACTIVO</option>
-              <option value="INACTIVO">INACTIVO</option>
+              <option value="Activo">ACTIVO</option>
+              <option value="Inactivo">INACTIVO</option>
             </select>
           </div>
         </form>
+        
       </div>
 
       <div id="barraMorada2">
-        <button class="OK" type="button" >GUARDAR</button>
+        <button class="OK" type="button" (click)="guardar()">GUARDAR CAMBIOS</button>
       </div>
+      
     </div>
 </div>
 

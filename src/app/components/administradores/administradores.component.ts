@@ -58,10 +58,18 @@ export class AdministradoresComponent implements OnInit {
     });
   }
 
-  editarAdministrador(): void {
-    const dialogRef = this._matDialog.open(ModalEditarAdministradorComponent);
-    dialogRef.afterClosed().subscribe( {
+  editarAdministrador(administrador: any): void {
+    const dialogRef = this._matDialog.open(ModalEditarAdministradorComponent, {
+      data: administrador // Asegúrate de que el administrador tenga los datos correctos
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.getAdministradores(); // Actualiza la lista si se editaron los datos
+      }
     });
   }
+  
+  
 
 }

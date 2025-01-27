@@ -1,55 +1,51 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AppComponent } from '../../app.component';
-import { Router } from '@angular/router'; //importar router
-
-
-
-
+import { Router } from '@angular/router';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-
   validacion: FormGroup;
-  matricula: FormControl;
+  correo: FormControl;
   contra: FormControl;
 
-  constructor(private router: Router){ //router para inyectar
-    this.matricula= new FormControl('', [ //validar
+  constructor(private router: Router, private authService: AuthService) {
+    this.correo = new FormControl('', [
       Validators.required,
-      Validators.pattern('^[0-9]{10}$') 
+      Validators.email // Validación para correo electrónico
     ]);
-    this.contra= new FormControl('', [
-      Validators.required,
-      Validators.pattern('^[a-zA-Z0-9]{1,15}$')
+    this.contra = new FormControl('', [
+      Validators.required // Solo se valida que no esté vacío
     ]);
 
-    this.validacion= new FormGroup({
-      matricula: this.matricula,
+    this.validacion = new FormGroup({
+      correo: this.correo,
       contra: this.contra
     });
   }
 
-
-  handleSubmit(): void{
-    console.log('Sesion iniciada: ', this.validacion.value);
-    this.validacion.reset();
-    this.router.navigate(['/inicio']); //redireccionar a otra pestaña
-
-
-
-
+  handleSubmit(): void {
+    if (this.validacion.valid) {
+      const { correo, contra } = this.validacion.value;
+  
+      this.authService.login(correo, contra).subscribe({
+        next: (response) => {
+          console.log('Inicio de sesión exitoso:', response);
+  
+          // Guardar los datos del administrador en localStorage
+          localStorage.setItem('admin', JSON.stringify(response.user));
+  
+          this.router.navigate(['/inicio']); // Redirigir al sistema
+        },
+        error: (error) => {
+          console.error('Error al iniciar sesión:', error);
+          alert('Correo o contraseña incorrectos');
+        }
+      });
+    }
   }
 }
-
-
-
-
-
-
-
-

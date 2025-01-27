@@ -1,5 +1,5 @@
 #body {
-  background-color: #D2D6DE;
+  background-color: #d2d6de;
   font-family: Arial, sans-serif;
   display: flex;
   justify-content: center;
@@ -7,6 +7,7 @@
   height: 100vh;
   margin: 0;
   flex-direction: column;
+  width: 100%;
 }
 
 #contenedorLogin {
@@ -14,7 +15,7 @@
   border-radius: 3px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 30px;
-  width: 350px;
+  width: 20%; /* Ancho del contenedor ajustado */
   text-align: center;
 }
 
@@ -23,7 +24,7 @@
   text-align: center;
 }
 
-#upp font {
+#upp-title {
   font-size: 3em;
   color: #444444;
   font-weight: bold;
@@ -35,8 +36,8 @@
 }
 
 .input-container input {
-  width: 100%;
-  padding: 10px 40px 10px 10px;
+  width: 100%; /* Ancho completo para dejar espacio al ícono */
+  padding: 10px 40px 10px 10px; /* Espacio derecho ajustado para el ícono */
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
@@ -44,16 +45,18 @@
 
 .input-container i {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 10px;
+  top: 50%; /* Centrado vertical */
+  right: 10px; /* Posición del ícono al lado derecho */
+  transform: translateY(-50%); /* Ajuste para centrar verticalmente */
   color: #9e9e9e;
+  pointer-events: none; /* Para que el ícono no interfiera con la interacción del input */
 }
 
 button {
-  width: 100%;
+  float: right;
+  width: 30%; /* Botón alineado con los inputs */
   padding: 10px;
-  background-color: #441B69;
+  background-color: #441b69;
   color: white;
   border: none;
   border-radius: 5px;
@@ -64,42 +67,4 @@ button {
 
 button:hover {
   background-color: #35124e;
-}
-
-#textOlv {
-  display: block;
-  margin-top: 10px;
-  color: #487EB3;
-  text-decoration: none;
-  text-align: left;
-}
-
-#textOlv:hover {
-  text-decoration: underline;
-
-}
-
-#matriculaLogin {
-  width: calc(100% - 20px);
-}
-
-#contraLogin {
-  width: calc(100% - 20px);
-}
-
-#iconoUsu{
-  padding: 10px;
-  justify-content: center;
-}
-
-#iconoContra{
-  padding: 10px;
-}
-
-#upp-title {
-  font-size: 3em;
-  color: #444444;
-  font-weight: bold;
-  text-align: center;
-
 }
