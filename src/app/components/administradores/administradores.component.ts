@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AdministradoresService } from '../../service/administradores.service';
 import { ModalAddAdministradorComponent } from '../../modal-add-administrador/modal-add-administrador.component';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ModalEliminarAdministradorComponent } from '../../modal-eliminar-administrador/modal-eliminar-administrador.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-administradores',
@@ -12,13 +13,6 @@ export class AdministradoresComponent implements OnInit {
   administradores: any[] = []; // Lista de administradores
 
   constructor(private _matDialog: MatDialog, private administradoresService: AdministradoresService) {}
-
-  agregarAdministrador(): void {
-    const dialogRef = this._matDialog.open(ModalAddAdministradorComponent,);
-    dialogRef.afterClosed().subscribe( {
-    });
-  }
-
 
   ngOnInit(): void {
     this.getAdministradores(); // Cargar administradores al iniciar el componente
@@ -34,5 +28,25 @@ export class AdministradoresComponent implements OnInit {
         console.error('Error al obtener administradores:', error);
       }
     );
+  }
+
+  // Abrir el modal para agregar un administrador
+  agregarAdministrador(): void {
+    const dialogRef = this._matDialog.open(ModalAddAdministradorComponent);
+
+    // Suscribirse al cierre del modal
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        // Si el modal se cerró con éxito (resultado "true"), actualiza la tabla
+        this.getAdministradores();
+      }
+    });
+  }
+
+
+  eliminarAdministrador(): void {
+    const dialogRef = this._matDialog.open(ModalEliminarAdministradorComponent);
+    dialogRef.afterClosed().subscribe( {
+    });
   }
 }

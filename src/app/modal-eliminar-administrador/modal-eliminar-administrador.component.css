@@ -1,0 +1,39 @@
+.modal{
+  width: 500px;
+  height: 200px;
+  margin: 0;
+}
+
+#txtPregunta{
+  margin: 5%;
+  text-align: center;
+  letter-spacing: 2px;
+  font-size: 18px;
+}
+
+
+.ELIMINAR{
+  float: right;
+  margin-top: 2%;
+  margin-right: 25%;
+  background-color: #441B69;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 20%;
+  height: 10%;
+}
+
+.CANCELAR{
+  float: left;
+  margin-left: 25%;
+  margin-top: 2%;
+  background-color: #441B69;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 20%;
+  height: 10%;
+}

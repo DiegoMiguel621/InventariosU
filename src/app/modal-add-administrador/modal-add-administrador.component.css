@@ -59,7 +59,7 @@ input{
 }
 
 /* Input más largo para "Nombre Completo", "Correo Personal" y "Correo Institucional" */
-#nombre, #apellidos, #correo{
+#nombres, #apellidos, #correo{
   width: 50%; /* Ajusta el ancho para hacerlo más largo */
   margin-left: 10px;
   border-radius: 8px;
@@ -91,3 +91,11 @@ textarea{
   cursor: pointer;
 }
 
+#permiso {
+  font-size: 16px;
+  margin-left: 10px;
+  border-radius: 8px;
+  padding: 4px;
+  background-color: #F4F4F4;
+  border: 2px solid black;
+}

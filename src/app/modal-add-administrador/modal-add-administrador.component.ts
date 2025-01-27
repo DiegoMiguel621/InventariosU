@@ -22,11 +22,11 @@ export class ModalAddAdministradorComponent implements OnInit {
     ngOnInit(): void {
       // Inicializar el formulario con campos vacíos y validaciones
     this.administradorForm = this.fb.group({
-      nombre: ['', [Validators.required, Validators.minLength(3)]],
+      nombres: ['', [Validators.required, Validators.minLength(3)]],
       apellidos: ['', [Validators.required]],
       correo: ['', [Validators.required, Validators.email]],
       contraseña: ['', [Validators.required]],
-      permiso: ['activo', [Validators.required]]
+      permiso: ['ACTIVO', [Validators.required]]
     });
 
     }
