@@ -21,6 +21,9 @@ import { ModalAddAdministradorComponent } from './modal-add-administrador/modal-
 import { ModalEliminarAdministradorComponent } from './modal-eliminar-administrador/modal-eliminar-administrador.component';
 import { ModalEditarAdministradorComponent } from './modal-editar-administrador/modal-editar-administrador.component';
 import { ModalFiltrosBienesComponent } from './modal-filtros-bienes/modal-filtros-bienes.component';
+import { AsideComponent } from './components/aside/aside.component';
+
+
 
 
 const routes: Routes = [
@@ -34,6 +37,7 @@ const routes: Routes = [
   {path:'inventario2',component:Inventario2Component},
   {path:'personal',component:PersonalComponent},
   {path:'administradores',component:AdministradoresComponent},
+  {path:'aside',component:AsideComponent},
 
 
   //modales

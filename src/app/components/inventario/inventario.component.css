@@ -9,45 +9,6 @@ body {
   font-family: Arial, sans-serif;
 }
 
-#aside {
-  background-color: #222D32;
-  float: left;
-  width: 12%;
-  height: calc(100vh - 50px);
-}
-
-#menuAside {
-  background-color: #1A2226;
-  width: 100%;
-  height: 35px;
-}
-
-#menuPalabra {
-  width: fit-content;
-  height: auto;
-  margin-left: 15px;
-  padding-top: 10px;
-  position: relative;
-}
-
-.divEnlaces {
-  width: 100%;
-  height: 45px;
-}
-
-.iconoEnlace {
-  float: left;
-  width: 5px;
-  margin-top: 2px;
-  margin-left: 20px;
-}
-
-.textoEnlace {
-  margin-left: 40px;
-  margin-top: 4px;
-  color: #C4ECFE;
-}
-
 #opcInicio {
   background-color: #ECF0F5;
   width: 88%;
