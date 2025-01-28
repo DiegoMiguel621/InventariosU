@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ModalforminvComponent } from '../modalforminv/modalforminv.component';
 import { ModalEditarComponent } from '../modal-editar/modal-editar.component';
 import { ModalVerComponent } from '../modal-ver/modal-ver.component';
@@ -18,7 +18,7 @@ export class InventarioComponent implements OnInit {
   currentPage: number = 0;  // Índice de página actual
   pageSize: number = 12;    // cantidad de registros por página
 
-  constructor(private _matDialog: MatDialog, private bienesService: BienesService) {}
+  constructor(private _matDialog: MatDialog, private dialog: MatDialog, private bienesService: BienesService) {}
 
   ngOnInit(): void {
     // Obtener los bienes y mostrarlos en la tabla
@@ -93,32 +93,33 @@ export class InventarioComponent implements OnInit {
   }
 
 
-
-  mostrarModalFiltros = false;
+mostrarModalFiltros = false;
 
 mostrarOcultarModal() {
   this.mostrarModalFiltros = !this.mostrarModalFiltros;
 }
 
-filtrosBien(): void {
-  // 1) Obtener la referencia del botón
+
+
+
+
+
+
+
+
+filtrosBien(): void {  
   const buttonElement = document.getElementById('btnFiltros');
   if (!buttonElement) {
     return;
-  }
-
-  // 2) Obtener posición y dimensiones del botón
+  }  
   const rect = buttonElement.getBoundingClientRect();
 
-  // 3) Calcular posición. Ej. poner el modal justo debajo del botón:
   const top = rect.top + rect.height;
   const left = rect.left;
 
-  // 4) Abrir el modal con las coordenadas
   this._matDialog.open(ModalFiltrosBienesComponent, {
-    hasBackdrop: true,    // para el fondo oscuro
-    position: {
-      // Le pasamos strings con “px” al final
+    hasBackdrop: false,    // para el fondo oscuro
+    position: {      
       top: `${top}px`,
       left: `${left}px`
     }

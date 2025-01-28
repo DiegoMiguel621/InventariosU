@@ -1,49 +1,33 @@
-.modal{
+.modal {
   width: 400px;
   height: 570px;
-
-
-}
-.modal-content{
-width: 100%;
-height: 100%;
+  margin: 0;
 }
 
-/* Contenedor principal del modal */
+.modal-content {
+  width: 100%;
+  height: 100%;
+}
+
+/* Contenedor principal */
 .filtros-modal {
   display: flex;
   flex-direction: column;
-  width: 400px;            /* Ajusta al ancho deseado */
-  max-height: 80vh;        /* Limita la altura para scroll interno si es muy largo */
+  width: 100%;
+  height: 100%;
   background-color: #FFFFFF;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  overflow: hidden;        /* Para que el header y footer se mantengan fijos */
   font-family: 'Arial', sans-serif;
 }
 
-/* Cabecera (opcional) */
-.filtros-modal header {
-  background-color: #441B69; /* Morado, si deseas */
-  color: #FFF;
-  padding: 12px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.filtros-modal header h2 {
-  margin: 0;
-  font-size: 18px;
-}
-
-/* Contenido scrollable */
+/* Contenido scrollable con altura calculada (restando el footer) */
 .filtros-content {
+  height: calc(100% - 50px);
   padding: 16px 20px;
-  overflow-y: auto;          /* Scroll interno si excede la altura */
+  overflow-y: auto;
 }
 
-/* Cada sección de filtro con su título */
 .filtro-section {
   margin-bottom: 20px;
 }
@@ -55,47 +39,50 @@ height: 100%;
   font-weight: 600;
 }
 
-/* Grupo de checkboxes juntos */
+/* Grupo de checkboxes en 2 columnas */
 .checkbox-group {
-  display: flex;
-  flex-wrap: wrap;          /* Para que los checkboxes se muevan a siguiente línea si no caben */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
-  margin-bottom: 8px;       /* Espacio debajo del group */
+  margin-bottom: 8px;
 }
 
 .checkbox-group label {
   display: flex;
   align-items: center;
-  gap: 5px;                 /* Espacio entre el input y el texto */
-  font-size: 14px;
+  gap: 5px;
+  font-size: 16px;
   color: #444;
 }
 
-/* Ajusta el estilo del select */
+/* Ajusta el width de los select a 40% */
 .filtro-section select {
-  width: 100%;
+  width: 50%;
   padding: 6px;
   border: 1px solid #CCC;
   border-radius: 4px;
   font-size: 14px;
   color: #333;
-  margin-bottom: 8px;       /* Espacio debajo del select */
+  margin-bottom: 8px;
 }
 
-/* Footer con botones */
+/* Footer fijo de 40px */
 .filtros-footer {
+  height: 50px;
   display: flex;
   justify-content: space-between;
-  padding: 10px 20px;
-  background-color: #f0f0f0; /* Gris claro para contrastar */
+  align-items: center;
+  padding: 0 20px;
+  background-color: #f0f0f0;
   border-top: 1px solid #ddd;
 }
 
+/* Botones del footer */
 .filtros-footer button {
   background-color: transparent;
   border: 1px solid #441B69;
   border-radius: 4px;
-  padding: 8px 12px;
+  padding: 6px 12px;
   font-size: 14px;
   cursor: pointer;
   color: #441B69;
@@ -107,26 +94,16 @@ height: 100%;
 }
 
 .limpiar-btn {
-  margin-right: 10px;
+  background-color: transparent !important;
+  border: none !important;
+  color: #441B69 !important;
+  margin-left: 10%;
 }
 
 .resultados-btn {
-  background-color: #441B69;
-  color: #FFF;
-  border: none;
+  background-color: #441B69 !important;
+  border: none !important;
+  color: #FFF !important;
+  margin-right: 10%;
 }
 
-.resultados-btn:hover {
-  background-color: #5b278a; /* Un morado un poco más claro */
-}
-#selectPeriodo{
-  width: 50%;
-}
-#selectPeriodo2{
-  width: 50%;
-}
-
-
-#selectPeriodo3{
-  width: 50%;
-}

@@ -202,12 +202,27 @@ td:not(:last-child) {
   font-size: 16px;
 }
 
-#contenedorFiltros{
-  margin-left: 35%;
-  width: 100px;
+#contenedorFiltros {
+  margin-left: 36%;  
 }
 
-#btnFiltros{
-  padding: 10px;
-  width: 100%;
+#btnFiltros {
+  display: inline-flex;         
+  align-items: center;          
+  justify-content: center;      
+  gap: 6px;    
+  width: 100px;                 
+  height: 30px;                 
+  padding: 0 10px;              
+  background-color: #F3F3F3;
+  color: black;
+  border: 1px solid #818181;
+  cursor: pointer;
+  font-size: 14px; 
 }
+
+#btnFiltros:hover {
+  /* Opcional: efecto hover */
+  background-color: #e3e3e3;
+}
+
