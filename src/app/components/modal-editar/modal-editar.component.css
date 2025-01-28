@@ -299,3 +299,9 @@ select#estatusResguardo:focus{
   outline: none; /* Elimina el contorno predeterminado */
   background-color: #FFF; /* Fondo blanco al enfocar */
 }
+#tipoResguardo {
+  width: 40%;
+}
+#frecDepre{
+  width: 20%;
+}

@@ -51,7 +51,7 @@
               <th>Subcategoría (CONAC)</th>
               <th>Tipo de alta (Compra, Comodato, Donación, Menores a 70 UMA, Otro)</th>
               <th>Se cuenta con Factura física/Documento oficial de ingreso del Bien Si/No</th>
-              <th>Fecha recepción de la facturafísica/Documento oficial de ingreso del Bien</th>
+              <th>Fecha recepción de la factura física/Documento oficial de ingreso del Bien</th>
               <th>Número de factura</th>
               <th>Fecha de factura</th>
               <th>Fecha de alta del Bien</th>
@@ -129,19 +129,19 @@
               <td>{{ bien.subcategoria }}</td>
               <td>{{ bien.tipoAlta }}</td>
               <td>{{ bien.facturaFisica }}</td>
-              <td>{{ bien.fechaRecFact }}</td>
+              <td>{{ bien.fechaRecFact | date:'dd-MM-yyyy'}}</td>
               <td>{{ bien.numFact }}</td>
-              <td>{{ bien.fechaFact }}</td>
-              <td>{{ bien.fechaAlta }}</td>
-              <td>{{ bien.costoAdq }}</td>
-              <td>{{ bien.costoAdqCont }}</td>
+              <td>{{ bien.fechaFact | date:'dd-MM-yyyy'}}</td>
+              <td>{{ bien.fechaAlta | date:'dd-MM-yyyy'}}</td>
+              <td>{{ '$'+ bien.costoAdq }}</td>
+              <td>{{ '$'+ bien.costoAdqCont }}</td>
               <td>{{ bien.depreciacion }}</td>
               <td>{{ bien.frecDepre }}</td>
-              <td>{{ bien.porcDepAnual }}</td>
+              <td>{{ bien.porcDepAnual + '%'}}</td>
               <td>{{ bien.mesesDepre }}</td>
-              <td>{{ bien.impMensDepre }}</td>
-              <td>{{ bien.montoDepre }}</td>
-              <td>{{ bien.valLibros }}</td>
+              <td>{{ '$'+ bien.impMensDepre }}</td>
+              <td>{{ '$'+ bien.montoDepre }}</td>
+              <td>{{ '$'+ bien.valLibros }}</td>
               <td>{{ bien.mesesPendDepre }}</td>
               <td>{{ bien.claveProyecto }}</td>
               <td>{{ bien.apProye }}</td>
@@ -163,7 +163,7 @@
               <td>{{ bien.seguimDesinc }}</td>
               <td>{{ bien.estatusBien }}</td>
               <td>{{ bien.motBaja }}</td>
-              <td>{{ bien.fechaBaja }}</td>
+              <td>{{ bien.fechaBaja | date:'dd-MM-yyyy'}}</td>
               <td>{{ bien.aAdquisicion }}</td>
               <td>{{ bien.mAdquisicion }}</td>
               <td>{{ bien.fotoBien }}</td>
@@ -182,7 +182,7 @@
               <td>{{ bien.res23 }}</td>
               <td>{{ bien.res24 }}</td>
               <td>{{ bien.estatusResguardo }}</td>
-              <td>{{ bien.ultimoResguardo }}</td>
+              <td>{{ bien.ultimoResguardo | date:'dd-MM-yyyy'}}</td>
               <td>{{ bien.etiqueta }}</td>
               <td class="fixed-column">
                 <i class="fa fa-eye" style="color: #00A65A;" (click)="VerBien(bien)"></i>

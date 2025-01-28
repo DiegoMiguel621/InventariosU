@@ -44,8 +44,7 @@
           <div class="form-group">
             <label for="descripcion">Descripción:</label>
             <textarea id="descripcion" formControlName="descripcion"></textarea>
-          </div>
-                  
+          </div>                  
           <div class="form-group">
             <label for="marca">Marca:</label>
             <input type="text" id="marca" formControlName="marca">
@@ -124,7 +123,7 @@
             <input type="number" id="costoAdqCont" formControlName="costoAdqCont" step="0.01">
           </div>
           <div class="form-group">
-            <label for="depreciacion">Depreciación:</label>
+            <label for="depreciacion">Con Depreciación (SI/NO):</label>
             <select id="depreciacion" formControlName="depreciacion">
               <option value="SI">SI</option>
               <option value="NO">NO</option>
@@ -132,7 +131,10 @@
           </div>
           <div class="form-group">
             <label for="frecDepre">Frecuencia Depreciación:</label>
-            <input type="text" id="frecDepre" formControlName="frecDepre">
+            <select id="frecDepre" formControlName="frecDepre">
+              <option value="NO APLICA">NO APLICA</option>
+              <option value="MENSUAL">MENSUAL</option>
+            </select>
           </div>
           <div class="form-group">
             <label for="porcDepAnual">% Depreciación Anual:</label>
@@ -209,8 +211,12 @@
         
           <div class="form-group">
             <label for="tipoResguardo">Tipo de Resguardo:</label>
-            <input type="text" id="tipoResguardo" formControlName="tipoResguardo">
-          </div>
+            <select id="tipoResguardo" formControlName="tipoResguardo">
+              <option value="" disabled selected>Seleccione tipo de resguardo</option>
+              <option value="PATRIMONIO">PATRIMONIO</option>
+              <option value="SUJETO A CONTROL">SUJETO A CONTROL</option>
+            </select>
+          </div>          
         
           <div class="form-group">
             <label for="nomRes">Nombre del Resguardante:</label>
@@ -250,8 +256,7 @@
           <div class="form-group">
             <label for="seguimDesinc">Seguimiento de Desincorporación:</label>
             <textarea id="seguimDesinc" formControlName="seguimDesinc"></textarea>
-          </div>
-        
+          </div>        
           <div class="form-group">
             <label for="estatusBien">Estatus del Bien:</label>
             <select id="estatusBien" formControlName="estatusBien">
@@ -259,9 +264,7 @@
               <option value="ALTA">ALTA</option>
               <option value="BAJA">BAJA</option>
             </select>
-          </div>
-          
-        
+          </div>                  
           <div class="form-group">
             <label for="motBaja">Motivo de Baja:</label>
             <textarea id="motBaja" formControlName="motBaja"></textarea>

@@ -133,7 +133,10 @@
           </div>
           <div class="form-group">
             <label for="frecDepre">Frecuencia Depreciación:</label>
-            <input type="text" id="frecDepre" formControlName="frecDepre">
+            <select id="frecDepre" formControlName="frecDepre">
+              <option value="NO APLICA">NO APLICA</option>
+              <option value="MENSUAL">MENSUAL</option>
+            </select>
           </div>
           <div class="form-group">
             <label for="porcDepAnual">% Depreciación Anual:</label>
@@ -210,8 +213,12 @@
         
           <div class="form-group">
             <label for="tipoResguardo">Tipo de Resguardo:</label>
-            <input type="text" id="tipoResguardo" formControlName="tipoResguardo">
-          </div>
+            <select id="tipoResguardo" formControlName="tipoResguardo">
+              <option value="" disabled selected>Seleccione tipo de resguardo</option>
+              <option value="PATRIMONIO">PATRIMONIO</option>
+              <option value="SUJETO A CONTROL">SUJETO A CONTROL</option>
+            </select>
+          </div>          
         
           <div class="form-group">
             <label for="nomRes">Nombre del Resguardante:</label>

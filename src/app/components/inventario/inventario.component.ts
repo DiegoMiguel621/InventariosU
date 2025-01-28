@@ -81,22 +81,27 @@ export class InventarioComponent implements OnInit {
       console.log('Modal de agregar bien cerrado');
     });
   }
+
   cargarBienes() {
-    this.bienesService.getBienes().subscribe(data => {
-      this.bienes = data;
-    });
-  }
+  this.bienesService.getBienes().subscribe(data => {
+    this.bienes = data;    
+    this.bienesFiltrados = [...this.bienes];
+    
+    this.currentPage = 0;
+  });
+}
+
 
   // Abrir el modal para editar un bien
   editarBien(bien: any): void {
     this._matDialog.open(ModalEditarComponent, {
-      data: { bien: bien }
+      data: { bien }
     }).afterClosed().subscribe((result) => {
       if (result === true) {
-        this.cargarBienes();
+        this.cargarBienes();  // Método que llama al servicio y actualiza la tabla
       }
     });
-  }
+  }  
 
   // Abrir el modal para ver los detalles de un bien
   VerBien(bien: any): void {

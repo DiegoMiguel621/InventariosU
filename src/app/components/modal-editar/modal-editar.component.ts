@@ -46,7 +46,7 @@ export class ModalEditarComponent implements OnInit {
       costoAdq: [0],
       costoAdqCont: [0],
       depreciacion: ['NO'],
-      frecDepre: [''],
+      frecDepre: ['NO APLICA'],
       porcDepAnual: [0],
       mesesDepre: [0],
       impMensDepre: [0],
@@ -96,13 +96,22 @@ export class ModalEditarComponent implements OnInit {
       etiqueta: ['NO']
     });
 
+    this.editBienForm.get('depreciacion')!.valueChanges.subscribe(val => {
+      if (val === 'SI') {
+        this.editBienForm.patchValue({ frecDepre: 'MENSUAL' });
+      } else {
+        this.editBienForm.patchValue({ frecDepre: 'NO APLICA' });
+      }
+    });                
+
     // Patch values con el bien que recibimos
     if (this.data && this.data.bien) {
       // Rellena el form con los valores existentes del bien
       this.editBienForm.patchValue(this.data.bien);
     }
+    
   }
-
+  
   onSubmit(): void {
     if (this.editBienForm.valid) {
       const idBien = this.data.bien.idBien; // ID del bien
