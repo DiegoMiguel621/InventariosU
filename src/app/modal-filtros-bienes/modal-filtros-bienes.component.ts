@@ -15,7 +15,12 @@ export class ModalFiltrosBienesComponent implements OnInit{
     private fb: FormBuilder, // Constructor del formulario
     private administradoresService: AdministradoresService, // Servicio de administradores
     private dialog: MatDialog
-  ) {}
+  ) {
+
+
+  }
+
+
 
   ngOnInit(): void{}
 

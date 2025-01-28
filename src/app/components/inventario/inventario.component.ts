@@ -92,11 +92,37 @@ export class InventarioComponent implements OnInit {
     });
   }
 
-  filtrosBien(): void {
-    const dialogRef = this._matDialog.open(ModalFiltrosBienesComponent);
-    dialogRef.afterClosed().subscribe( {
-    });
+
+
+  mostrarModalFiltros = false;
+
+mostrarOcultarModal() {
+  this.mostrarModalFiltros = !this.mostrarModalFiltros;
+}
+
+filtrosBien(): void {
+  // 1) Obtener la referencia del botón
+  const buttonElement = document.getElementById('btnFiltros');
+  if (!buttonElement) {
+    return;
   }
 
+  // 2) Obtener posición y dimensiones del botón
+  const rect = buttonElement.getBoundingClientRect();
 
+  // 3) Calcular posición. Ej. poner el modal justo debajo del botón:
+  const top = rect.top + rect.height;
+  const left = rect.left;
+
+  // 4) Abrir el modal con las coordenadas
+  this._matDialog.open(ModalFiltrosBienesComponent, {
+    hasBackdrop: true,    // para el fondo oscuro
+    position: {
+      // Le pasamos strings con “px” al final
+      top: `${top}px`,
+      left: `${left}px`
+    }
+  });
 }
+}
+

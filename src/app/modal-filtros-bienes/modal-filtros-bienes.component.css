@@ -1,101 +1,132 @@
 .modal{
-  width: 600px;
-  height: 500px;
-  margin: 0;
+  width: 400px;
+  height: 570px;
+
+
 }
 .modal-content{
 width: 100%;
 height: 100%;
 }
 
-.modal-header {
-  width: 100%;
-  height: 10%;
-  background-color: #441B69;
-  display: flex; /* Permite alinear elementos con flexbox */
-  justify-content: space-between; /* Texto a la izquierda, icono a la derecha */
-  align-items: center; /* Centra verticalmente el contenido */
-}
-
-#txtAddProd {
-  color: white;
-  text-transform: uppercase;
-  font-size: 20px;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  margin: 0; /* Elimina márgenes extras */
-  margin-left: 5%;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.iconContainerClose {
-  cursor: pointer; /* Cambia el cursor al pasar sobre el icono */
-  margin-right: 2%;
-}
-
-.close-button{
-  margin-left: 95%;
-  letter-spacing: 5px;
-  background-color: #441B69;
-  margin-top: -50px;
-}
-
-.modal-body{
-  height: 80%;
-}
-
-label{
-  line-height: 3.3;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 20px;
-  margin-left: 20px;
-}
-
-input{
-  margin-left: 10px;
+/* Contenedor principal del modal */
+.filtros-modal {
+  display: flex;
+  flex-direction: column;
+  width: 400px;            /* Ajusta al ancho deseado */
+  max-height: 80vh;        /* Limita la altura para scroll interno si es muy largo */
+  background-color: #FFFFFF;
   border-radius: 8px;
-  padding: 4px;
-  background-color: #F4F4F4;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  overflow: hidden;        /* Para que el header y footer se mantengan fijos */
+  font-family: 'Arial', sans-serif;
 }
 
-/* Input más largo para "Nombre Completo", "Correo Personal" y "Correo Institucional" */
-#nombres, #apellidos, #correo{
-  width: 50%; /* Ajusta el ancho para hacerlo más largo */
-  margin-left: 10px;
-  border-radius: 8px;
-  padding: 4px;
-  background-color: #F4F4F4;
+/* Cabecera (opcional) */
+.filtros-modal header {
+  background-color: #441B69; /* Morado, si deseas */
+  color: #FFF;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-textarea{
-  margin-top: 20px;
+.filtros-modal header h2 {
+  margin: 0;
+  font-size: 18px;
 }
 
-#barraMorada2 {
+/* Contenido scrollable */
+.filtros-content {
+  padding: 16px 20px;
+  overflow-y: auto;          /* Scroll interno si excede la altura */
+}
+
+/* Cada sección de filtro con su título */
+.filtro-section {
+  margin-bottom: 20px;
+}
+
+.filtro-section h3 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+}
+
+/* Grupo de checkboxes juntos */
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;          /* Para que los checkboxes se muevan a siguiente línea si no caben */
+  gap: 10px;
+  margin-bottom: 8px;       /* Espacio debajo del group */
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 5px;                 /* Espacio entre el input y el texto */
+  font-size: 14px;
+  color: #444;
+}
+
+/* Ajusta el estilo del select */
+.filtro-section select {
   width: 100%;
-  height: 10%; /* Altura fija para la barra */
-  background-color: #441B69;
-  display: flex; /* Habilita Flexbox */
-  justify-content: flex-end; /* Alinea el botón a la derecha */
-  align-items: center; /* Centra el botón verticalmente */
-}
-
-.OK {
-  background-color: transparent;
-  color: white;
-  border: 1px solid white;
+  padding: 6px;
+  border: 1px solid #CCC;
   border-radius: 4px;
-  margin-right: 20px; /* Ajuste horizontal del botón */
-  height: 50%; /* Altura del 50% de barraMorada2 */
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 8px;       /* Espacio debajo del select */
+}
+
+/* Footer con botones */
+.filtros-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #f0f0f0; /* Gris claro para contrastar */
+  border-top: 1px solid #ddd;
+}
+
+.filtros-footer button {
+  background-color: transparent;
+  border: 1px solid #441B69;
+  border-radius: 4px;
+  padding: 8px 12px;
   font-size: 14px;
   cursor: pointer;
+  color: #441B69;
 }
 
-#permiso {
-  font-size: 16px;
-  margin-left: 10px;
-  border-radius: 8px;
-  padding: 4px;
-  background-color: #F4F4F4;
-  border: 2px solid black;
+.filtros-footer button:hover {
+  background-color: #441B69;
+  color: #FFF;
+}
+
+.limpiar-btn {
+  margin-right: 10px;
+}
+
+.resultados-btn {
+  background-color: #441B69;
+  color: #FFF;
+  border: none;
+}
+
+.resultados-btn:hover {
+  background-color: #5b278a; /* Un morado un poco más claro */
+}
+#selectPeriodo{
+  width: 50%;
+}
+#selectPeriodo2{
+  width: 50%;
+}
+
+
+#selectPeriodo3{
+  width: 50%;
 }

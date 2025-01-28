@@ -4,46 +4,85 @@
 
 <div class="modal">
     <div class="modal-content">
-      <div class="modal-header">
-        <h2 id="txtAddProd">Añadir Trabajador</h2>
-        <div class="iconContainerClose">
-          <i class="fa-solid fa-xmark fa-2xl" style="color: #ffffff;" ></i>
-        </div>
-      </div>
+      <div class="filtros-modal">
+        <header>
+          <h2>Filtros</h2>
+          <!-- Un ícono o botón de cerrar, si deseas -->
+        </header>
 
-      <div class="modal-body">
-        <form >
-          <div class="form-group">
-            <label for="nombres">Nombres:</label>
-            <input type="text" id="nombres" formControlName="nombres" required>
-          </div>
-          <div class="form-group">
-            <label for="apellidos">Apellidos:</label>
-            <input type="text" id="apellidos" formControlName="apellidos" required>
-          </div>
-          <div class="form-group">
-            <label for="correo">Correo electronico:</label>
-            <input type="text" id="correo" formControlName="correo" required>
-          </div>
-          <div class="form-group">
-            <label for="contra">Contraseña:</label>
-            <input type="text" id="contra" formControlName="contraseña" required>
-          </div>
-          <div class="form-group">
-            <label for="permiso">Permiso:</label>
-            <select id="permiso" formControlName="permiso" required>
-              <option value="ACTIVO">ACTIVO</option>
-              <option value="INACTIVO">INACTIVO</option>
+        <div class="filtros-content">
+
+          <!-- Sección: Bienes Muebles e intangibles -->
+          <section class="filtro-section">
+            <h3>Bienes Muebles e intangibles</h3>
+            <div class="checkbox-group">
+              <label>
+                <input type="checkbox" />
+                Patrimonio
+              </label>
+              <label>
+                <input type="checkbox" />
+                Sujeto a control
+              </label>
+            </div>
+          </section>
+
+          <!-- Sección: Alta -->
+          <section class="filtro-section">
+            <h3>Alta de Bienes Muebles e intangibles</h3>
+            <div class="checkbox-group periodos">
+              <label><input type="checkbox" />Mensual</label>
+              <label><input type="checkbox" />Trimestral</label>
+              <label><input type="checkbox" />Semestral</label>
+              <label><input type="checkbox" />Anual</label>
+            </div>
+            <select id="selectPeriodo">
+              <option>Seleccione el periodo</option>
+              <!-- más opciones -->
             </select>
-          </div>
-        </form>
+          </section>
+
+          <!-- Sección: Donación -->
+          <section class="filtro-section">
+            <h3>Donación de Bienes Muebles e intangibles</h3>
+            <div class="checkbox-group periodos">
+              <label><input type="checkbox" />Mensual</label>
+              <label><input type="checkbox" />Trimestral</label>
+              <label><input type="checkbox" />Semestral</label>
+              <label><input type="checkbox" />Anual</label>
+            </div>
+            <select id="selectPeriodo2">
+              <option>Seleccione el periodo</option>
+            </select>
+          </section>
+
+          <!-- Sección: Baja -->
+          <section class="filtro-section">
+            <h3>Baja de Bienes Muebles e intangibles</h3>
+            <div class="checkbox-group periodos">
+              <label><input type="checkbox" />Mensual</label>
+              <label><input type="checkbox" />Trimestral</label>
+              <label><input type="checkbox" />Semestral</label>
+              <label><input type="checkbox" />Anual</label>
+            </div>
+            <select id="selectPeriodo3">
+              <option>Seleccione el periodo</option>
+            </select>
+          </section>
+
+        </div>
+
+        <footer class="filtros-footer">
+          <button class="limpiar-btn">Limpiar Filtros</button>
+          <button class="resultados-btn">Ver resultados</button>
+        </footer>
       </div>
 
-      <div id="barraMorada2">
-        <button class="OK" type="button" >GUARDAR</button>
-      </div>
-    </div>
+
 </div>
+
+    </div>
+
 
 
 
