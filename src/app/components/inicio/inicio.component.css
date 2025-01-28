@@ -54,22 +54,25 @@
     margin-top: 10px;
     margin-left: 30px;
     display: inline-block;
-
 }
-
+#actividadAzul2{
+  background-color: #0073B7;
+  width: 325px;
+  height: 118px;
+  margin-left: 20px;
+  margin-top: 10px;
+  display:inline-block;
+}
 
 .izOpc{
   width: 63%;
-  height: 80%;
-  
-  
+  height: 80%;    
   float: left;
 }
 .derOpc{
   height: 80%;
   width: 35%;
-  float: right;
-  
+  float: right;  
 }
 
 .iconOpc{
@@ -89,6 +92,12 @@
     width: fit-content;
     height: fit-content;
     padding: 12px 0px 0px 10px;
+    
+  }
+  #txtOpc3{
+    width: fit-content;
+    height: fit-content;
+    padding: 6px 0px 0px 10px;
     
   }
 

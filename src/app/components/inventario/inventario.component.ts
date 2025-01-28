@@ -92,38 +92,36 @@ export class InventarioComponent implements OnInit {
     });
   }
 
-
-mostrarModalFiltros = false;
-
-mostrarOcultarModal() {
-  this.mostrarModalFiltros = !this.mostrarModalFiltros;
-}
+  private filtrosDialogRef: MatDialogRef<ModalFiltrosBienesComponent> | null = null;
 
 
-
-
-
-
-
-
-
-filtrosBien(): void {  
-  const buttonElement = document.getElementById('btnFiltros');
-  if (!buttonElement) {
-    return;
-  }  
-  const rect = buttonElement.getBoundingClientRect();
-
-  const top = rect.top + rect.height;
-  const left = rect.left;
-
-  this._matDialog.open(ModalFiltrosBienesComponent, {
-    hasBackdrop: false,    // para el fondo oscuro
-    position: {      
-      top: `${top}px`,
-      left: `${left}px`
+  filtrosBien(): void {      
+    if (!this.filtrosDialogRef) {
+      const buttonElement = document.getElementById('btnFiltros');
+      if (!buttonElement) {
+        return;
+      }
+  
+      const rect = buttonElement.getBoundingClientRect();
+      const top = rect.top + rect.height;
+      const left = rect.left;
+  
+      this.filtrosDialogRef = this._matDialog.open(ModalFiltrosBienesComponent, {
+        hasBackdrop: false,
+        position: {
+          top: `${top}px`,
+          left: `${left}px`
+        }
+      });
+      
+      this.filtrosDialogRef.afterClosed().subscribe(() => {
+        this.filtrosDialogRef = null;
+      });
+    }     
+    else {
+      this.filtrosDialogRef.close();
     }
-  });
-}
+  }
+  
 }
 
