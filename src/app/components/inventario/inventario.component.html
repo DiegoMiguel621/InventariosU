@@ -15,9 +15,12 @@
         </div>
         <div class="search">
           <label for="buscar">Buscar:</label>
-          <input type="text" id="buscar" class="buscar" placeholder="Nombre del bien o numeros de inventario" />
+          <!-- Usamos [(ngModel)] para enlazar el valor con la variable searchTerm en el TS -->
+          <input type="text" id="buscar" class="buscar" placeholder="Nombre del bien o números de inventario"
+                 [(ngModel)]="searchTerm"
+                 (input)="filtrarBienes()">
         </div>
-        <div id="contenedorFiltros">
+        <div id="contenedorFiltros">  
           <button id="btnFiltros" (click)="filtrosBien()">
             <i class="fa-solid fa-sliders" style="color: #000000;"></i>
             Filtros
@@ -107,7 +110,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let bien of bienes | slice : (currentPage * pageSize) : ((currentPage + 1) * pageSize)">
+            <tr *ngFor="let bien of bienesFiltrados | slice : (currentPage * pageSize) : ((currentPage + 1) * pageSize)">
               <td>{{ bien.numInvAnt }}</td>
               <td>{{ bien.numInvArm }}</td>
               <td>{{ bien.cControl }}</td>

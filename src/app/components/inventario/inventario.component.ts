@@ -14,6 +14,9 @@ import { BienesService } from '../../service/bienes.service';
 })
 export class InventarioComponent implements OnInit {
   bienes: any[] = [];
+  bienesFiltrados: any[] = [];
+
+  searchTerm: string = '';
 
   currentPage: number = 0;  // Índice de página actual
   pageSize: number = 12;    // cantidad de registros por página
@@ -24,6 +27,7 @@ export class InventarioComponent implements OnInit {
     // Obtener los bienes y mostrarlos en la tabla
     this.bienesService.getBienes().subscribe(data => {
       this.bienes = data;
+      this.bienesFiltrados = [...this.bienes];
     });
   }
     // Calcula la cantidad total de páginas
@@ -31,14 +35,37 @@ export class InventarioComponent implements OnInit {
       return Math.ceil(this.bienes.length / this.pageSize);
     }
 
-    // Avanza a la página siguiente
+    filtrarBienes(): void {
+      const texto = this.searchTerm.toLowerCase().trim();
+  
+      if (!texto) {
+        // Si la búsqueda está vacía, mostrar todo
+        this.bienesFiltrados = [...this.bienes];
+        this.currentPage = 0; // volver a la primera página
+        return;
+      }
+  
+      // Filtramos por varios campos
+      this.bienesFiltrados = this.bienes.filter(bien => {
+        const nombreBien = (bien.nombreBien ?? '').toLowerCase();
+        const numInvAnt = (bien.numInvAnt ?? '').toLowerCase();
+        const numInvArm = (bien.numInvArm ?? '').toLowerCase();
+  
+        return (
+          nombreBien.includes(texto) ||
+          numInvAnt.includes(texto) ||
+          numInvArm.includes(texto)
+        );
+      });      
+      this.currentPage = 0;
+    }
+    
     nextPage(): void {
       if (this.currentPage < this.totalPages - 1) {
         this.currentPage++;
       }
     }
-
-    // Retrocede a la página anterior
+    
     previousPage(): void {
       if (this.currentPage > 0) {
         this.currentPage--;
@@ -49,7 +76,7 @@ export class InventarioComponent implements OnInit {
   agregarBien(): void {
     this._matDialog.open(ModalforminvComponent).afterClosed().subscribe((result) => {
       if (result === true) {
-        this.cargarBienes(); // algún método que vuelve a llamar a getBienes()
+        this.cargarBienes(); 
       }
       console.log('Modal de agregar bien cerrado');
     });
@@ -93,7 +120,6 @@ export class InventarioComponent implements OnInit {
   }
 
   private filtrosDialogRef: MatDialogRef<ModalFiltrosBienesComponent> | null = null;
-
 
   filtrosBien(): void {      
     if (!this.filtrosDialogRef) {
