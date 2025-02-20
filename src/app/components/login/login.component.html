@@ -12,18 +12,17 @@
       <form [formGroup]="validacion" (ngSubmit)="handleSubmit()">
         <article id="Login">
           <div class="input-container">
-            <input type="text" id="correoLogin" name="correoLog" placeholder="Correo electrónico" formControlName="correo"/>
+            <input type="text" id="correoLogin" name="correoLog" placeholder="Correo electrónico" formControlName="correo" maxlength="50"/>
             <i class="fas fa-user"></i>
           </div>
           <div class="input-container">
-            <input type="password" id="contraLogin" name="contLog" placeholder="Contraseña" formControlName="contra"/>
+            <input type="password" id="contraLogin" name="contLog" placeholder="Contraseña" formControlName="contra" maxlength="20"/>
             <i class="fas fa-lock"></i>
           </div>
           <button type="submit" [disabled]="validacion.invalid">Entrar</button>
-          
+
         </article>
       </form>
     </div>
   </div>
   <router-outlet></router-outlet>
-  

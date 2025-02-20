@@ -16,10 +16,14 @@ export class LoginComponent {
   constructor(private router: Router, private authService: AuthService) {
     this.correo = new FormControl('', [
       Validators.required,
-      Validators.email // Validación para correo electrónico
+      Validators.email, // Validación para correo electrónico
+      Validators.maxLength(50),  // 🔹 Límite de 50 caracteres para correo
+      Validators.pattern(/^\S*$/) // 🔹 No permite espacios en blanco
     ]);
     this.contra = new FormControl('', [
-      Validators.required // Solo se valida que no esté vacío
+      Validators.required, // Solo se valida que no esté vacío
+      Validators.maxLength(20), // 🔹 Límite de 20 caracteres para contraseña
+      Validators.pattern(/^\S*$/) // 🔹 No permite espacios en blanco
     ]);
 
     this.validacion = new FormGroup({
@@ -31,14 +35,14 @@ export class LoginComponent {
   handleSubmit(): void {
     if (this.validacion.valid) {
       const { correo, contra } = this.validacion.value;
-  
+
       this.authService.login(correo, contra).subscribe({
         next: (response) => {
           console.log('Inicio de sesión exitoso:', response);
-  
+
           // Guardar los datos del administrador en localStorage
           localStorage.setItem('admin', JSON.stringify(response.user));
-  
+
           this.router.navigate(['/inicio']); // Redirigir al sistema
         },
         error: (error) => {
