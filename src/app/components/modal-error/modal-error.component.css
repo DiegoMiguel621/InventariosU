@@ -1,0 +1,42 @@
+/* Estilos del modal */
+.modal-content {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  text-align: center;
+  width: 400px;
+  height: 120px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h3 {
+  margin: 0;
+  color: #d32f2f;
+}
+
+.modal-content p {
+  font-size: 16px;
+  color: black;
+  margin: 10px 0;
+}
+
+.modal-content button {
+  background: #35124e;
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 80%;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+.modal-content button:hover {
+  background: #5a287e;
+}
+
+h3{
+font-size: 18px;
+}
+

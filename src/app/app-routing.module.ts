@@ -22,6 +22,7 @@ import { ModalEliminarAdministradorComponent } from './modal-eliminar-administra
 import { ModalEditarAdministradorComponent } from './modal-editar-administrador/modal-editar-administrador.component';
 import { ModalFiltrosBienesComponent } from './modal-filtros-bienes/modal-filtros-bienes.component';
 import { AsideComponent } from './components/aside/aside.component';
+import { ModalErrorComponent } from './components/modal-error/modal-error.component';
 
 
 
@@ -53,6 +54,7 @@ const routes: Routes = [
   {path:'modal10',component:ModalEliminarAdministradorComponent},
   {path:'modal11',component:ModalEditarAdministradorComponent},
   {path:'modal12',component:ModalFiltrosBienesComponent},
+  {path:'modal13',component:ModalErrorComponent},
 
 
 

@@ -34,6 +34,7 @@ import { ModalEditarAdministradorComponent } from './modal-editar-administrador/
 import { ModalFiltrosBienesComponent } from './modal-filtros-bienes/modal-filtros-bienes.component';
 import { AsideComponent } from './components/aside/aside.component';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { ModalErrorComponent } from './components/modal-error/modal-error.component';
 
 
 
@@ -64,6 +65,7 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
     ModalEditarAdministradorComponent,
     ModalFiltrosBienesComponent,
     AsideComponent,
+    ModalErrorComponent,
 
   ],
   imports: [
