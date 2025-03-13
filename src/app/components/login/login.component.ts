@@ -5,6 +5,8 @@ import { AuthService } from '../../service/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalErrorComponent } from '../../components/modal-error/modal-error.component';
 
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,38 +14,53 @@ import { ModalErrorComponent } from '../../components/modal-error/modal-error.co
 })
 export class LoginComponent {
   validacion: FormGroup;
-  correo: FormControl;
-  contra: FormControl;
 
   constructor(private router: Router, private authService: AuthService, public dialog: MatDialog) {
-    this.correo = new FormControl('', [
-      Validators.required,
-      Validators.email, // Validación para correo electrónico
-      Validators.maxLength(50),  // 🔹 Límite de 50 caracteres para correo
-      Validators.pattern(/^\S*$/) // 🔹 No permite espacios en blanco
-    ]);
-    this.contra = new FormControl('', [
-      Validators.required, // Solo se valida que no esté vacío
-      Validators.maxLength(20), // 🔹 Límite de 20 caracteres para contraseña
-      Validators.pattern(/^\S*$/) // 🔹 No permite espacios en blanco
-    ]);
-
     this.validacion = new FormGroup({
-      correo: this.correo,
-      contra: this.contra
+      correo: new FormControl('', [
+        Validators.required,
+        Validators.email,
+        Validators.maxLength(50),
+        Validators.pattern(/^\S*$/)
+      ]),
+      contra: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(20),
+        Validators.pattern(/^\S*$/)
+      ])
     });
   }
 
   handleSubmit(): void {
-    console.log('🔵 handleSubmit() se está ejecutando');
+    console.log('🔵 handleSubmit() SE EJECUTÓ');
 
-    if (this.validacion.invalid) {
-      console.log('⚠️ Formulario vacío o inválido');
+    const correo = this.validacion.get('correo')?.value.trim();
+    const contra = this.validacion.get('contra')?.value.trim();
+
+    console.log('📩 Valores ingresados:', { correo, contra });
+
+    // 🟡 Caso 1: Ambos campos vacíos
+    if (!correo && !contra) {
+      console.log('⚠️ Ambos campos están vacíos');
       this.abrirModal('Debes ingresar tu correo y contraseña');
-      return; // 🔹 Detiene la ejecución si los campos están vacíos
+      return;
     }
 
-    const { correo, contra } = this.validacion.value;
+    // 🟠 Caso 2: Solo el correo está vacío
+    if (!correo) {
+      console.log('⚠️ El campo de correo está vacío');
+      this.abrirModal('Debes ingresar tu correo');
+      return;
+    }
+
+    // 🔵 Caso 3: Solo la contraseña está vacía
+    if (!contra) {
+      console.log('⚠️ El campo de contraseña está vacío');
+      this.abrirModal('Debes ingresar tu contraseña');
+      return;
+    }
+
+    // Si ambos campos están llenos, intentamos iniciar sesión
     console.log('📩 Datos ingresados:', { correo, contra });
 
     this.authService.login(correo, contra).subscribe({
@@ -62,15 +79,15 @@ export class LoginComponent {
   }
 
 
-
   abrirModal(mensaje: string): void {
     console.log('🟠 abrirModal() llamado con mensaje:', mensaje);
-    this.dialog.open(ModalErrorComponent, {
-      data: { mensaje }
-    });
+
+    setTimeout(() => {
+      this.dialog.open(ModalErrorComponent, {
+        data: { mensaje }
+      });
+    }, 100);
   }
-
-
 
 
 }
