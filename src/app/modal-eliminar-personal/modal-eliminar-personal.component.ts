@@ -14,19 +14,20 @@ export class ModalEliminarPersonalComponent {
     private trabajadoresService: TrabajadoresService // Servicio para interactuar con la API
   ) {}
 
-  // Función para eliminar el trabajador
-  eliminarTrabajador(): void {
-    this.trabajadoresService.deleteTrabajador(this.data.id).subscribe({
-      next: (response) => {
-        console.log('Trabajador eliminado correctamente:', response.message); // Muestra el mensaje devuelto por el backend
-        this.dialogRef.close(true); // Cierra el modal con éxito
-      },
-      error: (error) => {
-        console.error('Error al eliminar el trabajador:', error);
-        this.dialogRef.close(false); // Cierra el modal con fallo
-      }
-    });
-  }
+ // Función para eliminar el trabajador
+eliminarTrabajador(): void {
+  this.trabajadoresService.deleteTrabajador(this.data.id).subscribe({
+    next: (response) => {
+      console.log('Trabajador eliminado correctamente:', response.message);
+      this.dialogRef.close(true);
+    },
+    error: (error) => {
+      console.error('Error al eliminar el trabajador:', error);
+      this.dialogRef.close(false);
+    }
+  });
+}
+
   
   
   

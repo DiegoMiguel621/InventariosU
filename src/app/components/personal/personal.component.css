@@ -83,6 +83,8 @@ body {
   width: 100%;
   display: flex;
   justify-content: flex-start;
+  align-items: center;
+  gap: 40px; /* Espacio horizontal entre los dos botones */
 }
 
 .add-user {
@@ -90,6 +92,28 @@ body {
   color: #673AB7;
   cursor: pointer;
 }
+
+/* Contenedor del botón de Historial */
+.history-button button {
+  background-color: #F3F3F3;
+  color: #000;
+  border: 1px solid #818181;
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 14px;
+  cursor: pointer;
+
+  /* Para alinear icono y texto en la misma línea y centrarlos verticalmente */
+  display: inline-flex;
+  align-items: center;
+  gap: 6px; /* Espacio entre el icono y el texto */
+}
+
+/* Ajusta el tamaño del icono si deseas */
+.history-button button i {
+  font-size: 16px;
+}
+
 
 #listado {
   width: 100%;

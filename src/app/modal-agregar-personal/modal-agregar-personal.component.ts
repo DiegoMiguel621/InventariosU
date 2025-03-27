@@ -26,9 +26,10 @@ export class ModalAgregarPersonalComponent implements OnInit {
       ubicacion: ['', [Validators.required]],
       perfilAcad: ['', [Validators.required]],
       puesto: ['', [Validators.required]],
-      estatus: ['activo', [Validators.required]],
+      estatus: ['ACTIVO', [Validators.required]],
       correoPersonal: ['', [Validators.required, Validators.email]],
-      correoInstit: ['', [Validators.required, Validators.email]]
+      correoInstit: ['', [Validators.required, Validators.email]],
+      rfcTrabaj: ['', [Validators.required]]
     });
   }
 

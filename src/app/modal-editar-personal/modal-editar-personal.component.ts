@@ -30,6 +30,7 @@ export class ModalEditarPersonalComponent implements OnInit {
       estatus: [this.data.estatus, [Validators.required]],
       correoPersonal: [this.data.correoPersonal, [Validators.required, Validators.email]],
       correoInstit: [this.data.correoInstit, [Validators.required, Validators.email]],
+      rfcTrabaj: [this.data.rfcTrabaj, [Validators.required]]
     });
   }
   

@@ -35,6 +35,9 @@ import { ModalFiltrosBienesComponent } from './modal-filtros-bienes/modal-filtro
 import { AsideComponent } from './components/aside/aside.component';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { ModalErrorComponent } from './components/modal-error/modal-error.component';
+import { ModalRestaurarTrabajadorComponent } from './modals/modal-restaurar-trabajador/modal-restaurar-trabajador.component';
+import { ModalRestaurarTrabajador2Component } from './modal/modal-restaurar-trabajador2/modal-restaurar-trabajador2.component';
+import { ModalRestaurarTrabajador3Component } from './components/modal-restaurar-trabajador3/modal-restaurar-trabajador3.component';
 
 
 
@@ -66,6 +69,9 @@ import { ModalErrorComponent } from './components/modal-error/modal-error.compon
     ModalFiltrosBienesComponent,
     AsideComponent,
     ModalErrorComponent,
+    ModalRestaurarTrabajadorComponent,
+    ModalRestaurarTrabajador2Component,
+    ModalRestaurarTrabajador3Component,
 
   ],
   imports: [

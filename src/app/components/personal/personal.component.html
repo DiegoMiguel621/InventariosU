@@ -50,7 +50,16 @@
           <i class="fa fa-user-plus" ></i>
         </button>
       </div>
+
+      <div class="history-button">
+        <button type="button" (click)="toggleHistorial()">
+          <i class="fa-solid fa-rotate-left"></i> 
+          Historial
+        </button>
+      </div>
     </div>
+
+
 
     <section id="listado">
       <div class="table-container">
@@ -66,6 +75,7 @@
               <th>Estatus</th>
               <th>Correo Personal</th>
               <th>Correo Institucional</th>
+              <th>RFC</th>
               <th class="fixed-column">Opciones</th>
             </tr>
           </thead>
@@ -80,10 +90,22 @@
               <td>{{ trabajador.estatus }}</td>
               <td>{{ trabajador.correoPersonal }}</td>
               <td>{{ trabajador.correoInstit }}</td>
+              <td>{{trabajador.rfcTrabaj}}</td>
               <td class="fixed-column">
                 <i class="fa fa-eye" style="color: #00A65A;" (click)="verrPersonal(trabajador.idTrabajador)"></i>
-                <i class="fa-regular fa-pen-to-square" style="color: #6FC6F9;" (click)="editarPersonal(trabajador)"></i>                
-                <i class="fa-solid fa-circle-xmark" style="color: #FF346A;" (click)="eliminarPersonal(trabajador.idTrabajador)"></i>
+                <i class="fa-regular fa-pen-to-square" style="color: #6FC6F9;" (click)="editarPersonal(trabajador)"></i>                                
+                <i *ngIf="!mostrarInactivos" 
+     class="fa-solid fa-trash" 
+     style="color: #FF346A;" 
+     (click)="eliminarPersonal(trabajador.idTrabajador)">
+  </i>
+
+  <!-- Si estamos en "inactivos", mostramos ícono de trash-arrow-up para restaurar -->
+  <i *ngIf="mostrarInactivos" 
+     class="fa-solid fa-trash-arrow-up" 
+     style="color: #00A65A;" 
+     (click)="recuperarPersonal(trabajador.idTrabajador)">
+  </i>
               </td>
             </tr>
           </tbody>          

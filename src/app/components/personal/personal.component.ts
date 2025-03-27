@@ -4,6 +4,7 @@ import { ModalAgregarPersonalComponent } from '../../modal-agregar-personal/moda
 import { ModalVerPersonalComponent } from '../../modal-ver-personal/modal-ver-personal.component';
 import { ModalEditarPersonalComponent } from '../../modal-editar-personal/modal-editar-personal.component';
 import { ModalEliminarPersonalComponent } from '../../modal-eliminar-personal/modal-eliminar-personal.component';
+import { ModalRestaurarTrabajador3Component } from '../modal-restaurar-trabajador3/modal-restaurar-trabajador3.component';
 import { TrabajadoresService } from '../../service/trabajadores.service';
 
 @Component({
@@ -22,6 +23,8 @@ export class PersonalComponent implements OnInit {
   numeroBusqueda: string = '';
   areaSeleccionada: string = '';
   areas: string[] = [];
+
+  mostrarInactivos: boolean = false;
 
   Math = Math; // Exponemos Math para usar Math.ceil en el template
 
@@ -42,6 +45,36 @@ export class PersonalComponent implements OnInit {
     this.trabajadoresService.getAreas().subscribe((areas: string[]) => {
       this.areas = ['CUALQUIER AREA', ...areas]; // Agregar "CUALQUIER AREA"
     });
+  }
+
+  // Llamar a getTrabajadores() para cargar activos
+  cargarActivos(): void {
+    this.trabajadoresService.getTrabajadores().subscribe((data) => {
+      this.trabajadores = data;
+      this.trabajadoresFiltrados = [...data];
+      this.updatePagination();
+    });
+  }
+
+  // Llamar a getTrabajadoresInactivos() para cargar inactivos
+  cargarInactivos(): void {
+    this.trabajadoresService.getTrabajadoresInactivos().subscribe((data) => {
+      this.trabajadores = data;
+      this.trabajadoresFiltrados = [...data];
+      this.updatePagination();
+    });
+  }
+
+  // Botón Historial => Toggle entre activos e inactivos
+  toggleHistorial(): void {
+    this.mostrarInactivos = !this.mostrarInactivos;
+    if (this.mostrarInactivos) {
+      // Cargar inactivos
+      this.cargarInactivos();
+    } else {
+      // Cargar activos
+      this.cargarActivos();
+    }
   }
 
   // Función para aplicar filtros combinados
@@ -210,4 +243,18 @@ export class PersonalComponent implements OnInit {
       }
     });
   }
+  recuperarPersonal(id: number): void {
+    const dialogRef = this._matDialog.open(ModalRestaurarTrabajador3Component, {
+      data: { id }
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        // Recargamos la lista de inactivos
+        this.cargarInactivos();
+      }
+    });
+  }
+  
+  
 }
