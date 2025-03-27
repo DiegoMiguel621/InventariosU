@@ -69,6 +69,7 @@
               <th>Nombre Completo</th>
               <th>Número</th>
               <th>Área</th>
+              <th>Área Funcional</th>
               <th>Ubicación</th>
               <th>Perfil Académico</th>
               <th>Puesto</th>
@@ -84,6 +85,7 @@
               <td>{{ trabajador.nombre }}</td>
               <td>{{ trabajador.numero }}</td>
               <td>{{ trabajador.area }}</td>
+              <td>{{trabajador.areaFuncional}}</td>
               <td>{{ trabajador.ubicacion }}</td>
               <td>{{ trabajador.perfilAcad }}</td>
               <td>{{ trabajador.puesto }}</td>
@@ -94,18 +96,8 @@
               <td class="fixed-column">
                 <i class="fa fa-eye" style="color: #00A65A;" (click)="verrPersonal(trabajador.idTrabajador)"></i>
                 <i class="fa-regular fa-pen-to-square" style="color: #6FC6F9;" (click)="editarPersonal(trabajador)"></i>                                
-                <i *ngIf="!mostrarInactivos" 
-     class="fa-solid fa-trash" 
-     style="color: #FF346A;" 
-     (click)="eliminarPersonal(trabajador.idTrabajador)">
-  </i>
-
-  <!-- Si estamos en "inactivos", mostramos ícono de trash-arrow-up para restaurar -->
-  <i *ngIf="mostrarInactivos" 
-     class="fa-solid fa-trash-arrow-up" 
-     style="color: #00A65A;" 
-     (click)="recuperarPersonal(trabajador.idTrabajador)">
-  </i>
+                <i *ngIf="!mostrarInactivos" class="fa-solid fa-trash" style="color: #FF346A;" (click)="eliminarPersonal(trabajador.idTrabajador)"></i>
+                <i *ngIf="mostrarInactivos" class="fa-solid fa-trash-arrow-up" style="color: #00A65A;" (click)="recuperarPersonal(trabajador.idTrabajador)"></i>
               </td>
             </tr>
           </tbody>          

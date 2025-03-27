@@ -24,13 +24,14 @@ export class ModalEditarPersonalComponent implements OnInit {
       nombre: [this.data.nombre, [Validators.required]],
       numero: [this.data.numero, [Validators.required, Validators.pattern('^[0-9]+$')]],
       area: [this.data.area, [Validators.required]],
+      areaFuncional: [this.data.areaFuncional],
       ubicacion: [this.data.ubicacion, [Validators.required]],
       perfilAcad: [this.data.perfilAcad, [Validators.required]],
       puesto: [this.data.puesto, [Validators.required]],
       estatus: [this.data.estatus, [Validators.required]],
       correoPersonal: [this.data.correoPersonal, [Validators.required, Validators.email]],
       correoInstit: [this.data.correoInstit, [Validators.required, Validators.email]],
-      rfcTrabaj: [this.data.rfcTrabaj, [Validators.required]]
+      rfcTrabaj: [this.data.rfcTrabaj]
     });
   }
   

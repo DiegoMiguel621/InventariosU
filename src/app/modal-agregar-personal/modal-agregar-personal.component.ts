@@ -23,6 +23,7 @@ export class ModalAgregarPersonalComponent implements OnInit {
       nombre: ['', [Validators.required]],
       numero: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
       area: ['', [Validators.required]],
+      areaFuncional: ['', [Validators.required]],
       ubicacion: ['', [Validators.required]],
       perfilAcad: ['', [Validators.required]],
       puesto: ['', [Validators.required]],
