@@ -6,64 +6,26 @@
   <div class="modal-content">
     <div class="filtros-modal">
       <div class="filtros-content">
-
         <!-- Sección: Bienes Muebles e intangibles -->
         <section class="filtro-section">
           <h3>Bienes Muebles e intangibles</h3>
           <div class="checkbox-group">
-            <label><input type="checkbox" /> Patrimonio</label>
-            <label><input type="checkbox" /> Sujeto a control</label>
+            <label>
+              <input type="checkbox" [(ngModel)]="patrimonio" name="patrimonio" />
+              Patrimonio
+            </label>
+            <label>
+              <input type="checkbox" [(ngModel)]="sujetoControl" name="sujetoControl" />
+              Sujeto a control
+            </label>
           </div>
-        </section>
-
-        <!-- Sección: Alta -->
-        <section class="filtro-section">
-          <h3>Alta de Bienes Muebles e intangibles</h3>
-          <div class="checkbox-group">
-            <label><input type="checkbox" />Mensual</label>
-            <label><input type="checkbox" />Trimestral</label>
-            <label><input type="checkbox" />Semestral</label>
-            <label><input type="checkbox" />Anual</label>
-          </div>
-          <select id="selectPeriodo">
-            <option>Seleccione el periodo</option>
-            <!-- más opciones -->
-          </select>
-        </section>
-
-        <!-- Sección: Donación -->
-        <section class="filtro-section">
-          <h3>Donación de Bienes Muebles e intangibles</h3>
-          <div class="checkbox-group">
-            <label><input type="checkbox" />Mensual</label>
-            <label><input type="checkbox" />Trimestral</label>
-            <label><input type="checkbox" />Semestral</label>
-            <label><input type="checkbox" />Anual</label>
-          </div>
-          <select id="selectPeriodo2">
-            <option>Seleccione el periodo</option>
-          </select>
-        </section>
-
-        <!-- Sección: Baja -->
-        <section class="filtro-section">
-          <h3>Baja de Bienes Muebles e intangibles</h3>
-          <div class="checkbox-group">
-            <label><input type="checkbox" />Mensual</label>
-            <label><input type="checkbox" />Trimestral</label>
-            <label><input type="checkbox" />Semestral</label>
-            <label><input type="checkbox" />Anual</label>
-          </div>
-          <select id="selectPeriodo3">
-            <option>Seleccione el periodo</option>
-          </select>
         </section>
       </div>
-
       <footer class="filtros-footer">
-        <button class="limpiar-btn">Limpiar Filtros</button>
-        <button class="resultados-btn">Ver resultados</button>
+        <button class="limpiar-btn" type="button" (click)="limpiarFiltros()">Limpiar Filtros</button>
+        <button class="resultados-btn" type="button" (click)="verResultados()">Ver resultados</button>
       </footer>
     </div>
   </div>
 </div>
+

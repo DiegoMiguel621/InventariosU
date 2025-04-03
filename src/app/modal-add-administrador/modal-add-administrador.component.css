@@ -85,8 +85,8 @@ textarea{
   color: white;
   border: 1px solid white;
   border-radius: 4px;
-  margin-right: 20px; /* Ajuste horizontal del botón */
-  height: 50%; /* Altura del 50% de barraMorada2 */
+  margin-right: 25px; /* Ajuste horizontal del botón */
+  height: 70%; /* Altura del 50% de barraMorada2 */
   font-size: 14px;
   cursor: pointer;
 }

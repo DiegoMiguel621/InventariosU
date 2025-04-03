@@ -13,6 +13,7 @@ import { BienesService } from '../../service/bienes.service';
   styleUrls: ['./inventario.component.css']
 })
 export class InventarioComponent implements OnInit {
+  
   bienes: any[] = [];
   bienesFiltrados: any[] = [];
 
@@ -35,30 +36,7 @@ export class InventarioComponent implements OnInit {
       return Math.ceil(this.bienes.length / this.pageSize);
     }
 
-    filtrarBienes(): void {
-      const texto = this.searchTerm.toLowerCase().trim();
-  
-      if (!texto) {
-        // Si la búsqueda está vacía, mostrar todo
-        this.bienesFiltrados = [...this.bienes];
-        this.currentPage = 0; // volver a la primera página
-        return;
-      }
-  
-      // Filtramos por varios campos
-      this.bienesFiltrados = this.bienes.filter(bien => {
-        const nombreBien = (bien.nombreBien ?? '').toLowerCase();
-        const numInvAnt = (bien.numInvAnt ?? '').toLowerCase();
-        const numInvArm = (bien.numInvArm ?? '').toLowerCase();
-  
-        return (
-          nombreBien.includes(texto) ||
-          numInvAnt.includes(texto) ||
-          numInvArm.includes(texto)
-        );
-      });      
-      this.currentPage = 0;
-    }
+    
     
     nextPage(): void {
       if (this.currentPage < this.totalPages - 1) {
@@ -106,8 +84,6 @@ export class InventarioComponent implements OnInit {
     });
   }
   
-  
-
   // Abrir el modal para ver los detalles de un bien
   VerBien(bien: any): void {
     console.log('Bien a ver:', bien);
@@ -131,33 +107,102 @@ export class InventarioComponent implements OnInit {
 
   private filtrosDialogRef: MatDialogRef<ModalFiltrosBienesComponent> | null = null;
 
-  filtrosBien(): void {      
-    if (!this.filtrosDialogRef) {
-      const buttonElement = document.getElementById('btnFiltros');
-      if (!buttonElement) {
+  // Agrega una variable para recordar el estado de los filtros del modal:
+private filtroEstado = {
+  patrimonio: false,
+  sujetoControl: false
+};
+
+// Función unificada para aplicar todos los filtros (checkboxes y texto)
+aplicarTodosLosFiltros(): void {
+  // Comienza con la lista completa de bienes
+  let resultados = [...this.bienes];
+
+  // 1) Aplica el filtro de checkboxes (si alguno está marcado)
+  if (this.filtroEstado.patrimonio || this.filtroEstado.sujetoControl) {
+    resultados = resultados.filter(bien => {
+      // Normaliza el valor de tipoResguardo: quita espacios y pasa a mayúsculas
+      const tipo = (bien.tipoResguardo || '').trim().toUpperCase();
+      if (this.filtroEstado.patrimonio && this.filtroEstado.sujetoControl) {
+        return tipo === 'PATRIMONIO' || tipo === 'SUJETO A CONTROL';
+      } else if (this.filtroEstado.patrimonio) {
+        return tipo === 'PATRIMONIO';
+      } else if (this.filtroEstado.sujetoControl) {
+        return tipo === 'SUJETO A CONTROL';
+      }
+      return true;
+    });
+  }
+
+  // 2) Aplica el filtro textual (si se ha escrito algo en searchTerm)
+  const texto = this.searchTerm.toLowerCase().trim();
+  if (texto) {
+    resultados = resultados.filter(bien => {
+      const nombreBien = (bien.nombreBien || '').toLowerCase();
+      const numInvAnt = (bien.numInvAnt || '').toLowerCase();
+      const numInvArm = (bien.numInvArm || '').toLowerCase();
+      return (
+        nombreBien.includes(texto) ||
+        numInvAnt.includes(texto) ||
+        numInvArm.includes(texto)
+      );
+    });
+  }
+
+  // Asigna el resultado final a la lista filtrada y reinicia la paginación
+  this.bienesFiltrados = resultados;
+  this.currentPage = 0;
+}
+
+// Llama a esta función en el (input) del searchTerm
+filtrarBienes(): void {
+  // Actualiza la búsqueda y vuelve a aplicar todos los filtros
+  this.aplicarTodosLosFiltros();
+}
+
+// En la función que cierra el modal de filtros:
+filtrosBien(): void {
+  if (!this.filtrosDialogRef) {
+    const buttonElement = document.getElementById('btnFiltros');
+    if (!buttonElement) return;
+
+    const rect = buttonElement.getBoundingClientRect();
+    const top = rect.top + rect.height;
+    const left = rect.left;
+
+    // Abre el modal, enviándole el estado actual
+    this.filtrosDialogRef = this._matDialog.open(ModalFiltrosBienesComponent, {
+      hasBackdrop: false,
+      position: { top: `${top}px`, left: `${left}px` },
+      data: { ...this.filtroEstado }
+    });
+
+    this.filtrosDialogRef.afterClosed().subscribe((result) => {
+      this.filtrosDialogRef = null;
+      if (!result) {
+        // Se cerró sin aplicar filtro
         return;
       }
-  
-      const rect = buttonElement.getBoundingClientRect();
-      const top = rect.top + rect.height;
-      const left = rect.left;
-  
-      this.filtrosDialogRef = this._matDialog.open(ModalFiltrosBienesComponent, {
-        hasBackdrop: false,
-        position: {
-          top: `${top}px`,
-          left: `${left}px`
-        }
-      });
-      
-      this.filtrosDialogRef.afterClosed().subscribe(() => {
-        this.filtrosDialogRef = null;
-      });
-    }     
-    else {
-      this.filtrosDialogRef.close();
-    }
+      if (result.mostrarTodos) {
+        // Si no se marcó nada, resetea el estado y muestra todos los bienes
+        this.filtroEstado = { patrimonio: false, sujetoControl: false };
+      } else {
+        // Actualiza el estado de los filtros con lo seleccionado
+        this.filtroEstado = { 
+          patrimonio: result.patrimonio, 
+          sujetoControl: result.sujetoControl 
+        };
+      }
+      // Aplica todos los filtros
+      this.aplicarTodosLosFiltros();
+    });
+  } else {
+    this.filtrosDialogRef.close();
   }
+}
+  
+  
+  
   
 }
 

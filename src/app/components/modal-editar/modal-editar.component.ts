@@ -126,7 +126,6 @@ export class ModalEditarComponent implements OnInit {
       }
     }
     
-
     // Cargar trabajadores para el autocomplete
     this.trabajadoresService.getTrabajadores().subscribe(data => {
       this.trabajadores = data;
@@ -141,8 +140,6 @@ export class ModalEditarComponent implements OnInit {
   displayFn(trabajador: any): string {
     return trabajador && trabajador.nombre ? trabajador.nombre : '';
   }
-  
-  
   
 
   private _filterTrabajadores(value: any): any[] {
