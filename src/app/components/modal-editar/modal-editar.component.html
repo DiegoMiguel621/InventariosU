@@ -220,11 +220,29 @@
             </select>
           </div>          
         
-          <div class="form-group">
-            <label for="nomRes">Nombre del Resguardante:</label>
-            <input type="text" id="nomRes" formControlName="nomRes">
-          </div>
-        
+          <mat-form-field appearance="fill" class="resguardante-field">
+            <mat-label>Nombre del resguardante</mat-label>
+            <input
+              matInput
+              placeholder="Buscar resguardante"
+              [formControl]="resguardanteControl"
+              [matAutocomplete]="auto">
+            <mat-autocomplete
+              #auto="matAutocomplete"
+              [displayWith]="displayFn"
+              (optionSelected)="seleccionarTrabajador($event.option.value)">
+              <mat-option
+                *ngFor="let trabajador of filteredTrabajadores | async"
+                [value]="trabajador">
+                {{ trabajador.nombre }} - {{ trabajador.numero }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          
+          
+          
+          
+                  
           <div class="form-group">
             <label for="numRes">Número del Resguardante:</label>
             <input type="number" id="numRes" formControlName="numRes">
@@ -322,6 +340,11 @@
           <div class="form-group">
             <label for="correoInstRes">Correo Institucional del Resguardante:</label>
             <input type="email" id="correoInstRes" formControlName="correoInstRes">
+          </div>
+
+          <div class="form-group">
+            <label for="rfcTrabaj">RFC del resguardante:</label>
+            <input type="text" id="rfcTrabaj" formControlName="rfcTrabaj" />
           </div>
         
           <div class="form-group">

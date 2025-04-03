@@ -29,7 +29,7 @@ export class BienesService {
   // Función para modificar un bien existente 
   updateBien(id: number, bienData: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/${id}`, bienData);
-}
+  }
 
     
 }

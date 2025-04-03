@@ -305,3 +305,28 @@ select#estatusResguardo:focus{
 #frecDepre{
   width: 20%;
 }
+/* Ajustes específicos para mat-form-field con autocomplete */
+mat-form-field.resguardante-field {
+  display: inline-block;       /* O flex, según tu layout */
+  margin-left: 20px;           /* Coincidir con el label que ya usas */
+  margin-top: 10px;            /* Espacio vertical */
+  width: 60%;                  /* Para que se vea del mismo ancho que "input#nomRes" */
+}
+
+/* Apariencia rellena (fill) con fondo gris y bordes redondeados */
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: #F4F4F4;    /* Coincidir con el resto de inputs */
+  border-radius: 8px;
+}
+
+/* Ajusta la tipografía de la etiqueta del mat-form-field si deseas */
+.mat-form-field-label {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 20px;
+}
+
+/* Opcional: Ajustar el input interno del matInput */
+.mat-form-field .mat-input-element {
+  font-size: 16px;
+  /* Ajusta si deseas un padding, color, etc. */
+}

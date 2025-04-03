@@ -1,8 +1,11 @@
 // src/app/components/modalforminv/modalforminv.component.ts
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { BienesService } from '../../service/bienes.service';
+import { TrabajadoresService } from '../../service/trabajadores.service';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-modalforminv',
@@ -10,13 +13,17 @@ import { BienesService } from '../../service/bienes.service';
   styleUrls: ['./modalforminv.component.css']
 })
 export class ModalforminvComponent {
-
   addProductForm: FormGroup;
+
+  resguardanteControl: FormControl = new FormControl();
+  trabajadores: any[] = [];
+  filteredTrabajadores!: Observable<any[]>;
 
   constructor(
     public dialogRef: MatDialogRef<ModalforminvComponent>,
     private fb: FormBuilder,
-    private bienesService: BienesService
+    private bienesService: BienesService,
+    private trabajadoresService: TrabajadoresService
   ) {
     this.addProductForm = this.fb.group({
           numInvAnt: [''],
@@ -79,7 +86,8 @@ export class ModalforminvComponent {
           puestoRes: [''],      
           estatusRes: ['ACTIVO'],      
           correoPerRes: [''],      
-          correoInstRes: [''],      
+          correoInstRes: [''], 
+          rfcTrabaj: [''],     
           res16Ant: ['NO'],      
           res17: ['NO'],      
           res18: ['NO'],      
@@ -91,7 +99,8 @@ export class ModalforminvComponent {
           res24: ['NO'],      
           estatusResguardo: ['ACTIVO'],      
           ultimoResguardo: [''],      
-          etiqueta: ['NO']
+          etiqueta: ['NO'],
+          idTrabajador: [null]
     });
   }
   
@@ -104,15 +113,48 @@ export class ModalforminvComponent {
         this.addProductForm.patchValue({ frecDepre: 'NO APLICA' });
       }
     });
+
+    // Cargar la lista de trabajadores para el autocomplete
+    this.trabajadoresService.getTrabajadores().subscribe(data => {
+      this.trabajadores = data;
+      this.filteredTrabajadores = this.resguardanteControl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filterTrabajadores(value))
+      );
+    });
   }
 
+  private _filterTrabajadores(value: string): any[] {
+    const filterValue = value.toLowerCase();
+    return this.trabajadores.filter(trabajador =>
+      trabajador.nombre.toLowerCase().includes(filterValue) ||
+      trabajador.numero.toString().includes(filterValue)
+    );
+  }
+
+  // Cuando se selecciona un trabajador del autocomplete
+  seleccionarTrabajador(trabajador: any): void {
+    this.addProductForm.patchValue({
+      nomRes: trabajador.nombre,
+      numRes: trabajador.numero,
+      areaRes: trabajador.area,
+      ubiRes: trabajador.ubicacion,
+      perfilRes: trabajador.perfilAcad,
+      puestoRes: trabajador.puesto,
+      estatusRes: trabajador.estatus,
+      correoPerRes: trabajador.correoPersonal,
+      correoInstRes: trabajador.correoInstit,
+      rfcTrabaj: trabajador.rfcTrabaj,
+      idTrabajador: trabajador.idTrabajador
+    });
+    this.resguardanteControl.setValue(trabajador.nombre);
+  }
   
   onSubmit() {
     if (this.addProductForm.valid) {
       this.bienesService.addBien(this.addProductForm.value).subscribe(
         response => {
           console.log('Bien agregado exitosamente', response);
-          // Cerramos el modal y retornamos un valor true
           this.dialogRef.close(true);
         },
         error => {

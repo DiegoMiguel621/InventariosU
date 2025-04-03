@@ -93,15 +93,20 @@ export class InventarioComponent implements OnInit {
 
 
   // Abrir el modal para editar un bien
-  editarBien(bien: any): void {
-    this._matDialog.open(ModalEditarComponent, {
-      data: { bien }
-    }).afterClosed().subscribe((result) => {
-      if (result === true) {
-        this.cargarBienes();  // Método que llama al servicio y actualiza la tabla
-      }
+  editarBien(bienEnTabla: any) {
+    this.bienesService.getBien(bienEnTabla.idBien).subscribe((bien) => {
+      console.log("Bien del servidor:", bien); // <-- comprueba si bien.nomRes existe
+      this._matDialog.open(ModalEditarComponent, {
+        data: { bien }
+      }).afterClosed().subscribe((result) => {
+        if (result === true) {
+          this.cargarBienes();
+        }
+      });
     });
-  }  
+  }
+  
+  
 
   // Abrir el modal para ver los detalles de un bien
   VerBien(bien: any): void {

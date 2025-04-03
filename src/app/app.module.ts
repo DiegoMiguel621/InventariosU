@@ -38,6 +38,11 @@ import { ModalErrorComponent } from './components/modal-error/modal-error.compon
 import { ModalRestaurarTrabajadorComponent } from './modals/modal-restaurar-trabajador/modal-restaurar-trabajador.component';
 import { ModalRestaurarTrabajador2Component } from './modal/modal-restaurar-trabajador2/modal-restaurar-trabajador2.component';
 import { ModalRestaurarTrabajador3Component } from './components/modal-restaurar-trabajador3/modal-restaurar-trabajador3.component';
+import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
+
 
 
 
@@ -80,9 +85,12 @@ import { ModalRestaurarTrabajador3Component } from './components/modal-restaurar
     MatDialogModule,
     MatButtonModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    FormsModule
-
+    HttpClientModule,    
+    FormsModule, 
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
   ],
   providers: [
     provideClientHydration(),
