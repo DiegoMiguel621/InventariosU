@@ -19,7 +19,53 @@
               Sujeto a control
             </label>
           </div>
+
+          
         </section>
+        
+<!-- Sección: Alta -->
+<section class="filtro-section">
+  <h3>Alta de Bienes Muebles e intangibles</h3>
+  <div class="checkbox-group">
+    <label><input type="checkbox" />Mensual</label>
+    <label><input type="checkbox" />Trimestral</label>
+    <label><input type="checkbox" />Semestral</label>
+    <label><input type="checkbox" />Anual</label>
+  </div>
+  <select id="selectPeriodo">
+    <option>Seleccione el periodo</option>
+    <!-- más opciones -->
+  </select>
+</section>
+
+<!-- Sección: Donación -->
+<section class="filtro-section">
+  <h3>Donación de Bienes Muebles e intangibles</h3>
+  <div class="checkbox-group">
+    <label><input type="checkbox" />Mensual</label>
+    <label><input type="checkbox" />Trimestral</label>
+    <label><input type="checkbox" />Semestral</label>
+    <label><input type="checkbox" />Anual</label>
+  </div>
+  <select id="selectPeriodo2">
+    <option>Seleccione el periodo</option>
+  </select>
+</section>
+
+<!-- Sección: Baja -->
+<section class="filtro-section">
+  <h3>Baja de Bienes Muebles e intangibles</h3>
+  <div class="checkbox-group">
+    <label><input type="checkbox" />Mensual</label>
+    <label><input type="checkbox" />Trimestral</label>
+    <label><input type="checkbox" />Semestral</label>
+    <label><input type="checkbox" />Anual</label>
+  </div>
+  <select id="selectPeriodo3">
+    <option>Seleccione el periodo</option>
+  </select>
+</section>
+</div>
       </div>
       <footer class="filtros-footer">
         <button class="limpiar-btn" type="button" (click)="limpiarFiltros()">Limpiar Filtros</button>
@@ -27,5 +73,5 @@
       </footer>
     </div>
   </div>
-</div>
+
 
