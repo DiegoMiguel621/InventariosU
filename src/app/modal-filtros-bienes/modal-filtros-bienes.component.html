@@ -23,48 +23,28 @@
           
         </section>
         
-<!-- Sección: Alta -->
-<section class="filtro-section">
+<!-- Sección: Alta de Bienes Muebles e intangibles -->
+<section class="filtro-section alta">
   <h3>Alta de Bienes Muebles e intangibles</h3>
   <div class="checkbox-group">
-    <label><input type="checkbox" />Mensual</label>
-    <label><input type="checkbox" />Trimestral</label>
-    <label><input type="checkbox" />Semestral</label>
-    <label><input type="checkbox" />Anual</label>
+    <label><input type="checkbox" [(ngModel)]="mensual" name="mensual" (change)="onAltaChange('mensual')"/> Mensual</label>
+    <label><input type="checkbox" [(ngModel)]="trimestral" name="trimestral" (change)="onAltaChange('trimestral')"/> Trimestral</label>
+    <label><input type="checkbox" [(ngModel)]="semestral" name="semestral" (change)="onAltaChange('semestral')"/> Semestral</label>
+    <label><input type="checkbox" [(ngModel)]="anual" name="anual" (change)="onAltaChange('anual')"/> Anual</label>
   </div>
-  <select id="selectPeriodo">
-    <option>Seleccione el periodo</option>
-    <!-- más opciones -->
-  </select>
+
+  <div class="select-group">
+    <select [(ngModel)]="filtroAnio" name="filtroAnio">
+      <option value="">Año de inicio</option>
+      <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+    </select>
+    <select [(ngModel)]="filtroMes" name="filtroMes">
+      <option value="">Mes de inicio</option>
+      <option *ngFor="let m of months" [value]="m.value">{{ m.label }}</option>
+    </select>
+  </div>
 </section>
 
-<!-- Sección: Donación -->
-<section class="filtro-section">
-  <h3>Donación de Bienes Muebles e intangibles</h3>
-  <div class="checkbox-group">
-    <label><input type="checkbox" />Mensual</label>
-    <label><input type="checkbox" />Trimestral</label>
-    <label><input type="checkbox" />Semestral</label>
-    <label><input type="checkbox" />Anual</label>
-  </div>
-  <select id="selectPeriodo2">
-    <option>Seleccione el periodo</option>
-  </select>
-</section>
-
-<!-- Sección: Baja -->
-<section class="filtro-section">
-  <h3>Baja de Bienes Muebles e intangibles</h3>
-  <div class="checkbox-group">
-    <label><input type="checkbox" />Mensual</label>
-    <label><input type="checkbox" />Trimestral</label>
-    <label><input type="checkbox" />Semestral</label>
-    <label><input type="checkbox" />Anual</label>
-  </div>
-  <select id="selectPeriodo3">
-    <option>Seleccione el periodo</option>
-  </select>
-</section>
 </div>
       </div>
       <footer class="filtros-footer">

@@ -7,6 +7,7 @@ import { ModalEliminarComponent } from '../modal-eliminar/modal-eliminar.compone
 import { ModalFiltrosBienesComponent } from '../../modal-filtros-bienes/modal-filtros-bienes.component';
 import { BienesService } from '../../service/bienes.service';
 
+
 @Component({
   selector: 'app-inventario',
   templateUrl: './inventario.component.html',
@@ -112,97 +113,127 @@ private filtroEstado = {
   patrimonio: false,
   sujetoControl: false
 };
+// filtros de “Alta”
+  private filtroAlta = {
+    mensual:      false,
+    trimestral:   false,
+    semestral:    false,
+    anual:        false,
+    filtroAnio:   '' as number | '',
+    filtroMes:    '' as number | ''
+  };
 
 // Función unificada para aplicar todos los filtros (checkboxes y texto)
 aplicarTodosLosFiltros(): void {
-  // Comienza con la lista completa de bienes
   let resultados = [...this.bienes];
 
-  // 1) Aplica el filtro de checkboxes (si alguno está marcado)
-  if (this.filtroEstado.patrimonio || this.filtroEstado.sujetoControl) {
-    resultados = resultados.filter(bien => {
-      // Normaliza el valor de tipoResguardo: quita espacios y pasa a mayúsculas
-      const tipo = (bien.tipoResguardo || '').trim().toUpperCase();
-      if (this.filtroEstado.patrimonio && this.filtroEstado.sujetoControl) {
+  // 1) filtro de resguardo
+  const { patrimonio, sujetoControl } = this.filtroEstado;
+  if (patrimonio || sujetoControl) {
+    resultados = resultados.filter(b => {
+      const tipo = (b.tipoResguardo || '').trim().toUpperCase();
+      if (patrimonio && sujetoControl) {
         return tipo === 'PATRIMONIO' || tipo === 'SUJETO A CONTROL';
-      } else if (this.filtroEstado.patrimonio) {
-        return tipo === 'PATRIMONIO';
-      } else if (this.filtroEstado.sujetoControl) {
-        return tipo === 'SUJETO A CONTROL';
       }
+      if (patrimonio) return tipo === 'PATRIMONIO';
+      if (sujetoControl) return tipo === 'SUJETO A CONTROL';
       return true;
     });
   }
 
-  // 2) Aplica el filtro textual (si se ha escrito algo en searchTerm)
+  // 2) filtro de texto
   const texto = this.searchTerm.toLowerCase().trim();
   if (texto) {
-    resultados = resultados.filter(bien => {
-      const nombreBien = (bien.nombreBien || '').toLowerCase();
-      const numInvAnt = (bien.numInvAnt || '').toLowerCase();
-      const numInvArm = (bien.numInvArm || '').toLowerCase();
-      return (
-        nombreBien.includes(texto) ||
-        numInvAnt.includes(texto) ||
-        numInvArm.includes(texto)
-      );
+    resultados = resultados.filter(b =>
+      [b.nombreBien, b.numInvAnt, b.numInvArm]
+        .some(c => (c||'').toString().toLowerCase().includes(texto))
+    );
+  }
+
+  // 3) filtro de “Alta”
+  const fa = this.filtroAlta;
+  const meses = fa.mensual    ? 1
+               : fa.trimestral ? 3
+               : fa.semestral  ? 6
+               : fa.anual      ? 12
+               : 0;
+
+  if (meses > 0 && fa.filtroAnio && fa.filtroMes) {
+    const desde = new Date(+fa.filtroAnio, (+fa.filtroMes)-1, 1);
+    // suma meses
+    const hasta = new Date(desde.getFullYear(), desde.getMonth() + meses, 1);
+    resultados = resultados.filter(b => {
+      if (!b.tipoAlta) return false;
+      const altaValida = ['COMPRA','COMODATO','MENORES A 70 UMA','OTRO']
+        .includes(b.tipoAlta.toUpperCase());
+      const fA = new Date(b.fechaAlta);
+      return altaValida && fA >= desde && fA < hasta;
     });
   }
 
-  // Asigna el resultado final a la lista filtrada y reinicia la paginación
   this.bienesFiltrados = resultados;
   this.currentPage = 0;
 }
 
 // Llama a esta función en el (input) del searchTerm
 filtrarBienes(): void {
-  // Actualiza la búsqueda y vuelve a aplicar todos los filtros
   this.aplicarTodosLosFiltros();
 }
+
 
 // En la función que cierra el modal de filtros:
 filtrosBien(): void {
   if (!this.filtrosDialogRef) {
-    const buttonElement = document.getElementById('btnFiltros');
-    if (!buttonElement) return;
+    // localiza el botón para calcular posición
+    const btn = document.getElementById('btnFiltros');
+    if (!btn) return;
+    const { top, left, height } = btn.getBoundingClientRect();
 
-    const rect = buttonElement.getBoundingClientRect();
-    const top = rect.top + rect.height;
-    const left = rect.left;
-
-    // Abre el modal, enviándole el estado actual
+    // abre el modal enviándole TODO el estado actual
     this.filtrosDialogRef = this._matDialog.open(ModalFiltrosBienesComponent, {
       hasBackdrop: false,
-      position: { top: `${top}px`, left: `${left}px` },
-      data: { ...this.filtroEstado }
+      position: { top: `${top + height}px`, left: `${left}px` },
+      data: {
+        ...this.filtroEstado,
+        ...this.filtroAlta
+      }
     });
 
-    this.filtrosDialogRef.afterClosed().subscribe((result) => {
+    this.filtrosDialogRef.afterClosed().subscribe(result => {
       this.filtrosDialogRef = null;
-      if (!result) {
-        // Se cerró sin aplicar filtro
-        return;
-      }
+      if (!result) return;
+
       if (result.mostrarTodos) {
-        // Si no se marcó nada, resetea el estado y muestra todos los bienes
+        // si no marcó nada, resetea TODO
         this.filtroEstado = { patrimonio: false, sujetoControl: false };
+        this.filtroAlta   = {
+          mensual: false, trimestral: false,
+          semestral: false, anual: false,
+          filtroAnio: '', filtroMes: ''
+        };
       } else {
-        // Actualiza el estado de los filtros con lo seleccionado
-        this.filtroEstado = { 
-          patrimonio: result.patrimonio, 
-          sujetoControl: result.sujetoControl 
+        // actualiza estados con lo que venga del modal
+        this.filtroEstado = {
+          patrimonio:   result.patrimonio,
+          sujetoControl: result.sujetoControl
+        };
+        this.filtroAlta = {
+          mensual:      result.mensual,
+          trimestral:   result.trimestral,
+          semestral:    result.semestral,
+          anual:        result.anual,
+          filtroAnio:   result.filtroAnio,
+          filtroMes:    result.filtroMes
         };
       }
-      // Aplica todos los filtros
+
+      // reaplica TODO el pipeline de filtros
       this.aplicarTodosLosFiltros();
     });
+
   } else {
     this.filtrosDialogRef.close();
   }
 }
-  
-  
-  
-  
+     
 }
-
