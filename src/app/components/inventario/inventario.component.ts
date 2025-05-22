@@ -136,7 +136,7 @@ private filtroDonacion = {
 aplicarTodosLosFiltros(): void {
   let resultados = [...this.bienes];
 
-  // 1) filtro de resguardo
+  // (1) Filtro de resguardo
   const { patrimonio, sujetoControl } = this.filtroEstado;
   if (patrimonio || sujetoControl) {
     resultados = resultados.filter(b => {
@@ -144,13 +144,13 @@ aplicarTodosLosFiltros(): void {
       if (patrimonio && sujetoControl) {
         return tipo === 'PATRIMONIO' || tipo === 'SUJETO A CONTROL';
       }
-      if (patrimonio) return tipo === 'PATRIMONIO';
+      if (patrimonio)    return tipo === 'PATRIMONIO';
       if (sujetoControl) return tipo === 'SUJETO A CONTROL';
       return true;
     });
   }
 
-  // 2) filtro de texto
+  // (2) Filtro de texto
   const texto = this.searchTerm.toLowerCase().trim();
   if (texto) {
     resultados = resultados.filter(b =>
@@ -159,48 +159,88 @@ aplicarTodosLosFiltros(): void {
     );
   }
 
-  // 3) filtro de “Alta”
-  const fa = this.filtroAlta;
-  const meses = fa.mensual    ? 1
-               : fa.trimestral ? 3
-               : fa.semestral  ? 6
-               : fa.anual      ? 12
-               : 0;
-
-  if (meses > 0 && fa.filtroAnio && fa.filtroMes) {
-    const desde = new Date(+fa.filtroAnio, (+fa.filtroMes)-1, 1);
-    // suma meses
+  // helper para periodos
+  const filtrarPeriodo = (
+    arr: any[],
+    meses: number,
+    anio: number | '',
+    mes: number | '',
+    tipos: string[]
+  ) => {
+    if (!meses || !anio || !mes) return [];
+    const desde = new Date(+anio, (+mes) - 1, 1);
     const hasta = new Date(desde.getFullYear(), desde.getMonth() + meses, 1);
-    resultados = resultados.filter(b => {
-      if (!b.tipoAlta) return false;
-      const altaValida = ['COMPRA','COMODATO','MENORES A 70 UMA','OTRO']
-        .includes(b.tipoAlta.toUpperCase());
-      const fA = new Date(b.fechaAlta);
-      return altaValida && fA >= desde && fA < hasta;
+    return arr.filter(b => {
+      const tAlta = (b.tipoAlta || '').toUpperCase();
+      const fAlta = new Date(b.fechaAlta);
+      return tipos.includes(tAlta) && fAlta >= desde && fAlta < hasta;
+    });
+  };
+
+  // (3a) “Alta”
+  const {
+    mensual: altaMens,
+    trimestral: altaTrim,
+    semestral: altaSem,
+    anual: altaAnu,
+    filtroAnio: altaAnio,
+    filtroMes: altaMes
+  } = this.filtroAlta;
+
+  const altaMeses = altaMens   ? 1
+                   : altaTrim  ? 3
+                   : altaSem   ? 6
+                   : altaAnu   ? 12
+                   : 0;
+
+  const subsetAlta = filtrarPeriodo(
+    resultados,
+    altaMeses,
+    altaAnio,
+    altaMes,
+    ['COMPRA','COMODATO','MENORES A 70 UMA','OTRO']
+  );
+
+  // (3b) “Donación”
+  const {
+    mensual: donMens,
+    trimestral: donTrim,
+    semestral: donSem,
+    anual: donAnu,
+    filtroAnio: donAnio,
+    filtroMes: donMes
+  } = this.filtroDonacion;
+
+  const donaMeses = donMens    ? 1
+                  : donTrim     ? 3
+                  : donSem      ? 6
+                  : donAnu      ? 12
+                  : 0;
+
+  const subsetDona = filtrarPeriodo(
+    resultados,
+    donaMeses,
+    donAnio,
+    donMes,
+    ['DONACIÓN']
+  );
+
+  // (4) Si alguno de los dos periodos está activo, unimos los resultados
+  if (altaMeses > 0 || donaMeses > 0) {
+    const combinado = [...subsetAlta, ...subsetDona];
+    const seen = new Set<number>();
+    resultados = combinado.filter(b => {
+      if (seen.has(b.idBien)) return false;
+      seen.add(b.idBien);
+      return true;
     });
   }
 
-  // ——— filtro DONACIÓN ———
-const fd   = this.filtroDonacion;
-const mesesDon = fd.mensual    ? 1
-               : fd.trimestral ? 3
-               : fd.semestral  ? 6
-               : fd.anual      ? 12
-               : 0;
-if (mesesDon > 0 && fd.filtroAnio && fd.filtroMes) {
-  const desdeDon = new Date(+fd.filtroAnio, +fd.filtroMes - 1, 1);
-  const hastaDon = new Date(desdeDon.getFullYear(), desdeDon.getMonth() + mesesDon, 1);
-  resultados = resultados.filter(b => {
-    const esDonacion = (b.tipoAlta || '').toUpperCase() === 'DONACIÓN';
-    const fecha     = new Date(b.fechaAlta);
-    return esDonacion && fecha >= desdeDon && fecha < hastaDon;
-  });
-}
-
-
+  // asigna y resetea paginación
   this.bienesFiltrados = resultados;
   this.currentPage = 0;
 }
+
 
 // Llama a esta función en el (input) del searchTerm
 filtrarBienes(): void {
@@ -233,36 +273,39 @@ filtrosBien(): void {
   }
 });
 
-    this.filtrosDialogRef.afterClosed().subscribe(result => {
-  this.filtrosDialogRef = null;
-  if (!result) return;
-  if (result.mostrarTodos) {
-    // resetea todo
-    this.filtroEstado     = { patrimonio: false, sujetoControl: false };
-    this.filtroAlta       = { mensual:false, trimestral:false, semestral:false, anual:false, filtroAnio:'', filtroMes:'' };
-    this.filtroDonacion   = { mensual:false, trimestral:false, semestral:false, anual:false, filtroAnio:'', filtroMes:'' };
-  } else {
-    this.filtroEstado   = { patrimonio: result.patrimonio, sujetoControl: result.sujetoControl };
-    this.filtroAlta     = {
-      mensual: result.mensual,
-      trimestral: result.trimestral,
-      semestral: result.semestral,
-      anual: result.anual,
-      filtroAnio: result.filtroAnio,
-      filtroMes: result.filtroMes
-    };
-    this.filtroDonacion = {
-      mensual: result.donMensual,
-      trimestral: result.donTrimestral,
-      semestral: result.donSemestral,
-      anual: result.donAnual,
-      filtroAnio: result.donFiltroAnio,
-      filtroMes: result.donFiltroMes
-    };
-  }
-  this.aplicarTodosLosFiltros();
-});
+this.filtrosDialogRef.afterClosed().subscribe(result => {
+      this.filtrosDialogRef = null;
+      if (!result) return;
 
+      if (result.mostrarTodos) {
+        // resetea TODO
+        this.filtroEstado   = { patrimonio:false, sujetoControl:false };
+        this.filtroAlta     = { mensual:false, trimestral:false, semestral:false, anual:false, filtroAnio:'', filtroMes:'' };
+        this.filtroDonacion = { mensual:false, trimestral:false, semestral:false, anual:false, filtroAnio:'', filtroMes:'' };
+      } else {
+        // actualiza con lo que llega del modal
+        this.filtroEstado   = { patrimonio: result.patrimonio, sujetoControl: result.sujetoControl };
+        this.filtroAlta     = {
+          mensual:    result.mensual,
+          trimestral: result.trimestral,
+          semestral:  result.semestral,
+          anual:      result.anual,
+          filtroAnio: result.filtroAnio,
+          filtroMes:  result.filtroMes
+        };
+        this.filtroDonacion = {
+          mensual:    result.donMensual,
+          trimestral: result.donTrimestral,
+          semestral:  result.donSemestral,
+          anual:      result.donAnual,
+          filtroAnio: result.donFiltroAnio,
+          filtroMes:  result.donFiltroMes
+        };
+      }
+
+      // reaplica TODO
+      this.aplicarTodosLosFiltros();
+    });
   } else {
     this.filtrosDialogRef.close();
   }
