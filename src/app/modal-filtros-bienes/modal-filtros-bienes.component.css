@@ -65,28 +65,6 @@
   color: #333;
   margin-bottom: 8px;
 }
-.filtro-section.alta {
-  border-top: 1px solid #ddd;
-  padding-top: 16px;
-  margin-top: 16px;
-}
-
-.filtro-section.alta .select-group {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  margin-top: 8px;
-  margin-bottom: 16px;
-}
-
-.filtro-section.alta .select-group select {
-  width: 48%;
-  padding: 6px;
-  border: 1px solid #CCC;
-  border-radius: 4px;
-  font-size: 14px;
-  color: #333;
-}
 
 /* Footer fijo de 40px */
 .filtros-footer {
@@ -129,3 +107,36 @@
   margin-right: 10%;
 }
 
+.filtro-section.alta .select-group,
+.filtro-section.donacion .select-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;            
+  margin: 8px 0 16px 0;    
+}
+
+.filtro-section.alta .select-group select,
+.filtro-section.donacion .select-group select {
+  width: 48%;             
+}
+
+.filtro-section.alta .checkbox-group,
+.filtro-section.donacion .checkbox-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.filtro-section.alta,
+.filtro-section.donacion {
+  margin-bottom: 20px;
+}
+
+.filtro-section.alta h3,
+.filtro-section.donacion h3 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+}

@@ -122,6 +122,15 @@ private filtroEstado = {
     filtroAnio:   '' as number | '',
     filtroMes:    '' as number | ''
   };
+// filtro de "Donación"
+private filtroDonacion = {
+  mensual:    false,
+  trimestral: false,
+  semestral:  false,
+  anual:      false,
+  filtroAnio: '' as number | '',
+  filtroMes:  '' as number | ''
+};
 
 // Función unificada para aplicar todos los filtros (checkboxes y texto)
 aplicarTodosLosFiltros(): void {
@@ -171,6 +180,24 @@ aplicarTodosLosFiltros(): void {
     });
   }
 
+  // ——— filtro DONACIÓN ———
+const fd   = this.filtroDonacion;
+const mesesDon = fd.mensual    ? 1
+               : fd.trimestral ? 3
+               : fd.semestral  ? 6
+               : fd.anual      ? 12
+               : 0;
+if (mesesDon > 0 && fd.filtroAnio && fd.filtroMes) {
+  const desdeDon = new Date(+fd.filtroAnio, +fd.filtroMes - 1, 1);
+  const hastaDon = new Date(desdeDon.getFullYear(), desdeDon.getMonth() + mesesDon, 1);
+  resultados = resultados.filter(b => {
+    const esDonacion = (b.tipoAlta || '').toUpperCase() === 'DONACIÓN';
+    const fecha     = new Date(b.fechaAlta);
+    return esDonacion && fecha >= desdeDon && fecha < hastaDon;
+  });
+}
+
+
   this.bienesFiltrados = resultados;
   this.currentPage = 0;
 }
@@ -191,45 +218,50 @@ filtrosBien(): void {
 
     // abre el modal enviándole TODO el estado actual
     this.filtrosDialogRef = this._matDialog.open(ModalFiltrosBienesComponent, {
-      hasBackdrop: false,
-      position: { top: `${top + height}px`, left: `${left}px` },
-      data: {
-        ...this.filtroEstado,
-        ...this.filtroAlta
-      }
-    });
+  hasBackdrop: false,
+  position: { top: `${top+height}px`, left: `${left}px` },
+  data: {
+    ...this.filtroEstado,
+    ...this.filtroAlta,
+    // pasamos el estado actual de donación
+    donMensual:    this.filtroDonacion.mensual,
+    donTrimestral: this.filtroDonacion.trimestral,
+    donSemestral:  this.filtroDonacion.semestral,
+    donAnual:      this.filtroDonacion.anual,
+    donFiltroAnio: this.filtroDonacion.filtroAnio,
+    donFiltroMes:  this.filtroDonacion.filtroMes
+  }
+});
 
     this.filtrosDialogRef.afterClosed().subscribe(result => {
-      this.filtrosDialogRef = null;
-      if (!result) return;
-
-      if (result.mostrarTodos) {
-        // si no marcó nada, resetea TODO
-        this.filtroEstado = { patrimonio: false, sujetoControl: false };
-        this.filtroAlta   = {
-          mensual: false, trimestral: false,
-          semestral: false, anual: false,
-          filtroAnio: '', filtroMes: ''
-        };
-      } else {
-        // actualiza estados con lo que venga del modal
-        this.filtroEstado = {
-          patrimonio:   result.patrimonio,
-          sujetoControl: result.sujetoControl
-        };
-        this.filtroAlta = {
-          mensual:      result.mensual,
-          trimestral:   result.trimestral,
-          semestral:    result.semestral,
-          anual:        result.anual,
-          filtroAnio:   result.filtroAnio,
-          filtroMes:    result.filtroMes
-        };
-      }
-
-      // reaplica TODO el pipeline de filtros
-      this.aplicarTodosLosFiltros();
-    });
+  this.filtrosDialogRef = null;
+  if (!result) return;
+  if (result.mostrarTodos) {
+    // resetea todo
+    this.filtroEstado     = { patrimonio: false, sujetoControl: false };
+    this.filtroAlta       = { mensual:false, trimestral:false, semestral:false, anual:false, filtroAnio:'', filtroMes:'' };
+    this.filtroDonacion   = { mensual:false, trimestral:false, semestral:false, anual:false, filtroAnio:'', filtroMes:'' };
+  } else {
+    this.filtroEstado   = { patrimonio: result.patrimonio, sujetoControl: result.sujetoControl };
+    this.filtroAlta     = {
+      mensual: result.mensual,
+      trimestral: result.trimestral,
+      semestral: result.semestral,
+      anual: result.anual,
+      filtroAnio: result.filtroAnio,
+      filtroMes: result.filtroMes
+    };
+    this.filtroDonacion = {
+      mensual: result.donMensual,
+      trimestral: result.donTrimestral,
+      semestral: result.donSemestral,
+      anual: result.donAnual,
+      filtroAnio: result.donFiltroAnio,
+      filtroMes: result.donFiltroMes
+    };
+  }
+  this.aplicarTodosLosFiltros();
+});
 
   } else {
     this.filtrosDialogRef.close();

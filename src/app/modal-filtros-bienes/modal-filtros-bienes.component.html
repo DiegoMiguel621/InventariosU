@@ -45,6 +45,29 @@
   </div>
 </section>
 
+<!-- Sección: Donación de Bienes Muebles e intangibles -->
+<section class="filtro-section donacion">
+  <h3>Donación de Bienes Muebles e intangibles</h3>
+  <div class="checkbox-group">
+    <label><input type="checkbox" [(ngModel)]="donMensual" name="donMensual" (change)="onDonacionChange('mensual')"/> Mensual</label>
+    <label><input type="checkbox" [(ngModel)]="donTrimestral" name="donTrimestral" (change)="onDonacionChange('trimestral')"/> Trimestral</label>
+    <label><input type="checkbox" [(ngModel)]="donSemestral" name="donSemestral" (change)="onDonacionChange('semestral')"/> Semestra</label>
+    <label><input type="checkbox" [(ngModel)]="donAnual" name="donAnual" (change)="onDonacionChange('anual')"/> Anual</label>
+  </div>
+  <div class="select-group">
+    <select [(ngModel)]="donFiltroAnio" name="donFiltroAnio">
+      <option value="">Año de inicio</option>
+      <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+    </select>
+    <select [(ngModel)]="donFiltroMes" name="donFiltroMes">
+      <option value="">Mes de inicio</option>
+      <option *ngFor="let m of months" [value]="m.value">
+        {{ m.label }}
+      </option>
+    </select>
+  </div>
+</section>
+
 </div>
       </div>
       <footer class="filtros-footer">

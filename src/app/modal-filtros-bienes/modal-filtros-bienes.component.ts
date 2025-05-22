@@ -1,10 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-interface Month {
-  value: number;
-  label: string;
-}
+interface Month { value: number; label: string; }
 
 @Component({
   selector: 'app-modal-filtros-bienes',
@@ -12,30 +9,37 @@ interface Month {
   styleUrls: ['./modal-filtros-bienes.component.css']
 })
 export class ModalFiltrosBienesComponent implements OnInit {
-  // filtro "Bienes Muebles e intangibles"
+  // —————— Filtro “Resguardante” ——————
   patrimonio = false;
   sujetoControl = false;
 
-  // filtro "Alta de Bienes"
+  // —————— Filtro “Alta” ——————
   mensual = false;
   trimestral = false;
   semestral = false;
   anual = false;
-
   filtroAnio: number | '' = '';
-  filtroMes: number | '' = '';
+  filtroMes:  number | '' = '';
+
+  // —————— Nuevo filtro “Donación” ——————
+  donMensual    = false;
+  donTrimestral = false;
+  donSemestral  = false;
+  donAnual      = false;
+  donFiltroAnio: number | '' = '';
+  donFiltroMes:  number | '' = '';
 
   years: number[] = [];
   months: Month[] = [
-    { value: 1, label: 'Enero' },
-    { value: 2, label: 'Febrero' },
-    { value: 3, label: 'Marzo' },
-    { value: 4, label: 'Abril' },
-    { value: 5, label: 'Mayo' },
-    { value: 6, label: 'Junio' },
-    { value: 7, label: 'Julio' },
-    { value: 8, label: 'Agosto' },
-    { value: 9, label: 'Septiembre' },
+    { value: 1,  label: 'Enero' },
+    { value: 2,  label: 'Febrero' },
+    { value: 3,  label: 'Marzo' },
+    { value: 4,  label: 'Abril' },
+    { value: 5,  label: 'Mayo' },
+    { value: 6,  label: 'Junio' },
+    { value: 7,  label: 'Julio' },
+    { value: 8,  label: 'Agosto' },
+    { value: 9,  label: 'Septiembre' },
     { value: 10, label: 'Octubre' },
     { value: 11, label: 'Noviembre' },
     { value: 12, label: 'Diciembre' }
@@ -47,57 +51,79 @@ export class ModalFiltrosBienesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Generar array de años desde 2016 hasta el actual
-    const startYear = 2016;
-    const currentYear = new Date().getFullYear();
-    for (let y = startYear; y <= currentYear; y++) {
+    // Generar array de años 2016–2025
+    for (let y = 2016; y <= new Date().getFullYear(); y++) {
       this.years.push(y);
     }
-
-    // Si el padre nos envió estado previo, lo cargamos
+    // Si el padre nos envió un estado previo, lo cargamos:
     if (this.data) {
-      this.patrimonio     = !!this.data.patrimonio;
-      this.sujetoControl  = !!this.data.sujetoControl;
-      // si deseas también precargar estos nuevos filtros:
-      this.mensual    = !!this.data.mensual;
-      this.trimestral = !!this.data.trimestral;
-      this.semestral  = !!this.data.semestral;
-      this.anual      = !!this.data.anual;
-      this.filtroAnio = this.data.filtroAnio ?? '';
-      this.filtroMes  = this.data.filtroMes  ?? '';
+      Object.assign(this, {
+        patrimonio:     !!this.data.patrimonio,
+        sujetoControl:  !!this.data.sujetoControl,
+        mensual:        !!this.data.mensual,
+        trimestral:     !!this.data.trimestral,
+        semestral:      !!this.data.semestral,
+        anual:          !!this.data.anual,
+        filtroAnio:     this.data.filtroAnio ?? '',
+        filtroMes:      this.data.filtroMes  ?? '',
+        donMensual:     !!this.data.donMensual,
+        donTrimestral:  !!this.data.donTrimestral,
+        donSemestral:   !!this.data.donSemestral,
+        donAnual:       !!this.data.donAnual,
+        donFiltroAnio:  this.data.donFiltroAnio ?? '',
+        donFiltroMes:   this.data.donFiltroMes  ?? ''
+      });
     }
   }
 
-  onAltaChange(opción: 'mensual'|'trimestral'|'semestral'|'anual') {
-    this.mensual    = opción === 'mensual';
-    this.trimestral = opción === 'trimestral';
-    this.semestral  = opción === 'semestral';
-    this.anual      = opción === 'anual';
+  // Mantener mutuamente exclusivo el grupo “Alta”
+  onAltaChange(op: 'mensual'|'trimestral'|'semestral'|'anual') {
+    this.mensual    = op === 'mensual';
+    this.trimestral = op === 'trimestral';
+    this.semestral  = op === 'semestral';
+    this.anual      = op === 'anual';
+  }
+
+  // Mantener mutuamente exclusivo el grupo “Donación”
+  onDonacionChange(op: 'mensual'|'trimestral'|'semestral'|'anual') {
+    this.donMensual    = op === 'mensual';
+    this.donTrimestral = op === 'trimestral';
+    this.donSemestral  = op === 'semestral';
+    this.donAnual      = op === 'anual';
   }
 
   limpiarFiltros(): void {
-    // Vuelvo todo a false / vacío
     this.patrimonio = this.sujetoControl = false;
     this.mensual = this.trimestral = this.semestral = this.anual = false;
-    this.filtroAnio = '';
-    this.filtroMes  = '';
+    this.donMensual = this.donTrimestral = this.donSemestral = this.donAnual = false;
+    this.filtroAnio = this.filtroMes = '';
+    this.donFiltroAnio = this.donFiltroMes = '';
   }
 
   verResultados(): void {
-    // Preparo objeto con TODO el estado de filtros
     const noPrimario = !this.patrimonio && !this.sujetoControl;
     const noAlta     = !this.mensual && !this.trimestral && !this.semestral && !this.anual;
-    // cerrar devolviendo el estado completo
+    const noDon      = !this.donMensual && !this.donTrimestral && !this.donSemestral && !this.donAnual;
+
     this.dialogRef.close({
-      mostrarTodos: noPrimario && noAlta && this.filtroAnio === '' && this.filtroMes === '',
+      mostrarTodos: noPrimario && noAlta && noDon && this.filtroAnio === '' && this.filtroMes === '' && this.donFiltroAnio === '' && this.donFiltroMes === '',
+      // primarios
       patrimonio: this.patrimonio,
       sujetoControl: this.sujetoControl,
-      mensual:    this.mensual,
+      // alta
+      mensual: this.mensual,
       trimestral: this.trimestral,
-      semestral:  this.semestral,
-      anual:      this.anual,
+      semestral: this.semestral,
+      anual: this.anual,
       filtroAnio: this.filtroAnio,
-      filtroMes:  this.filtroMes
+      filtroMes: this.filtroMes,
+      // donación
+      donMensual: this.donMensual,
+      donTrimestral: this.donTrimestral,
+      donSemestral: this.donSemestral,
+      donAnual: this.donAnual,
+      donFiltroAnio: this.donFiltroAnio,
+      donFiltroMes: this.donFiltroMes
     });
   }
 }
