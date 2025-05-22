@@ -38,9 +38,8 @@ body {
   border-top: 3px solid #441B69;
 }
 .opcBusqueda{
-
   width: 100%;
-  height: 150px;
+  height: fit-content;
   display: inline-flex;
   flex-wrap: wrap;
 
