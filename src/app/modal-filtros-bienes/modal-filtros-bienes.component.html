@@ -45,6 +45,27 @@
   </div>
 </section>
 
+<!-- Sección: Bajas de Bienes Muebles e intangibles -->
+<section class="filtro-section baja">
+  <h3>Bajas de Bienes Muebles e intangibles</h3>
+  <div class="checkbox-group">
+    <label><input type="checkbox" [(ngModel)]="bajaMensual"    name="bajaMensual"    (change)="onBajaChange('mensual')"   /> Mensual</label>
+    <label><input type="checkbox" [(ngModel)]="bajaTrimestral" name="bajaTrimestral" (change)="onBajaChange('trimestral')" /> Trimestral</label>
+    <label><input type="checkbox" [(ngModel)]="bajaSemestral"  name="bajaSemestral"  (change)="onBajaChange('semestral')"  /> Semestral</label>
+    <label><input type="checkbox" [(ngModel)]="bajaAnual"      name="bajaAnual"      (change)="onBajaChange('anual')"      /> Anual</label>
+  </div>
+  <div class="select-group">
+    <select [(ngModel)]="bajaFiltroAnio" name="bajaFiltroAnio">
+      <option value="">Año de inicio</option>
+      <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+    </select>
+    <select [(ngModel)]="bajaFiltroMes" name="bajaFiltroMes">
+      <option value="">Mes de inicio</option>
+      <option *ngFor="let m of months" [value]="m.value">{{ m.label }}</option>
+    </select>
+  </div>
+</section>
+
 <!-- Sección: Donación de Bienes Muebles e intangibles -->
 <section class="filtro-section donacion">
   <h3>Donación de Bienes Muebles e intangibles</h3>

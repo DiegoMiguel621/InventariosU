@@ -36,6 +36,14 @@ export class ModalFiltrosBienesComponent implements OnInit {
   comAnual       = false;
   comFiltroAnio: number | '' = '';
   comFiltroMes:  number | '' = '';
+  
+  // —————— Filtro “Baja” ——————
+  bajaMensual    = false;
+  bajaTrimestral = false;
+  bajaSemestral  = false;
+  bajaAnual      = false;
+  bajaFiltroAnio: number | '' = '';
+  bajaFiltroMes:  number | '' = '';
 
   years: number[] = [];
   months: Month[] = [
@@ -89,7 +97,14 @@ export class ModalFiltrosBienesComponent implements OnInit {
         comSemestral:   !!this.data.comSemestral,
         comAnual:       !!this.data.comAnual,
         comFiltroAnio:  this.data.comFiltroAnio ?? '',
-        comFiltroMes:   this.data.comFiltroMes  ?? ''
+        comFiltroMes:   this.data.comFiltroMes  ?? '',
+        // Filtro "Baja"
+        bajaMensual:    !!this.data.bajaMensual,
+        bajaTrimestral: !!this.data.bajaTrimestral,
+        bajaSemestral:  !!this.data.bajaSemestral,
+        bajaAnual:      !!this.data.bajaAnual,
+        bajaFiltroAnio: this.data.bajaFiltroAnio ?? '',
+        bajaFiltroMes:  this.data.bajaFiltroMes  ?? ''
       });
     }
   }
@@ -117,6 +132,13 @@ export class ModalFiltrosBienesComponent implements OnInit {
   this.comSemestral  = opción === 'semestral';
   this.comAnual      = opción === 'anual';
 }
+// Mantener mutuamente exclusivo el grupo “Baja”
+  onBajaChange(op: 'mensual'|'trimestral'|'semestral'|'anual') {
+    this.bajaMensual    = op === 'mensual';
+    this.bajaTrimestral = op === 'trimestral';
+    this.bajaSemestral  = op === 'semestral';
+    this.bajaAnual      = op === 'anual';
+  }
 
   limpiarFiltros(): void {
     this.patrimonio = this.sujetoControl = false;
@@ -127,6 +149,8 @@ export class ModalFiltrosBienesComponent implements OnInit {
     this.comMensual = this.comTrimestral = this.comSemestral = this.comAnual = false;
     this.comFiltroAnio = '';
     this.comFiltroMes  = '';
+    this.bajaMensual = this.bajaTrimestral = this.bajaSemestral = this.bajaAnual = false;
+    this.bajaFiltroAnio = this.bajaFiltroMes = '';
   }
 
   verResultados(): void {
@@ -134,10 +158,12 @@ export class ModalFiltrosBienesComponent implements OnInit {
     const noAlta     = !this.mensual && !this.trimestral && !this.semestral && !this.anual;
     const noDon      = !this.donMensual && !this.donTrimestral && !this.donSemestral && !this.donAnual;
     const noCom      = !this.comMensual && !this.comTrimestral && !this.comSemestral && !this.comAnual;
+    const noBaja = !this.bajaMensual && !this.bajaTrimestral && !this.bajaSemestral && !this.bajaAnual;
     const mostrarTodos = noPrimario && noAlta && noDon && noCom &&
                      this.filtroAnio==='' && this.filtroMes==='' &&
                      this.donFiltroAnio==='' && this.donFiltroMes==='' &&
-                     this.comFiltroAnio==='' && this.comFiltroMes==='';
+                     this.comFiltroAnio==='' && this.comFiltroMes===''&& 
+                     this.bajaFiltroAnio==='' && this.bajaFiltroMes==='';
 
     this.dialogRef.close({
       mostrarTodos,
@@ -164,7 +190,14 @@ export class ModalFiltrosBienesComponent implements OnInit {
       comSemestral: this.comSemestral,
       comAnual: this.comAnual,
       comFiltroAnio: this.comFiltroAnio,
-      comFiltroMes: this.comFiltroMes
+      comFiltroMes: this.comFiltroMes,
+      // “Baja”
+      bajaMensual: this.bajaMensual,
+      bajaTrimestral: this.bajaTrimestral,
+      bajaSemestral: this.bajaSemestral,
+      bajaAnual: this.bajaAnual,
+      bajaFiltroAnio: this.bajaFiltroAnio,
+      bajaFiltroMes: this.bajaFiltroMes
     });
   }
 }
