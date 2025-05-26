@@ -68,6 +68,27 @@
   </div>
 </section>
 
+<!-- Sección: Comodato de Bienes Muebles e intangibles -->
+<section class="filtro-section comodato">
+  <h3>Comodato de Bienes Muebles e intangibles</h3>
+  <div class="checkbox-group">
+    <label><input type="checkbox" [(ngModel)]="comMensual"    name="comMensual"    (change)="onComodatoChange('mensual')"   /> Mensual</label>
+    <label><input type="checkbox" [(ngModel)]="comTrimestral" name="comTrimestral" (change)="onComodatoChange('trimestral')" /> Trimestral</label>
+    <label><input type="checkbox" [(ngModel)]="comSemestral"  name="comSemestral"  (change)="onComodatoChange('semestral')"  /> Semestral</label>
+    <label><input type="checkbox" [(ngModel)]="comAnual"      name="comAnual"      (change)="onComodatoChange('anual')"      /> Anual</label>
+  </div>
+  <div class="select-group">
+    <select [(ngModel)]="comFiltroAnio" name="comFiltroAnio">
+      <option value="">Año de inicio</option>
+      <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+    </select>
+    <select [(ngModel)]="comFiltroMes" name="comFiltroMes">
+      <option value="">Mes de inicio</option>
+      <option *ngFor="let m of months" [value]="m.value">{{ m.label }}</option>
+    </select>
+  </div>
+</section>
+
 </div>
       </div>
       <footer class="filtros-footer">

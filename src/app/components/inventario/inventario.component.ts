@@ -114,14 +114,14 @@ private filtroEstado = {
   sujetoControl: false
 };
 // filtros de “Alta”
-  private filtroAlta = {
-    mensual:      false,
-    trimestral:   false,
-    semestral:    false,
-    anual:        false,
-    filtroAnio:   '' as number | '',
-    filtroMes:    '' as number | ''
-  };
+private filtroAlta = {
+  mensual:      false,
+  trimestral:   false,
+  semestral:    false,
+  anual:        false,
+  filtroAnio:   '' as number | '',
+  filtroMes:    '' as number | ''
+};
 // filtro de "Donación"
 private filtroDonacion = {
   mensual:    false,
@@ -130,6 +130,15 @@ private filtroDonacion = {
   anual:      false,
   filtroAnio: '' as number | '',
   filtroMes:  '' as number | ''
+};
+//filtro de "Comodato"
+private filtroComodato = {
+  mensual:    false,
+  trimestral: false,
+  semestral:  false,
+  anual:      false,
+  filtroAnio: '' as number|'',
+  filtroMes:  '' as number|''
 };
 
 // Función unificada para aplicar todos los filtros (checkboxes y texto)
@@ -198,7 +207,7 @@ aplicarTodosLosFiltros(): void {
     altaMeses,
     altaAnio,
     altaMes,
-    ['COMPRA','COMODATO','MENORES A 70 UMA','OTRO']
+    ['COMPRA','MENORES A 70 UMA','OTRO']
   );
 
   // (3b) “Donación”
@@ -225,9 +234,25 @@ aplicarTodosLosFiltros(): void {
     ['DONACIÓN']
   );
 
-  // (4) Si alguno de los dos periodos está activo, unimos los resultados
-  if (altaMeses > 0 || donaMeses > 0) {
-    const combinado = [...subsetAlta, ...subsetDona];
+  // (3c) “Comodato”
+const comodMeses = this.filtroComodato.mensual    ? 1
+                 : this.filtroComodato.trimestral ? 3
+                 : this.filtroComodato.semestral  ? 6
+                 : this.filtroComodato.anual      ? 12
+                 : 0;
+
+const subsetComodato = filtrarPeriodo(
+  resultados,
+  comodMeses,
+  this.filtroComodato.filtroAnio,
+  this.filtroComodato.filtroMes,
+  ['COMODATO']
+)
+.filter(b => (b.estatusBien||'').toUpperCase() === 'ALTA');
+
+  // (4) Si hay ALTA o DONA o COMODA, unimos los tres subconjuntos
+  if (altaMeses > 0 || donaMeses > 0 || comodMeses > 0) {
+    const combinado = [...subsetAlta, ...subsetDona, ...subsetComodato];
     const seen = new Set<number>();
     resultados = combinado.filter(b => {
       if (seen.has(b.idBien)) return false;
@@ -263,13 +288,20 @@ filtrosBien(): void {
   data: {
     ...this.filtroEstado,
     ...this.filtroAlta,
+    ...this.filtroDonacion,
     // pasamos el estado actual de donación
     donMensual:    this.filtroDonacion.mensual,
     donTrimestral: this.filtroDonacion.trimestral,
     donSemestral:  this.filtroDonacion.semestral,
     donAnual:      this.filtroDonacion.anual,
     donFiltroAnio: this.filtroDonacion.filtroAnio,
-    donFiltroMes:  this.filtroDonacion.filtroMes
+    donFiltroMes:  this.filtroDonacion.filtroMes,
+    comMensual:    this.filtroComodato.mensual,
+    comTrimestral: this.filtroComodato.trimestral,
+    comSemestral:  this.filtroComodato.semestral,
+    comAnual:      this.filtroComodato.anual,
+    comFiltroAnio: this.filtroComodato.filtroAnio,
+    comFiltroMes:  this.filtroComodato.filtroMes
   }
 });
 
@@ -282,6 +314,7 @@ this.filtrosDialogRef.afterClosed().subscribe(result => {
         this.filtroEstado   = { patrimonio:false, sujetoControl:false };
         this.filtroAlta     = { mensual:false, trimestral:false, semestral:false, anual:false, filtroAnio:'', filtroMes:'' };
         this.filtroDonacion = { mensual:false, trimestral:false, semestral:false, anual:false, filtroAnio:'', filtroMes:'' };
+        this.filtroComodato  = { mensual:false, trimestral:false, semestral:false, anual:false, filtroAnio:'', filtroMes:'' };
       } else {
         // actualiza con lo que llega del modal
         this.filtroEstado   = { patrimonio: result.patrimonio, sujetoControl: result.sujetoControl };
@@ -301,8 +334,15 @@ this.filtrosDialogRef.afterClosed().subscribe(result => {
           filtroAnio: result.donFiltroAnio,
           filtroMes:  result.donFiltroMes
         };
+        this.filtroComodato = {
+          mensual:    result.comMensual,
+          trimestral: result.comTrimestral,
+          semestral:  result.comSemestral,
+          anual:      result.comAnual,
+          filtroAnio: result.comFiltroAnio,
+          filtroMes:  result.comFiltroMes
+        };
       }
-
       // reaplica TODO
       this.aplicarTodosLosFiltros();
     });

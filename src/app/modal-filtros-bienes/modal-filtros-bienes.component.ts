@@ -9,7 +9,7 @@ interface Month { value: number; label: string; }
   styleUrls: ['./modal-filtros-bienes.component.css']
 })
 export class ModalFiltrosBienesComponent implements OnInit {
-  // —————— Filtro “Resguardante” ——————
+  // —————— Filtro “tipo de resguardo” ——————
   patrimonio = false;
   sujetoControl = false;
 
@@ -21,13 +21,21 @@ export class ModalFiltrosBienesComponent implements OnInit {
   filtroAnio: number | '' = '';
   filtroMes:  number | '' = '';
 
-  // —————— Nuevo filtro “Donación” ——————
+  // —————— Filtro “Donación” ——————
   donMensual    = false;
   donTrimestral = false;
   donSemestral  = false;
   donAnual      = false;
   donFiltroAnio: number | '' = '';
   donFiltroMes:  number | '' = '';
+
+    // Filtro "Comodato"
+  comMensual     = false;
+  comTrimestral  = false;
+  comSemestral   = false;
+  comAnual       = false;
+  comFiltroAnio: number | '' = '';
+  comFiltroMes:  number | '' = '';
 
   years: number[] = [];
   months: Month[] = [
@@ -58,20 +66,30 @@ export class ModalFiltrosBienesComponent implements OnInit {
     // Si el padre nos envió un estado previo, lo cargamos:
     if (this.data) {
       Object.assign(this, {
+        //Filtro “tipo de resguardo”
         patrimonio:     !!this.data.patrimonio,
         sujetoControl:  !!this.data.sujetoControl,
+        // Filtro “Alta”
         mensual:        !!this.data.mensual,
         trimestral:     !!this.data.trimestral,
         semestral:      !!this.data.semestral,
         anual:          !!this.data.anual,
         filtroAnio:     this.data.filtroAnio ?? '',
         filtroMes:      this.data.filtroMes  ?? '',
+        // Filtro “Donación”
         donMensual:     !!this.data.donMensual,
         donTrimestral:  !!this.data.donTrimestral,
         donSemestral:   !!this.data.donSemestral,
         donAnual:       !!this.data.donAnual,
         donFiltroAnio:  this.data.donFiltroAnio ?? '',
-        donFiltroMes:   this.data.donFiltroMes  ?? ''
+        donFiltroMes:   this.data.donFiltroMes  ?? '',
+        // Filtro "Comodato"
+        comMensual:     !!this.data.comMensual,
+        comTrimestral:  !!this.data.comTrimestral,
+        comSemestral:   !!this.data.comSemestral,
+        comAnual:       !!this.data.comAnual,
+        comFiltroAnio:  this.data.comFiltroAnio ?? '',
+        comFiltroMes:   this.data.comFiltroMes  ?? ''
       });
     }
   }
@@ -92,21 +110,37 @@ export class ModalFiltrosBienesComponent implements OnInit {
     this.donAnual      = op === 'anual';
   }
 
+  // Mantener mutuamente exclusivo el grupo “Comodato”
+  onComodatoChange(opción: 'mensual'|'trimestral'|'semestral'|'anual') {
+  this.comMensual    = opción === 'mensual';
+  this.comTrimestral = opción === 'trimestral';
+  this.comSemestral  = opción === 'semestral';
+  this.comAnual      = opción === 'anual';
+}
+
   limpiarFiltros(): void {
     this.patrimonio = this.sujetoControl = false;
     this.mensual = this.trimestral = this.semestral = this.anual = false;
-    this.donMensual = this.donTrimestral = this.donSemestral = this.donAnual = false;
     this.filtroAnio = this.filtroMes = '';
+    this.donMensual = this.donTrimestral = this.donSemestral = this.donAnual = false;    
     this.donFiltroAnio = this.donFiltroMes = '';
+    this.comMensual = this.comTrimestral = this.comSemestral = this.comAnual = false;
+    this.comFiltroAnio = '';
+    this.comFiltroMes  = '';
   }
 
   verResultados(): void {
     const noPrimario = !this.patrimonio && !this.sujetoControl;
     const noAlta     = !this.mensual && !this.trimestral && !this.semestral && !this.anual;
     const noDon      = !this.donMensual && !this.donTrimestral && !this.donSemestral && !this.donAnual;
+    const noCom      = !this.comMensual && !this.comTrimestral && !this.comSemestral && !this.comAnual;
+    const mostrarTodos = noPrimario && noAlta && noDon && noCom &&
+                     this.filtroAnio==='' && this.filtroMes==='' &&
+                     this.donFiltroAnio==='' && this.donFiltroMes==='' &&
+                     this.comFiltroAnio==='' && this.comFiltroMes==='';
 
     this.dialogRef.close({
-      mostrarTodos: noPrimario && noAlta && noDon && this.filtroAnio === '' && this.filtroMes === '' && this.donFiltroAnio === '' && this.donFiltroMes === '',
+      mostrarTodos,
       // primarios
       patrimonio: this.patrimonio,
       sujetoControl: this.sujetoControl,
@@ -123,7 +157,14 @@ export class ModalFiltrosBienesComponent implements OnInit {
       donSemestral: this.donSemestral,
       donAnual: this.donAnual,
       donFiltroAnio: this.donFiltroAnio,
-      donFiltroMes: this.donFiltroMes
+      donFiltroMes: this.donFiltroMes,
+      //Comodato
+      comMensual: this.comMensual,
+      comTrimestral: this.comTrimestral,
+      comSemestral: this.comSemestral,
+      comAnual: this.comAnual,
+      comFiltroAnio: this.comFiltroAnio,
+      comFiltroMes: this.comFiltroMes
     });
   }
 }

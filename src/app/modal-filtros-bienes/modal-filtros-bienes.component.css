@@ -107,8 +107,10 @@
   margin-right: 10%;
 }
 
+/* Aplica mismo estilo a los 3 bloques */
 .filtro-section.alta .select-group,
-.filtro-section.donacion .select-group {
+.filtro-section.donacion .select-group,
+.filtro-section.comodato .select-group {
   display: flex;
   justify-content: space-between;
   gap: 10px;            
@@ -116,27 +118,38 @@
 }
 
 .filtro-section.alta .select-group select,
-.filtro-section.donacion .select-group select {
+.filtro-section.donacion .select-group select,
+.filtro-section.comodato .select-group select {
   width: 48%;             
 }
 
 .filtro-section.alta .checkbox-group,
-.filtro-section.donacion .checkbox-group {
+.filtro-section.donacion .checkbox-group,
+.filtro-section.comodato .checkbox-group {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
   margin-bottom: 8px;
 }
 
+/* márgenes sólo para alta y donación */
 .filtro-section.alta,
 .filtro-section.donacion {
   margin-bottom: 20px;
 }
 
+/* comodato sin espacio debajo */
+.filtro-section.comodato {
+  margin-bottom: 0;
+}
+
+/* títulos idénticos en los 3 casos */
 .filtro-section.alta h3,
-.filtro-section.donacion h3 {
+.filtro-section.donacion h3,
+.filtro-section.comodato h3 {
   margin: 0 0 8px 0;
   font-size: 16px;
   color: #333;
   font-weight: 600;
 }
+
