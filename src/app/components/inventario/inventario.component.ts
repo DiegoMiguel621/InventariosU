@@ -146,6 +146,9 @@ private filtroBaja = {
   filtroAnio: '' as number|'',
   filtroMes:  '' as number|''
 };
+// filtro de "Tipo de bien"
+private filtroTipoBien: string = '';
+
 
 
 // Función unificada para aplicar todos los filtros (checkboxes y texto)
@@ -274,7 +277,7 @@ const subsetBaja = bajaMeses > 0 && this.filtroBaja.filtroAnio && this.filtroBaj
     })
   : [];
 
-  // (4) Si hay ALTA o DONA o COMODA, unimos los tres subconjuntos
+  // (3E) Si hay ALTA o DONA o COMODA, unimos los tres subconjuntos
   if (altaMeses > 0 || donaMeses > 0 || comodMeses > 0 || bajaMeses  > 0) {
     const combinado = [...subsetAlta, ...subsetDona, ...subsetComodato, ...subsetBaja];
     const seen = new Set<number>();
@@ -285,9 +288,23 @@ const subsetBaja = bajaMeses > 0 && this.filtroBaja.filtroAnio && this.filtroBaj
     });
   }
 
+  // (4) “Tipo de Bien”
+  if (this.filtroTipoBien) {
+    resultados = resultados.filter(b =>
+      this.normalizeStr(b.clasificacion || '') === this.filtroTipoBien
+    );
+  }
+
   // asigna y resetea paginación
   this.bienesFiltrados = resultados;
   this.currentPage = 0;
+}
+
+normalizeStr(s: string): string {
+  return s
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toUpperCase();
 }
 
 // Llama a esta función en el (input) del searchTerm
@@ -312,6 +329,8 @@ filtrosBien(): void {
     ...this.filtroAlta, 
     ...this.filtroDonacion,
     ...this.filtroComodato,
+    ...this.filtroBaja,
+    tipoBien: this.filtroTipoBien,
 
     // pasamos el estado actual de los filtros
     patrimonio:     this.filtroEstado.patrimonio,
@@ -358,6 +377,7 @@ this.filtrosDialogRef.afterClosed().subscribe(result => {
         this.filtroDonacion = { mensual:false, trimestral:false, semestral:false, anual:false, filtroAnio:'', filtroMes:'' };
         this.filtroComodato  = { mensual:false, trimestral:false, semestral:false, anual:false, filtroAnio:'', filtroMes:'' };
         this.filtroBaja = { mensual:false, trimestral:false, semestral:false, anual:false, filtroAnio:'', filtroMes:'' };
+        this.filtroTipoBien = '';
       } else {
         // actualiza con lo que llega del modal
         this.filtroEstado   = { patrimonio: result.patrimonio, sujetoControl: result.sujetoControl };
@@ -393,6 +413,7 @@ this.filtrosDialogRef.afterClosed().subscribe(result => {
           filtroAnio: result.bajaFiltroAnio,
           filtroMes:  result.bajaFiltroMes
         };
+        this.filtroTipoBien = result.tipoBien || '';
       }
       // reaplica TODO
       this.aplicarTodosLosFiltros();

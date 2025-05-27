@@ -6,6 +6,9 @@
   <div class="modal-content">
     <div class="filtros-modal">
       <div class="filtros-content">
+
+        <div class="section-title">Reportes por periodo</div>
+        <div class="section-divider"></div>
         <!-- Sección: Bienes Muebles e intangibles -->
         <section class="filtro-section">
           <h3>Bienes Muebles e intangibles</h3>
@@ -68,11 +71,11 @@
 
 <!-- Sección: Donación de Bienes Muebles e intangibles -->
 <section class="filtro-section donacion">
-  <h3>Donación de Bienes Muebles e intangibles</h3>
+  <h3>Donaciones de Bienes Muebles e intangibles</h3>
   <div class="checkbox-group">
     <label><input type="checkbox" [(ngModel)]="donMensual" name="donMensual" (change)="onDonacionChange('mensual')"/> Mensual</label>
     <label><input type="checkbox" [(ngModel)]="donTrimestral" name="donTrimestral" (change)="onDonacionChange('trimestral')"/> Trimestral</label>
-    <label><input type="checkbox" [(ngModel)]="donSemestral" name="donSemestral" (change)="onDonacionChange('semestral')"/> Semestra</label>
+    <label><input type="checkbox" [(ngModel)]="donSemestral" name="donSemestral" (change)="onDonacionChange('semestral')"/> Semestral</label>
     <label><input type="checkbox" [(ngModel)]="donAnual" name="donAnual" (change)="onDonacionChange('anual')"/> Anual</label>
   </div>
   <div class="select-group">
@@ -91,7 +94,7 @@
 
 <!-- Sección: Comodato de Bienes Muebles e intangibles -->
 <section class="filtro-section comodato">
-  <h3>Comodato de Bienes Muebles e intangibles</h3>
+  <h3>Comodatos de Bienes Muebles e intangibles</h3>
   <div class="checkbox-group">
     <label><input type="checkbox" [(ngModel)]="comMensual"    name="comMensual"    (change)="onComodatoChange('mensual')"   /> Mensual</label>
     <label><input type="checkbox" [(ngModel)]="comTrimestral" name="comTrimestral" (change)="onComodatoChange('trimestral')" /> Trimestral</label>
@@ -109,6 +112,31 @@
     </select>
   </div>
 </section>
+
+<div class="section-title">Otros filtros de bienes</div>
+<div class="section-divider"></div>
+
+<!-------------------------- Sección: Tipo de Bien ---------------------------->
+<section class="filtro-section tipo-bien">
+  <h3>Tipo de Bien</h3>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Buscar clasificación</mat-label>
+    <input
+      type="text"
+      matInput
+      [(ngModel)]="filtroTipoBien"
+      (ngModelChange)="onTipoBienSearch($event)"
+      [matAutocomplete]="auto"
+      placeholder="Escribe para filtrar..."
+    >
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let opc of filteredClasificaciones" [value]="opc">
+        {{ opc }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</section>
+
 
 </div>
       </div>

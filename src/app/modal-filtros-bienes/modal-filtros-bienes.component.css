@@ -156,3 +156,31 @@
   font-weight: 600;
 }
 
+/* Títulos de sección */
+.section-title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+/* Línea divisoria */
+.section-divider {
+  width: 95%;
+  height: 3px;
+  background-color: #441B69;
+  margin: 0 auto 16px;
+}
+
+
+
+
+.filtro-section.tipo-bien { margin-bottom: 20px; }
+.filtro-section.tipo-bien h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.full-width { width: 90%; }
+
+

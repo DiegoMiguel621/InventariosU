@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { BienesService } from '../service/bienes.service';
 
 interface Month { value: number; label: string; }
 
@@ -45,6 +46,13 @@ export class ModalFiltrosBienesComponent implements OnInit {
   bajaFiltroAnio: number | '' = '';
   bajaFiltroMes:  number | '' = '';
 
+  // —————— Tipo de bien ——————
+  filtroTipoBien: string = '';
+  clasificaciones: string[] = [];
+  filteredClasificaciones: string[] = [];
+
+
+  // —————— Auxiliar para filtros de periodo ——————
   years: number[] = [];
   months: Month[] = [
     { value: 1,  label: 'Enero' },
@@ -63,7 +71,8 @@ export class ModalFiltrosBienesComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<ModalFiltrosBienesComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private bienesService: BienesService
   ) {}
 
   ngOnInit(): void {
@@ -107,6 +116,21 @@ export class ModalFiltrosBienesComponent implements OnInit {
         bajaFiltroMes:  this.data.bajaFiltroMes  ?? ''
       });
     }
+    this.bienesService.getBienes().subscribe(bienes => {
+      const all = bienes.map(b => b.clasificacion || '');
+      const norm = all
+        .map(s => this.normalizeStr(s))
+        .filter(s => !!s);
+      this.clasificaciones = Array.from(new Set(norm)).sort();
+      this.filteredClasificaciones = [...this.clasificaciones];
+
+      // si venimos con un tipo seleccionado, recárgalo
+      if (this.data?.tipoBien) {
+        this.filtroTipoBien = this.data.tipoBien;
+        this.onTipoBienSearch(this.filtroTipoBien);
+      }
+    });
+
   }
 
   // Mantener mutuamente exclusivo el grupo “Alta”
@@ -151,6 +175,24 @@ export class ModalFiltrosBienesComponent implements OnInit {
     this.comFiltroMes  = '';
     this.bajaMensual = this.bajaTrimestral = this.bajaSemestral = this.bajaAnual = false;
     this.bajaFiltroAnio = this.bajaFiltroMes = '';
+    this.filtroTipoBien = '';
+    this.filteredClasificaciones = [...this.clasificaciones];
+  }
+
+  /** Quita tildes y pasa a mayúsculas */
+  normalizeStr(s: string): string {
+    return s
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toUpperCase();
+  }
+
+  /** Filtra el dropdown según lo que escribe el usuario */
+  onTipoBienSearch(value: string) {
+    const q = this.normalizeStr(value || '');
+    this.filteredClasificaciones = this.clasificaciones.filter(c =>
+      c.includes(q)
+    );
   }
 
   verResultados(): void {
@@ -159,45 +201,50 @@ export class ModalFiltrosBienesComponent implements OnInit {
     const noDon      = !this.donMensual && !this.donTrimestral && !this.donSemestral && !this.donAnual;
     const noCom      = !this.comMensual && !this.comTrimestral && !this.comSemestral && !this.comAnual;
     const noBaja = !this.bajaMensual && !this.bajaTrimestral && !this.bajaSemestral && !this.bajaAnual;
-    const mostrarTodos = noPrimario && noAlta && noDon && noCom &&
+    const noTipoBien = this.filtroTipoBien === '';
+    
+    const mostrarTodos = noPrimario && noAlta && noDon && noCom && noBaja && noTipoBien &&
                      this.filtroAnio==='' && this.filtroMes==='' &&
                      this.donFiltroAnio==='' && this.donFiltroMes==='' &&
                      this.comFiltroAnio==='' && this.comFiltroMes===''&& 
                      this.bajaFiltroAnio==='' && this.bajaFiltroMes==='';
+    
 
     this.dialogRef.close({
       mostrarTodos,
       // primarios
       patrimonio: this.patrimonio,
       sujetoControl: this.sujetoControl,
-      // alta
+      // altas
       mensual: this.mensual,
       trimestral: this.trimestral,
       semestral: this.semestral,
       anual: this.anual,
       filtroAnio: this.filtroAnio,
       filtroMes: this.filtroMes,
-      // donación
+      // donaciones
       donMensual: this.donMensual,
       donTrimestral: this.donTrimestral,
       donSemestral: this.donSemestral,
       donAnual: this.donAnual,
       donFiltroAnio: this.donFiltroAnio,
       donFiltroMes: this.donFiltroMes,
-      //Comodato
+      //Comodatos
       comMensual: this.comMensual,
       comTrimestral: this.comTrimestral,
       comSemestral: this.comSemestral,
       comAnual: this.comAnual,
       comFiltroAnio: this.comFiltroAnio,
       comFiltroMes: this.comFiltroMes,
-      // “Baja”
+      // Bajas
       bajaMensual: this.bajaMensual,
       bajaTrimestral: this.bajaTrimestral,
       bajaSemestral: this.bajaSemestral,
       bajaAnual: this.bajaAnual,
       bajaFiltroAnio: this.bajaFiltroAnio,
-      bajaFiltroMes: this.bajaFiltroMes
+      bajaFiltroMes: this.bajaFiltroMes,
+      // Tipo de bien
+      tipoBien: this.filtroTipoBien
     });
   }
 }
