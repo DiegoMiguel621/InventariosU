@@ -5,6 +5,7 @@ import { ModalEditarComponent } from '../modal-editar/modal-editar.component';
 import { ModalVerComponent } from '../modal-ver/modal-ver.component';
 import { ModalEliminarComponent } from '../modal-eliminar/modal-eliminar.component';
 import { ModalFiltrosBienesComponent } from '../../modal-filtros-bienes/modal-filtros-bienes.component';
+import { ModalExportarReporteComponent } from '../modal-exportar-reporte/modal-exportar-reporte.component';
 import { BienesService } from '../../service/bienes.service';
 
 
@@ -100,6 +101,17 @@ export class InventarioComponent implements OnInit {
       if (result === true) {
         this.cargarBienes();
       }
+    });
+  }
+
+  abrirModalExport() {
+    const ref = this._matDialog.open(ModalExportarReporteComponent, {
+      hasBackdrop: true
+    });
+    ref.afterClosed().subscribe(formato => {
+      if (!formato) return;
+      // aquí recibes 'PDF' o 'Excel' y podrás disparar la exportación
+      console.log('Exportar como:', formato);
     });
   }
 

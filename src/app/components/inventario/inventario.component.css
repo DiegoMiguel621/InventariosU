@@ -226,3 +226,32 @@ td:not(:last-child) {
   background-color: #e3e3e3;
 }
 
+/* inventario.component.css */
+#contenedorExport {
+  display: inline-block;
+  margin-left: 20px;
+}
+/* inventario.component.css */
+
+/* Ajusta el estilo del botón Exportar para que coincida con el de Filtros */
+#btnExport {
+  display: inline-flex;         
+  align-items: center;          
+  justify-content: center;      
+  gap: 6px;    
+  width: 120px;                 
+  height: 30px;                 
+  padding: 0 10px;              
+  background-color: #F3F3F3;
+  color: black;
+  border: 1px solid #818181;
+  cursor: pointer;
+  font-size: 14px; 
+}
+
+
+
+#btnExport:hover {
+  background-color: #e3e3e3;
+}
+

@@ -42,6 +42,7 @@ import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
+import { ModalExportarReporteComponent } from './components/modal-exportar-reporte/modal-exportar-reporte.component';
 
 
 
@@ -77,6 +78,7 @@ import { MatInputModule } from '@angular/material/input';
     ModalRestaurarTrabajadorComponent,
     ModalRestaurarTrabajador2Component,
     ModalRestaurarTrabajador3Component,
+    ModalExportarReporteComponent,
 
   ],
   imports: [
