@@ -148,7 +148,10 @@ private filtroBaja = {
 };
 // filtro de "Tipo de bien"
 private filtroTipoBien: string = '';
-
+// filtro de "por Resguardante"
+private filtroResguardante = '';
+// filtro de "por Proyecto"
+private filtroProyecto: string = '';
 
 
 // Función unificada para aplicar todos los filtros (checkboxes y texto)
@@ -294,6 +297,18 @@ const subsetBaja = bajaMeses > 0 && this.filtroBaja.filtroAnio && this.filtroBaj
       this.normalizeStr(b.clasificacion || '') === this.filtroTipoBien
     );
   }
+  // (5) "por resguardante"
+  if (this.filtroResguardante) {
+  resultados = resultados.filter(b =>
+    (b.nomRes || '').toLowerCase() === this.filtroResguardante.toLowerCase()
+  );
+  }
+  // (6) “Por Proyecto”
+  if (this.filtroProyecto) {
+    resultados = resultados.filter(b =>
+      (b.claveProyecto || '').toString() === this.filtroProyecto
+    );
+  }
 
   // asigna y resetea paginación
   this.bienesFiltrados = resultados;
@@ -331,6 +346,8 @@ filtrosBien(): void {
     ...this.filtroComodato,
     ...this.filtroBaja,
     tipoBien: this.filtroTipoBien,
+    resguardante: this.filtroResguardante,
+    proyecto: this.filtroProyecto,
 
     // pasamos el estado actual de los filtros
     patrimonio:     this.filtroEstado.patrimonio,
@@ -378,6 +395,8 @@ this.filtrosDialogRef.afterClosed().subscribe(result => {
         this.filtroComodato  = { mensual:false, trimestral:false, semestral:false, anual:false, filtroAnio:'', filtroMes:'' };
         this.filtroBaja = { mensual:false, trimestral:false, semestral:false, anual:false, filtroAnio:'', filtroMes:'' };
         this.filtroTipoBien = '';
+        this.filtroResguardante = '';
+        this.filtroProyecto = '';
       } else {
         // actualiza con lo que llega del modal
         this.filtroEstado   = { patrimonio: result.patrimonio, sujetoControl: result.sujetoControl };
@@ -414,6 +433,8 @@ this.filtrosDialogRef.afterClosed().subscribe(result => {
           filtroMes:  result.bajaFiltroMes
         };
         this.filtroTipoBien = result.tipoBien || '';
+        this.filtroResguardante = result.resguardante || '';
+        this.filtroProyecto = result.proyecto || '';
       }
       // reaplica TODO
       this.aplicarTodosLosFiltros();

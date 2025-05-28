@@ -51,6 +51,15 @@ export class ModalFiltrosBienesComponent implements OnInit {
   clasificaciones: string[] = [];
   filteredClasificaciones: string[] = [];
 
+  // —————— Por resguardante ——————
+  filtroResguardante = '';
+  resguardantes: string[] = [];
+  filteredResguardantes: string[] = [];
+
+  // —————— por proyecto ——————
+  filtroProyecto: string = '';
+  proyectos: string[] = [];
+  filteredProyectos: string[] = [];
 
   // —————— Auxiliar para filtros de periodo ——————
   years: number[] = [];
@@ -116,6 +125,7 @@ export class ModalFiltrosBienesComponent implements OnInit {
         bajaFiltroMes:  this.data.bajaFiltroMes  ?? ''
       });
     }
+    //tipo de bien
     this.bienesService.getBienes().subscribe(bienes => {
       const all = bienes.map(b => b.clasificacion || '');
       const norm = all
@@ -128,6 +138,39 @@ export class ModalFiltrosBienesComponent implements OnInit {
       if (this.data?.tipoBien) {
         this.filtroTipoBien = this.data.tipoBien;
         this.onTipoBienSearch(this.filtroTipoBien);
+      }        
+    });
+
+    //por resguardante
+    this.bienesService.getBienes().subscribe(bienes => {
+  // … tu código de clasificaciones
+
+  // ahora los resguardantes (nomRes):
+  this.resguardantes = Array.from(
+    new Set(bienes.map(b => b.nomRes || '').filter(x => !!x))
+  ).sort();
+  this.filteredResguardantes = [...this.resguardantes];
+
+  // cargar valor previo si viene
+  if (this.data?.resguardante) {
+    this.filtroResguardante = this.data.resguardante;
+    this.onResguardanteSearch(this.filtroResguardante);
+  }
+  });
+
+  //por proyecto
+  this.bienesService.getBienes().subscribe(bienes => {
+      // EXTRAEMOS Y UNIFICAMOS claves de proyecto
+      const allClaves = bienes
+        .map(b => (b.claveProyecto || '').toString().trim())
+        .filter(s => !!s);
+      this.proyectos = Array.from(new Set(allClaves)).sort();
+      this.filteredProyectos = [...this.proyectos];
+
+      // si venimos con uno preseleccionado
+      if (this.data?.proyecto) {
+        this.filtroProyecto = this.data.proyecto;
+        this.onProyectoSearch(this.filtroProyecto);
       }
     });
 
@@ -164,6 +207,19 @@ export class ModalFiltrosBienesComponent implements OnInit {
     this.bajaAnual      = op === 'anual';
   }
 
+  onResguardanteSearch(q: string) {
+  this.filteredResguardantes = this.resguardantes.filter(r =>
+    r.toLowerCase().includes((q||'').toLowerCase())
+  );
+  }
+
+  onProyectoSearch(value: string) {
+    const q = (value || '').toUpperCase();
+    this.filteredProyectos = this.proyectos.filter(p =>
+      p.toUpperCase().includes(q)
+    );
+  }
+
   limpiarFiltros(): void {
     this.patrimonio = this.sujetoControl = false;
     this.mensual = this.trimestral = this.semestral = this.anual = false;
@@ -177,6 +233,10 @@ export class ModalFiltrosBienesComponent implements OnInit {
     this.bajaFiltroAnio = this.bajaFiltroMes = '';
     this.filtroTipoBien = '';
     this.filteredClasificaciones = [...this.clasificaciones];
+    this.filtroResguardante = '';
+    this.filteredResguardantes = [...this.resguardantes];
+    this.filtroProyecto = '';
+    this.filteredProyectos = [...this.proyectos];
   }
 
   /** Quita tildes y pasa a mayúsculas */
@@ -202,8 +262,10 @@ export class ModalFiltrosBienesComponent implements OnInit {
     const noCom      = !this.comMensual && !this.comTrimestral && !this.comSemestral && !this.comAnual;
     const noBaja = !this.bajaMensual && !this.bajaTrimestral && !this.bajaSemestral && !this.bajaAnual;
     const noTipoBien = this.filtroTipoBien === '';
-    
-    const mostrarTodos = noPrimario && noAlta && noDon && noCom && noBaja && noTipoBien &&
+    const noResguardante   = this.filtroResguardante === '';
+    const noProyecto = this.filtroProyecto === '';
+
+    const mostrarTodos = noPrimario && noAlta && noDon && noCom && noBaja && noTipoBien && noResguardante && noProyecto &&
                      this.filtroAnio==='' && this.filtroMes==='' &&
                      this.donFiltroAnio==='' && this.donFiltroMes==='' &&
                      this.comFiltroAnio==='' && this.comFiltroMes===''&& 
@@ -244,7 +306,10 @@ export class ModalFiltrosBienesComponent implements OnInit {
       bajaFiltroAnio: this.bajaFiltroAnio,
       bajaFiltroMes: this.bajaFiltroMes,
       // Tipo de bien
-      tipoBien: this.filtroTipoBien
+      tipoBien: this.filtroTipoBien,
+      //Resguardante
+      resguardante: this.filtroResguardante,
+      proyecto: this.filtroProyecto
     });
   }
 }

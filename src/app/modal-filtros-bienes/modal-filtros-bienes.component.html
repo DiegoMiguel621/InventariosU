@@ -116,19 +116,28 @@
 <div class="section-title">Otros filtros de bienes</div>
 <div class="section-divider"></div>
 
+<!-- Sección: Por resguardante -->
+<section class="filtro-section resguardante">
+  <h3>Por resguardante</h3>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Buscar resguardante</mat-label>
+    <input type="text" matInput [(ngModel)]="filtroResguardante" (ngModelChange)="onResguardanteSearch($event)" [matAutocomplete]="autoRes" placeholder="Escribe para filtrar...">
+    <mat-autocomplete #autoRes="matAutocomplete">
+      <mat-option *ngFor="let opc of filteredResguardantes" [value]="opc">
+        {{ opc }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</section>
+
+
 <!-------------------------- Sección: Tipo de Bien ---------------------------->
 <section class="filtro-section tipo-bien">
   <h3>Tipo de Bien</h3>
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Buscar clasificación</mat-label>
     <input
-      type="text"
-      matInput
-      [(ngModel)]="filtroTipoBien"
-      (ngModelChange)="onTipoBienSearch($event)"
-      [matAutocomplete]="auto"
-      placeholder="Escribe para filtrar..."
-    >
+      type="text" matInput [(ngModel)]="filtroTipoBien" (ngModelChange)="onTipoBienSearch($event)" [matAutocomplete]="auto" placeholder="Escribe para filtrar...">
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let opc of filteredClasificaciones" [value]="opc">
         {{ opc }}
@@ -136,6 +145,28 @@
     </mat-autocomplete>
   </mat-form-field>
 </section>
+
+<!-- Sección: Por Proyecto -->
+<section class="filtro-section proyecto">
+  <h3>Por Proyecto</h3>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Buscar proyecto</mat-label>
+    <input
+      type="text"
+      matInput
+      [(ngModel)]="filtroProyecto"
+      (ngModelChange)="onProyectoSearch($event)"
+      [matAutocomplete]="autoProj"
+      placeholder="Escribe para filtrar..."
+    >
+    <mat-autocomplete #autoProj="matAutocomplete">
+      <mat-option *ngFor="let p of filteredProyectos" [value]="p">
+        {{ p }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</section>
+
 
 
 </div>

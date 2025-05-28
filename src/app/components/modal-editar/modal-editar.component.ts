@@ -162,6 +162,7 @@ export class ModalEditarComponent implements OnInit {
       nomRes: trabajador.nombre,
       numRes: trabajador.numero,
       areaRes: trabajador.area,
+      areaFunRes: trabajador.areaFunRes,
       ubiRes: trabajador.ubicacion,
       perfilRes: trabajador.perfilAcad,
       puestoRes: trabajador.puesto,
