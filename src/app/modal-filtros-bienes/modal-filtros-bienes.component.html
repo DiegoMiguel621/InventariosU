@@ -151,17 +151,45 @@
   <h3>Por Proyecto</h3>
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Buscar proyecto</mat-label>
-    <input
-      type="text"
-      matInput
-      [(ngModel)]="filtroProyecto"
-      (ngModelChange)="onProyectoSearch($event)"
-      [matAutocomplete]="autoProj"
-      placeholder="Escribe para filtrar..."
-    >
+    <input type="text" matInput [(ngModel)]="filtroProyecto" (ngModelChange)="onProyectoSearch($event)" [matAutocomplete]="autoProj" placeholder="Escribe para filtrar..." >
     <mat-autocomplete #autoProj="matAutocomplete">
       <mat-option *ngFor="let p of filteredProyectos" [value]="p">
         {{ p }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</section>
+
+<!-- Sección: Por área de adscripción -->
+<section class="filtro-section area-res">
+  <h3>Por área de adscripción</h3>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Buscar área</mat-label>
+    <input type="text" matInput [(ngModel)]="filtroAreaRes" (ngModelChange)="onAreaResSearch($event)" [matAutocomplete]="autoArea" placeholder="Escribe para filtrar...">
+    <mat-autocomplete #autoArea="matAutocomplete">
+      <mat-option *ngFor="let a of filteredAreasRes" [value]="a">
+        {{ a }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</section>
+
+<!-- Sección: Por área funcional de resguardante -->
+<section class="filtro-section area-fun-res">
+  <h3>Por área funcional de resguardante</h3>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Buscar área funcional</mat-label>
+    <input
+      type="text"
+      matInput
+      [(ngModel)]="filtroAreaFunRes"
+      (ngModelChange)="onAreaFunResSearch($event)"
+      [matAutocomplete]="autoAreaFun"
+      placeholder="Escribe para filtrar..."
+    >
+    <mat-autocomplete #autoAreaFun="matAutocomplete">
+      <mat-option *ngFor="let a of filteredAreasFunRes" [value]="a">
+        {{ a }}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>

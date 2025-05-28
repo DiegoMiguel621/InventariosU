@@ -152,7 +152,10 @@ private filtroTipoBien: string = '';
 private filtroResguardante = '';
 // filtro de "por Proyecto"
 private filtroProyecto: string = '';
-
+// filtro de "por area de adscripcion"
+private filtroAreaRes: string = '';
+// filtro de "área funcional"
+private filtroAreaFunRes: string = '';
 
 // Función unificada para aplicar todos los filtros (checkboxes y texto)
 aplicarTodosLosFiltros(): void {
@@ -310,6 +313,20 @@ const subsetBaja = bajaMeses > 0 && this.filtroBaja.filtroAnio && this.filtroBaj
     );
   }
 
+  // (7) “Por área de adscripción”
+  if (this.filtroAreaRes) {
+    resultados = resultados.filter(b =>
+      (b.areaRes || '').toString() === this.filtroAreaRes
+    );
+  }
+
+  // (8) “Por área funcional de resguardante”
+  if (this.filtroAreaFunRes) {
+    resultados = resultados.filter(b =>
+      (b.areaFunRes || '').toString() === this.filtroAreaFunRes
+    );
+  }
+
   // asigna y resetea paginación
   this.bienesFiltrados = resultados;
   this.currentPage = 0;
@@ -327,7 +344,6 @@ filtrarBienes(): void {
   this.aplicarTodosLosFiltros();
 }
 
-// En la función que cierra el modal de filtros:
 filtrosBien(): void {
   if (!this.filtrosDialogRef) {
     // localiza el botón para calcular posición
@@ -348,7 +364,9 @@ filtrosBien(): void {
     tipoBien: this.filtroTipoBien,
     resguardante: this.filtroResguardante,
     proyecto: this.filtroProyecto,
-
+    areaRes: this.filtroAreaRes,
+    areaFunRes: this.filtroAreaFunRes,
+  
     // pasamos el estado actual de los filtros
     patrimonio:     this.filtroEstado.patrimonio,
     sujetoControl:  this.filtroEstado.sujetoControl,
@@ -397,6 +415,9 @@ this.filtrosDialogRef.afterClosed().subscribe(result => {
         this.filtroTipoBien = '';
         this.filtroResguardante = '';
         this.filtroProyecto = '';
+        this.filtroAreaRes = '';
+        this.filtroAreaFunRes = '';
+
       } else {
         // actualiza con lo que llega del modal
         this.filtroEstado   = { patrimonio: result.patrimonio, sujetoControl: result.sujetoControl };
@@ -435,6 +456,8 @@ this.filtrosDialogRef.afterClosed().subscribe(result => {
         this.filtroTipoBien = result.tipoBien || '';
         this.filtroResguardante = result.resguardante || '';
         this.filtroProyecto = result.proyecto || '';
+        this.filtroAreaRes = result.areaRes || '';
+        this.filtroAreaFunRes = result.areaFunRes || '';
       }
       // reaplica TODO
       this.aplicarTodosLosFiltros();

@@ -28,10 +28,6 @@
   overflow-y: auto;
 }
 
-.filtro-section {
-  margin-bottom: 20px;
-}
-
 .filtro-section h3 {
   margin: 0 0 8px 0;
   font-size: 16px;
@@ -44,7 +40,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
 }
 
 .checkbox-group label {
@@ -63,7 +59,7 @@
   border-radius: 4px;
   font-size: 14px;
   color: #333;
-  margin-bottom: 8px;
+  
 }
 
 /* Footer fijo de 40px */
