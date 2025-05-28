@@ -11,8 +11,8 @@ import { BienesService } from '../../service/bienes.service';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
-
-
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-inventario',
@@ -123,7 +123,7 @@ export class InventarioComponent implements OnInit {
       this.exportPdf();
     }
     if (formats.includes('Excel')) {
-      //this.exportExcel(); // cuando lo implementes
+      this.exportExcel(); // cuando lo implementes
     }
   });
 }
@@ -541,7 +541,7 @@ exportPdf() {
     no:             i + 1,
     numInvAnt:            b.numInvAnt,
   numInvArm:            b.numInvArm,
-  claveControl:         b.claveControl,
+  claveControl:         b.cControl,
   nombreBien:           b.nombreBien,
   clasificacion:        b.clasificacion,
   clasAdic:             b.clAdic,
@@ -813,4 +813,117 @@ this.filtrosDialogRef.afterClosed().subscribe(result => {
   }
 }
     
+// Declaracion de campos para el excel
+private excelHeaders = [
+  { header: 'No',                              dataKey: 'no' },
+  { header: 'Número de inventario anterior',   dataKey: 'numInvAnt' },
+  { header: 'Número de inventario armonizado', dataKey: 'numInvArm' },
+  { header: 'Clave de control',                dataKey: 'cControl' },
+  { header: 'Nombre del Bien',                 dataKey: 'nombreBien' },
+  { header: 'Clasificación del bien',          dataKey: 'clasificacion' },
+  { header: 'Clasificación Adicional del bien',dataKey: 'clasAdic' },
+  { header: 'Nombre del Bien (catálogo CONAC)',dataKey: 'nombreCat' },
+  { header: 'Descripción del Bien',            dataKey: 'descripcion' },
+  { header: 'Marca',                           dataKey: 'marca' },
+  { header: 'Modelo',                          dataKey: 'modelo' },
+  { header: 'Número de serie',                 dataKey: 'numSerie' },
+  { header: 'Aplica registro contable',        dataKey: 'aplicaRegCont' },
+  { header: 'Grupo bienes (contabilidad)',     dataKey: 'grupoBienesCont' },
+  { header: 'Grupo bienes (CONAC)',            dataKey: 'grupoBienesConac' },
+  { header: 'Categoría (CONAC)',               dataKey: 'categoria' },
+  { header: 'Subcategoría (CONAC)',            dataKey: 'subcategoria' },
+  { header: 'Tipo de Alta',                    dataKey: 'tipoAlta' },
+  { header: 'Factura física/DOC ingreso',      dataKey: 'facturaFisica' },
+  { header: 'Fecha recepción factura',         dataKey: 'fechaRecFact' },
+  { header: 'Número de factura',               dataKey: 'numFact' },
+  { header: 'Fecha de factura',                dataKey: 'fechaFact' },
+  { header: 'Fecha de alta del Bien',          dataKey: 'fechaAlta' },
+  { header: 'Costo adquisición',               dataKey: 'costoAdq' },
+  { header: 'Costo adquisición (contab.)',     dataKey: 'costoAdqCont' },
+  { header: 'Con depreciación',                dataKey: 'depreciacion' },
+  { header: 'Frecuencia depreciación',         dataKey: 'frecDepre' },
+  { header: '% Depreciación anual',            dataKey: 'porcDepAnual' },
+  { header: 'Meses a depreciar',               dataKey: 'mesesDepre' },
+  { header: 'Imp. depreciación mensual',       dataKey: 'impMensDepre' },
+  { header: 'Monto depreciado',                dataKey: 'montoDepre' },
+  { header: 'Valor en libros',                 dataKey: 'valLibros' },
+  { header: 'Meses pend. depreciar',           dataKey: 'mesesPendDepre' },
+  { header: 'Clave del proyecto',              dataKey: 'claveProyecto' },
+  { header: 'Aplica para proyecto',            dataKey: 'apProye' },
+  { header: 'Partida presupuestal',            dataKey: 'partPres' },
+  { header: 'Fuente de financiamiento',        dataKey: 'fuenteFinan' },
+  { header: 'Número de cuenta',                dataKey: 'numCuenta' },
+  { header: 'Proveedor',                       dataKey: 'proveedor' },
+  { header: 'RFC proveedor',                   dataKey: 'rfcProveedor' },
+  { header: 'Domicilio fiscal proveedor',      dataKey: 'domProveedor' },
+  { header: 'Bienes menores a 35 SMDF',        dataKey: 'bienesMenores' },
+  { header: 'Tipo de resguardo',               dataKey: 'tipoResguardo' },
+  { header: 'Asignación (resguardante)',       dataKey: 'nomRes' },
+  { header: 'Número de resguardo',             dataKey: 'numRes' },
+  { header: 'Área de adscripción',             dataKey: 'areaRes' },
+  { header: 'Área funcional',                  dataKey: 'areaFunRes' },
+  { header: 'Ubicación física resguardante',   dataKey: 'ubiRes' },
+  { header: 'Observaciones 1',                 dataKey: 'observ1' },
+  { header: 'Observaciones 2',                 dataKey: 'observ2' },
+  { header: 'Comentarios contabilidad',        dataKey: 'comentCont' },
+  { header: 'Seguim. comité desinc.',          dataKey: 'seguimDesinc' },
+  { header: 'Estatus del bien',                dataKey: 'estatusBien' },
+  { header: 'Motivo de baja',                  dataKey: 'motBaja' },
+  { header: 'Fecha de baja',                   dataKey: 'fechaBaja' },
+  { header: 'Año adquisición',                 dataKey: 'aAdquisicion' },
+  { header: 'Mes adquisición',                 dataKey: 'mAdquisicion' },
+  { header: 'Evidencia fotográfica',           dataKey: 'fotoBien' },
+  { header: 'Perfil académico resguardante',   dataKey: 'perfilRes' },
+  { header: 'Puesto',                          dataKey: 'puestoRes' },
+  { header: 'Estatus laboral',                 dataKey: 'estatusRes' },
+  { header: 'Correo personal',                 dataKey: 'correoPersonalRes' },
+  { header: 'Correo institucional',            dataKey: 'correoInstRes' },
+  { header: 'RFC resguardante',                dataKey: 'rfcTrabaj' },
+  { header: 'Resguardo 2016 y ant.',           dataKey: 'res16Ant' },
+  { header: 'Resguardo 2017',                  dataKey: 'res17' },
+  { header: 'Resguardo 2018',                  dataKey: 'res18' },
+  { header: 'Resguardo 2019',                  dataKey: 'res19' },
+  { header: 'Resguardo 2020',                  dataKey: 'res20' },
+  { header: 'Resguardo 2021',                  dataKey: 'res21' },
+  { header: 'Resguardo 2022',                  dataKey: 'res22' },
+  { header: 'Resguardo 2023',                  dataKey: 'res23' },
+  { header: 'Resguardo 2024',                  dataKey: 'res24' },
+  { header: 'Estatus resguardo',               dataKey: 'estatusResguardo' },
+  { header: 'Último resguardo',                dataKey: 'ultimoResguardo' },
+  { header: 'Etiqueta',                        dataKey: 'etiqueta' },
+];
+
+exportExcel() {
+  if (!this.bienesFiltrados.length) return;
+
+  // 1) crea los datos
+  const data = this.bienesFiltrados.map((b, i) => {
+    const row: any = { No: i + 1 };
+
+    for (const col of this.excelHeaders) {
+      // si es la columna 'No', saltarla
+      if (col.dataKey === 'no') continue;
+      row[col.header] = b[col.dataKey] ?? '';
+    }
+    return row;
+  });
+
+  // 2) convierte a hoja y descarga igual que lo tienes…
+  const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data, {
+    header: this.excelHeaders.map(h => h.header),
+    skipHeader: false
+  });
+
+  // ajustar anchos, crear libro, descargar…
+  const colWidths = this.excelHeaders.map(h => ({ wch: Math.max(h.header.length + 2, 10) }));
+  ws['!cols'] = colWidths;
+
+  const wb: XLSX.WorkBook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Reporte');
+  const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+  const blob = new Blob([wbout], { type: 'application/octet-stream' });
+  saveAs(blob, 'reporte_bienes.xlsx');
+}
+
+
 }
