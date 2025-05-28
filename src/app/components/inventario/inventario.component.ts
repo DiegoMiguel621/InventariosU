@@ -8,6 +8,11 @@ import { ModalFiltrosBienesComponent } from '../../modal-filtros-bienes/modal-fi
 import { ModalExportarReporteComponent } from '../modal-exportar-reporte/modal-exportar-reporte.component';
 import { BienesService } from '../../service/bienes.service';
 
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+
+
+
 
 @Component({
   selector: 'app-inventario',
@@ -104,16 +109,24 @@ export class InventarioComponent implements OnInit {
     });
   }
 
-  abrirModalExport() {
-    const ref = this._matDialog.open(ModalExportarReporteComponent, {
-      hasBackdrop: true
-    });
-    ref.afterClosed().subscribe(formato => {
-      if (!formato) return;
-      // aquí recibes 'PDF' o 'Excel' y podrás disparar la exportación
-      console.log('Exportar como:', formato);
-    });
-  }
+  abrirModalExport(): void {
+  const dialogRef = this._matDialog.open(ModalExportarReporteComponent, {
+    hasBackdrop: true,
+    // …añade aquí posición o tamaño si lo necesitas
+  });
+
+  dialogRef.afterClosed().subscribe((formats: string[] | null) => {
+    // formats es lo que devuelve tu modal: ['PDF'], ['Excel'], ['PDF','Excel'] o null
+    if (!formats) return;
+
+    if (formats.includes('PDF')) {
+      this.exportPdf();
+    }
+    if (formats.includes('Excel')) {
+      //this.exportExcel(); // cuando lo implementes
+    }
+  });
+}
 
   private filtrosDialogRef: MatDialogRef<ModalFiltrosBienesComponent> | null = null;
 
@@ -359,6 +372,303 @@ const subsetBaja = bajaMeses > 0 && this.filtroBaja.filtroAnio && this.filtroBaj
   // asigna y resetea paginación
   this.bienesFiltrados = resultados;
   this.currentPage = 0;
+}
+
+exportPdf() {
+  if (!this.bienesFiltrados.length) return;
+
+  // 1) Define tus columnas completas
+  interface ExportRow {
+    no: number;
+    numInvAnt:        any;
+    numInvArm:        any;
+    claveControl:     any;
+    nombreBien:       any;
+    clasificacion:    any;
+    clasAdic:         any;
+    nombreCat:        any;
+    descripcion:      any;
+    marca:            any;
+    modelo:           any;
+    numSerie:         any;
+    aplicaRegCont:    any;
+    grupoBienesCont:  any;
+    grupoBienesCont2: any;
+    categoria:        any;
+    subcategoria:     any;
+    tipoAlta:         any;
+    facturaFisica:    any;
+    fechaRecFact:     any;
+    numFact:          any;
+    fechaFact:        any;
+    fechaAlta:        any;
+    costoAdq:         any;
+    costoAdqCont:     any;
+    depreciacion:     any;
+    frecDepre:        any;
+    porcDepAnual:     any;
+    mesesDepre:       any;
+    impMensDepre:     any;
+    montoDepre:       any;
+    valLibros:        any;
+    mesesPendDepre:   any;
+    claveProyecto:    any;
+    apProye:          any;
+    partPres:         any;
+    fuenteFinan:      any;
+    numCuenta:        any;
+    proveedor:        any;
+    rfcProveedor:     any;
+    domProveedor:     any;
+    bienesMenores:    any;
+    tipoResguardo:    any;
+    observ1:          any;
+    observ2:          any;
+    comentCont:       any;
+    seguimDesinc:     any;
+    estatusBien:      any;
+    motBaja:          any;
+    fechaBaja:        any;
+    aAdquisicion:     any;
+    mAdquisicion:     any;
+    fotoBien:         any;
+    res16Ant:         any;
+    res17:            any;
+    res18:            any;
+    res19:            any;
+    res20:            any;
+    res21:            any;
+    res22:            any;
+    res23:            any;
+    res24:            any;
+    estatusResguardo: any;
+    ultimoResguardo:  any;
+    etiqueta:         any;
+
+    nomRes:        string;
+    numRes:        string;
+    areaRes:       string;
+    areaFunRes:    string;
+    ubiRes:        string;
+    perfilRes:     string;
+    puestoRes:     string;
+    estatusRes:    string;
+    correoPersonalRes: string;
+    correoInstRes:     string;
+    rfcTrabaj:         string;
+  }
+  const headers: { header: string; dataKey: keyof ExportRow }[] = [
+    { header: 'No',               dataKey: 'no' },
+  { header: 'Número de inventario anterior',        dataKey: 'numInvAnt' },
+  { header: 'Número de inventario armonizado',        dataKey: 'numInvArm' },
+  { header: 'clave de Control',     dataKey: 'claveControl' },
+  { header: 'Nombre del Bien',       dataKey: 'nombreBien' },
+  { header: 'Clasificación del bien',    dataKey: 'clasificacion' },
+  { header: 'Clasificación Adicional del bien',         dataKey: 'clasAdic' },
+  { header: 'Nombre del Bien (catálogo del CONAC)',        dataKey: 'nombreCat' },
+  { header: 'Descripción del Bien',      dataKey: 'descripcion' },
+  { header: 'Marca',            dataKey: 'marca' },
+  { header: 'Modelo',           dataKey: 'modelo' },
+  { header: 'Número de serie',         dataKey: 'numSerie' },
+  { header: 'Aplica registro contable Si/No',    dataKey: 'aplicaRegCont' },
+  { header: 'Grupo bienes (contabilidad)',  dataKey: 'grupoBienesCont' },
+  { header: 'Grupo bienes (CONAC)', dataKey: 'grupoBienesCont2' },
+  { header: 'Categoría (CONAC)',        dataKey: 'categoria' },
+  { header: 'Subcategoría (CONAC)',     dataKey: 'subcategoria' },
+  { header: 'Tipo de Alta',         dataKey: 'tipoAlta' },
+  { header: 'Factura física/Documento oficial del Bien ',    dataKey: 'facturaFisica' },
+  { header: 'Fecha recepción de factura',     dataKey: 'fechaRecFact' },
+  { header: 'Número de factura',          dataKey: 'numFact' },
+  { header: 'Fecha de factura',        dataKey: 'fechaFact' },
+  { header: 'Fecha de alta del Bien',        dataKey: 'fechaAlta' },
+  { header: 'Costo adquisición del Bien',         dataKey: 'costoAdq' },
+  { header: 'Costo adquisición del Bien (contabilidad)',     dataKey: 'costoAdqCont' },
+  { header: 'Con depreciación Si/No',     dataKey: 'depreciacion' },
+  { header: 'Frecuencia depreciación',        dataKey: 'frecDepre' },
+  { header: '% de Depreciación anual',     dataKey: 'porcDepAnual' },
+  { header: 'Total meses a depreciar',       dataKey: 'mesesDepre' },
+  { header: 'Importe de depre. mensual',     dataKey: 'impMensDepre' },
+  { header: 'Monto depreciado	',       dataKey: 'montoDepre' },
+  { header: 'Valor en libros',        dataKey: 'valLibros' },
+  { header: 'Meses pendientes depreciar',   dataKey: 'mesesPendDepre' },
+  { header: 'Clave del proyecto',    dataKey: 'claveProyecto' },
+  { header: 'Aplica para proyecto Si/No',          dataKey: 'apProye' },
+  { header: 'Partida presupuestal',         dataKey: 'partPres' },
+  { header: 'Fuente de financiamiento',      dataKey: 'fuenteFinan' },
+  { header: 'Número de cuenta',        dataKey: 'numCuenta' },
+  { header: 'Nombre Proveedor',        dataKey: 'proveedor' },
+  { header: 'RFC del proveedor',     dataKey: 'rfcProveedor' },
+  { header: 'Domicilio Fiscal del proveedor',     dataKey: 'domProveedor' },
+  { header: 'Bienes menores a 35 SMDF...',    dataKey: 'bienesMenores' },
+  { header: 'Tipo de resguardo',    dataKey: 'tipoResguardo' },
+  { header: 'Nombre del resguardante',            dataKey: 'nomRes' },
+  { header: 'Número de resguardo',            dataKey: 'numRes' },
+  { header: 'Área de adscripción del resguardante',           dataKey: 'areaRes' },
+  { header: 'Área funcional del resguardante',        dataKey: 'areaFunRes' },
+  { header: 'Ubicación física del resguardante',            dataKey: 'ubiRes' },
+  { header: 'Observaciónes 1',          dataKey: 'observ1' },
+  { header: 'Observaciónes 2',          dataKey: 'observ2' },
+  { header: 'Comentarios del área de contabilidad',       dataKey: 'comentCont' },
+  { header: 'Seguimiento del cómite de desincorporación de Bienes',     dataKey: 'seguimDesinc' },
+  { header: 'Estatus del bien',      dataKey: 'estatusBien' },
+  { header: 'Motivo de baja del bien',          dataKey: 'motBaja' },
+  { header: 'Fecha de baja del bien',        dataKey: 'fechaBaja' },
+  { header: 'Año de adquisición',     dataKey: 'aAdquisicion' },
+  { header: 'Mes de adquisición	',     dataKey: 'mAdquisicion' },
+  { header: 'Evidencia Fotográfica del bien',         dataKey: 'fotoBien' },
+  { header: 'Perfil académico del resguardante',         dataKey: 'perfilRes' },
+  { header: 'Puesto',         dataKey: 'puestoRes' },
+  { header: 'Estatus laboral del resguardante',        dataKey: 'estatusRes' },
+  { header: 'Correo personal del resguardante', dataKey: 'correoPersonalRes' },
+  { header: 'Correo institucional del resguardante',     dataKey: 'correoInstRes' },
+  { header: 'RFC resguardante	',         dataKey: 'rfcTrabaj' },
+  { header: 'Resguardo 2016 y años anteriores',         dataKey: 'res16Ant' },
+  { header: 'Resguardo 2017 Si/No',            dataKey: 'res17' },
+  { header: 'Resguardo 2018 Si/No',            dataKey: 'res18' },
+  { header: 'Resguardo 2019 Si/No',            dataKey: 'res19' },
+  { header: 'Resguardo 2020 Si/No',            dataKey: 'res20' },
+  { header: 'Resguardo 2021 Si/No',            dataKey: 'res21' },
+  { header: 'Resguardo 2022 Si/No',            dataKey: 'res22' },
+  { header: 'Resguardo 2023 Si/No',            dataKey: 'res23' },
+  { header: 'Resguardo 2024 Si/No',            dataKey: 'res24' },
+  { header: 'Estatus del resguardo', dataKey: 'estatusResguardo' },
+  { header: 'Fecha de generación del Último resguardo',  dataKey: 'ultimoResguardo' },
+  { header: 'El bien cuenta con Etiqueta',         dataKey: 'etiqueta' }
+  ];
+
+  // 2) Prepara las filas
+  const rows: ExportRow[] = this.bienesFiltrados.map((b, i) => ({
+    no:             i + 1,
+    numInvAnt:            b.numInvAnt,
+  numInvArm:            b.numInvArm,
+  claveControl:         b.claveControl,
+  nombreBien:           b.nombreBien,
+  clasificacion:        b.clasificacion,
+  clasAdic:             b.clAdic,
+  nombreCat:            b.nombreCat,
+  descripcion:          b.descripcion,
+  marca:                b.marca,
+  modelo:               b.modelo,
+  numSerie:             b.numSerie,
+  aplicaRegCont:        b.aplicaRegCont,
+  grupoBienesCont:      b.grupoBienesCont,
+  grupoBienesCont2:     b.grupoBienesCont2,
+  categoria:            b.categoria,
+  subcategoria:         b.subcategoria,
+  tipoAlta:             b.tipoAlta,
+  facturaFisica:        b.facturaFisica,
+  fechaRecFact:         b.fechaRecFact,
+  numFact:              b.numFact,
+  fechaFact:            b.fechaFact,
+  fechaAlta:            b.fechaAlta,
+  costoAdq:             b.costoAdq,
+  costoAdqCont:         b.costoAdqCont,
+  depreciacion:         b.depreciacion,
+  frecDepre:            b.frecDepre,
+  porcDepAnual:         b.porcDepAnual,
+  mesesDepre:           b.mesesDepre,
+  impMensDepre:         b.impMensDepre,
+  montoDepre:           b.montoDepre,
+  valLibros:            b.valLibros,
+  mesesPendDepre:       b.mesesPendDepre,
+  claveProyecto:        b.claveProyecto,
+  apProye:              b.apProye,
+  partPres:             b.partPres,
+  fuenteFinan:          b.fuenteFinan,
+  numCuenta:            b.numCuenta,
+  proveedor:            b.proveedor,
+  rfcProveedor:         b.rfcProveedor,
+  domProveedor:         b.domProveedor,
+  bienesMenores:        b.bienesMenores,
+  tipoResguardo:        b.tipoResguardo,
+  observ1:              b.observ1,
+  observ2:              b.observ2,
+  comentCont:           b.comentCont,
+  seguimDesinc:         b.seguimDesinc,
+  estatusBien:          b.estatusBien,
+  motBaja:              b.motBaja,
+  fechaBaja:            b.fechaBaja,
+  aAdquisicion:         b.aAdquisicion,
+  mAdquisicion:         b.mAdquisicion,
+  fotoBien:             b.fotoBien,
+  res16Ant:             b.res16Ant,
+  res17:                b.res17,
+  res18:                b.res18,
+  res19:                b.res19,
+  res20:                b.res20,
+  res21:                b.res21,
+  res22:                b.res22,
+  res23:                b.res23,
+  res24:                b.res24,
+  estatusResguardo:     b.estatusResguardo,
+  ultimoResguardo:      b.ultimoResguardo,
+  etiqueta:             b.etiqueta,
+  // ——— Resguardante ———
+  nomRes:               b.nomRes,
+  numRes:               b.numRes,
+  areaRes:              b.areaRes,
+  areaFunRes:           b.areaFunRes,
+  ubiRes:               b.ubiRes,
+  perfilRes:            b.perfilRes,
+  puestoRes:            b.puestoRes,
+  estatusRes:           b.estatusRes,
+  correoPersonalRes:    b.correoPersonalRes,
+  correoInstRes:        b.correoInstRes,
+  rfcTrabaj:            b.rfcTrabaj
+  }));
+
+  // 3) Crea el PDF
+  const doc = new jsPDF({
+    orientation: 'landscape',
+    unit: 'pt',
+    format: 'letter'
+  });
+
+  // Función para dibujar el título
+  const drawTitle = () => {
+    doc.setFontSize(16);
+    doc.text(
+      'Reporte de Bienes Filtrados',
+      doc.internal.pageSize.getWidth() / 2,
+      40,
+      { align: 'center' }
+    );
+  };
+
+  // 4) Divide columnas en trozos de X
+  const chunkSize = 6; // columnas por página
+  for (let i = 0; i < headers.length; i += chunkSize) {
+    const slice = headers.slice(i, i + chunkSize);
+
+    if (i > 0) doc.addPage();          // añade nueva página a partir del segundo trozo
+    drawTitle();
+
+    autoTable(doc, {
+      startY: 60,
+      margin: { top: 60, bottom: 40, left: 40, right: 40 },
+
+      // estilos generales
+      styles: {
+        fontSize: 8,
+        cellWidth: 'wrap',
+        overflow: 'linebreak'
+      },
+      headStyles: {
+        fillColor: '#673AB7',
+        textColor: 255
+      },
+      showHead: 'everyPage',
+
+      // usa sólo el trozo actual de encabezados
+      head: [ slice.map(h => h.header) ],
+      body: rows.map(row =>
+        slice.map(h => row[h.dataKey])
+      )
+    });
+  }
+
+  // 5) Descarga el PDF
+  doc.save('reporte_bienes.pdf');
 }
 
 normalizeStr(s: string): string {
