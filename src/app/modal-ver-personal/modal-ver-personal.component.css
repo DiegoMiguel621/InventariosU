@@ -86,19 +86,57 @@
   padding-bottom: 5px;
 }
 
-.bienes-table {
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #ffffff;
-  color: #4a185a;
-  border-radius: 4px;
-  text-align: center;
-  font-size: 14px;
-}
-
 .btn-group {
   text-align: right;
   padding: 10px 20px;
+}
+
+/* Container de la tabla */
+.bienes-table {
+  margin-top: 16px;
+  overflow-x: auto;
+}
+
+/* La propia tabla */
+.bienes-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+/* Encabezados */
+.bienes-table thead {
+  background-color: #673AB7;
+}
+
+.bienes-table th {
+  color: #ffffff;
+  font-weight: 600;
+  padding: 8px;
+  text-align: left;
+  border-bottom: 2px solid #5E35B1;
+}
+
+/* Filas del cuerpo */
+.bienes-table tbody tr:nth-child(even) {
+  background-color: #F3F3F3;
+}
+
+.bienes-table tbody tr:hover {
+  background-color: #E0E0E0;
+}
+
+.bienes-table td {
+  padding: 8px;
+  border-bottom: 1px solid #DDD;
+  color: #333;
+}
+
+/* Asegura que el texto no se “rompa” de forma extraña */
+.bienes-table th,
+.bienes-table td {
+  white-space: nowrap;
 }
 
 
@@ -122,6 +160,17 @@
   font-size: 16px;
   margin-right: 5%;
 }
+
+/* modal-ver-personal.component.css */
+
+.bienes-section h3 {
+  text-align: center;      /* Centra el título */
+  font-size: 1.5rem;       /* Más grande que el texto normal */
+  color: #000;             /* Negro */
+  margin: 16px 0;          /* Espaciado arriba y abajo */
+  font-weight: 500;        /* Un poco de énfasis */
+}
+
 
 
 

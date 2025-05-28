@@ -19,33 +19,79 @@
             <span>{{ trabajador.nombre }}</span>
           </div>
           <div class="form-group">
-            <label>Perfil Académico:</label>
-            <span>{{ trabajador.perfilAcad }}</span>
-          </div>
-          <div class="form-group">
             <label>No. de trabajador:</label>
             <span>{{ trabajador.numero }}</span>
+          </div>
+          <div class="form-group">
+            <label>Área de adscripción:</label>
+            <span>{{ trabajador.area }}</span>
+          </div>
+          <div class="form-group">
+            <label>Área funcional:</label>
+            <span>{{ trabajador.areaFuncional }}</span>
+          </div>
+          <div class="form-group">
+            <label>Ubicación:</label>
+            <span>{{ trabajador.ubicacion }}</span>
+          </div>
+          <div class="form-group">
+            <label>Perfil Académico:</label>
+            <span>{{ trabajador.perfilAcad }}</span>
           </div>
           <div class="form-group">
             <label>Puesto:</label>
             <span>{{ trabajador.puesto }}</span>
           </div>
           <div class="form-group">
-            <label>Área:</label>
-            <span>{{ trabajador.area }}</span>
-          </div>
-          <div class="form-group">
             <label>Estatus:</label>
             <span>{{ trabajador.estatus }}</span>
           </div>
-        </div>
-  
-        <div class="bienes-section">
-          <h3>Bienes a su disposición</h3>
-          <div class="bienes-table">
-            <p>El trabajador no tiene bienes asignados</p>
+          <div class="form-group">
+            <label>Correo Personal:</label>
+            <span>{{ trabajador.correoPersonal }}</span>
           </div>
+          <div class="form-group">
+            <label>Correo Institucional:</label>
+            <span>{{ trabajador.correoInstit }}</span>
+          </div>
+          <div class="form-group">
+            <label>RFC:</label>
+            <span>{{ trabajador.rfcTrabaj }}</span>
+          </div>
+
         </div>
+        
+<!-- seccion de tabla de bienes -->
+  <div class="bienes-section">
+  <h3>Bienes a su disposición</h3>
+
+  <div class="bienes-table" *ngIf="bienesAsignados.length > 0; else noBienes">
+    <table>
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Nombre del bien</th>
+          <th>Clasificación del bien</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bien of bienesAsignados; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ bien.nombreBien }}</td>
+          <td>{{ bien.clasificacion }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noBienes>
+    <p>El trabajador no tiene bienes asignados</p>
+  </ng-template>
+</div>
+
+
+
+        
       </div>
   
       <div class="modal-footer">
