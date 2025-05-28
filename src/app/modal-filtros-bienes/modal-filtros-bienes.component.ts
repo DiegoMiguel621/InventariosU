@@ -71,6 +71,10 @@ export class ModalFiltrosBienesComponent implements OnInit {
   areasFunRes: string[]           = [];
   filteredAreasFunRes: string[]   = [];
 
+  // —————— Estatus del Bien ——————
+  estatusAlta  = false;
+  estatusBaja  = false;
+
   // —————— Auxiliar para filtros de periodo ——————
   years: number[] = [];
   months: Month[] = [
@@ -132,7 +136,11 @@ export class ModalFiltrosBienesComponent implements OnInit {
         bajaSemestral:  !!this.data.bajaSemestral,
         bajaAnual:      !!this.data.bajaAnual,
         bajaFiltroAnio: this.data.bajaFiltroAnio ?? '',
-        bajaFiltroMes:  this.data.bajaFiltroMes  ?? ''
+        bajaFiltroMes:  this.data.bajaFiltroMes  ?? '',
+
+        // Filtro "Estatus del bien"
+        estatusAlta:  !!this.data.estatusAlta,
+        estatusBaja:  !!this.data.estatusBaja
       });
     }
     //tipo de bien
@@ -264,13 +272,23 @@ export class ModalFiltrosBienesComponent implements OnInit {
     );
   }
 
-  
   onAreaFunResSearch(value: string) {
     const q = (value || '').toUpperCase();
     this.filteredAreasFunRes = this.areasFunRes.filter(a =>
       a.toUpperCase().includes(q)
     );
   }
+
+  onEstatusChange(op: 'alta' | 'baja', checked: boolean) {
+  if (op === 'alta') {
+    this.estatusAlta = checked;
+    // si marco 'alta' limpio 'baja'; si desmarco, no toco 'baja'
+    if (checked) this.estatusBaja = false;
+  } else {
+    this.estatusBaja = checked;
+    if (checked) this.estatusAlta = false;
+  }
+}
 
   limpiarFiltros(): void {
     this.patrimonio = this.sujetoControl = false;
@@ -292,6 +310,7 @@ export class ModalFiltrosBienesComponent implements OnInit {
     this.filtroAreaRes = '';
     this.filteredAreasRes = [...this.areasRes];
     this.filtroAreaFunRes = '';
+    this.estatusAlta = this.estatusBaja = false;
   }
 
   /** Quita tildes y pasa a mayúsculas */
@@ -321,8 +340,10 @@ export class ModalFiltrosBienesComponent implements OnInit {
     const noProyecto = this.filtroProyecto === '';
     const noAreaRes = this.filtroAreaRes === '';
     const noAreaFunRes = this.filtroAreaFunRes === '';
+    const noEstatus = !this.estatusAlta && !this.estatusBaja;
 
-    const mostrarTodos = noPrimario && noAlta && noDon && noCom && noBaja && noTipoBien && noResguardante && noProyecto && noAreaRes && noAreaFunRes &&
+    const mostrarTodos = noPrimario && noAlta && noDon && noCom && noBaja && noTipoBien && 
+                          noResguardante && noProyecto && noAreaRes && noAreaFunRes && noEstatus &&
                      this.filtroAnio==='' && this.filtroMes==='' &&
                      this.donFiltroAnio==='' && this.donFiltroMes==='' &&
                      this.comFiltroAnio==='' && this.comFiltroMes===''&& 
@@ -368,7 +389,9 @@ export class ModalFiltrosBienesComponent implements OnInit {
       resguardante: this.filtroResguardante,
       proyecto: this.filtroProyecto,
       areaRes: this.filtroAreaRes,
-      areaFunRes: this.filtroAreaFunRes
+      areaFunRes: this.filtroAreaFunRes,
+      estatusAlta: this.estatusAlta,
+      estatusBaja: this.estatusBaja
     });
   }
 }

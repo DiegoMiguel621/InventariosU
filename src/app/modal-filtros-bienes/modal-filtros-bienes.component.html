@@ -116,6 +116,21 @@
 <div class="section-title">Otros filtros de bienes</div>
 <div class="section-divider"></div>
 
+<!-- Sección: Estatus del Bien -->
+<section class="filtro-section estatus-bien">
+  <h3>Estatus del Bien</h3>
+  <div class="checkbox-group">
+    <label>
+  <input type="checkbox" [(ngModel)]="estatusAlta" (ngModelChange)="onEstatusChange('alta', $event)"/>
+  Alta
+</label>
+<label>
+  <input type="checkbox" [(ngModel)]="estatusBaja" (ngModelChange)="onEstatusChange('baja', $event)"/>
+  Baja
+</label>
+  </div>
+</section>
+
 <!-- Sección: Por resguardante -->
 <section class="filtro-section resguardante">
   <h3>Por resguardante</h3>
@@ -131,7 +146,7 @@
 </section>
 
 
-<!-------------------------- Sección: Tipo de Bien ---------------------------->
+<!-- Sección: Tipo de Bien -->
 <section class="filtro-section tipo-bien">
   <h3>Tipo de Bien</h3>
   <mat-form-field appearance="outline" class="full-width">
@@ -179,14 +194,7 @@
   <h3>Por área funcional de resguardante</h3>
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Buscar área funcional</mat-label>
-    <input
-      type="text"
-      matInput
-      [(ngModel)]="filtroAreaFunRes"
-      (ngModelChange)="onAreaFunResSearch($event)"
-      [matAutocomplete]="autoAreaFun"
-      placeholder="Escribe para filtrar..."
-    >
+    <input type="text" matInput [(ngModel)]="filtroAreaFunRes" (ngModelChange)="onAreaFunResSearch($event)" [matAutocomplete]="autoAreaFun" placeholder="Escribe para filtrar...">
     <mat-autocomplete #autoAreaFun="matAutocomplete">
       <mat-option *ngFor="let a of filteredAreasFunRes" [value]="a">
         {{ a }}

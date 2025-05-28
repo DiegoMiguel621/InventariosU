@@ -156,6 +156,12 @@ private filtroProyecto: string = '';
 private filtroAreaRes: string = '';
 // filtro de "área funcional"
 private filtroAreaFunRes: string = '';
+// filtro de “Estatus del Bien”
+private filtroEstatus = {
+  alta: false,
+  baja: false
+};
+
 
 // Función unificada para aplicar todos los filtros (checkboxes y texto)
 aplicarTodosLosFiltros(): void {
@@ -327,6 +333,17 @@ const subsetBaja = bajaMeses > 0 && this.filtroBaja.filtroAnio && this.filtroBaj
     );
   }
 
+  // (X) Filtro “Estatus del Bien”
+  const { alta, baja } = this.filtroEstatus;
+  if (alta || baja) {
+    resultados = resultados.filter(b => {
+      const est = (b.estatusBien || '').toUpperCase();
+      if (alta) return est === 'ALTA';
+      if (baja) return est === 'BAJA';
+      return true;
+    });
+  }
+
   // asigna y resetea paginación
   this.bienesFiltrados = resultados;
   this.currentPage = 0;
@@ -366,6 +383,8 @@ filtrosBien(): void {
     proyecto: this.filtroProyecto,
     areaRes: this.filtroAreaRes,
     areaFunRes: this.filtroAreaFunRes,
+    estatusAlta: this.filtroEstatus.alta,
+    estatusBaja: this.filtroEstatus.baja,
   
     // pasamos el estado actual de los filtros
     patrimonio:     this.filtroEstado.patrimonio,
@@ -417,6 +436,7 @@ this.filtrosDialogRef.afterClosed().subscribe(result => {
         this.filtroProyecto = '';
         this.filtroAreaRes = '';
         this.filtroAreaFunRes = '';
+        this.filtroEstatus = { alta: false, baja: false };
 
       } else {
         // actualiza con lo que llega del modal
@@ -458,6 +478,10 @@ this.filtrosDialogRef.afterClosed().subscribe(result => {
         this.filtroProyecto = result.proyecto || '';
         this.filtroAreaRes = result.areaRes || '';
         this.filtroAreaFunRes = result.areaFunRes || '';
+        this.filtroEstatus = {
+          alta: result.estatusAlta,
+          baja: result.estatusBaja
+        };
       }
       // reaplica TODO
       this.aplicarTodosLosFiltros();
