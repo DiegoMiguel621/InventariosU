@@ -453,7 +453,7 @@ exportPdf() {
     perfilRes:     string;
     puestoRes:     string;
     estatusRes:    string;
-    correoPersonalRes: string;
+    correoPerRes: string;
     correoInstRes:     string;
     rfcTrabaj:         string;
   }
@@ -519,7 +519,7 @@ exportPdf() {
   { header: 'Perfil académico del resguardante',         dataKey: 'perfilRes' },
   { header: 'Puesto',         dataKey: 'puestoRes' },
   { header: 'Estatus laboral del resguardante',        dataKey: 'estatusRes' },
-  { header: 'Correo personal del resguardante', dataKey: 'correoPersonalRes' },
+  { header: 'Correo personal del resguardante', dataKey: 'correoPerRes' },
   { header: 'Correo institucional del resguardante',     dataKey: 'correoInstRes' },
   { header: 'RFC resguardante	',         dataKey: 'rfcTrabaj' },
   { header: 'Resguardo 2016 y años anteriores',         dataKey: 'res16Ant' },
@@ -612,7 +612,7 @@ exportPdf() {
   perfilRes:            b.perfilRes,
   puestoRes:            b.puestoRes,
   estatusRes:           b.estatusRes,
-  correoPersonalRes:    b.correoPersonalRes,
+  correoPerRes:    b.correoPerRes,
   correoInstRes:        b.correoInstRes,
   rfcTrabaj:            b.rfcTrabaj
   }));
@@ -876,7 +876,7 @@ private excelHeaders = [
   { header: 'Perfil académico resguardante',   dataKey: 'perfilRes' },
   { header: 'Puesto',                          dataKey: 'puestoRes' },
   { header: 'Estatus laboral',                 dataKey: 'estatusRes' },
-  { header: 'Correo personal',                 dataKey: 'correoPersonalRes' },
+  { header: 'Correo personal',                 dataKey: 'correoPerRes' },
   { header: 'Correo institucional',            dataKey: 'correoInstRes' },
   { header: 'RFC resguardante',                dataKey: 'rfcTrabaj' },
   { header: 'Resguardo 2016 y ant.',           dataKey: 'res16Ant' },
