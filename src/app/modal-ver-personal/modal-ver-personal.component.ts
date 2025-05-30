@@ -7,6 +7,7 @@ import { BienesService } from '../service/bienes.service';
 
 import ExcelJS from 'exceljs';
 import { saveAs } from 'file-saver';
+import { wrap } from 'node:module';
 
 @Component({
   selector: 'app-modal-ver-personal',
@@ -113,47 +114,54 @@ export class ModalVerPersonalComponent implements OnInit {
     'ÁREA FUNCIONAL:'
   ];
   // ajustamos fila 8 a altura 24.17
-  ws.getRow(8).height = 25.5;
+  ws.getRow(8).height = 25.7;
   for (let i = 0; i < infoTitles.length; i++) {
-    const rowNum = 6 + i;
-    const row = ws.getRow(rowNum);
-    // A: título en mayúsculas, negrita, size=8
-    row.getCell(1).value = infoTitles[i];
-    row.getCell(1).font = { bold: true, size: 8 };
-    // B: valor dinámico
-    let val: string = '';
-    switch (i) {
-      case 0: // fecha hoy
-        val = new Date().toLocaleDateString();
-        break;
-      case 1:
-        val = `${this.trabajador.numero}`;
-        break;
-      case 2:
-        val = `LIC. ${this.trabajador.nombre}`;
-        break;
-      case 3:
-        val = this.trabajador.area;
-        break;
-      case 4:
-        val = this.trabajador.areaFuncional;
-        break;
-    }
-    row.getCell(2).value = val;
-    row.getCell(2).font = { size: 8 };
+  const rowNum = 6 + i;
+  const row = ws.getRow(rowNum);
+
+  // fusionar B y C
+  ws.mergeCells(`B${rowNum}:C${rowNum}`);
+
+  // A: título
+  row.getCell(1).value = infoTitles[i];
+  row.getCell(1).font = { bold: true, size: 8, name: 'Arial' };
+  row.getCell(1).alignment = { wrapText: true, vertical: 'middle' };
+
+  // B (y C): valor dinámico
+  let val = '';
+  switch (i) {
+    case 0:
+      const hoy = new Date();
+      const nombresMes = [
+        'ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO',
+        'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'
+      ];
+      val = `${hoy.getDate()} DE ${nombresMes[hoy.getMonth()]} DE ${hoy.getFullYear()}`;
+      break;
+
+    case 1: val = `${this.trabajador.numero}`;      break;
+    case 2: val = `LIC. ${this.trabajador.nombre}`; break;
+    case 3: val = this.trabajador.area;             break;
+    case 4: val = this.trabajador.areaFuncional;    break;
   }
+  val = val.toString().toUpperCase();
+
+  row.getCell(2).value = val;
+  row.getCell(2).font = { size: 8, name: 'Arial' };
+  row.getCell(2).alignment = { vertical: 'middle', horizontal: 'center' };
+}
 
   //
   // === SECCIÓN DOMICILIO (filas 6–8, columna D–F fusionadas 3x3) ===
   //
   const domicilioText =
-    'DOMICILIO: CARR. PACHUCA-CD. SAHAGÚN, KM. 20, EX-HACIENDA DE SANTA BÁRBARA, ZEMPOALA, ' +
-    'HIDALGO, C.P.43830, TELÉFONO 017715477510. CORREO ELECTRÓNICO www.upp.edu.mx';
+    'DOMICILIO: CARR. PACHUCA-CD. SAHAGÚN, KM. 20, EX-HACIENDA DE SANTA \u200A\n BÁRBARA, ZEMPOALA, ' +
+    'HIDALGO, C.P.43830, TELÉFONO 017715477510. CORREO \u200A\n ELECTRÓNICO www.upp.edu.mx';
   ws.mergeCells('D6:F8');
   const domCell = ws.getCell('D6');
   domCell.value = domicilioText;
   domCell.font = { size: 8 };
-  domCell.alignment = { wrapText: true, vertical: 'top', horizontal: 'left' };
+  domCell.alignment = { wrapText: true, vertical: 'middle', horizontal: 'center' };
 
   //
   // === TIPO DE RESGUARDO (filas 9–10) ===
@@ -190,7 +198,7 @@ export class ModalVerPersonalComponent implements OnInit {
     'que se le encomienden, evitando el uso abusivo, sustracción, destrucción, ocultamiento o inutilización indebida ' +
     'de los mismos; asimismo, a notificar oportunamente a la Secretaría Administrativa cualquier incidencia que ' +
     'sufran los bienes descritos en este resguardo.';
-  [49, 50].forEach(rn => ws.getRow(rn).height = 16);
+  [49, 50].forEach(rn => ws.getRow(rn).height = 16.2);
   ws.getRow(51).height = 33;
   ws.mergeCells('A49:F51');
   const p1 = ws.getCell('A49');
@@ -265,32 +273,41 @@ export class ModalVerPersonalComponent implements OnInit {
   ws.mergeCells('A63:B63');
   ws.getCell('A63').value = `LIC. ${this.trabajador.nombre}`;
   ws.getCell('A63').alignment = { horizontal: 'center' };
+  ws.getCell('A63').font = { size: 7 };
+
 
   ws.getCell('C63').value = 'C. FERNANDO PEÑA HERNÁNDEZ';
   ws.getCell('C63').alignment = { horizontal: 'center' };
+  ws.getCell('C63').font = { size: 7 };
 
   ws.getCell('D63').value = 'L.A.E. LUIS ALBERTO VELÁZQUEZ CRUZ';
   ws.getCell('D63').alignment = { horizontal: 'center' };
+  ws.getCell('D63').font = { size: 7 };
 
   ws.mergeCells('E63:F63');
   ws.getCell('E63').value = 'M.R.H. IDANIA ZAMORA ALVAREZ';
   ws.getCell('E63').alignment = { horizontal: 'center' };
+  ws.getCell('E63').font = { size: 7 };
 
   // fila 64
   ws.getRow(64).height = 16.5;
   ws.mergeCells('A64:B64');
   ws.getCell('A64').value = 'SUBDIRECCIÓN DE COMUNICACIÓN SOCIAL';
   ws.getCell('A64').alignment = { horizontal: 'center' };
+  ws.getCell('A64').font = { size: 7 };
 
   ws.getCell('C64').value = 'JEFE DE OFICINA DEL DEPARTAMENTO';
   ws.getCell('C64').alignment = { horizontal: 'center' };
+  ws.getCell('C64').font = { size: 7 };
 
   ws.getCell('D64').value = 'RESPONSABLE DEL DEPARTAMENTO';
   ws.getCell('D64').alignment = { horizontal: 'center' };
+  ws.getCell('D64').font = { size: 7 };
 
   ws.mergeCells('E64:F64');
   ws.getCell('E64').value = 'ENCARGADA DEL DESPACHO DE LA';
   ws.getCell('E64').alignment = { horizontal: 'center' };
+  ws.getCell('E64').font = { size: 7 };
 
   // fila 65
   ws.getRow(65).height = 16.5;
@@ -298,8 +315,10 @@ export class ModalVerPersonalComponent implements OnInit {
   ws.mergeCells('E65:F65');
   ws.getCell('C65').value = 'DE INVENTARIOS';
   ws.getCell('C65').alignment = { horizontal: 'center' };
+  ws.getCell('C65').font = { size: 7 };
   ws.getCell('D65').value = 'DE INVENTARIOS';
   ws.getCell('D65').alignment = { horizontal: 'center' };
+  ws.getCell('D65').font = { size: 7 };
 
   // fila 66
   ws.getRow(66).height = 16.5;
@@ -307,12 +326,30 @@ export class ModalVerPersonalComponent implements OnInit {
   ws.getCell('A66').font = { size: 10 };
   ws.getCell('F66').value = 'F_AF_IN-02';
   ws.getCell('F66').font = { size: 10 };
-  ws.getCell('A66').alignment = { horizontal: 'left' };
-  ws.getCell('F66').alignment = { horizontal: 'right' };
+  ws.getCell('A66').alignment = { horizontal: 'center' };
+  ws.getCell('F66').alignment = { horizontal: 'center' };
 
   //
   // 8) descarga
   //
+
+  wb.eachSheet(sheet => {
+  sheet.eachRow(row => {
+    row.eachCell(cell => {
+      // si ya tenías size/bold/italic, las conservamos:
+      const { size, bold, italic, color, underline } = cell.font || {};
+      cell.font = {
+        name: 'Arial',
+        size,
+        bold,
+        italic,
+        color,
+        underline
+      };
+    });
+  });
+});
+
   const buf = await wb.xlsx.writeBuffer();
   saveAs(new Blob([buf]), `resguardo_${this.trabajador.numero}.xlsx`);
 }
