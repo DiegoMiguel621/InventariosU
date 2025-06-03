@@ -60,6 +60,7 @@ export class ModalVerPersonalComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  
   async printResguardo() {
   if (!this.trabajador) return;
   // 1) crea workbook y hoja
@@ -185,9 +186,106 @@ export class ModalVerPersonalComponent implements OnInit {
   ws.getRow(11).height = 8.5;
   ws.mergeCells('A11:F11');
 
-  //
-  // — salto filas 12–48 (las dejamos vacías para tu sección dinámica) —
-  //
+  // 1) FILTRAR ÚNICAMENTE LOS BIENES “PATRIMONIO”
+  const patrimonios = this.bienesAsignados.filter(b =>
+    (b.tipoResguardo || '').trim().toUpperCase() === 'PATRIMONIO'
+  );
+
+  // 2) DEFINIR FILA 12: ENCABEZADOS DE LA TABLA DE BIENES
+  //    Arial 8, negrita, alineación centrada horizontal y vertical.
+  const headerRowIndex = 12;
+  const headerRow = ws.getRow(headerRowIndex);
+  headerRow.height = 15.63; // altura estándar
+
+  // Columna A
+  headerRow.getCell(1).value = 'NÚMERO DE INVENTARIO';
+  headerRow.getCell(1).font = { name: 'Arial', size: 8, bold: true };
+  headerRow.getCell(1).alignment = { horizontal: 'center', vertical: 'middle', wrapText: true };
+
+  // Columnas B + C (fusionadas)
+  ws.mergeCells(`B${headerRowIndex}:C${headerRowIndex}`);
+  const bcCell = headerRow.getCell(2);
+  bcCell.value = 'NOMBRE DEL BIEN';
+  bcCell.font = { name: 'Arial', size: 8, bold: true };
+  bcCell.alignment = { horizontal: 'center', wrapText: true };
+
+  // Columna D
+  headerRow.getCell(4).value = 'MARCA';
+  headerRow.getCell(4).font = { name: 'Arial', size: 8, bold: true };
+  headerRow.getCell(4).alignment = { horizontal: 'center', wrapText: true };
+
+  // Columna E
+  headerRow.getCell(5).value = 'MODELO';
+  headerRow.getCell(5).font = { name: 'Arial', size: 8, bold: true };
+  headerRow.getCell(5).alignment = { horizontal: 'center', wrapText: true };
+
+  // Columna F
+  headerRow.getCell(6).value = 'NÚMERO DE SERIE';
+  headerRow.getCell(6).font = { name: 'Arial', size: 8, bold: true };
+  headerRow.getCell(6).alignment = { horizontal: 'center', wrapText: true };
+
+  headerRow.commit();
+
+  // 3) LLENAR FILAS DE LA 13 A LA 13 + (patrimonios.length - 1)
+  let currentRow = headerRowIndex + 1; // empieza en la fila 13
+  patrimonios.forEach((b, index) => {
+    const r = ws.getRow(currentRow + index);
+    r.height = 15.63; // altura estándar
+
+    // Columna A = numInvAnt
+    const cellA = r.getCell(1);
+    cellA.value = b.numInvAnt ?? '';
+    cellA.font = { name: 'Arial', size: 8, bold: false };
+    cellA.alignment = { horizontal: 'center', vertical: 'middle', wrapText: true };
+
+    // Columnas B + C (fusionadas) = nombreBien
+    ws.mergeCells(`B${currentRow + index}:C${currentRow + index}`);
+    const cellBC = r.getCell(2);
+    cellBC.value = b.nombreBien ?? '';
+    cellBC.font = { name: 'Arial', size: 8, bold: false };
+    cellBC.alignment = { horizontal: 'center', vertical: 'middle', wrapText: true };
+
+    // Columna D = marca
+    const cellD = r.getCell(4);
+    cellD.value = b.marca ?? '';
+    cellD.font = { name: 'Arial', size: 8, bold: false };
+    cellD.alignment = { horizontal: 'center', vertical: 'middle', wrapText: true };
+
+    // Columna E = modelo
+    const cellE = r.getCell(5);
+    cellE.value = b.modelo ?? '';
+    cellE.font = { name: 'Arial', size: 8, bold: false };
+    cellE.alignment = { horizontal: 'center', vertical: 'middle', wrapText: true };
+
+    // Columna F = numSerie
+    const cellF = r.getCell(6);
+    cellF.value = b.numSerie ?? '';
+    cellF.font = { name: 'Arial', size: 8, bold: false };
+    cellF.alignment = { horizontal: 'center', vertical: 'middle', wrapText: true };
+
+    r.commit();
+  });
+
+  // 4) Debajo de la última fila de bienes, escribir el TOTAL
+  const totalRowIndex = headerRowIndex + patrimonios.length + 1; // 12 + N bienes + 1
+  const totalRow = ws.getRow(totalRowIndex);
+  totalRow.height = 15.63;
+
+  // Merge A–E en la fila total
+  ws.mergeCells(`A${totalRowIndex}:E${totalRowIndex}`);
+  const totalTextCell = totalRow.getCell(1);
+  totalTextCell.value = 'TOTAL DE BIENES RESGUARDADOS:';
+  totalTextCell.font = { name: 'Arial', size: 8, bold: true };
+  totalTextCell.alignment = { horizontal: 'center', vertical: 'middle' };
+
+  // Columna F = número de bienes patrimoniales
+  const totalNumberCell = totalRow.getCell(6);
+  totalNumberCell.value = patrimonios.length;
+  totalNumberCell.font = { name: 'Arial', size: 8, bold: true };
+  totalNumberCell.alignment = { horizontal: 'center', vertical: 'middle' };
+
+  totalRow.commit();
+  
 
   //
   // === PIE ESTÁTICO (filas 49–57) todas A–F fusionadas, fuente 10 ===

@@ -866,7 +866,7 @@ private excelHeaders = [
   { header: 'Observaciones 1',                 dataKey: 'observ1' },
   { header: 'Observaciones 2',                 dataKey: 'observ2' },
   { header: 'Comentarios contabilidad',        dataKey: 'comentCont' },
-  { header: 'Seguim. comité desinc.',          dataKey: 'seguimDesinc' },
+  { header: 'Seguimiento del cómite de desincorporación de Bienes',          dataKey: 'seguimDesinc' },
   { header: 'Estatus del bien',                dataKey: 'estatusBien' },
   { header: 'Motivo de baja',                  dataKey: 'motBaja' },
   { header: 'Fecha de baja',                   dataKey: 'fechaBaja' },
@@ -922,7 +922,7 @@ exportExcel() {
   XLSX.utils.book_append_sheet(wb, ws, 'Reporte');
   const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
   const blob = new Blob([wbout], { type: 'application/octet-stream' });
-  saveAs(blob, 'reporte_bienes.xlsx');
+  saveAs(blob, 'Reporte_bienes.xlsx');
 }
 
 
