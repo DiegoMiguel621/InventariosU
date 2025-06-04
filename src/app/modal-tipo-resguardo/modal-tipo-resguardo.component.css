@@ -1,0 +1,104 @@
+/* Semitransparente de fondo */
+.cdk-overlay-backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* --------------------------------------------------
+   Contenedor principal, más ancho para no “apretarlo”
+   -------------------------------------------------- */
+.modal-content {
+  background-color: #592B80;    /* púrpura intenso */
+  color: #fff;
+  width: 400px;                 /* antes 360px */
+  padding: 24px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* -------------------------
+   Header: título + botón X
+   ------------------------- */
+.modal-header {
+  position: relative;    /* para posicionar la X */
+  text-align: center;    /* centra el H2 */
+  margin-bottom: 24px;
+  padding: 0 8px;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.25rem;    /* ya lo tenías; ajústalo si quieres más grande */
+  font-weight: 500;
+  color: #fff;
+}
+
+.modal-header .close-button {
+  position: absolute;
+  top: 50%;
+  right: 8px;            /* separación al borde derecho */
+  transform: translateY(-50%);
+  font-size: 2rem;       /* agranda la “X” */
+  cursor: pointer;
+  color: #fff;
+}
+
+/* -------------------------
+   Body: checkboxes al 100%  
+   ------------------------- */
+.modal-body {
+  padding: 0 8px;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-right: 12px;
+  accent-color: #fff;    /* relleno blanco en checked */
+}
+
+/* -------------------------
+   Footer: botones centrados 
+   ------------------------- */
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.modal-footer .btn-primary,
+.modal-footer .btn-secondary {
+  border: none;
+  border-radius: 4px;
+  padding: 8px 20px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.modal-footer .btn-primary {
+  background-color: #fff;
+  color: #000;
+}
+
+.modal-footer .btn-secondary {
+  background-color: #fff;
+  color: #000;
+  
+}

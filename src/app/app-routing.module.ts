@@ -24,6 +24,7 @@ import { ModalFiltrosBienesComponent } from './modal-filtros-bienes/modal-filtro
 import { AsideComponent } from './components/aside/aside.component';
 import { ModalErrorComponent } from './components/modal-error/modal-error.component';
 import { ModalExportarReporteComponent } from './components/modal-exportar-reporte/modal-exportar-reporte.component';
+import { ModalTipoResguardoComponent } from './modal-tipo-resguardo/modal-tipo-resguardo.component';
 
 
 const routes: Routes = [
@@ -55,10 +56,9 @@ const routes: Routes = [
   {path:'modal12',component:ModalFiltrosBienesComponent},
   {path:'modal13',component:ModalErrorComponent},
   {path:'modal14',component:ModalExportarReporteComponent},
+  {path:'modal15',component:ModalTipoResguardoComponent},
+
   
-
-
-
   {path:'**',redirectTo:'login',pathMatch:'full'}
 ];
 

@@ -43,6 +43,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { ModalExportarReporteComponent } from './components/modal-exportar-reporte/modal-exportar-reporte.component';
+import { ModalTipoResguardoComponent } from './modal-tipo-resguardo/modal-tipo-resguardo.component';
 
 
 
@@ -79,6 +80,7 @@ import { ModalExportarReporteComponent } from './components/modal-exportar-repor
     ModalRestaurarTrabajador2Component,
     ModalRestaurarTrabajador3Component,
     ModalExportarReporteComponent,
+    ModalTipoResguardoComponent,
 
   ],
   imports: [

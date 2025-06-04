@@ -1,9 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TrabajadoresService } from '../service/trabajadores.service';
 import { BienesService } from '../service/bienes.service';
+import { ModalTipoResguardoComponent } from '../modal-tipo-resguardo/modal-tipo-resguardo.component';
 
 import ExcelJS from 'exceljs';
 import { saveAs } from 'file-saver';
@@ -22,7 +23,8 @@ export class ModalVerPersonalComponent implements OnInit {
     private trabajadoresService: TrabajadoresService,
     private bienesService: BienesService, 
     public dialogRef: MatDialogRef<ModalVerPersonalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { id: number } // Recibimos el ID
+    @Inject(MAT_DIALOG_DATA) public data: { id: number }, // Recibimos el ID
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -60,8 +62,26 @@ export class ModalVerPersonalComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  
-  async printResguardo() {
+  openModalTipoResguardo(): void {
+    const dialogRef = this.dialog.open(ModalTipoResguardoComponent, {
+      width: '400px'
+    });
+
+    dialogRef.afterClosed().subscribe((resultado: string | null) => {
+      // Si devolvió 'PATRIMONIO_EXCEL', llamamos a printResguardoPatrimonio()
+      if (resultado === 'PATRIMONIO_EXCEL') {
+        this.printResguardoPatrimonio();
+      }
+      // Si es null o cualquier otro valor, no hacemos nada por ahora
+    });
+  }
+
+
+
+     //
+     // IMPRESION DE RESGUARDOS
+     //
+     async printResguardoPatrimonio() {
   if (!this.trabajador) return;
   // 1) crea workbook y hoja
   const wb = new ExcelJS.Workbook();
@@ -195,7 +215,7 @@ export class ModalVerPersonalComponent implements OnInit {
   //    Arial 8, negrita, alineación centrada horizontal y vertical.
   const headerRowIndex = 12;
   const headerRow = ws.getRow(headerRowIndex);
-  headerRow.height = 15.63; // altura estándar
+  headerRow.height = 16.5; // altura estándar
 
   // Columna A
   headerRow.getCell(1).value = 'NÚMERO DE INVENTARIO';
@@ -230,7 +250,7 @@ export class ModalVerPersonalComponent implements OnInit {
   let currentRow = headerRowIndex + 1; // empieza en la fila 13
   patrimonios.forEach((b, index) => {
     const r = ws.getRow(currentRow + index);
-    r.height = 15.63; // altura estándar
+    r.height = 16.5; // altura estándar
 
     // Columna A = numInvAnt
     const cellA = r.getCell(1);
@@ -265,11 +285,12 @@ export class ModalVerPersonalComponent implements OnInit {
 
     r.commit();
   });
+  
 
   // 4) Debajo de la última fila de bienes, escribir el TOTAL
   const totalRowIndex = headerRowIndex + patrimonios.length + 1; // 12 + N bienes + 1
   const totalRow = ws.getRow(totalRowIndex);
-  totalRow.height = 15.63;
+  totalRow.height = 16.5;
 
   // Merge A–E en la fila total
   ws.mergeCells(`A${totalRowIndex}:E${totalRowIndex}`);
@@ -285,7 +306,11 @@ export class ModalVerPersonalComponent implements OnInit {
   totalNumberCell.alignment = { horizontal: 'center', vertical: 'middle' };
 
   totalRow.commit();
-  
+  const primerFilaVacia = totalRowIndex + 1;
+for (let fila = primerFilaVacia; fila <= 48; fila++) {
+  ws.mergeCells(`B${fila}:C${fila}`);
+}
+
 
   //
   // === PIE ESTÁTICO (filas 49–57) todas A–F fusionadas, fuente 10 ===
@@ -296,7 +321,7 @@ export class ModalVerPersonalComponent implements OnInit {
     'que se le encomienden, evitando el uso abusivo, sustracción, destrucción, ocultamiento o inutilización indebida ' +
     'de los mismos; asimismo, a notificar oportunamente a la Secretaría Administrativa cualquier incidencia que ' +
     'sufran los bienes descritos en este resguardo.';
-  [49, 50].forEach(rn => ws.getRow(rn).height = 16.2);
+  [49, 50].forEach(rn => ws.getRow(rn).height = 16.5);
   ws.getRow(51).height = 33;
   ws.mergeCells('A49:F51');
   const p1 = ws.getCell('A49');
@@ -335,15 +360,18 @@ export class ModalVerPersonalComponent implements OnInit {
   //
   // === OBSERVACIONES + firmas (filas 58–66) ===
   //
-  ws.getCell('A58').value = 'OBSERVACIONES:';
-  ws.getCell('A58').font = { bold: true, size: 10 };
+  const obCell = ws.getCell('A58');
+  ws.mergeCells('A58:F58');
+  obCell.value = 'OBSERVACIONES:';
+  obCell.font = { size: 10, bold: true };
+  obCell.alignment = { vertical: 'middle', horizontal: 'left' };
 
   // fila 59 separador
   ws.getRow(59).height = 16.5;
   ws.mergeCells('A59:F59');
 
   // fila 60: ACEPTO / ELABORÓ / REVISÓ / AUTORIZÓ
-  ws.getRow(60).height = 15.63;
+  ws.getRow(60).height = 16.5;
   ws.mergeCells('A60:B60');
   ws.getCell('A60').value = 'ACEPTÓ';
   ws.getCell('A60').font = { bold: true, size: 10 };
@@ -428,6 +456,89 @@ export class ModalVerPersonalComponent implements OnInit {
   ws.getCell('F66').alignment = { horizontal: 'center' };
 
   //
+  //TODOS los bordes del resguardo
+  //
+
+  //Bordes normales
+  const rango = ['A6','B6','A7','B7','A8','B8','A9','B9','A10','B10', 'E9'];
+  rango.forEach(coord => {
+    ws.getCell(coord).border = {
+      top:    { style: 'thin' },
+      left:   { style: 'thin' },
+      bottom: { style: 'thin' },
+      right:  { style: 'thin' }
+    };
+  });
+
+  // para los gruesos
+  const rangoG1 = ['A5','B5', 'C5', 'D5', 'E5', 'F5'];
+  rangoG1.forEach(coord => {
+    ws.getCell(coord).border = {
+      bottom:    { style: 'medium' }
+    };
+  });
+
+  const celdaD6 = ws.getCell('D6');
+  celdaD6.border = {  
+    left:   { style: 'medium' },  
+    bottom: {style: 'thin'},
+    right:  { style: 'medium' }
+  };
+
+  const celdaD9 = ws.getCell('D9');
+  celdaD9.border = {  
+    left:   { style: 'medium' },  
+    right:  { style: 'thin' }
+  };
+
+  const celdaE9 = ws.getCell('E9');
+  celdaE9.border = {  
+    right:   { style: 'medium' }
+  };
+  
+  const rangoFi11 = ['A11','B11', 'D11', 'E11', 'F11'];
+  rangoFi11.forEach(coord => {
+    ws.getCell(coord).border = {
+      bottom:    { style: 'medium' },
+      top:    { style: 'medium' }
+    };
+  });
+
+  for (let fila = 12; fila <= 58; fila++) {
+  const celdaGiz = ws.getCell(`G${fila}`);
+  celdaGiz.border = {    
+    left:   { style: 'medium' }
+  };
+  }
+
+  const celdaA58 = ws.getCell('A58');
+  celdaA58.border = {  
+    bottom:   { style: 'medium' }
+  };
+
+  const rangoGen = ['A49', 'A52', 'A53', 'A56'];
+  rangoGen.forEach(coord => {
+    ws.getCell(coord).border = {
+      top:    { style: 'thin' },
+      left:   { style: 'thin' },
+      bottom: { style: 'thin' },
+      right:  { style: 'thin' }
+    };
+  });
+
+  for (let row = 12; row <= 48; row++) {
+  for (let col = 1; col <= 6; col++) {
+    const cellTable = ws.getRow(row).getCell(col);
+    cellTable.border = {
+      top:    { style: 'thin' },
+      left:   { style: 'thin' },
+      bottom: { style: 'thin' },
+      right:  { style: 'thin' }
+    };
+  }
+}
+
+  //
   // 8) descarga
   //
 
@@ -449,6 +560,8 @@ export class ModalVerPersonalComponent implements OnInit {
 });
 
   const buf = await wb.xlsx.writeBuffer();
-  saveAs(new Blob([buf]), `resguardo_${this.trabajador.numero}.xlsx`);
+  saveAs(new Blob([buf]), `Resguardo_Patrimonio_${this.trabajador.nombre}.xlsx`);
 }
+  
+  
 }

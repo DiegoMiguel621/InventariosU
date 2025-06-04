@@ -1,0 +1,27 @@
+<div class="modal modal-export">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Seleccione el tipo de reporte</h2>
+      <div class="close-button" (click)="close()">
+        <i class="fa-solid fa-xmark"></i>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" [(ngModel)]="patrimonioSelected"/>
+          PATRIMONIO
+        </label>
+        <label>
+          <input type="checkbox" [(ngModel)]="sujetoControlSelected"/>
+          SUJETO A CONTROL
+        </label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-primary" (click)="onExcelClick()">EXCEL</button>
+      <button class="btn-secondary" (click)="onPdfClick()">PDF</button>
+    </div>
+  </div>
+</div>
+
