@@ -23,14 +23,29 @@ export class ModalTipoResguardoComponent {
 
   // Método que se dispara al hacer click en "EXCEL"
   onExcelClick(): void {
-    // Si "PATRIMONIO" está marcado, devolvemos un flag concreto
-    if (this.patrimonioSelected) {
+    // Sólo Patrimonio:
+    if (this.patrimonioSelected && !this.sujetoControlSelected) {
       this.dialogRef.close('PATRIMONIO_EXCEL');
-    } else {
-      // Opcional: podrías mostrar un mensaje de error si no marcó nada,
-      // o simplemente cerrar sin valor:
-      this.dialogRef.close(null);
+      return;
     }
+
+    // Sólo Sujeto a Control:
+    if (!this.patrimonioSelected && this.sujetoControlSelected) {
+      this.dialogRef.close('SUJETO_CONTROL_EXCEL');
+      return;
+    }
+
+    // Ambas marcadas: devolvemos un arreglo con los dos flags
+    if (this.patrimonioSelected && this.sujetoControlSelected) {
+      this.dialogRef.close([
+        'PATRIMONIO_EXCEL',
+        'SUJETO_CONTROL_EXCEL'
+      ]);
+      return;
+    }
+
+    // Si no marcó nada, cerramos sin valor
+    this.dialogRef.close(null);
   }
 
   // (Opcional en el futuro) Método para PDF

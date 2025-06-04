@@ -177,3 +177,56 @@
 
 
 
+/* ============================= */
+/* Sección “Información del Resguardante” */
+/* ============================= */
+
+
+.resguardante-section h3 {
+  text-align: center;      /* Centra el título */
+  font-size: 1.5rem;       /* Más grande que el texto normal */
+  color: #000;             /* Negro */  
+  font-weight: 500;  
+  border-bottom: 2px solid #9e5bb5;
+  padding-bottom: 5px;
+}
+
+/* Contenedor para habilitar scroll horizontal si la pantalla es muy pequeña */
+.resguardante-table-container {
+  margin-top: 12px;
+  overflow-x: auto;
+}
+
+/* Tabla de dos columnas para los datos del trabajador */
+.resguardante-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+/* Etiquetas (campo/título) */
+.resguardante-table th {
+  width: 30%;
+  text-align: left;
+  padding: 8px;
+  background-color: #f3f3f3;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Valores (datos del trabajador) */
+.resguardante-table td {
+  width: 70%;
+  padding: 8px;
+  color: #333;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Zebra stripes (opcional) */
+.resguardante-table tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+
