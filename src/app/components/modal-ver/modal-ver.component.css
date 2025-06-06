@@ -123,5 +123,62 @@
   margin-right: 5%;
 }
 
+/* ============================= */
+/* Sección “Información del Bien” */
+/* ============================= */
+
+.bien-section h3 {
+  text-align: center;            /* Centrar el título */
+  font-size: 1.5rem;             /* Más grande que el texto normal */
+  color: #000;                   /* Negro */
+  font-weight: 500;              /* Un poco de énfasis */
+  border-bottom: 2px solid #9e5bb5; /* Línea morada idéntica */
+  padding-bottom: 5px;
+  margin: 0;
+}
+
+/* Contenedor para habilitar scroll horizontal si la pantalla se hace muy pequeña */
+.bien-table-container {
+  margin-top: 12px;
+  overflow-x: auto;
+}
+
+/* Tabla de dos columnas para los datos del bien */
+.bien-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+/* Etiquetas (campo/título) */
+.bien-table th {
+  width: 40%;
+  text-align: left;
+  padding: 8px;
+  background-color: #f3f3f3;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Valores (datos del bien) */
+.bien-table td {
+  width: 60%;
+  padding: 8px;
+  color: #333;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Opcional: zebra stripes para filas pares */
+.bien-table tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+/* Si quieres que en todos los <th> y <td> verticalmente queden alineados al centro: */
+.bien-table th,
+.bien-table td {
+  vertical-align: middle;
+}
 
 

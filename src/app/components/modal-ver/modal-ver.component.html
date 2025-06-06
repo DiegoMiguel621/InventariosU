@@ -5,386 +5,321 @@
   <div class="modal">
     <div class="modal-content">
       <div class="modal-header">
-        <h2>Información del Bien</h2>
+        <h2></h2>
         <div class="close-button" (click)="cerrarModal()">
           <i class="fa-solid fa-xmark fa-2xl" style="color: #ffffff;"></i>
         </div>
       </div>
   
       <div class="modal-body">
-        <div class="info-section" *ngIf="bien">
-  
-          <!-- 1 -->
-          <div class="form-group">
-            <label>Número de inventario anterior:</label>
-            <span>{{ bien.numInvAnt }}</span>
-          </div>
-          <!-- 2 -->
-          <div class="form-group">
-            <label>Número de inventario armonizado:</label>
-            <span>{{ bien.numInvArm }}</span>
-          </div>
-          <!-- 3 -->
-          <div class="form-group">
-            <label>Clave de control:</label>
-            <span>{{ bien.cControl }}</span>
-          </div>
-          <!-- 4 -->
-          <div class="form-group">
-            <label>Nombre del bien:</label>
-            <span>{{ bien.nombreBien }}</span>
-          </div>
-          <!-- 5 -->
-          <div class="form-group">
-            <label>Clasificación del Bien:</label>
-            <span>{{ bien.clasificacion }}</span>
-          </div>
-          <!-- 6 -->
-          <div class="form-group">
-            <label>Clasificación adicional del Bien:</label>
-            <span>{{ bien.clasAdic }}</span>
-          </div>
-          <!-- 7 -->
-          <div class="form-group">
-            <label>Nombre del Bien (catálogo):</label>
-            <span>{{ bien.nombreCat }}</span>
-          </div>
-          <!-- 8 -->
-          <div class="form-group">
-            <label>Descripción:</label>
-            <span>{{ bien.descripcion }}</span>
-          </div>
-          <!-- 9 -->
-          <div class="form-group">
-            <label>Marca:</label>
-            <span>{{ bien.marca }}</span>
-          </div>
-          <!-- 10 -->
-          <div class="form-group">
-            <label>Modelo:</label>
-            <span>{{ bien.modelo }}</span>
-          </div>
-          <!-- 11 -->
-          <div class="form-group">
-            <label>Número de serie:</label>
-            <span>{{ bien.numSerie }}</span>
-          </div>
-          <!-- 12 -->
-          <div class="form-group">
-            <label>Aplica registro contable:</label>
-            <span>{{ bien.aplicaRegCont }}</span>
-          </div>
-          <!-- 13 -->
-          <div class="form-group">
-            <label>Grupo de Bienes (Contabilidad):</label>
-            <span>{{ bien.grupoBienesCont }}</span>
-          </div>
-          <!-- 14 -->
-          <div class="form-group">
-            <label>Grupo de Bienes (CONAC):</label>
-            <span>{{ bien.grupoBienesConac }}</span>
-          </div>
-          <!-- 15 -->
-          <div class="form-group">
-            <label>Categoría:</label>
-            <span>{{ bien.categoria }}</span>
-          </div>
-          <!-- 16 -->
-          <div class="form-group">
-            <label>Subcategoría:</label>
-            <span>{{ bien.subcategoria }}</span>
-          </div>
-          <!-- 17 -->
-          <div class="form-group">
-            <label>Tipo de Alta:</label>
-            <span>{{ bien.tipoAlta }}</span>
-          </div>
-          <!-- 18 -->
-          <div class="form-group">
-            <label>Factura Física:</label>
-            <span>{{ bien.facturaFisica }}</span>
-          </div>
-          <!-- 19 -->
-          <div class="form-group">
-            <label>Fecha Recepción Factura:</label>
-            <span>{{ bien.fechaRecFact }}</span>
-          </div>
-          <!-- 20 -->
-          <div class="form-group">
-            <label>Número de Factura:</label>
-            <span>{{ bien.numFact }}</span>
-          </div>
-          <!-- 21 -->
-          <div class="form-group">
-            <label>Fecha Factura:</label>
-            <span>{{ bien.fechaFact }}</span>
-          </div>
-          <!-- 22 -->
-          <div class="form-group">
-            <label>Fecha Alta:</label>
-            <span>{{ bien.fechaAlta }}</span>
-          </div>
-          <!-- 23 -->
-          <div class="form-group">
-            <label>Costo Adquisición:</label>
-            <span>{{ bien.costoAdq }}</span>
-          </div>
-          <!-- 24 -->
-          <div class="form-group">
-            <label>Costo Adquisición Contable:</label>
-            <span>{{ bien.costoAdqCont }}</span>
-          </div>
-          <!-- 25 -->
-          <div class="form-group">
-            <label>Depreciación:</label>
-            <span>{{ bien.depreciacion }}</span>
-          </div>
-          <!-- 26 -->
-          <div class="form-group">
-            <label>Frecuencia Depreciación:</label>
-            <span>{{ bien.frecDepre }}</span>
-          </div>
-          <!-- 27 -->
-          <div class="form-group">
-            <label>% Depreciación Anual:</label>
-            <span>{{ bien.porcDepAnual }}</span>
-          </div>
-          <!-- 28 -->
-          <div class="form-group">
-            <label>Meses a Depreciar:</label>
-            <span>{{ bien.mesesDepre }}</span>
-          </div>
-          <!-- 29 -->
-          <div class="form-group">
-            <label>Importe Mensual Depreciación:</label>
-            <span>{{ bien.impMensDepre }}</span>
-          </div>
-          <!-- 30 -->
-          <div class="form-group">
-            <label>Monto Depreciado:</label>
-            <span>{{ bien.montoDepre }}</span>
-          </div>
-          <!-- 31 -->
-          <div class="form-group">
-            <label>Valor en Libros:</label>
-            <span>{{ bien.valLibros }}</span>
-          </div>
-          <!-- 32 -->
-          <div class="form-group">
-            <label>Meses Pendientes Depreciación:</label>
-            <span>{{ bien.mesesPendDepre }}</span>
-          </div>
-          <!-- 33 -->
-          <div class="form-group">
-            <label>Clave del Proyecto:</label>
-            <span>{{ bien.claveProyecto }}</span>
-          </div>
-          <!-- 34 -->
-          <div class="form-group">
-            <label>Aplica Proyecto:</label>
-            <span>{{ bien.apProye }}</span>
-          </div>
-          <!-- 35 -->
-          <div class="form-group">
-            <label>Partida Presupuestal:</label>
-            <span>{{ bien.partPres }}</span>
-          </div>
-          <!-- 36 -->
-          <div class="form-group">
-            <label>Fuente de Financiamiento:</label>
-            <span>{{ bien.fuenteFinan }}</span>
-          </div>
-          <!-- 37 -->
-          <div class="form-group">
-            <label>Número de Cuenta:</label>
-            <span>{{ bien.numCuenta }}</span>
-          </div>
-          <!-- 38 -->
-          <div class="form-group">
-            <label>Nombre Proveedor:</label>
-            <span>{{ bien.proveedor }}</span>
-          </div>
-          <!-- 39 -->
-          <div class="form-group">
-            <label>RFC del Proveedor:</label>
-            <span>{{ bien.rfcProveedor }}</span>
-          </div>
-          <!-- 40 -->
-          <div class="form-group">
-            <label>Domicilio del Proveedor:</label>
-            <span>{{ bien.domProveedor }}</span>
-          </div>
-          <!-- 41 -->
-          <div class="form-group">
-            <label>Bienes Menores:</label>
-            <span>{{ bien.bienesMenores }}</span>
-          </div>
-          <!-- 42 -->
-          <div class="form-group">
-            <label>Tipo de Resguardo:</label>
-            <span>{{ bien.tipoResguardo }}</span>
-          </div>
-          <!-- 43 -->
-          <div class="form-group">
-            <label>Nombre del Resguardante:</label>
-            <span>{{ bien.nomRes }}</span>
-          </div>
-          <!-- 44 -->
-          <div class="form-group">
-            <label>Número del Resguardante:</label>
-            <span>{{ bien.numRes }}</span>
-          </div>
-          <!-- 45 -->
-          <div class="form-group">
-            <label>Área del Resguardante:</label>
-            <span>{{ bien.areaRes }}</span>
-          </div>
-          <!-- 46 -->
-          <div class="form-group">
-            <label>Ubicación del Resguardante:</label>
-            <span>{{ bien.ubiRes }}</span>
-          </div>
-          <!-- 47 -->
-          <div class="form-group">
-            <label>Observaciones 1:</label>
-            <span>{{ bien.observ1 }}</span>
-          </div>
-          <!-- 48 -->
-          <div class="form-group">
-            <label>Observaciones 2:</label>
-            <span>{{ bien.observ2 }}</span>
-          </div>
-          <!-- 49 -->
-          <div class="form-group">
-            <label>Comentario Contable:</label>
-            <span>{{ bien.comentCont }}</span>
-          </div>
-          <!-- 50 -->
-          <div class="form-group">
-            <label>Seguimiento de Desincorporación:</label>
-            <span>{{ bien.seguimDesinc }}</span>
-          </div>
-          <!-- 51 -->
-          <div class="form-group">
-            <label>Estatus del Bien:</label>
-            <span>{{ bien.estatusBien }}</span>
-          </div>
-          <!-- 52 -->
-          <div class="form-group">
-            <label>Motivo de Baja:</label>
-            <span>{{ bien.motBaja }}</span>
-          </div>
-          <!-- 53 -->
-          <div class="form-group">
-            <label>Fecha de Baja:</label>
-            <span>{{ bien.fechaBaja }}</span>
-          </div>
-          <!-- 54 -->
-          <div class="form-group">
-            <label>Año de Adquisición:</label>
-            <span>{{ bien.aAdquisicion }}</span>
-          </div>
-          <!-- 55 -->
-          <div class="form-group">
-            <label>Mes de Adquisición:</label>
-            <span>{{ bien.mAdquisicion }}</span>
-          </div>
-          <!-- 56 -->
-          <div class="form-group">
-            <label>Foto del Bien:</label>
-            <span>{{ bien.fotoBien }}</span>
-          </div>
-          <!-- 57 -->
-          <div class="form-group">
-            <label>Perfil del Resguardante:</label>
-            <span>{{ bien.perfilRes }}</span>
-          </div>
-          <!-- 58 -->
-          <div class="form-group">
-            <label>Puesto del Resguardante:</label>
-            <span>{{ bien.puestoRes }}</span>
-          </div>
-          <!-- 59 -->
-          <div class="form-group">
-            <label>Estatus del Resguardante:</label>
-            <span>{{ bien.estatusRes }}</span>
-          </div>
-          <!-- 60 -->
-          <div class="form-group">
-            <label>Correo Personal del Resguardante:</label>
-            <span>{{ bien.correoPerRes }}</span>
-          </div>
-          <!-- 61 -->
-          <div class="form-group">
-            <label>Correo Institucional del Resguardante:</label>
-            <span>{{ bien.correoInstRes }}</span>
-          </div>
-          <!-- 62 -->
-          <div class="form-group">
-            <label>Resguardo 2016 y años anteriores:</label>
-            <span>{{ bien.res16Ant }}</span>
-          </div>
-          <!-- 63 -->
-          <div class="form-group">
-            <label>Resguardo 2017 Si/No:</label>
-            <span>{{ bien.res17 }}</span>
-          </div>
-          <!-- 64 -->
-          <div class="form-group">
-            <label>Resguardo 2018 Si/No:</label>
-            <span>{{ bien.res18 }}</span>
-          </div>
-          <!-- 65 -->
-          <div class="form-group">
-            <label>Resguardo 2019 Si/No:</label>
-            <span>{{ bien.res19 }}</span>
-          </div>
-          <!-- 66 -->
-          <div class="form-group">
-            <label>Resguardo 2020 Si/No:</label>
-            <span>{{ bien.res20 }}</span>
-          </div>
-          <!-- 67 -->
-          <div class="form-group">
-            <label>Resguardo 2021 Si/No:</label>
-            <span>{{ bien.res21 }}</span>
-          </div>
-          <!-- 68 -->
-          <div class="form-group">
-            <label>Resguardo 2022 Si/No:</label>
-            <span>{{ bien.res22 }}</span>
-          </div>
-          <!-- 69 -->
-          <div class="form-group">
-            <label>Resguardo 2023 Si/No:</label>
-            <span>{{ bien.res23 }}</span>
-          </div>
-          <!-- 70 -->
-          <div class="form-group">
-            <label>Resguardo 2024 Si/No:</label>
-            <span>{{ bien.res24 }}</span>
-          </div>
-          <!-- 71 -->
-          <div class="form-group">
-            <label>Estatus del Resguardo:</label>
-            <span>{{ bien.estatusResguardo }}</span>
-          </div>
-          <!-- 72 -->
-          <div class="form-group">
-            <label>Último Resguardo:</label>
-            <span>{{ bien.ultimoResguardo }}</span>
-          </div>
-          <!-- 73 -->
-          <div class="form-group">
-            <label>Etiqueta:</label>
-            <span>{{ bien.etiqueta }}</span>
-          </div>
-  
-        </div>
+        <!-- sección de “Información del Bien” -->
+<div class="bien-section" *ngIf="bien">
+  <h3>Información del Bien</h3>
+  <div class="bien-table-container">
+    <table class="bien-table">
+      <tbody>
+        <tr>
+          <th>Número de inventario anterior:</th>
+          <td>{{ bien.numInvAnt }}</td>
+        </tr>
+        <tr>
+          <th>Número de inventario armonizado:</th>
+          <td>{{ bien.numInvArm }}</td>
+        </tr>
+        <tr>
+          <th>Clave de control:</th>
+          <td>{{ bien.cControl }}</td>
+        </tr>
+        <tr>
+          <th>Nombre del bien:</th>
+          <td>{{ bien.nombreBien }}</td>
+        </tr>
+        <tr>
+          <th>Clasificación del Bien:</th>
+          <td>{{ bien.clasificacion }}</td>
+        </tr>
+        <tr>
+          <th>Clasificación adicional del Bien:</th>
+          <td>{{ bien.clasAdic }}</td>
+        </tr>
+        <tr>
+          <th>Nombre del Bien (catálogo):</th>
+          <td>{{ bien.nombreCat }}</td>
+        </tr>
+        <tr>
+          <th>Descripción:</th>
+          <td>{{ bien.descripcion }}</td>
+        </tr>
+        <tr>
+          <th>Marca:</th>
+          <td>{{ bien.marca }}</td>
+        </tr>
+        <tr>
+          <th>Modelo:</th>
+          <td>{{ bien.modelo }}</td>
+        </tr>
+        <tr>
+          <th>Número de serie:</th>
+          <td>{{ bien.numSerie }}</td>
+        </tr>
+        <tr>
+          <th>Aplica registro contable:</th>
+          <td>{{ bien.aplicaRegCont }}</td>
+        </tr>
+        <tr>
+          <th>Grupo de Bienes (Contabilidad):</th>
+          <td>{{ bien.grupoBienesCont }}</td>
+        </tr>
+        <tr>
+          <th>Grupo de Bienes (CONAC):</th>
+          <td>{{ bien.grupoBienesConac }}</td>
+        </tr>
+        <tr>
+          <th>Categoría:</th>
+          <td>{{ bien.categoria }}</td>
+        </tr>
+        <tr>
+          <th>Subcategoría:</th>
+          <td>{{ bien.subcategoria }}</td>
+        </tr>
+        <tr>
+          <th>Tipo de Alta:</th>
+          <td>{{ bien.tipoAlta }}</td>
+        </tr>
+        <tr>
+          <th>Factura Física:</th>
+          <td>{{ bien.facturaFisica }}</td>
+        </tr>
+        <tr>
+          <th>Fecha Recepción Factura:</th>
+          <td>{{ bien.fechaRecFact }}</td>
+        </tr>
+        <tr>
+          <th>Número de Factura:</th>
+          <td>{{ bien.numFact }}</td>
+        </tr>
+        <tr>
+          <th>Fecha Factura:</th>
+          <td>{{ bien.fechaFact }}</td>
+        </tr>
+        <tr>
+          <th>Fecha Alta:</th>
+          <td>{{ bien.fechaAlta }}</td>
+        </tr>
+        <tr>
+          <th>Costo Adquisición:</th>
+          <td>{{ bien.costoAdq }}</td>
+        </tr>
+        <tr>
+          <th>Costo Adquisición Contable:</th>
+          <td>{{ bien.costoAdqCont }}</td>
+        </tr>
+        <tr>
+          <th>Depreciación:</th>
+          <td>{{ bien.depreciacion }}</td>
+        </tr>
+        <tr>
+          <th>Frecuencia Depreciación:</th>
+          <td>{{ bien.frecDepre }}</td>
+        </tr>
+        <tr>
+          <th>% Depreciación Anual:</th>
+          <td>{{ bien.porcDepAnual }}</td>
+        </tr>
+        <tr>
+          <th>Meses a Depreciar:</th>
+          <td>{{ bien.mesesDepre }}</td>
+        </tr>
+        <tr>
+          <th>Importe Mensual Depreciación:</th>
+          <td>{{ bien.impMensDepre }}</td>
+        </tr>
+        <tr>
+          <th>Monto Depreciado:</th>
+          <td>{{ bien.montoDepre }}</td>
+        </tr>
+        <tr>
+          <th>Valor en Libros:</th>
+          <td>{{ bien.valLibros }}</td>
+        </tr>
+        <tr>
+          <th>Meses Pendientes Depreciación:</th>
+          <td>{{ bien.mesesPendDepre }}</td>
+        </tr>
+        <tr>
+          <th>Clave del Proyecto:</th>
+          <td>{{ bien.claveProyecto }}</td>
+        </tr>
+        <tr>
+          <th>Aplica Proyecto:</th>
+          <td>{{ bien.apProye }}</td>
+        </tr>
+        <tr>
+          <th>Partida Presupuestal:</th>
+          <td>{{ bien.partPres }}</td>
+        </tr>
+        <tr>
+          <th>Fuente de Financiamiento:</th>
+          <td>{{ bien.fuenteFinan }}</td>
+        </tr>
+        <tr>
+          <th>Número de Cuenta:</th>
+          <td>{{ bien.numCuenta }}</td>
+        </tr>
+        <tr>
+          <th>Nombre Proveedor:</th>
+          <td>{{ bien.proveedor }}</td>
+        </tr>
+        <tr>
+          <th>RFC del Proveedor:</th>
+          <td>{{ bien.rfcProveedor }}</td>
+        </tr>
+        <tr>
+          <th>Domicilio del Proveedor:</th>
+          <td>{{ bien.domProveedor }}</td>
+        </tr>
+        <tr>
+          <th>Bienes Menores:</th>
+          <td>{{ bien.bienesMenores }}</td>
+        </tr>
+        <tr>
+          <th>Tipo de Resguardo:</th>
+          <td>{{ bien.tipoResguardo }}</td>
+        </tr>
+        <tr>
+          <th>Nombre del Resguardante:</th>
+          <td>{{ bien.nomRes }}</td>
+        </tr>
+        <tr>
+          <th>Número del Resguardante:</th>
+          <td>{{ bien.numRes }}</td>
+        </tr>
+        <tr>
+          <th>Área del Resguardante:</th>
+          <td>{{ bien.areaRes }}</td>
+        </tr>
+        <tr>
+          <th>Ubicación del Resguardante:</th>
+          <td>{{ bien.ubiRes }}</td>
+        </tr>
+        <tr>
+          <th>Observaciones 1:</th>
+          <td>{{ bien.observ1 }}</td>
+        </tr>
+        <tr>
+          <th>Observaciones 2:</th>
+          <td>{{ bien.observ2 }}</td>
+        </tr>
+        <tr>
+          <th>Comentario Contable:</th>
+          <td>{{ bien.comentCont }}</td>
+        </tr>
+        <tr>
+          <th>Seguimiento de Desincorporación:</th>
+          <td>{{ bien.seguimDesinc }}</td>
+        </tr>
+        <tr>
+          <th>Estatus del Bien:</th>
+          <td>{{ bien.estatusBien }}</td>
+        </tr>
+        <tr>
+          <th>Motivo de Baja:</th>
+          <td>{{ bien.motBaja }}</td>
+        </tr>
+        <tr>
+          <th>Fecha de Baja:</th>
+          <td>{{ bien.fechaBaja }}</td>
+        </tr>
+        <tr>
+          <th>Año de Adquisición:</th>
+          <td>{{ bien.aAdquisicion }}</td>
+        </tr>
+        <tr>
+          <th>Mes de Adquisición:</th>
+          <td>{{ bien.mAdquisicion }}</td>
+        </tr>
+        <tr>
+          <th>Foto del Bien:</th>
+          <td>{{ bien.fotoBien }}</td>
+        </tr>
+        <tr>
+          <th>Perfil del Resguardante:</th>
+          <td>{{ bien.perfilRes }}</td>
+        </tr>
+        <tr>
+          <th>Puesto del Resguardante:</th>
+          <td>{{ bien.puestoRes }}</td>
+        </tr>
+        <tr>
+          <th>Estatus del Resguardante:</th>
+          <td>{{ bien.estatusRes }}</td>
+        </tr>
+        <tr>
+          <th>Correo Personal del Resguardante:</th>
+          <td>{{ bien.correoPerRes }}</td>
+        </tr>
+        <tr>
+          <th>Correo Institucional del Resguardante:</th>
+          <td>{{ bien.correoInstRes }}</td>
+        </tr>
+        <tr>
+          <th>Resguardo 2016 y años anteriores:</th>
+          <td>{{ bien.res16Ant }}</td>
+        </tr>
+        <tr>
+          <th>Resguardo 2017 Si/No:</th>
+          <td>{{ bien.res17 }}</td>
+        </tr>
+        <tr>
+          <th>Resguardo 2018 Si/No:</th>
+          <td>{{ bien.res18 }}</td>
+        </tr>
+        <tr>
+          <th>Resguardo 2019 Si/No:</th>
+          <td>{{ bien.res19 }}</td>
+        </tr>
+        <tr>
+          <th>Resguardo 2020 Si/No:</th>
+          <td>{{ bien.res20 }}</td>
+        </tr>
+        <tr>
+          <th>Resguardo 2021 Si/No:</th>
+          <td>{{ bien.res21 }}</td>
+        </tr>
+        <tr>
+          <th>Resguardo 2022 Si/No:</th>
+          <td>{{ bien.res22 }}</td>
+        </tr>
+        <tr>
+          <th>Resguardo 2023 Si/No:</th>
+          <td>{{ bien.res23 }}</td>
+        </tr>
+        <tr>
+          <th>Resguardo 2024 Si/No:</th>
+          <td>{{ bien.res24 }}</td>
+        </tr>
+        <tr>
+          <th>Estatus del Resguardo:</th>
+          <td>{{ bien.estatusResguardo }}</td>
+        </tr>
+        <tr>
+          <th>Último Resguardo:</th>
+          <td>{{ bien.ultimoResguardo }}</td>
+        </tr>
+        <tr>
+          <th>Etiqueta:</th>
+          <td>{{ bien.etiqueta }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
       </div>
   
       <div class="modal-footer">
-        <button class="btn-imprimir" type="button">Imprimir</button>
+        <button class="btn-imprimir" type="button" (click)="printBienInfo()">Imprimir</button>
+
       </div>
     </div>
   </div>
