@@ -50,12 +50,19 @@ export class ModalTipoResguardoComponent {
 
   // (Opcional en el futuro) Método para PDF
   onPdfClick(): void {
-    // Harías algo similar, por ejemplo:
-    // if (this.patrimonioSelected) {
-    //   this.dialogRef.close('PATRIMONIO_PDF');
-    // } else {
-    //   this.dialogRef.close(null);
-    // }
-    this.dialogRef.close(null);
+  if (this.patrimonioSelected && !this.sujetoControlSelected) {
+    this.dialogRef.close('PATRIMONIO_PDF');
+    return;
   }
+  if (!this.patrimonioSelected && this.sujetoControlSelected) {
+    this.dialogRef.close('SUJETO_CONTROL_PDF');
+    return;
+  }
+  if (this.patrimonioSelected && this.sujetoControlSelected) {
+    this.dialogRef.close(['PATRIMONIO_PDF', 'SUJETO_CONTROL_PDF']);
+    return;
+  }
+  this.dialogRef.close(null);
+}
+
 }

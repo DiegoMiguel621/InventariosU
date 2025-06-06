@@ -44,6 +44,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { ModalExportarReporteComponent } from './components/modal-exportar-reporte/modal-exportar-reporte.component';
 import { ModalTipoResguardoComponent } from './modal-tipo-resguardo/modal-tipo-resguardo.component';
+import { ModalCerrarSesionComponent } from './modal-cerrar-sesion/modal-cerrar-sesion.component';
 
 
 
@@ -81,6 +82,7 @@ import { ModalTipoResguardoComponent } from './modal-tipo-resguardo/modal-tipo-r
     ModalRestaurarTrabajador3Component,
     ModalExportarReporteComponent,
     ModalTipoResguardoComponent,
+    ModalCerrarSesionComponent,
 
   ],
   imports: [
