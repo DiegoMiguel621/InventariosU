@@ -40,10 +40,6 @@ export class ModalVerComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  /**
-   * Genera un PDF que reproduce exactamente la misma tabla con
-   * "Información del Bien" que ves en pantalla (40%/60%, línea morada, etc.).
-   */
   printBienInfo(): void {
     if (!this.bien) {
       return;
