@@ -15,19 +15,19 @@
         <form [formGroup]="addProductForm" (ngSubmit)="onSubmit()">          
           <div class="form-group">
             <label for="numInvAnt">Número de Inventario Anterior:</label>
-            <input type="text" id="numInvAnt" formControlName="numInvAnt">
+            <input type="text" id="numInvAnt" formControlName="numInvAnt" maxlength="25">
           </div>
           <div class="form-group">
             <label for="numInvArm">Número de Inventario Armonizado:</label>
-            <input type="text" id="numInvArm" formControlName="numInvArm">
+            <input type="text" id="numInvArm" formControlName="numInvArm" maxlength="25">
           </div>
           <div class="form-group">
             <label for="cControl">Clave de Control:</label>
-            <input type="text" id="cControl" formControlName="cControl">
+            <input type="text" id="cControl" formControlName="cControl" maxlength="20">
           </div>
           <div class="form-group">
             <label for="nombreBien">Nombre del Bien:</label>
-            <input type="text" id="nombreBien" formControlName="nombreBien" required>
+            <input type="text" id="nombreBien" formControlName="nombreBien" required maxlength="50">
           </div>
           <div class="form-group">
             <label for="clasificacion">Clasificación:</label>
@@ -47,7 +47,7 @@
           </div>                  
           <div class="form-group">
             <label for="marca">Marca:</label>
-            <input type="text" id="marca" formControlName="marca">
+            <input type="text" id="marca" formControlName="marca" maxlength="25">
           </div>
           <div class="form-group">
             <label for="modelo">Modelo:</label>
@@ -196,7 +196,7 @@
         
           <div class="form-group">
             <label for="rfcProveedor">RFC del Proveedor:</label>
-            <input type="text" id="rfcProveedor" formControlName="rfcProveedor">
+            <input type="text" id="rfcProveedor" formControlName="rfcProveedor" maxlength="20">
           </div>
         
           <div class="form-group">
@@ -230,7 +230,7 @@
         
           <div class="form-group">
             <label for="numRes">Número del Resguardante:</label>
-            <input type="number" id="numRes" formControlName="numRes">
+            <input type="number" id="numRes" formControlName="numRes" maxlength="15">
           </div>
         
           <div class="form-group">
@@ -287,7 +287,7 @@
         
           <div class="form-group">
             <label for="aAdquisicion">Año de Adquisición:</label>
-            <input type="number" id="aAdquisicion" formControlName="aAdquisicion">
+            <input type="number" id="aAdquisicion" formControlName="aAdquisicion" maxlength="5">
           </div>
         
           <div class="form-group">
@@ -307,7 +307,7 @@
         
           <div class="form-group">
             <label for="puestoRes">Puesto del Resguardante:</label>
-            <input type="text" id="puestoRes" formControlName="puestoRes">
+            <input type="text" id="puestoRes" formControlName="puestoRes" maxlength="60">
           </div>
         
           <div class="form-group">
@@ -321,17 +321,17 @@
         
           <div class="form-group">
             <label for="correoPerRes">Correo Personal del Resguardante:</label>
-            <input type="email" id="correoPerRes" formControlName="correoPerRes">
+            <input type="email" id="correoPerRes" formControlName="correoPerRes" maxlength="50">
           </div>
         
           <div class="form-group">
             <label for="correoInstRes">Correo Institucional del Resguardante:</label>
-            <input type="email" id="correoInstRes" formControlName="correoInstRes">
+            <input type="email" id="correoInstRes" formControlName="correoInstRes" maxlength="50">
           </div>
 
           <div class="form-group">
             <label for="rfcTrabaj">RFC del resguardante:</label>
-            <input type="text" id="rfcTrabaj" formControlName="rfcTrabaj" />
+            <input type="text" id="rfcTrabaj" formControlName="rfcTrabaj" maxlength="15"/>
           </div>
         
           <div class="form-group">

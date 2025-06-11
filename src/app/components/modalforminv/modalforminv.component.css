@@ -53,11 +53,14 @@ input{
   padding: 4px;
   background-color: #F4F4F4;
 }
-input#nomRes{
+input#nomRes, #clasificacion{
   width: 40%;
 }
 input#numRes{
   width: 10%;
+}
+input#nombreBien, #nombreCat{
+  width: 50%;
 }
 #observaciones{
   margin-left: 20px;
