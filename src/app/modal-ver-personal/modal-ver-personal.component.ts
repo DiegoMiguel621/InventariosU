@@ -134,9 +134,11 @@ export class ModalVerPersonalComponent implements OnInit {
   // Helper fetchImageAsUint8Array ya declarado más arriba
   let logoUppUint8: Uint8Array;
   let logoHidalgoUint8: Uint8Array;
+  let lineaHorUint8: Uint8Array;
   try {
     logoUppUint8     = await this.fetchImageAsUint8Array('/assets/images/logoUpp.png');
     logoHidalgoUint8 = await this.fetchImageAsUint8Array('/assets/images/logoHidalgo.png');
+    lineaHorUint8 = await this.fetchImageAsUint8Array('/assets/images/lineaHorizontal.jpg');
   } catch (err) {
     console.error('Error cargando imágenes:', err);
     // Si quieres continuar sin logos, comenta el return siguiente:
@@ -145,6 +147,7 @@ export class ModalVerPersonalComponent implements OnInit {
 
   const logoUppId     = wb.addImage({ buffer: logoUppUint8,    extension: 'png' });
   const logoHidalgoId = wb.addImage({ buffer: logoHidalgoUint8, extension: 'png' });
+  const logoHorId = wb.addImage({ buffer: lineaHorUint8, extension: 'png' });
 
   ws.addImage(logoUppId, {
   tl: {
@@ -170,6 +173,8 @@ export class ModalVerPersonalComponent implements OnInit {
   }
 });
 
+ws.addImage(logoHorId, 'A16:C16');
+//logoHorId
 
   //
   // === ENCABEZADO ESTÁTICO (filas 1–4, texto mayúsculas, negrita, tamaño 9, centrado) ===
