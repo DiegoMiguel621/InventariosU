@@ -148,7 +148,7 @@ export class ModalVerPersonalComponent implements OnInit {
   const logoUppId     = wb.addImage({ buffer: logoUppUint8,    extension: 'png' });
   const logoHidalgoId = wb.addImage({ buffer: logoHidalgoUint8, extension: 'png' });
   const logoHorId = wb.addImage({ buffer: lineaHorUint8, extension: 'png' });
-
+  
   ws.addImage(logoUppId, {
   tl: {
     // "0.7" significa 70% hacia la derecha de la columna A,
@@ -173,8 +173,7 @@ export class ModalVerPersonalComponent implements OnInit {
   }
 });
 
-ws.addImage(logoHorId, 'A16:C16');
-//logoHorId
+
 
   //
   // === ENCABEZADO ESTÁTICO (filas 1–4, texto mayúsculas, negrita, tamaño 9, centrado) ===
@@ -376,7 +375,46 @@ ws.addImage(logoHorId, 'A16:C16');
   totalNumberCell.alignment = { horizontal: 'center', vertical: 'middle' };
 
   totalRow.commit();
+
+  // 1) Primera fila vacía justo debajo del TOTAL
   const primerFilaVacia = totalRowIndex + 1;
+
+  // 2) Altura de esa fila y cálculo de la fracción vertical
+  const fila       = ws.getRow(primerFilaVacia);
+  const rowH       = fila.height ?? 16.5;      // altura de la fila en puntos
+  const imgH       = rowH * 0.9;               // 90 % de la fila
+  const offsetYpt  = (rowH - imgH) / 2;        // margen en pts arriba
+  const offsetFrac = offsetYpt / rowH;         // fracción de la fila
+
+  // 3) Ancho total de las columnas A–C (en unidades de carácter)
+  const totalCols = ws.columns
+    .slice(0, 3)                               // A, B, C
+    .map(c => c.width || 0)
+    .reduce((a, b) => a + b, 0);
+  // Ajuste: ~7px (o pt) por unidad de columna; cámbialo si quieres algo distinto
+  const imgW = totalCols * 7;
+
+  // 4) Registra la imagen (suponiendo que `lineaHorUint8` ya la tienes)
+  const lineaHorId = wb.addImage({
+    buffer:    lineaHorUint8,
+    extension: 'png'
+  });
+
+  // 5) Inserción con tl+br, pero casteada a any para esquivar el chequeo de TS
+  const pos: any = {
+    tl: {
+      col: 0,
+      row: (primerFilaVacia - 1) + offsetFrac
+    },
+    br: {
+      col: 3,  // hasta la columna D, cubriendo totalmente A–C
+      row: (primerFilaVacia - 1) + 1 - offsetFrac
+    }
+  };
+
+  ws.addImage(lineaHorId, pos);
+
+  
 for (let fila = primerFilaVacia; fila <= 48; fila++) {
   ws.mergeCells(`B${fila}:C${fila}`);
 }
@@ -656,9 +694,11 @@ async printResguardoSujetoControl() {
   // Helper fetchImageAsUint8Array ya declarado más arriba
   let logoUppUint8: Uint8Array;
   let logoHidalgoUint8: Uint8Array;
+  let lineaHorUint8: Uint8Array;
   try {
     logoUppUint8     = await this.fetchImageAsUint8Array('/assets/images/logoUpp.png');
     logoHidalgoUint8 = await this.fetchImageAsUint8Array('/assets/images/logoHidalgo.png');
+    lineaHorUint8 = await this.fetchImageAsUint8Array('/assets/images/lineaHorizontal.jpg');
   } catch (err) {
     console.error('Error cargando imágenes:', err);
     // Si quieres continuar sin logos, comenta el return siguiente:
@@ -667,6 +707,7 @@ async printResguardoSujetoControl() {
 
   const logoUppId     = wb.addImage({ buffer: logoUppUint8,    extension: 'png' });
   const logoHidalgoId = wb.addImage({ buffer: logoHidalgoUint8, extension: 'png' });
+  const logoHorId = wb.addImage({ buffer: lineaHorUint8, extension: 'png' });
 
   ws.addImage(logoUppId, {
   tl: {
@@ -892,7 +933,44 @@ async printResguardoSujetoControl() {
   totalNumberCell.alignment = { horizontal: 'center', vertical: 'middle' };
 
   totalRow.commit();
+  
+  // 1) Primera fila vacía justo debajo del TOTAL
   const primerFilaVacia = totalRowIndex + 1;
+
+  // 2) Altura de esa fila y cálculo de la fracción vertical
+  const fila       = ws.getRow(primerFilaVacia);
+  const rowH       = fila.height ?? 16.5;      // altura de la fila en puntos
+  const imgH       = rowH * 0.9;               // 90 % de la fila
+  const offsetYpt  = (rowH - imgH) / 2;        // margen en pts arriba
+  const offsetFrac = offsetYpt / rowH;         // fracción de la fila
+
+  // 3) Ancho total de las columnas A–C (en unidades de carácter)
+  const totalCols = ws.columns
+    .slice(0, 3)                               // A, B, C
+    .map(c => c.width || 0)
+    .reduce((a, b) => a + b, 0);
+  // Ajuste: ~7px (o pt) por unidad de columna; cámbialo si quieres algo distinto
+  const imgW = totalCols * 7;
+
+  // 4) Registra la imagen (suponiendo que `lineaHorUint8` ya la tienes)
+  const lineaHorId = wb.addImage({
+    buffer:    lineaHorUint8,
+    extension: 'png'
+  });
+
+  // 5) Inserción con tl+br, pero casteada a any para esquivar el chequeo de TS
+  const pos: any = {
+    tl: {
+      col: 0,
+      row: (primerFilaVacia - 1) + offsetFrac
+    },
+    br: {
+      col: 3,  // hasta la columna D, cubriendo totalmente A–C
+      row: (primerFilaVacia - 1) + 1 - offsetFrac
+    }
+  };
+
+  ws.addImage(lineaHorId, pos);
 for (let fila = primerFilaVacia; fila <= 48; fila++) {
   ws.mergeCells(`B${fila}:C${fila}`);
 }
