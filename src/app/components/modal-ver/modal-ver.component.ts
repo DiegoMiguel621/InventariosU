@@ -58,7 +58,7 @@ export class ModalVerComponent implements OnInit {
     const usableWidth = pageWidth - marginLR * 2;               // aprox. 532pt
 
     // 2) Dibujar título centrado “Información del Bien”
-    const titleText = 'Información del Bien';
+    const titleText = `Información del Bien ${this.bien.numInvAnt}`;
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(18);
     const textWidth = doc.getTextWidth(titleText);
@@ -181,6 +181,6 @@ export class ModalVerComponent implements OnInit {
     });
 
     // 5) Guardar PDF
-    doc.save(`Bien_${this.bien.numInvAnt || 'info'}.pdf`);
+    doc.save(`Detalles_Bien_${this.bien.numInvAnt || 'info'}.pdf`);
   }
 }

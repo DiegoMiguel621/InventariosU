@@ -1,15 +1,16 @@
+//IMPORTACIONES de librerias de las herramientas a usar, las obligatorias y las extras que se usan en las funciones
+
+//importaciones de ANGULAR
 import { Component, Inject, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
-
+//importaciones de otros archivos como Servicios y modal
 import { TrabajadoresService } from '../service/trabajadores.service';
 import { BienesService } from '../service/bienes.service';
 import { ModalTipoResguardoComponent } from '../modal-tipo-resguardo/modal-tipo-resguardo.component';
-
+//importaciones para uso de EXCEL
 import ExcelJS from 'exceljs';
 import { saveAs } from 'file-saver';
-import { firstValueFrom } from 'rxjs';
-
 
 @Component({
   selector: 'app-modal-ver-personal',
@@ -24,7 +25,7 @@ export class ModalVerPersonalComponent implements OnInit {
     private trabajadoresService: TrabajadoresService,
     private bienesService: BienesService, 
     public dialogRef: MatDialogRef<ModalVerPersonalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { id: number }, // Recibimos el ID
+    @Inject(MAT_DIALOG_DATA) public data: { id: number }, // Recibimos el ID del trabajador
     private dialog: MatDialog,
     private http: HttpClient
   ) {}
@@ -33,7 +34,7 @@ export class ModalVerPersonalComponent implements OnInit {
     // Obtenemos los datos del trabajador
     this.trabajadoresService.getTrabajadorById(this.data.id).subscribe(
       (data) => {
-        this.trabajador = data; // Asignamos los datos
+        this.trabajador = data; // Asignamos los datos del trabajador para mostrarlo en la tabla del modal
         this.cargarBienesAsignados();
       },
       (error) => {
@@ -42,6 +43,7 @@ export class ModalVerPersonalComponent implements OnInit {
     );
   }
 
+  //se listan los bienes que tengan al resguardante asignado en la tabla "bienes" para poder mostrarla en "trabajadores"
   private cargarBienesAsignados(): void {
   this.bienesService.getBienes()
     .subscribe(bienes => {
@@ -55,15 +57,17 @@ export class ModalVerPersonalComponent implements OnInit {
           .toLowerCase();
         return nomRes === nombreTrab;
       });
-
+      //log de verificacion en consola que busca los bienes asignados, comparando el nombre en la tabla bienes
       console.log('Comparando:', nombreTrab, 'contra lista de nomRes:', 
                   bienes.map(b => (b.nomRes||'').trim().toLowerCase()));
     });
 }
+  //cerrar modal sin hacer nada
   closeModal(): void {
     this.dialogRef.close();
   }
 
+  //FUNCION para abrir el modal de seleccion de resguardos, además al cerrar el modal, se obtiene que resguardo seleccionó
   openModalTipoResguardo(): void {
     const dialogRef = this.dialog.open(ModalTipoResguardoComponent, {
       width: '400px'
@@ -97,6 +101,7 @@ export class ModalVerPersonalComponent implements OnInit {
     });
   }
 
+  //FUNCION AUXILIAR PARA IMAGENES DENTRO DE LOS RESGUARDOS (EXCEL)
   private async fetchImageAsUint8Array(url: string): Promise<Uint8Array> {
   const resp = await fetch(url);
   if (!resp.ok) {
@@ -105,9 +110,9 @@ export class ModalVerPersonalComponent implements OnInit {
   const buffer = await resp.arrayBuffer();
   return new Uint8Array(buffer);
 }
-     //
-     // IMPRESION DE RESGUARDOS
-     //
+  //------------------------------
+  //-----RESGUARDO PATRIMONIO-----
+  //------------------------------
   async printResguardoPatrimonio() {
     if (!this.trabajador) return;
     // 1) crea workbook y hoja
@@ -505,7 +510,7 @@ export class ModalVerPersonalComponent implements OnInit {
     // fila 63: firmas dinámicas y estáticas
     ws.getRow(63).height = 16.5;
     ws.mergeCells('A63:B63');
-    ws.getCell('A63').value = `LIC. ${this.trabajador.nombre}`;
+    ws.getCell('A63').value = `LIC. ${this.trabajador.nombre?.toString().toUpperCase()}`;
     ws.getCell('A63').alignment = { horizontal: 'center' };
     ws.getCell('A63').font = { size: 7 };
 
@@ -669,6 +674,9 @@ export class ModalVerPersonalComponent implements OnInit {
     saveAs(new Blob([buf]), `Resguardo_Patrimonio_${this.trabajador.nombre}.xlsx`);
   }
 
+  //------------------------------
+  //--RESGUARDO SUJETO A CONTROL--
+  //------------------------------
   async printResguardoSujetoControl() {
     if (!this.trabajador) return;
     // 1) crea workbook y hoja
