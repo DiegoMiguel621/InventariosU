@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdministradoresService } from '../service/administradores.service';
+import { ModalErrorFormComponent } from '../modal-error-form/modal-error-form.component';
 
 
 @Component({
@@ -45,6 +46,10 @@ export class ModalAddAdministradorComponent implements OnInit {
       });
     } else {
       console.log('Formulario inválido');
+      this.dialog.open(ModalErrorFormComponent, {
+        disableClose: true
+      });
+      return;
     }
   }
 

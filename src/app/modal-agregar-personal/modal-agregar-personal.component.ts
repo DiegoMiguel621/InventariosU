@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TrabajadoresService } from '../service/trabajadores.service'; // Servicio para trabajadores
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { ModalErrorFormComponent } from '../modal-error-form/modal-error-form.component';
 
 @Component({
   selector: 'app-modal-agregar-personal',
@@ -14,7 +15,8 @@ export class ModalAgregarPersonalComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private trabajadoresService: TrabajadoresService, // Servicio para interactuar con la API
-    private dialogRef: MatDialogRef<ModalAgregarPersonalComponent> // Referencia al modal
+    private dialogRef: MatDialogRef<ModalAgregarPersonalComponent>, // Referencia al modal
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -48,6 +50,10 @@ export class ModalAgregarPersonalComponent implements OnInit {
       });
     } else {
       console.error('Formulario inválido');
+      this.dialog.open(ModalErrorFormComponent, {
+        disableClose: true
+      });
+      return;
     }
   }
   

@@ -25,6 +25,7 @@ import { AsideComponent } from './components/aside/aside.component';
 import { ModalErrorComponent } from './components/modal-error/modal-error.component';
 import { ModalExportarReporteComponent } from './components/modal-exportar-reporte/modal-exportar-reporte.component';
 import { ModalTipoResguardoComponent } from './modal-tipo-resguardo/modal-tipo-resguardo.component';
+import { ModalErrorFormComponent } from './modal-error-form/modal-error-form.component';
 
 
 const routes: Routes = [
@@ -57,6 +58,7 @@ const routes: Routes = [
   {path:'modal13',component:ModalErrorComponent},
   {path:'modal14',component:ModalExportarReporteComponent},
   {path:'modal15',component:ModalTipoResguardoComponent},
+  {path:'modal16',component:ModalErrorFormComponent},
 
   
   {path:'**',redirectTo:'login',pathMatch:'full'}

@@ -1,11 +1,13 @@
 // src/app/components/modalforminv/modalforminv.component.ts
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { BienesService } from '../../service/bienes.service';
 import { TrabajadoresService } from '../../service/trabajadores.service';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { ModalErrorFormComponent } from '../../modal-error-form/modal-error-form.component';
+
 
 @Component({
   selector: 'app-modalforminv',
@@ -23,7 +25,9 @@ export class ModalforminvComponent {
     public dialogRef: MatDialogRef<ModalforminvComponent>,
     private fb: FormBuilder,
     private bienesService: BienesService,
-    private trabajadoresService: TrabajadoresService
+    private trabajadoresService: TrabajadoresService,
+    private _matDialog: MatDialog, 
+    private dialog: MatDialog
   ) {
     this.addProductForm = this.fb.group({
           numInvAnt: [''],
@@ -165,6 +169,10 @@ export class ModalforminvComponent {
       );
     } else {
       console.warn('Formulario inválido. Revisa los campos requeridos.');
+      this.dialog.open(ModalErrorFormComponent, {
+        disableClose: true
+      });
+      return;
     }
   }
   

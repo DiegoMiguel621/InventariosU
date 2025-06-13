@@ -45,6 +45,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ModalExportarReporteComponent } from './components/modal-exportar-reporte/modal-exportar-reporte.component';
 import { ModalTipoResguardoComponent } from './modal-tipo-resguardo/modal-tipo-resguardo.component';
 import { ModalCerrarSesionComponent } from './modal-cerrar-sesion/modal-cerrar-sesion.component';
+import { ModalErrorFormComponent } from './modal-error-form/modal-error-form.component';
 
 
 
@@ -83,6 +84,7 @@ import { ModalCerrarSesionComponent } from './modal-cerrar-sesion/modal-cerrar-s
     ModalExportarReporteComponent,
     ModalTipoResguardoComponent,
     ModalCerrarSesionComponent,
+    ModalErrorFormComponent,
 
   ],
   imports: [
