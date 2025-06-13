@@ -1,14 +1,15 @@
 import { Component, Inject, OnInit } from '@angular/core';
-
+import { HttpClient } from '@angular/common/http';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { TrabajadoresService } from '../service/trabajadores.service';
 import { BienesService } from '../service/bienes.service';
 import { ModalTipoResguardoComponent } from '../modal-tipo-resguardo/modal-tipo-resguardo.component';
 
 import ExcelJS from 'exceljs';
 import { saveAs } from 'file-saver';
-import { wrap } from 'node:module';
+import { firstValueFrom } from 'rxjs';
+
 
 @Component({
   selector: 'app-modal-ver-personal',
@@ -24,7 +25,8 @@ export class ModalVerPersonalComponent implements OnInit {
     private bienesService: BienesService, 
     public dialogRef: MatDialogRef<ModalVerPersonalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { id: number }, // Recibimos el ID
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -95,7 +97,14 @@ export class ModalVerPersonalComponent implements OnInit {
     });
   }
 
-
+  private async fetchImageAsUint8Array(url: string): Promise<Uint8Array> {
+  const resp = await fetch(url);
+  if (!resp.ok) {
+    throw new Error(`Error ${resp.status} al cargar imagen ${url}`);
+  }
+  const buffer = await resp.arrayBuffer();
+  return new Uint8Array(buffer);
+}
      //
      // IMPRESION DE RESGUARDOS
      //
@@ -121,6 +130,46 @@ export class ModalVerPersonalComponent implements OnInit {
   for (let i = 1; i <= 100; i++) {
     ws.getRow(i).height = 16.5;
   }
+
+  // Helper fetchImageAsUint8Array ya declarado más arriba
+  let logoUppUint8: Uint8Array;
+  let logoHidalgoUint8: Uint8Array;
+  try {
+    logoUppUint8     = await this.fetchImageAsUint8Array('/assets/images/logoUpp.png');
+    logoHidalgoUint8 = await this.fetchImageAsUint8Array('/assets/images/logoHidalgo.png');
+  } catch (err) {
+    console.error('Error cargando imágenes:', err);
+    // Si quieres continuar sin logos, comenta el return siguiente:
+    return;
+  }
+
+  const logoUppId     = wb.addImage({ buffer: logoUppUint8,    extension: 'png' });
+  const logoHidalgoId = wb.addImage({ buffer: logoHidalgoUint8, extension: 'png' });
+
+  ws.addImage(logoUppId, {
+  tl: {
+    // "0.7" significa 70% hacia la derecha de la columna A,
+    // "0.4" significa 40% hacia abajo de la fila 1
+    col: 0.7,
+    row: 0.4
+  },
+  ext: {
+    width:  79,   // tu ancho en puntos
+    height: 77    // tu alto en puntos
+  }
+});
+
+  ws.addImage(logoHidalgoId, {
+  tl: {
+    col: 5   + 0.2,  // columna F (5), desplazado un 20% dentro de F
+    row: 0.3        // 30% hacia abajo de la fila 1
+  },
+  ext: {
+    width:  78,
+    height: 77
+  }
+});
+
 
   //
   // === ENCABEZADO ESTÁTICO (filas 1–4, texto mayúsculas, negrita, tamaño 9, centrado) ===
@@ -598,6 +647,45 @@ async printResguardoSujetoControl() {
   for (let i = 1; i <= 100; i++) {
     ws.getRow(i).height = 16.5;
   }
+
+  // Helper fetchImageAsUint8Array ya declarado más arriba
+  let logoUppUint8: Uint8Array;
+  let logoHidalgoUint8: Uint8Array;
+  try {
+    logoUppUint8     = await this.fetchImageAsUint8Array('/assets/images/logoUpp.png');
+    logoHidalgoUint8 = await this.fetchImageAsUint8Array('/assets/images/logoHidalgo.png');
+  } catch (err) {
+    console.error('Error cargando imágenes:', err);
+    // Si quieres continuar sin logos, comenta el return siguiente:
+    return;
+  }
+
+  const logoUppId     = wb.addImage({ buffer: logoUppUint8,    extension: 'png' });
+  const logoHidalgoId = wb.addImage({ buffer: logoHidalgoUint8, extension: 'png' });
+
+  ws.addImage(logoUppId, {
+  tl: {
+    // "0.7" significa 70% hacia la derecha de la columna A,
+    // "0.4" significa 40% hacia abajo de la fila 1
+    col: 0.7,
+    row: 0.4
+  },
+  ext: {
+    width:  79,   // tu ancho en puntos
+    height: 77    // tu alto en puntos
+  }
+});
+
+  ws.addImage(logoHidalgoId, {
+  tl: {
+    col: 5   + 0.2,  // columna F (5), desplazado un 20% dentro de F
+    row: 0.3        // 30% hacia abajo de la fila 1
+  },
+  ext: {
+    width:  78,
+    height: 77
+  }
+});
 
   //
   // === ENCABEZADO ESTÁTICO (filas 1–4, texto mayúsculas, negrita, tamaño 9, centrado) ===
