@@ -667,8 +667,12 @@ exportPdf() {
     });
   }
 
+  const hoy = new Date();
+  const dd = String(hoy.getDate()).padStart(2, '0');
+  const mm = String(hoy.getMonth() + 1).padStart(2, '0');
+  const yyyy = hoy.getFullYear();
   // 5) Descarga el PDF
-  doc.save('reporte_bienes.pdf');
+doc.save(`reporte_bienes_${dd}-${mm}-${yyyy}.pdf`);
 }
 
 normalizeStr(s: string): string {
@@ -922,7 +926,13 @@ exportExcel() {
   XLSX.utils.book_append_sheet(wb, ws, 'Reporte');
   const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
   const blob = new Blob([wbout], { type: 'application/octet-stream' });
-  saveAs(blob, 'Reporte_bienes.xlsx');
+  
+  const hoy = new Date();
+  const dd = String(hoy.getDate()).padStart(2, '0');
+  const mm = String(hoy.getMonth() + 1).padStart(2, '0');
+  const yyyy = hoy.getFullYear();
+
+  saveAs(blob, `Reporte_bienes_${dd}-${mm}-${yyyy}.xlsx`);
 }
 
 
