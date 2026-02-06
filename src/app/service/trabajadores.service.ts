@@ -13,7 +13,7 @@ export class TrabajadoresService {
 
   // Retorna solo trabajadores ACTIVO
   getTrabajadores(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl); 
+    return this.http.get<any[]>(this.apiUrl);
   }
   // Retorna solo trabajadores INACTIVO
   getTrabajadoresInactivos(): Observable<any[]> {
@@ -30,7 +30,7 @@ export class TrabajadoresService {
   }
   restoreTrabajador(id: number): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/restore/${id}`, {});
-  }  
+  }
   updateTrabajador(idTrabajador: number, trabajador: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/${idTrabajador}`, trabajador);
   }
@@ -38,15 +38,15 @@ export class TrabajadoresService {
   getAreas(): Observable<string[]> {
     return this.http.get<string[]>(`${this.apiUrl}/areas`);
   }
-  
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
+
+
 }

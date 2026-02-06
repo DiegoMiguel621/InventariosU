@@ -11,7 +11,7 @@ describe('ModalEditarAdministradorComponent', () => {
       declarations: [ModalEditarAdministradorComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(ModalEditarAdministradorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

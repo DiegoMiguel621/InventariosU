@@ -62,14 +62,14 @@ export class AdministradoresComponent implements OnInit {
     const dialogRef = this._matDialog.open(ModalEditarAdministradorComponent, {
       data: administrador // Asegúrate de que el administrador tenga los datos correctos
     });
-  
+
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.getAdministradores(); // Actualiza la lista si se editaron los datos
       }
     });
   }
-  
-  
+
+
 
 }

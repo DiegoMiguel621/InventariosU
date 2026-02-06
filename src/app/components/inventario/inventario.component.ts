@@ -20,7 +20,7 @@ import { saveAs } from 'file-saver';
   styleUrls: ['./inventario.component.css']
 })
 export class InventarioComponent implements OnInit {
-  
+
   bienes: any[] = [];
   bienesFiltrados: any[] = [];
 
@@ -42,13 +42,13 @@ export class InventarioComponent implements OnInit {
     get totalPages(): number {
       return Math.ceil(this.bienes.length / this.pageSize);
     }
-    
+
     nextPage(): void {
       if (this.currentPage < this.totalPages - 1) {
         this.currentPage++;
       }
     }
-    
+
     previousPage(): void {
       if (this.currentPage > 0) {
         this.currentPage--;
@@ -59,7 +59,7 @@ export class InventarioComponent implements OnInit {
   agregarBien(): void {
     this._matDialog.open(ModalforminvComponent).afterClosed().subscribe((result) => {
       if (result === true) {
-        this.cargarBienes(); 
+        this.cargarBienes();
       }
       console.log('Modal de agregar bien cerrado');
     });
@@ -67,9 +67,9 @@ export class InventarioComponent implements OnInit {
 
   cargarBienes() {
   this.bienesService.getBienes().subscribe(data => {
-    this.bienes = data;    
+    this.bienes = data;
     this.bienesFiltrados = [...this.bienes];
-    
+
     this.currentPage = 0;
   });
 }
@@ -87,7 +87,7 @@ export class InventarioComponent implements OnInit {
       });
     });
   }
-  
+
   // Abrir el modal para ver los detalles de un bien
   VerBien(bien: any): void {
     console.log('Bien a ver:', bien);
@@ -700,7 +700,7 @@ filtrosBien(): void {
   position: { top: `${top+height}px`, left: `${left}px` },
   data: {
     ...this.filtroEstado,
-    ...this.filtroAlta, 
+    ...this.filtroAlta,
     ...this.filtroDonacion,
     ...this.filtroComodato,
     ...this.filtroBaja,
@@ -711,18 +711,18 @@ filtrosBien(): void {
     areaFunRes: this.filtroAreaFunRes,
     estatusAlta: this.filtroEstatus.alta,
     estatusBaja: this.filtroEstatus.baja,
-  
+
     // pasamos el estado actual de los filtros
     patrimonio:     this.filtroEstado.patrimonio,
     sujetoControl:  this.filtroEstado.sujetoControl,
-    
+
     mensual:        this.filtroAlta.mensual,
     trimestral:     this.filtroAlta.trimestral,
     semestral:      this.filtroAlta.semestral,
     anual:          this.filtroAlta.anual,
     filtroAnio:     this.filtroAlta.filtroAnio,
     filtroMes:      this.filtroAlta.filtroMes,
-    
+
     donMensual:    this.filtroDonacion.mensual,
     donTrimestral: this.filtroDonacion.trimestral,
     donSemestral:  this.filtroDonacion.semestral,
@@ -736,7 +736,7 @@ filtrosBien(): void {
     comAnual:      this.filtroComodato.anual,
     comFiltroAnio: this.filtroComodato.filtroAnio,
     comFiltroMes:  this.filtroComodato.filtroMes,
-    
+
     bajaMensual:    this.filtroBaja.mensual,
     bajaTrimestral: this.filtroBaja.trimestral,
     bajaSemestral:  this.filtroBaja.semestral,
@@ -816,7 +816,7 @@ this.filtrosDialogRef.afterClosed().subscribe(result => {
     this.filtrosDialogRef.close();
   }
 }
-    
+
 // Declaracion de campos para el excel
 private excelHeaders = [
   { header: 'No',                              dataKey: 'no' },
@@ -926,7 +926,7 @@ exportExcel() {
   XLSX.utils.book_append_sheet(wb, ws, 'Reporte');
   const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
   const blob = new Blob([wbout], { type: 'application/octet-stream' });
-  
+
   const hoy = new Date();
   const dd = String(hoy.getDate()).padStart(2, '0');
   const mm = String(hoy.getMonth() + 1).padStart(2, '0');
